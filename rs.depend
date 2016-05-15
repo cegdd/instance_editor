@@ -1,0 +1,1164 @@
+# depslib dependency file v1.0
+1461715478 source:c:\users\cegdd\programmation\rs\cac.c
+	<SDL.h>
+	"systeme.h"
+	"colision.h"
+	"main.h"
+	"jeux.h"
+	"rat.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\begin_code.h
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\close_code.h
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\users\cegdd\downloads\sdl2-devel-2.0.3-mingw\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1433280184 c:\users\cegdd\programmation\rs\systeme.h
+	"main.h"
+
+1442964633 c:\users\cegdd\programmation\rs\colision.h
+	<stdbool.h>
+	"struct.h"
+
+1433283745 c:\users\cegdd\programmation\rs\main.h
+	"struct.h"
+
+1376156543 c:\users\cegdd\downloads\sdl2_ttf-2.0.12\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1433282512 c:\users\cegdd\programmation\rs\queue.h
+
+1461715749 c:\users\cegdd\programmation\rs\jeux.h
+	<stdbool.h>
+	<SDL.h>
+	"main.h"
+
+1432683015 c:\users\cegdd\programmation\rs\rat.h
+	"main.h"
+
+1436994748 source:c:\users\cegdd\programmation\rs\clavier.c
+	"main.h"
+
+1442965356 source:c:\users\cegdd\programmation\rs\colision.c
+	<SDL.h>
+	<math.h>
+	<stdio.h>
+	<stdbool.h>
+	"image.h"
+	"tableau.h"
+	"colision.h"
+	"deplacement.h"
+	"main.h"
+
+1462138440 c:\users\cegdd\programmation\rs\image.h
+	<SDL_ttf.h>
+	"main.h"
+
+1443383402 c:\users\cegdd\programmation\rs\tableau.h
+	<SDL_ttf.h>
+	"main.h"
+
+1442963077 c:\users\cegdd\programmation\rs\deplacement.h
+
+1442964770 source:c:\users\cegdd\programmation\rs\deplacement.c
+	<SDL.h>
+	"colision.h"
+	"main.h"
+
+1461715502 source:c:\users\cegdd\programmation\rs\evenement.c
+	<stdlib.h>
+	<stdio.h>
+	<SDL.h>
+	"struct.h"
+	"colision.h"
+	"ui.h"
+	"listechaine.h"
+	"main.h"
+	"image.h"
+	"evenement.h"
+	"tableau.h"
+	"systeme.h"
+	"login.h"
+	"jeux.h"
+	"clavier.h"
+
+1441578553 c:\users\cegdd\programmation\rs\ui.h
+	<SDL_ttf.h>
+	<stdbool.h>
+
+1433279811 c:\users\cegdd\programmation\rs\listechaine.h
+
+1433279755 c:\users\cegdd\programmation\rs\evenement.h
+	<stdbool.h>
+	"main.h"
+	"login.h"
+
+1433282847 c:\users\cegdd\programmation\rs\login.h
+
+1433279595 c:\users\cegdd\programmation\rs\clavier.h
+
+1425859547 source:c:\users\cegdd\programmation\rs\fichier.c
+	<stdio.h>
+
+1443480555 source:c:\users\cegdd\programmation\rs\ia.c
+	<stdlib.h>
+	<SDL.h>
+	"main.h"
+
+1462138455 source:c:\users\cegdd\programmation\rs\image.c
+	<stdio.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"main.h"
+	"image.h"
+
+1376156342 c:\users\cegdd\downloads\sdl2_image-2.0.0\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1462112348 source:c:\users\cegdd\programmation\rs\jeux.c
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<string.h>
+	<math.h>
+	"rat.h"
+	"tir.h"
+	"jeux.h"
+	"evenement.h"
+	"main.h"
+	"image.h"
+	"tableau.h"
+	"ia.h"
+	"deplacement.h"
+	"colision.h"
+	"systeme.h"
+	"tool.h"
+	"CaC.h"
+	"ui.h"
+	"battledraw.h"
+	"queue.h"
+
+1433277676 c:\users\cegdd\programmation\rs\tir.h
+	"main.h"
+
+1432853765 c:\users\cegdd\programmation\rs\ia.h
+
+1433883971 c:\users\cegdd\programmation\rs\tool.h
+
+1432853804 c:\users\cegdd\programmation\rs\cac.h
+
+1461184386 source:c:\users\cegdd\programmation\rs\listechaine.c
+	<stdlib.h>
+	<SDL.h>
+	"main.h"
+	"listechaine.h"
+
+1461716450 source:c:\users\cegdd\programmation\rs\login.c
+	<stdio.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<string.h>
+	"main.h"
+	"login.h"
+	"image.h"
+	"evenement.h"
+	"fichier.h"
+	"sauvegarde.h"
+	"ui.h"
+
+1425859547 c:\users\cegdd\programmation\rs\fichier.h
+
+1432853201 c:\users\cegdd\programmation\rs\sauvegarde.h
+	"main.h"
+
+1459381545 source:c:\users\cegdd\programmation\rs\main.c
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<pthread.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"main.h"
+	"thread1.h"
+	"map.h"
+	"login.h"
+	"sauvegarde.h"
+	"jeux.h"
+	"tableau.h"
+	"queue.h"
+	"image.h"
+
+1376156425 c:\users\cegdd\downloads\sdl2_mixer-2.0.0\i686-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1425859548 c:\users\cegdd\programmation\rs\thread1.h
+
+1440010486 c:\users\cegdd\programmation\rs\map.h
+
+1461714745 source:c:\users\cegdd\programmation\rs\map.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<math.h>
+	"evenement.h"
+	"image.h"
+	"jeux.h"
+	"ui.h"
+	"sauvegarde.h"
+	"map.h"
+	"main.h"
+	"colision.h"
+	"deplacement.h"
+	"tableau.h"
+	"systeme.h"
+	"listechaine.h"
+	"queue.h"
+
+1434060050 source:c:\users\cegdd\programmation\rs\objet.c
+	<stdio.h>
+	<stdarg.h>
+	"main.h"
+
+1443480758 source:c:\users\cegdd\programmation\rs\queue.c
+	<stdio.h>
+	<stdlib.h>
+	"jeux.h"
+	"main.h"
+
+1462138467 source:c:\users\cegdd\programmation\rs\rat.c
+	<SDL.h>
+	"systeme.h"
+	"main.h"
+	"tool.h"
+	"image.h"
+
+1440009700 source:c:\users\cegdd\programmation\rs\sauvegarde.c
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<string.h>
+	"fichier.h"
+	"sauvegarde.h"
+
+1461713870 source:c:\users\cegdd\programmation\rs\systeme.c
+	<SDL.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	"main.h"
+	"image.h"
+	"listechaine.h"
+
+1462138484 source:c:\users\cegdd\programmation\rs\tableau.c
+	<SDL.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdbool.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	"main.h"
+	"image.h"
+	"objet.h"
+	"tool.h"
+	"queue.h"
+
+1434055690 c:\users\cegdd\programmation\rs\objet.h
+
+1433278831 source:c:\users\cegdd\programmation\rs\thread1.c
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<SDL.h>
+	<string.h>
+	<pthread.h>
+	<SDL_ttf.h>
+	"thread2.h"
+	"main.h"
+
+1425859548 c:\users\cegdd\programmation\rs\thread2.h
+
+1440535106 source:c:\users\cegdd\programmation\rs\thread2.c
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<SDL.h>
+	<string.h>
+	<pthread.h>
+	"image.h"
+	"thread2.h"
+	"main.h"
+	<SDL_ttf.h>
+
+1461715613 source:c:\users\cegdd\programmation\rs\tir.c
+	<stdlib.h>
+	<stdio.h>
+	<SDL.h>
+	<math.h>
+	"main.h"
+	"rat.h"
+	"systeme.h"
+
+1438203032 source:c:\users\cegdd\programmation\rs\tool.c
+	<stdlib.h>
+	<stdio.h>
+	<SDL.h>
+	"main.h"
+	"systeme.h"
+
+1462138499 source:c:\users\cegdd\programmation\rs\ui.c
+	<stdio.h>
+	<SDL.h>
+	<math.h>
+	"image.h"
+	"main.h"
+	"evenement.h"
+	"ui.h"
+	"deplacement.h"
+	"systeme.h"
+	"colision.h"
+
+1462138444 source:c:\users\cegdd\programmation\rs\battledraw.c
+	"main.h"
+	"colision.h"
+	"image.h"
+
+1443041163 c:\users\cegdd\programmation\rs\battledraw.h
+
+1462403012 c:\users\cegdd\programmation\rs\struct.h
+	<stdio.h>
+	<stdbool.h>
+	<SDL_ttf.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<winsock2.h>
+	<pthread.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<unistd.h>
+
+1376156342 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1426201942 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\begin_code.h
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\close_code.h
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940796 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394940797 c:\program files (x86)\codeblocks\mingw\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1454366533 c:\users\cegdd\programmation\lib\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451803973 c:\users\cegdd\programmation\lib\sdl2_image-2.0.1\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451805391 c:\users\cegdd\programmation\lib\sdl2_mixer-2.0.1\i686-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1462745637 source:c:\users\cegdd\programmation\editeur\clavier.c
+	"main.h"
+
+1462746301 c:\users\cegdd\programmation\editeur\main.h
+	"struct.h"
+
+1463351210 c:\users\cegdd\programmation\editeur\struct.h
+	<stdio.h>
+	<stdbool.h>
+	<SDL_ttf.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1462918030 source:c:\users\cegdd\programmation\editeur\colision.c
+	<SDL.h>
+	<math.h>
+	<stdio.h>
+	<stdbool.h>
+	"image.h"
+	"tableau.h"
+	"colision.h"
+	"deplacement.h"
+	"main.h"
+
+1462747914 c:\users\cegdd\programmation\editeur\image.h
+	<SDL_ttf.h>
+	"main.h"
+
+1463351491 c:\users\cegdd\programmation\editeur\tableau.h
+	<SDL_ttf.h>
+	"main.h"
+
+1462918030 c:\users\cegdd\programmation\editeur\colision.h
+	<stdbool.h>
+	"struct.h"
+
+1462746479 c:\users\cegdd\programmation\editeur\deplacement.h
+
+1462920156 source:c:\users\cegdd\programmation\editeur\evenement.c
+	<stdlib.h>
+	<stdio.h>
+	<SDL.h>
+	"struct.h"
+	"main.h"
+	"image.h"
+	"evenement.h"
+	"tableau.h"
+	"systeme.h"
+	"clavier.h"
+	"colision.h"
+
+1441578553 c:\users\cegdd\programmation\editeur\ui.h
+	<SDL_ttf.h>
+	<stdbool.h>
+
+1433279811 c:\users\cegdd\programmation\editeur\listechaine.h
+
+1462919756 c:\users\cegdd\programmation\editeur\evenement.h
+	<stdbool.h>
+	"main.h"
+
+1433282847 c:\users\cegdd\programmation\editeur\login.h
+
+1462746512 c:\users\cegdd\programmation\editeur\systeme.h
+	"main.h"
+
+1461715749 c:\users\cegdd\programmation\editeur\jeux.h
+	<stdbool.h>
+	<SDL.h>
+	"main.h"
+
+1462746687 c:\users\cegdd\programmation\editeur\clavier.h
+
+1462919183 source:c:\users\cegdd\programmation\editeur\image.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"main.h"
+	"image.h"
+
+1462920156 source:c:\users\cegdd\programmation\editeur\main.c
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"main.h"
+	"editeur.h"
+	"tableau.h"
+	"image.h"
+
+1425859548 c:\users\cegdd\programmation\editeur\thread1.h
+
+1440010486 c:\users\cegdd\programmation\editeur\map.h
+
+1432853201 c:\users\cegdd\programmation\editeur\sauvegarde.h
+	"main.h"
+
+1433282512 c:\users\cegdd\programmation\editeur\queue.h
+
+1462746414 source:c:\users\cegdd\programmation\editeur\systeme.c
+	<SDL.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	"main.h"
+	"image.h"
+
+1463351601 source:c:\users\cegdd\programmation\editeur\tableau.c
+	<SDL.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdbool.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	"main.h"
+	"image.h"
+
+1434055690 c:\users\cegdd\programmation\editeur\objet.h
+
+1433883971 c:\users\cegdd\programmation\editeur\tool.h
+
+1462917848 c:\users\cegdd\programmation\editeur\editeur.h
+	"struct.h"
+
+1463351706 source:c:\users\cegdd\programmation\editeur\editeur.c
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"struct.h"
+	"tableau.h"
+	"evenement.h"
+	"image.h"
+
