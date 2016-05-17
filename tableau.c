@@ -30,7 +30,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->echap = 0;
 
 	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);
-	systeme->police1 = TTF_OpenFont("rs/divers/police1.ttf", TAILLE_POLICE);
+	systeme->police1 = TTF_OpenFont("rs/divers/arial.ttf", TAILLE_POLICE);
 	if (systeme->police == NULL ||
         systeme->police1 == NULL)
     {
@@ -72,20 +72,26 @@ void initui (struct UI *ui)
 void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 {
     int index;
-    char string[10][1024];
 
     setPos(&console->console.pos, 0, 0, screenw, 105);
 
     console->console.texture = loadTexture ("rs/ui/console.png");
 
+    console->actif = 9;
+
     for (index = 0 ; index < 10 ; index++)
     {
-        sprintf(string[index], "un petit peu de texte");
-        console->texte[index].img.texture = imprime (string[index], screenw, NOIR, systeme, &console->texte[index].lenght, &console->texte[index].high);
-        console->texte[index].img.pos.x = 0;
-        console->texte[index].img.pos.y = index*10;
-        console->texte[index].img.pos.w = console->texte[index].lenght;
-        console->texte[index].img.pos.h = 8;
+        console->indice[index] = index;
+        sprintf(console->string[index], "  ");
+        console->texte[index].img.texture = imprime (console->string[index], screenw, NOIR, systeme, &console->texte[index].lenght, &console->texte[index].high);
+        console->pos[index].x = 0;
+        console->pos[index].y = index*10;
+        console->pos[index].w = console->texte[index].lenght;
+        console->pos[index].h = 10;
+        console->texte[index].img.pos.x = console->pos[index].x;
+        console->texte[index].img.pos.y = console->pos[index].y;
+        console->texte[index].img.pos.w = console->pos[index].w;
+        console->texte[index].img.pos.h = console->pos[index].h;
     }
 
     if (glIsTexture(console->console.texture) == GL_FALSE)

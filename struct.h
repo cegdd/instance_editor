@@ -88,6 +88,10 @@ struct CONSOLE
 {
     struct pict console;
     struct TEXTE texte[10];
+    struct SDL_Rect pos [10];
+    int indice[10];
+    int actif;
+    char string[10][1024];
 };
 
 #endif

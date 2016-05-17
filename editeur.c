@@ -11,6 +11,7 @@
 #include "tableau.h"
 #include "evenement.h"
 #include "image.h"
+#include "systeme.h"
 
 extern int screenh, screenw;
 
@@ -30,7 +31,7 @@ int editeur(struct DIVERSsysteme *systeme)
         /*reverse for OpenGL*/
         systeme->pointeur.pos.y = (systeme->pointeur.pos.y - screenh + systeme->pointeur.pos.h) * -1;
 
-        boucleevent(systeme, &ui);
+        boucleevent(systeme, &ui, &console);
         pointeur(systeme, &ui);
 
         draw_button(&ui.creer);

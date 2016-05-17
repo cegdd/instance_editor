@@ -14,7 +14,7 @@
 
 extern int screenh, screenw;
 
-void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui)
+void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console)
 {
 	while(SDL_PollEvent(&systeme->evenement) == 1)
 	{
@@ -29,7 +29,7 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui)
             case SDL_MOUSEBUTTONUP:
                 if( systeme->evenement.button.button == SDL_BUTTON_LEFT )
                 {
-                    clic_UP_L(systeme, ui);
+                    clic_UP_L(systeme, ui, console);
                 }
                 break;
 		}
@@ -61,13 +61,14 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
     }
 }
 
-void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui)
+void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console)
 {
     /* creer*/
     if (colisionbox(&systeme->pointeur.pos, &ui->creer.pos, true) == true &&
         ui->creer.etat == B_CLIQUER)
     {
         ui->creer.etat = B_NORMAL;
+        say ("map path to load :", console, systeme);
     }
     else if(ui->creer.etat == B_CLIQUER)
     {

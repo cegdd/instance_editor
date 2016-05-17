@@ -83,3 +83,28 @@ int calculoctant(int x, int y, int x2, int y2, int* difx, int* dify)
 
     return octant;
 }
+void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme)
+{
+    int index;
+
+    sprintf (console->string[console->actif], texte);
+    console->texte[console->actif].img.texture = imprime (console->string[console->actif], screenw, NOIR, systeme, &console->texte[console->actif].lenght, NULL);
+    console->actif--;
+    if(console->actif < 0)
+    {
+        console ->actif = 9;
+    }
+
+
+    for (index = 0 ; index <= 9 ; index++)
+    {
+        console->indice[index]++;
+        if (console->indice[index] == 10)
+        {
+            console->indice[index] = 0;
+        }
+        console->texte[index].img.pos.x = console->pos[console->indice[index]].x;
+        console->texte[index].img.pos.y = console->pos[console->indice[index]].y;
+        console->texte[index].img.pos.w = console->texte[index].lenght;
+    }
+}
