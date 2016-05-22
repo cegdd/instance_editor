@@ -1162,3 +1162,124 @@
 	"evenement.h"
 	"image.h"
 
+1462745637 source:c:\users\cegdd\programmation\instance_editor\clavier.c
+	"main.h"
+
+1462746301 c:\users\cegdd\programmation\instance_editor\main.h
+	"struct.h"
+
+1463942084 c:\users\cegdd\programmation\instance_editor\struct.h
+	<stdio.h>
+	<stdbool.h>
+	<SDL_ttf.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1462918030 source:c:\users\cegdd\programmation\instance_editor\colision.c
+	<SDL.h>
+	<math.h>
+	<stdio.h>
+	<stdbool.h>
+	"image.h"
+	"tableau.h"
+	"colision.h"
+	"deplacement.h"
+	"main.h"
+
+1462747914 c:\users\cegdd\programmation\instance_editor\image.h
+	<SDL_ttf.h>
+	"main.h"
+
+1463351491 c:\users\cegdd\programmation\instance_editor\tableau.h
+	<SDL_ttf.h>
+	"main.h"
+
+1462918030 c:\users\cegdd\programmation\instance_editor\colision.h
+	<stdbool.h>
+	"struct.h"
+
+1462746479 c:\users\cegdd\programmation\instance_editor\deplacement.h
+
+1462919183 source:c:\users\cegdd\programmation\instance_editor\image.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"main.h"
+	"image.h"
+
+1462920156 source:c:\users\cegdd\programmation\instance_editor\main.c
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"main.h"
+	"editeur.h"
+	"tableau.h"
+	"image.h"
+
+1462917848 c:\users\cegdd\programmation\instance_editor\editeur.h
+	"struct.h"
+
+1463942476 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"struct.h"
+	"tableau.h"
+	"evenement.h"
+	"image.h"
+	"systeme.h"
+
+1463483462 c:\users\cegdd\programmation\instance_editor\evenement.h
+	<stdbool.h>
+	"main.h"
+
+1463481809 c:\users\cegdd\programmation\instance_editor\systeme.h
+	"main.h"
+
+1463483462 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+	<stdlib.h>
+	<stdio.h>
+	<SDL.h>
+	"struct.h"
+	"main.h"
+	"image.h"
+	"evenement.h"
+	"tableau.h"
+	"systeme.h"
+	"clavier.h"
+	"colision.h"
+
+1462746687 c:\users\cegdd\programmation\instance_editor\clavier.h
+
+1463482682 source:c:\users\cegdd\programmation\instance_editor\systeme.c
+	<SDL.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	"main.h"
+	"image.h"
+
+1463942446 source:c:\users\cegdd\programmation\instance_editor\tableau.c
+	<SDL.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdbool.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	"main.h"
+	"image.h"
+

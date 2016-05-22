@@ -65,6 +65,7 @@ struct DIVERSsysteme
     GLuint BG;
     SDL_Texture *BGblanc;
 
+
     SDL_Event evenement;
 
     SDL_Window *screen;
@@ -88,10 +89,13 @@ struct CONSOLE
 {
     struct pict console;
     struct TEXTE texte[10];
+    struct TEXTE ecris;
     struct SDL_Rect pos [10];
     int indice[10];
     int actif;
     char string[10][1024];
+    char tampon[1024];
+    short curseur;
 };
 
 #endif

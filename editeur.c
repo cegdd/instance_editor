@@ -42,6 +42,7 @@ int editeur(struct DIVERSsysteme *systeme)
         {
             draw_pict(&console.texte[index].img);
         }
+        draw_pict(&console.ecris.img);
 
         glFlush();
         SDL_GL_SwapWindow(systeme->screen);

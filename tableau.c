@@ -73,7 +73,7 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 {
     int index;
 
-    setPos(&console->console.pos, 0, 0, screenw, 105);
+    setPos(&console->console.pos, 0, 12, screenw, 105);
 
     console->console.texture = loadTexture ("rs/ui/console.png");
 
@@ -85,7 +85,7 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         sprintf(console->string[index], "  ");
         console->texte[index].img.texture = imprime (console->string[index], screenw, NOIR, systeme, &console->texte[index].lenght, &console->texte[index].high);
         console->pos[index].x = 0;
-        console->pos[index].y = index*10;
+        console->pos[index].y = (index*10)+10;
         console->pos[index].w = console->texte[index].lenght;
         console->pos[index].h = 10;
         console->texte[index].img.pos.x = console->pos[index].x;
@@ -93,6 +93,12 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         console->texte[index].img.pos.w = console->pos[index].w;
         console->texte[index].img.pos.h = console->pos[index].h;
     }
+    sprintf(console->tampon, "");
+    console->ecris.img.texture = imprime (console->tampon, screenw, BLANC, systeme, &console->ecris.lenght, &console->ecris.high);
+    console->ecris.img.pos.x = 0;
+    console->ecris.img.pos.y = 0;
+    console->ecris.img.pos.w = console->ecris.lenght;
+    console->ecris.img.pos.h = 10;
 
     if (glIsTexture(console->console.texture) == GL_FALSE)
     {
