@@ -1,678 +1,522 @@
 #include "main.h"
-/*
-void intputtexte(struct typeFORevent *FORevent)
+#include "systeme.h"
+
+void intputtexte(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 {
 
-	int typeclavier = 2;
+	char typeclavier = '1';
 
-	switch (FORevent->systeme->evenement.key.keysym.scancode)
+	switch (systeme->evenement.key.keysym.scancode)
 	{
 	case SDL_SCANCODE_ESCAPE:
-		FORevent->systeme->echap = 1;
 		break;
 	case SDL_SCANCODE_DOWN:
-		FORevent->deplacement->direction.bas = 1;
-		FORevent->deplacement->persobouge = 1;
 		break;
 	case SDL_SCANCODE_UP:
-		FORevent->deplacement->direction.haut = 1;
-		FORevent->deplacement->persobouge = 1;
 		break;
 	case SDL_SCANCODE_LEFT:
-		FORevent->deplacement->direction.gauche = 1;
-		FORevent->deplacement->persobouge = 1;
 		break;
 	case SDL_SCANCODE_RIGHT:
-		FORevent->deplacement->direction.droite = 1;
-		FORevent->deplacement->persobouge = 1;
 		break;
 	case SDL_SCANCODE_A:
-		if (FORevent->chat->saisiechat == 1)
-		{
 			if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'q';
+				addletter('q', console);
 			}
 			else if (typeclavier == '2')
 			{
-				FORevent->chat->lettre = 'a';
+				addletter( 'a', console);
 			}
 			else if (typeclavier == '3')
 			{
-				FORevent->chat->lettre = 'a';
+				addletter( 'a', console);
 			}
-		}
-		else
-		{
-			FORevent->deplacement->direction.gauche = 1;
-			FORevent->deplacement->persobouge = 1;
-		}
 		break;
 	case SDL_SCANCODE_B:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'b';
-		}
+			addletter( 'b', console);
+
 		break;
 	case SDL_SCANCODE_C:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'c';
-		}
+			addletter( 'c', console);
+
 		break;
 	case SDL_SCANCODE_D:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'd';
-		}
-		else
-		{
-			FORevent->deplacement->direction.droite = 1;
-			FORevent->deplacement->persobouge = 1;
-		}
+			addletter( 'd', console);
 		break;
 	case SDL_SCANCODE_E:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'e';
-		}
+			addletter( 'e', console);
+
 		break;
 	case SDL_SCANCODE_F:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'f';
-		}
+			addletter( 'f', console);
+
 		break;
 	case SDL_SCANCODE_G:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'g';
-		}
+			addletter( 'g', console);
+
 		break;
 	case SDL_SCANCODE_H:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'h';
-		}
+			addletter( 'h', console);
+
 		break;
 	case SDL_SCANCODE_I:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'i';
-		}
+			addletter( 'i', console);
+
 		break;
 	case SDL_SCANCODE_J:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'j';
-		}
+			addletter( 'j', console);
+
 		break;
 	case SDL_SCANCODE_K:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'k';
-		}
+			addletter( 'k', console);
+
 		break;
 	case SDL_SCANCODE_L:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'l';
-		}
+			addletter( 'l', console);
+
 		break;
 	case SDL_SCANCODE_M:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '?';
+				addletter( '?', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '\0';
+				addletter( '\0', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = ',';
-			}
-		}
+				addletter( ',', console);
+
 		break;
 	case SDL_SCANCODE_SEMICOLON:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'm';
-		}
+			addletter( 'm', console);
+
 		break;
 	case SDL_SCANCODE_N:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'n';
-		}
+			addletter( 'n', console);
+
 		break;
 	case SDL_SCANCODE_O:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'o';
-		}
+			addletter( 'o', console);
+
 		break;
 	case SDL_SCANCODE_P:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'p';
-		}
+			addletter( 'p', console);
+
 		break;
 	case SDL_SCANCODE_Q:
-		if (FORevent->chat->saisiechat == 1)
-		{
 			if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'a';
+				addletter( 'a', console);
 			}
 			else if (typeclavier == '2')
 			{
-				FORevent->chat->lettre = 'q';
+				addletter( 'q', console);
 			}
 			else if (typeclavier == '3')
 			{
-				FORevent->chat->lettre = 'q';
+				addletter( 'q', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_R:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'r';
-		}
+			addletter( 'r', console);
+
 		break;
 	case SDL_SCANCODE_S:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 's';
-		}
-		else
-		{
-			FORevent->deplacement->direction.bas = 1;
-			FORevent->deplacement->persobouge = 1;
-		}
+			addletter( 's', console);
+
 		break;
 	case SDL_SCANCODE_T:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 't';
-		}
+			addletter( 't', console);
+
 		break;
 	case SDL_SCANCODE_U:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'u';
-		}
+			addletter( 'u', console);
+
 		break;
 	case SDL_SCANCODE_V:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'v';
-		}
+			addletter( 'v', console);
+
 		break;
 	case SDL_SCANCODE_W:
-		if (FORevent->chat->saisiechat == 1)
-		{
 			if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'z';
+				addletter( 'z', console);
 			}
 			else if (typeclavier == '2')
 			{
-				FORevent->chat->lettre = 'w';
+				addletter( 'w', console);
 			}
 			else if (typeclavier == '3')
 			{
-				FORevent->chat->lettre = 'w';
+				addletter( 'w', console);
 			}
-		}
-		else
-		{
-			FORevent->deplacement->direction.haut = 1;
-			FORevent->deplacement->persobouge = 1;
-		}
 		break;
 	case SDL_SCANCODE_X:
-		if (FORevent->chat->saisiechat == 1)
-		{
-			FORevent->chat->lettre = 'x';
-		}
+			addletter( 'x', console);
+
 		break;
 	case SDL_SCANCODE_Y:
-		if (FORevent->chat->saisiechat == 1)
-		{
 			if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'y';
+				addletter( 'y', console);
 			}
 			else if (typeclavier == '2')
 			{
-				FORevent->chat->lettre = 'y';
+				addletter( 'y', console);
 			}
 			else if (typeclavier == '3')
 			{
-				FORevent->chat->lettre = 'z';
-			}
-		}
+				addletter( 'z', console);
+            }
 		break;
 	case SDL_SCANCODE_Z:
-		if (FORevent->chat->saisiechat == 1)
-		{
 			if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'w';
+				addletter( 'w', console);
 			}
 			else if (typeclavier == '2')
 			{
-				FORevent->chat->lettre = 'z';
+				addletter( 'z', console);
 			}
 			else if (typeclavier == '3')
 			{
-				FORevent->chat->lettre = 'y';
+				addletter( 'y', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_0:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '0';
+				addletter( '0', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '@';
+				addletter( '@', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'à';
+				addletter( 'à', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_1:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '1';
+				addletter( '1', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '\0';
+				addletter( '\0', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = '&';
+				addletter( '&', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_2:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '2';
+				addletter( '2', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '~';
+				addletter( '~', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'é';
+				addletter( 'é', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_3:
-		if (FORevent->chat->saisiechat == 1)
-			{
-				if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+				if (typeclavier == '1' && systeme->shiftactif == true)
 				{
-					FORevent->chat->lettre = '3';
+					addletter( '3', console);
 				}
-				else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+				else if (typeclavier == '1' && systeme->altactif == true)
 				{
-					FORevent->chat->lettre = '#';
+					addletter( '#', console);
 				}
 				else if (typeclavier == '1')
 				{
-					FORevent->chat->lettre = '"';
+					addletter( '"', console);
 				}
-			}
+
 		break;
 	case SDL_SCANCODE_4:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '4';
+				addletter( '4', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '{';
+				addletter( '{', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = '\'';
+				addletter( '\\', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_5:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '5';
+				addletter( '5', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '[';
+				addletter( '[', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = '(';
+				addletter( '(', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_6:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '6';
+				addletter( '6', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '|';
+				addletter( '|', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = '-';
+				addletter( '-', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_7:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '7';
+				addletter( '7', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '`';
+				addletter( '`', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'è';
+				addletter( 'è', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_8:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '8';
+				addletter( '8', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '\\';
+				addletter( '\\', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = '_';
+				addletter( '_', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_9:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '9';
+				addletter( '9', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '^';
+				addletter( '^', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = 'ç';
+				addletter( 'ç', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_MINUS:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '°';
+				addletter( '°', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = ']';
+				addletter( ']', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = ')';
+				addletter( ')', console);
 			}
-		}
+
 		break;
 	case SDL_SCANCODE_EQUALS:
-		if(FORevent->chat->saisiechat == 1)
-		{
-			if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+			if (typeclavier == '1' && systeme->shiftactif == true)
 			{
-				FORevent->chat->lettre = '+';
+				addletter( '+', console);
 			}
-			else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+			else if (typeclavier == '1' && systeme->altactif == true)
 			{
-				FORevent->chat->lettre = '}';
+				addletter( '}', console);
 			}
 			else if (typeclavier == '1')
 			{
-				FORevent->chat->lettre = '=';
+				addletter( '=', console);
 			}
 			break;
 		case SDL_SCANCODE_LEFTBRACKET:
-		if(FORevent->chat->saisiechat == 1)
-			{
-				if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+				if (typeclavier == '1' && systeme->shiftactif == true)
 				{
-					FORevent->chat->lettre = '¨';
+					addletter( '¨', console);
 				}
-				else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+				else if (typeclavier == '1' && systeme->altactif == true)
 				{
-					FORevent->chat->lettre = '\0';
+					addletter( '\0', console);
 				}
 				else if (typeclavier == '1')
 				{
-					FORevent->chat->lettre = '^';
+					addletter( '^', console);
 				}
-
-			}
 			break;
 		case SDL_SCANCODE_RIGHTBRACKET:
-			if(FORevent->chat->saisiechat == 1)
-			{
-				if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+				if (typeclavier == '1' && systeme->shiftactif == true)
 				{
-					FORevent->chat->lettre = '£';
+					addletter( '£', console);
 				}
-				else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+				else if (typeclavier == '1' && systeme->altactif == true)
 				{
-					FORevent->chat->lettre = '¤';
+					addletter( '¤', console);
 				}
 				else if (typeclavier == '1')
 				{
-					FORevent->chat->lettre = '$';
+					addletter( '$', console);
 				}
-
-			}
 			break;
 		case SDL_SCANCODE_APOSTROPHE:
-			if(FORevent->chat->saisiechat == 1)
-			{
-				if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+				if (typeclavier == '1' && systeme->shiftactif == true)
 				{
-					FORevent->chat->lettre = '%';
+					addletter( '%', console);
 				}
-				else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+				else if (typeclavier == '1' && systeme->altactif == true)
 				{
-					FORevent->chat->lettre = '\0';
+					addletter( '\0', console);
 				}
 				else if (typeclavier == '1')
 				{
-					FORevent->chat->lettre = 'ù';
+					addletter( 'ù', console);
 				}
-
-			}
 			break;
 		case SDL_SCANCODE_COMMA:
-			if(FORevent->chat->saisiechat == 1)
-			{
-				if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+				if (typeclavier == '1' && systeme->shiftactif == true)
 				{
-					FORevent->chat->lettre = '.';
+					addletter( '.', console);
 				}
-				else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+				else if (typeclavier == '1' && systeme->altactif == true)
 				{
-					FORevent->chat->lettre = '\0';
+					addletter( '\0', console);
 				}
 				else if (typeclavier == '1')
 				{
-					FORevent->chat->lettre = ';';
+					addletter( ';', console);
 				}
-
-			}
 			break;
 		case SDL_SCANCODE_PERIOD:
-			if(FORevent->chat->saisiechat == 1)
-			{
-				if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+				if (typeclavier == '1' && systeme->shiftactif == true)
 				{
-					FORevent->chat->lettre = '/';
+					addletter( '/', console);
 				}
-				else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+				else if (typeclavier == '1' && systeme->altactif == true)
 				{
-					FORevent->chat->lettre = '\0';
+					addletter( '\0', console);
 				}
 				else if (typeclavier == '1')
 				{
-					FORevent->chat->lettre = ':';
+					addletter( ':', console);
 				}
-
-			}
 			break;
 		case SDL_SCANCODE_SLASH:
-			if(FORevent->chat->saisiechat == 1)
-			{
-				if (typeclavier == '1' && FORevent->systeme->shiftactif == true)
+				if (typeclavier == '1' && systeme->shiftactif == true)
 				{
-					FORevent->chat->lettre = '§';
+					addletter( '§', console);
 				}
-				else if (typeclavier == '1' && FORevent->systeme->altactif == true)
+				else if (typeclavier == '1' && systeme->altactif == true)
 				{
-					FORevent->chat->lettre = '\0';
+					addletter( '\0', console);
 				}
 				else if (typeclavier == '1')
 				{
-					FORevent->chat->lettre = '!';
+					addletter( '!', console);
 				}
-
-			}
 			break;
 		case SDL_SCANCODE_KP_0:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '0';
-			}
+				addletter( '0', console);
+
 			break;
 		case SDL_SCANCODE_KP_1:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '1';
-			}
+				addletter( '1', console);
+
 			break;
 		case SDL_SCANCODE_KP_2:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '2';
-			}
+				addletter( '2', console);
+
 			break;
 		case SDL_SCANCODE_KP_3:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '3';
-			}
+				addletter( '3', console);
+
 			break;
 		case SDL_SCANCODE_KP_4:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '4';
-			}
+				addletter( '4', console);
+
 			break;
 		case SDL_SCANCODE_KP_5:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '5';
-			}
+				addletter( '5', console);
+
 			break;
 		case SDL_SCANCODE_KP_6:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '6';
-			}
+				addletter( '6', console);
+
 			break;
 		case SDL_SCANCODE_KP_7:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '7';
-			}
+				addletter( '7', console);
+
 			break;
 		case SDL_SCANCODE_KP_8:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '8';
-			}
+				addletter( '8', console);
+
 			break;
 		case SDL_SCANCODE_KP_9:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '9';
-			}
+				addletter( '9', console);
+
 			break;
 		case SDL_SCANCODE_SPACE:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = ' ';
-			}
+				addletter( ' ', console);
+
 			break;
 		case SDL_SCANCODE_BACKSPACE:
-			if (FORevent->chat->saisiechat == 1)
-			{
-				FORevent->chat->lettre = '*';
-			}
+				removeletter(console);
+
 			break;
 		case SDL_SCANCODE_LSHIFT:
-			FORevent->systeme->shiftactif = true;
+			systeme->shiftactif = true;
 			break;
 		case SDL_SCANCODE_RSHIFT:
-			FORevent->systeme->shiftactif = true;
+			systeme->shiftactif = true;
 			break;
 		case SDL_SCANCODE_LALT:
-			FORevent->systeme->altactif = true;
+			systeme->altactif = true;
 			break;
 		case SDL_SCANCODE_RALT:
-			FORevent->systeme->altactif = true;
+			systeme->altactif = true;
 			break;
-
+        case SDL_SCANCODE_RETURN:
+            say(console->tampon, console, systeme);
+            flushbuffer(console);
+            break;
 		default:
 			break;
 		}
 	}
-}*/
+}
 

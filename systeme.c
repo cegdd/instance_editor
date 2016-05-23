@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 #include "main.h"
 #include "image.h"
@@ -107,4 +108,31 @@ void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme)
         console->texte[index].img.pos.y = console->pos[console->indice[index]].y;
         console->texte[index].img.pos.w = console->texte[index].lenght;
     }
+}
+
+void addletter(char lettre, struct CONSOLE *console)
+{
+    console->tampon[console->curseur] = lettre;
+    console->curseur++;
+}
+
+void removeletter(struct CONSOLE *console)
+{
+    if (console->curseur > 1)
+    {
+        console->curseur--;
+        console->tampon[console->curseur] = '\0';
+    }
+    else if (console->curseur == 1)
+    {
+        console->curseur = 0;
+        console->tampon[console->curseur] = ' ';
+    }
+}
+
+void flushbuffer(struct CONSOLE *console)
+{
+    memset(console->tampon, '\0', 1024);
+    console->tampon[0] = ' ';
+    console->curseur = 0;
 }

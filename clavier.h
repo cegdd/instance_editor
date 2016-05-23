@@ -1,6 +1,9 @@
 #ifndef CLAVIERH
 #define CLAVIERH
 
-/*void intputtexte(struct typeFORevent *FORevent);*/
+#include "main.h"
+#include "systeme.h"
+
+void intputtexte(struct DIVERSsysteme *systeme, struct CONSOLE *console);
 
 #endif

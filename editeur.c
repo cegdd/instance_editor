@@ -12,6 +12,7 @@
 #include "evenement.h"
 #include "image.h"
 #include "systeme.h"
+#include "clavier.h"
 
 extern int screenh, screenw;
 
@@ -42,6 +43,9 @@ int editeur(struct DIVERSsysteme *systeme)
         {
             draw_pict(&console.texte[index].img);
         }
+        console.ecris.img.texture = imprime (console.tampon, screenw, BLANC, systeme, &console.ecris.lenght, &console.ecris.high);
+        console.ecris.img.pos.w = console.ecris.lenght;
+
         draw_pict(&console.ecris.img);
 
         glFlush();

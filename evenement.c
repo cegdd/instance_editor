@@ -32,6 +32,9 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
                     clic_UP_L(systeme, ui, console);
                 }
                 break;
+            case SDL_KEYUP:
+                 intputtexte(systeme, console);
+                break;
 		}
 	}
 }

@@ -78,11 +78,13 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
     console->console.texture = loadTexture ("rs/ui/console.png");
 
     console->actif = 9;
+    console->curseur = 0;
 
     for (index = 0 ; index < 10 ; index++)
     {
         console->indice[index] = index;
-        sprintf(console->string[index], "  ");
+        memset(console->string[index], '\0', 1024);
+        console->string[index][0] = ' ';
         console->texte[index].img.texture = imprime (console->string[index], screenw, NOIR, systeme, &console->texte[index].lenght, &console->texte[index].high);
         console->pos[index].x = 0;
         console->pos[index].y = (index*10)+10;
@@ -93,7 +95,8 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         console->texte[index].img.pos.w = console->pos[index].w;
         console->texte[index].img.pos.h = console->pos[index].h;
     }
-    sprintf(console->tampon, "");
+    memset(console->tampon, '\0', 1024);
+    console->tampon[0] = ' ';
     console->ecris.img.texture = imprime (console->tampon, screenw, BLANC, systeme, &console->ecris.lenght, &console->ecris.high);
     console->ecris.img.pos.x = 0;
     console->ecris.img.pos.y = 0;
