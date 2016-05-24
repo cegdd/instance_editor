@@ -72,6 +72,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
     {
         ui->creer.etat = B_NORMAL;
         say ("map path to load :", console, systeme);
+        systeme->mapasked = true;
     }
     else if(ui->creer.etat == B_CLIQUER)
     {

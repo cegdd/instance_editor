@@ -512,7 +512,9 @@ void intputtexte(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 			break;
         case SDL_SCANCODE_RETURN:
             say(console->tampon, console, systeme);
+            sprintf(console->lastanswer, console->tampon);
             flushbuffer(console);
+            console->answered = true;
             break;
 		default:
 			break;

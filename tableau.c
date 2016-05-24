@@ -27,6 +27,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->altactif = false;
 	systeme->inbattle = false;
 	systeme->continuer = true;
+	systeme->mapasked = false;
 	systeme->echap = 0;
 
 	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);
@@ -79,6 +80,7 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
     console->actif = 9;
     console->curseur = 0;
+    console->answered = false;
 
     for (index = 0 ; index < 10 ; index++)
     {
@@ -103,8 +105,17 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
     console->ecris.img.pos.w = console->ecris.lenght;
     console->ecris.img.pos.h = 10;
 
+    memset(console->lastanswer, '\0', 1024);
+    console->lastanswer[0] = ' ';
+
     if (glIsTexture(console->console.texture) == GL_FALSE)
     {
         printf("texture not loaded\n");
     }
+}
+
+void initdata(struct DATA *data)
+{
+    data->map.texture = -1;
+    setPos(&data->map.pos, 0, 0, 0, 0);
 }

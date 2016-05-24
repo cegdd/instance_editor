@@ -55,6 +55,9 @@ struct DIVERSsysteme
     bool shiftactif;
     bool altactif;
     bool inbattle;
+
+    bool mapasked;
+
     bool continuer;
     int echap;
     int typeclavier;
@@ -95,7 +98,14 @@ struct CONSOLE
     int actif;
     char string[10][1024];
     char tampon[1024];
+    char lastanswer[1024];
     short curseur;
+    bool answered;
+};
+
+struct DATA
+{
+    struct pict map;
 };
 
 #endif

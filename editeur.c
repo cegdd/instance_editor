@@ -13,6 +13,7 @@
 #include "image.h"
 #include "systeme.h"
 #include "clavier.h"
+#include "editeur.h"
 
 extern int screenh, screenw;
 
@@ -21,8 +22,10 @@ int editeur(struct DIVERSsysteme *systeme)
     int index;
     struct UI ui;
     struct CONSOLE console;
+    struct DATA data;
     initui(&ui);
     initconsole(&console, systeme);
+    initdata(&data);
 
     while(systeme->continuer)
     {
@@ -34,6 +37,11 @@ int editeur(struct DIVERSsysteme *systeme)
 
         boucleevent(systeme, &ui, &console);
         pointeur(systeme, &ui);
+
+        if (systeme->mapasked)
+        {
+            loadingmap(&console, systeme, &data);
+        }
 
         draw_button(&ui.creer);
         draw_button(&ui.quitter);
@@ -54,4 +62,26 @@ int editeur(struct DIVERSsysteme *systeme)
         SDL_Delay(10);
     }
     return EXIT_SUCCESS;
+}
+
+void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
+{
+    char temp[128];
+    if (console->answered)
+    {
+        console->answered = false;
+        systeme->mapasked = false;
+
+        sprintf(temp, "rs/map/%s", console->lastanswer);
+        data->map.texture = loadTexture(temp);
+
+        if(glIsTexture(data->map.texture))
+        {
+            say("texture successfuly loaded", console, systeme);
+        }
+        else
+        {
+            say("ERROR : texture not successfuly loaded", console, systeme);
+        }
+    }
 }
