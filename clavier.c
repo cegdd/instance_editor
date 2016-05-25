@@ -1,7 +1,7 @@
 #include "main.h"
 #include "systeme.h"
 
-void intputtexte(struct DIVERSsysteme *systeme, struct CONSOLE *console)
+void intputtexteup(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 {
 
 	char typeclavier = '1';
@@ -499,16 +499,16 @@ void intputtexte(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 
 			break;
 		case SDL_SCANCODE_LSHIFT:
-			systeme->shiftactif = true;
+			systeme->shiftactif = false;
 			break;
 		case SDL_SCANCODE_RSHIFT:
-			systeme->shiftactif = true;
+			systeme->shiftactif = false;
 			break;
 		case SDL_SCANCODE_LALT:
-			systeme->altactif = true;
+			systeme->altactif = false;
 			break;
 		case SDL_SCANCODE_RALT:
-			systeme->altactif = true;
+			systeme->altactif = false;
 			break;
         case SDL_SCANCODE_RETURN:
             say(console->tampon, console, systeme);
@@ -521,4 +521,54 @@ void intputtexte(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 		}
 	}
 }
+
+void intputtextedown(struct DIVERSsysteme *systeme, struct CONSOLE *console)
+{
+	switch (systeme->evenement.key.keysym.scancode)
+	{
+	case SDL_SCANCODE_ESCAPE:
+		break;
+	case SDL_SCANCODE_DOWN:
+		break;
+	case SDL_SCANCODE_UP:
+		break;
+	case SDL_SCANCODE_LEFT:
+		break;
+	case SDL_SCANCODE_RIGHT:
+		break;
+    case SDL_SCANCODE_BACKSPACE:
+        removeletter(console);
+        break;
+    case SDL_SCANCODE_LSHIFT:
+        systeme->shiftactif = true;
+        break;
+    case SDL_SCANCODE_RSHIFT:
+        systeme->shiftactif = true;
+        break;
+    case SDL_SCANCODE_LALT:
+        systeme->altactif = true;
+        break;
+    case SDL_SCANCODE_RALT:
+        systeme->altactif = true;
+        break;
+    case SDL_SCANCODE_RETURN:
+        say(console->tampon, console, systeme);
+        sprintf(console->lastanswer, console->tampon);
+        flushbuffer(console);
+        console->answered = true;
+        break;
+    default:
+        break;
+    }
+}
+
+
+
+
+
+
+
+
+
+
 

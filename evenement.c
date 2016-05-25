@@ -33,7 +33,9 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
                 }
                 break;
             case SDL_KEYUP:
-                 intputtexte(systeme, console);
+                 intputtexteup(systeme, console);
+            case SDL_KEYDOWN:
+                 intputtextedown(systeme, console);
                 break;
 		}
 	}
@@ -73,6 +75,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         ui->creer.etat = B_NORMAL;
         say ("map path to load :", console, systeme);
         systeme->mapasked = true;
+        console->answered = false;
     }
     else if(ui->creer.etat == B_CLIQUER)
     {

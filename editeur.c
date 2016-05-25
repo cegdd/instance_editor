@@ -43,6 +43,11 @@ int editeur(struct DIVERSsysteme *systeme)
             loadingmap(&console, systeme, &data);
         }
 
+        if (glIsTexture(data.map.texture))
+        {
+            draw_pict(&data.map);
+        }
+
         draw_button(&ui.creer);
         draw_button(&ui.quitter);
 
@@ -73,11 +78,12 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
         systeme->mapasked = false;
 
         sprintf(temp, "rs/map/%s", console->lastanswer);
-        data->map.texture = loadTexture(temp);
+        data->map.texture = loadTextureandsize(temp, &data->map.pos);
 
         if(glIsTexture(data->map.texture))
         {
-            say("texture successfuly loaded", console, systeme);
+            sprintf(temp, "texture successfuly loaded %d x %d", data->map.pos.w, data->map.pos.h);
+            say (temp, console, systeme);
         }
         else
         {

@@ -19,5 +19,7 @@ void setPos(SDL_Rect *pos, int x, int y, int w, int h);
 void Turn_And_Draw (struct pict *img, float angle);
 void Sync_Moving_Pict(int time, struct moving_pict *m_pict);
 
+GLuint loadTextureandsize(const char *filename, struct SDL_Rect *pos);
+
 
 #endif

@@ -1162,7 +1162,7 @@
 	"evenement.h"
 	"image.h"
 
-1464131744 source:c:\users\cegdd\programmation\instance_editor\clavier.c
+1464216195 source:c:\users\cegdd\programmation\instance_editor\clavier.c
 	"main.h"
 	"systeme.h"
 
@@ -1187,7 +1187,7 @@
 	"deplacement.h"
 	"main.h"
 
-1462747914 c:\users\cegdd\programmation\instance_editor\image.h
+1464215347 c:\users\cegdd\programmation\instance_editor\image.h
 	<SDL_ttf.h>
 	"main.h"
 
@@ -1201,7 +1201,7 @@
 
 1462746479 c:\users\cegdd\programmation\instance_editor\deplacement.h
 
-1462919183 source:c:\users\cegdd\programmation\instance_editor\image.c
+1464215359 source:c:\users\cegdd\programmation\instance_editor\image.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -1229,7 +1229,7 @@
 1464130771 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"struct.h"
 
-1464131520 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1464215347 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1252,7 +1252,7 @@
 1464045852 c:\users\cegdd\programmation\instance_editor\systeme.h
 	"main.h"
 
-1464130385 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1464216001 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1265,7 +1265,7 @@
 	"clavier.h"
 	"colision.h"
 
-1464043557 c:\users\cegdd\programmation\instance_editor\clavier.h
+1464216001 c:\users\cegdd\programmation\instance_editor\clavier.h
 	"main.h"
 	"systeme.h"
 
