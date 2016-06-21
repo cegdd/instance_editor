@@ -48,6 +48,8 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->ppobj.w = 50;
 	systeme->ppobj.h = 50;
 
+	setPos(&systeme->origine, 0, 0, 0, 0);
+
 	systeme->oldpp.x = 0;
 	systeme->oldpp.y = 0;
 }
@@ -75,12 +77,17 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
     int index;
 
     setPos(&console->console.pos, 0, 12, screenw, 105);
+    setPos(&console->shooton.pos, 0, 0, screenw, 12);
+    setPos(&console->shootoff.pos, 0, 0, screenw, 12);
 
     console->console.texture = loadTexture ("rs/ui/console.png");
+    console->shooton.texture = loadTexture ("rs/ui/shootboxon.png");
+    console->shootoff.texture = loadTexture ("rs/ui/shootboxoff.png");
 
     console->actif = 9;
     console->curseur = 0;
     console->answered = false;
+    console->active = true;
 
     for (index = 0 ; index < 10 ; index++)
     {
@@ -118,4 +125,6 @@ void initdata(struct DATA *data)
 {
     data->map.texture = -1;
     setPos(&data->map.pos, 0, 0, 0, 0);
+    data->map.x = 0;
+    data->map.y = 0;
 }

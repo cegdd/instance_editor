@@ -21,6 +21,8 @@ enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
 struct pict
 {
     SDL_Rect pos;
+    int x;
+    int y;
     GLuint texture;
 };
 struct TEXTE
@@ -79,6 +81,7 @@ struct DIVERSsysteme
 	SDL_Rect pecran;
 	SDL_Rect oldpp;
 	SDL_Rect ppobj;
+	SDL_Rect origine;
 
 };
 
@@ -90,6 +93,8 @@ struct UI
 
 struct CONSOLE
 {
+    struct pict shooton;
+    struct pict shootoff;
     struct pict console;
     struct TEXTE texte[10];
     struct TEXTE ecris;
@@ -101,6 +106,7 @@ struct CONSOLE
     char lastanswer[1024];
     short curseur;
     bool answered;
+    bool active;
 };
 
 struct DATA

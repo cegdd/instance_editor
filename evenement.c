@@ -33,9 +33,19 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
                 }
                 break;
             case SDL_KEYUP:
-                 intputtexteup(systeme, console);
+                if (console->active)
+                {
+                    intputtexteup(systeme, console);
+                }
             case SDL_KEYDOWN:
-                 intputtextedown(systeme, console);
+                if (console->active)
+                {
+                    intputtextedown(systeme, console);
+                }
+                else
+                {
+                    pressdown(systeme);
+                }
                 break;
 		}
 	}
@@ -68,6 +78,16 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
 
 void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console)
 {
+    /*shootbox*/
+    if (colisionbox(&systeme->pointeur.pos, &console->shooton.pos, true))
+    {
+        console->active = true;
+    }
+    else
+    {
+        console->active = false;
+    }
+
     /* creer*/
     if (colisionbox(&systeme->pointeur.pos, &ui->creer.pos, true) == true &&
         ui->creer.etat == B_CLIQUER)

@@ -26,6 +26,7 @@ int editeur(struct DIVERSsysteme *systeme)
     initui(&ui);
     initconsole(&console, systeme);
     initdata(&data);
+    printf("%d %d\n", data.map.pos.x, data.map.pos.y);
 
     while(systeme->continuer)
     {
@@ -45,6 +46,8 @@ int editeur(struct DIVERSsysteme *systeme)
 
         if (glIsTexture(data.map.texture))
         {
+            data.map.pos.x = data.map.x + systeme->origine.x;
+            data.map.pos.y = data.map.y + systeme->origine.y;
             draw_pict(&data.map);
         }
 
@@ -52,6 +55,14 @@ int editeur(struct DIVERSsysteme *systeme)
         draw_button(&ui.quitter);
 
         draw_pict(&console.console);
+        if (console.active)
+        {
+            draw_pict(&console.shooton);
+        }
+        else
+        {
+            draw_pict(&console.shootoff);
+        }
         for(index = 0 ; index < 10 ; index++)
         {
             draw_pict(&console.texte[index].img);
@@ -78,7 +89,12 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
         systeme->mapasked = false;
 
         sprintf(temp, "rs/map/%s", console->lastanswer);
+        printf("%d %d\n", data->map.pos.x, data->map.pos.y);
         data->map.texture = loadTextureandsize(temp, &data->map.pos);
+        data->map.x = data->map.pos.x;
+        data->map.y = data->map.pos.y;
+        printf("%d %d\n", data->map.pos.x, data->map.pos.y);
+
 
         if(glIsTexture(data->map.texture))
         {

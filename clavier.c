@@ -563,12 +563,38 @@ void intputtextedown(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 }
 
 
+void pressdown(struct DIVERSsysteme *systeme)
+{
+    char typeclavier = '1';
 
-
-
-
-
-
-
-
+	switch (systeme->evenement.key.keysym.scancode)
+	{
+    case SDL_SCANCODE_W:
+        if (typeclavier == '1')
+        {
+            systeme->origine.y -= 10;
+        }
+    break;
+    case SDL_SCANCODE_S:
+        if (typeclavier == '1')
+        {
+            systeme->origine.y += 10;
+        }
+    break;
+    case SDL_SCANCODE_A:
+        if (typeclavier == '1')
+        {
+            systeme->origine.x += 10;
+        }
+    break;
+    case SDL_SCANCODE_D:
+        if (typeclavier == '1')
+        {
+            systeme->origine.x -= 10;
+        }
+    break;
+    default:
+        break;
+    }
+}
 

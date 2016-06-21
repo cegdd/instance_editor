@@ -1162,14 +1162,14 @@
 	"evenement.h"
 	"image.h"
 
-1464216195 source:c:\users\cegdd\programmation\instance_editor\clavier.c
+1466549389 source:c:\users\cegdd\programmation\instance_editor\clavier.c
 	"main.h"
 	"systeme.h"
 
 1462746301 c:\users\cegdd\programmation\instance_editor\main.h
 	"struct.h"
 
-1464131744 c:\users\cegdd\programmation\instance_editor\struct.h
+1466454202 c:\users\cegdd\programmation\instance_editor\struct.h
 	<stdio.h>
 	<stdbool.h>
 	<SDL_ttf.h>
@@ -1201,7 +1201,7 @@
 
 1462746479 c:\users\cegdd\programmation\instance_editor\deplacement.h
 
-1464215359 source:c:\users\cegdd\programmation\instance_editor\image.c
+1464868467 source:c:\users\cegdd\programmation\instance_editor\image.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -1213,7 +1213,7 @@
 	"main.h"
 	"image.h"
 
-1462920156 source:c:\users\cegdd\programmation\instance_editor\main.c
+1466454421 source:c:\users\cegdd\programmation\instance_editor\main.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1229,7 +1229,7 @@
 1464130771 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"struct.h"
 
-1464215347 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1466549203 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1245,14 +1245,14 @@
 	"clavier.h"
 	"editeur.h"
 
-1463483462 c:\users\cegdd\programmation\instance_editor\evenement.h
+1466549203 c:\users\cegdd\programmation\instance_editor\evenement.h
 	<stdbool.h>
 	"main.h"
 
 1464045852 c:\users\cegdd\programmation\instance_editor\systeme.h
 	"main.h"
 
-1464216001 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1466549601 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1265,7 +1265,7 @@
 	"clavier.h"
 	"colision.h"
 
-1464216001 c:\users\cegdd\programmation\instance_editor\clavier.h
+1466549601 c:\users\cegdd\programmation\instance_editor\clavier.h
 	"main.h"
 	"systeme.h"
 
@@ -1278,7 +1278,7 @@
 	"main.h"
 	"image.h"
 
-1464131744 source:c:\users\cegdd\programmation\instance_editor\tableau.c
+1466454395 source:c:\users\cegdd\programmation\instance_editor\tableau.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
