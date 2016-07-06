@@ -8,6 +8,11 @@ void intputtexteup(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 
 	switch (systeme->evenement.key.keysym.scancode)
 	{
+    case SDL_SCANCODE_TAB:
+        console->active = false;
+        SDL_FlushEvent(SDL_KEYDOWN);
+        SDL_FlushEvent(SDL_KEYUP);
+        break;
 	case SDL_SCANCODE_ESCAPE:
 		break;
 	case SDL_SCANCODE_DOWN:
@@ -552,10 +557,6 @@ void intputtextedown(struct DIVERSsysteme *systeme, struct CONSOLE *console)
         systeme->altactif = true;
         break;
     case SDL_SCANCODE_RETURN:
-        say(console->tampon, console, systeme);
-        sprintf(console->lastanswer, console->tampon);
-        flushbuffer(console);
-        console->answered = true;
         break;
     default:
         break;

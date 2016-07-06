@@ -26,7 +26,6 @@ int editeur(struct DIVERSsysteme *systeme)
     initui(&ui);
     initconsole(&console, systeme);
     initdata(&data);
-    printf("%d %d\n", data.map.pos.x, data.map.pos.y);
 
     while(systeme->continuer)
     {
@@ -39,7 +38,7 @@ int editeur(struct DIVERSsysteme *systeme)
         boucleevent(systeme, &ui, &console);
         pointeur(systeme, &ui);
 
-        if (systeme->mapasked)
+        if (systeme->asked)
         {
             loadingmap(&console, systeme, &data);
         }
@@ -50,9 +49,17 @@ int editeur(struct DIVERSsysteme *systeme)
             data.map.pos.y = data.map.y + systeme->origine.y;
             draw_pict(&data.map);
         }
+        if (systeme->projetouvert == true && ui.loadmap.etat == B_IMPOSSIBLE)
+        {
+            ui.loadmap.etat = B_NORMAL;
+            ui.enregistrer.etat = B_NORMAL;
+        }
 
         draw_button(&ui.creer);
         draw_button(&ui.quitter);
+        draw_button(&ui.enregistrer);
+        draw_button(&ui.loadmap);
+        draw_button(&ui.charger);
 
         draw_pict(&console.console);
         if (console.active)
@@ -82,18 +89,16 @@ int editeur(struct DIVERSsysteme *systeme)
 
 void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
 {
-    char temp[128];
     if (console->answered)
     {
+        char temp[128];
         console->answered = false;
-        systeme->mapasked = false;
+        systeme->asked = false;
 
         sprintf(temp, "rs/map/%s", console->lastanswer);
-        printf("%d %d\n", data->map.pos.x, data->map.pos.y);
         data->map.texture = loadTextureandsize(temp, &data->map.pos);
         data->map.x = data->map.pos.x;
         data->map.y = data->map.pos.y;
-        printf("%d %d\n", data->map.pos.x, data->map.pos.y);
 
 
         if(glIsTexture(data->map.texture))

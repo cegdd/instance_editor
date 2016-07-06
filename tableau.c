@@ -25,9 +25,9 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 {
 	systeme->shiftactif = false;
 	systeme->altactif = false;
-	systeme->inbattle = false;
+	systeme->projetouvert = false;
 	systeme->continuer = true;
-	systeme->mapasked = false;
+	systeme->asked = false;
 	systeme->echap = 0;
 
 	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);
@@ -56,16 +56,28 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 
 void initui (struct UI *ui)
 {
-    ui->creer.etat = B_NORMAL;
-    ui->quitter.etat = B_NORMAL;
+    ui->creer.etat =        B_NORMAL;
+    ui->quitter.etat =      B_NORMAL;
+    ui->loadmap.etat =      B_IMPOSSIBLE;
+    ui->charger.etat =      B_NORMAL;
+    ui->enregistrer.etat =  B_IMPOSSIBLE;
 
     setPos(&ui->creer.pos, 0, screenh-40, 120, 40);
+    setPos(&ui->loadmap.pos, 120, screenh-40, 120, 40);
+    setPos(&ui->enregistrer.pos, 240, screenh-40, 120, 40);
+    setPos(&ui->charger.pos, 360, screenh-40, 120, 40);
     setPos(&ui->quitter.pos, screenw-120, screenh-40, 120, 40);
 
-    ui->creer.texture = loadTexture ("rs/ui/creer.png");
-    ui->quitter.texture = loadTexture ("rs/ui/quitter.png");
+    ui->creer.texture =         loadTexture ("rs/ui/creer.png");
+    ui->quitter.texture =       loadTexture ("rs/ui/quitter.png");
+    ui->charger.texture =       loadTexture ("rs/ui/charger.png");
+    ui->enregistrer.texture =   loadTexture ("rs/ui/enregistrer.png");
+    ui->loadmap.texture =       loadTexture ("rs/ui/loadmap.png");
 
     if (glIsTexture(ui->creer.texture) == GL_FALSE          ||
+        glIsTexture(ui->charger.texture) == GL_FALSE          ||
+        glIsTexture(ui->enregistrer.texture) == GL_FALSE          ||
+        glIsTexture(ui->loadmap.texture) == GL_FALSE          ||
         glIsTexture(ui->quitter.texture) == GL_FALSE)
     {
         printf("texture not loaded\n");

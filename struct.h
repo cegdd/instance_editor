@@ -56,9 +56,9 @@ struct DIVERSsysteme
 
     bool shiftactif;
     bool altactif;
-    bool inbattle;
+    bool projetouvert;
 
-    bool mapasked;
+    bool asked;
 
     bool continuer;
     int echap;
@@ -89,6 +89,9 @@ struct UI
 {
     struct BOUTON creer;
     struct BOUTON quitter;
+    struct BOUTON loadmap;
+    struct BOUTON enregistrer;
+    struct BOUTON charger;
 };
 
 struct CONSOLE
