@@ -40,7 +40,14 @@ int editeur(struct DIVERSsysteme *systeme)
 
         if (systeme->asked)
         {
-            loadingmap(&console, systeme, &data);
+            if(systeme->askID == CHARGER)
+            {
+                loadingmap(&console, systeme, &data);
+            }
+            else if(systeme->askID == CREER)
+            {
+                createproject(&console, systeme);
+            }
         }
 
         if (glIsTexture(data.map.texture))
@@ -91,6 +98,7 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
 {
     if (console->answered)
     {
+        systeme->asked = false;
         char temp[128];
         console->answered = false;
         systeme->asked = false;
@@ -111,4 +119,62 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
             say("ERROR : texture not successfuly loaded", console, systeme);
         }
     }
+}
+
+void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme)
+{
+    if (console->answered)
+    {
+        char temp[128];
+        char temp2[128];
+
+        systeme->asked = false;
+        console->answered = false;
+        systeme->asked = false;
+
+        sprintf(temp, "rs/map/%s.RSCryptedMap", console->lastanswer);
+        fopen(temp, "w");
+        sprintf(temp2, "projet creer a destination de : %s", temp);
+        say(temp2, console, systeme);
+    }
+}
+
+
+void ecris(char string[50], FILE *fichier)
+{
+	int i = 0, index;
+	int valeur = 0;
+
+	while(string[i] != '\0')
+	{
+		valeur = (int)string[i];
+		for(index = 0 ; index < valeur ; index++)
+		{
+			fputc('O', fichier);
+		}
+		fputc('0', fichier);
+		i++;
+	}
+
+}
+
+
+void lis(char string[4096], char *ret)
+{
+	int i = 0, index = 0;
+	int compteur = 0;
+
+	while(string[i] != '\0')
+	{
+		while(string[i] == 'O')
+		{
+			compteur++;
+			i++;
+		}
+		i++;
+		ret[index] = compteur;
+		compteur = 0;
+		index++;
+	}
+	ret[index] = '\0';
 }

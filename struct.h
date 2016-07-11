@@ -17,6 +17,7 @@
 
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE};/*bouton*/
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
+enum{CREER, MAP, CHARGER};
 
 struct pict
 {
@@ -59,6 +60,7 @@ struct DIVERSsysteme
     bool projetouvert;
 
     bool asked;
+    int askID;
 
     bool continuer;
     int echap;
