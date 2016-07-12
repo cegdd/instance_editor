@@ -80,3 +80,5 @@ Temporary Items
 # Debug files
 *.dSYM/
 *.su
+*.o
+*.o

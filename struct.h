@@ -17,7 +17,7 @@
 
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE};/*bouton*/
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
-enum{CREER, MAP, CHARGER};
+enum{CREER, MAP, CHARGER, ENREGISTRER};
 
 struct pict
 {
@@ -117,6 +117,8 @@ struct CONSOLE
 struct DATA
 {
     struct pict map;
+    char projectname [64];
+    char projectmap [64];
 };
 
 #endif

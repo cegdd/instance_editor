@@ -46,7 +46,11 @@ int editeur(struct DIVERSsysteme *systeme)
             }
             else if(systeme->askID == CREER)
             {
-                createproject(&console, systeme);
+                createproject(&console, systeme, &data);
+            }
+            else if(systeme->askID == ENREGISTRER)
+            {
+                saveproject(&console, systeme, &data);
             }
         }
 
@@ -103,7 +107,8 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
         console->answered = false;
         systeme->asked = false;
 
-        sprintf(temp, "rs/map/%s", console->lastanswer);
+        sprintf(data->projectmap, "%s", console->lastanswer);
+        sprintf(temp, "rs/map/%s.png", console->lastanswer);
         data->map.texture = loadTextureandsize(temp, &data->map.pos);
         data->map.x = data->map.pos.x;
         data->map.y = data->map.pos.y;
@@ -121,7 +126,7 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
     }
 }
 
-void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme)
+void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
 {
     if (console->answered)
     {
@@ -132,11 +137,29 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme)
         console->answered = false;
         systeme->asked = false;
 
+        sprintf(data->projectname, "%s", console->lastanswer);
+
         sprintf(temp, "rs/map/%s.RSCryptedMap", console->lastanswer);
         fopen(temp, "w");
         sprintf(temp2, "projet creer a destination de : %s", temp);
         say(temp2, console, systeme);
     }
+}
+void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
+{
+        char temp[128];
+        FILE *fichier = NULL;
+
+        systeme->asked = false;
+        console->answered = false;
+        systeme->asked = false;
+
+        sprintf(temp, "rs/map/%s.RSCryptedMap", data->projectname);
+        fichier = fopen(temp, "w");
+        ecris(data->projectmap, fichier);
+
+        fclose(fichier);
+        say("projet enregistre avec succes", console, systeme);
 }
 
 

@@ -142,7 +142,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         ui->loadmap.etat == B_CLIQUER)
     {
         ui->loadmap.etat = B_NORMAL;
-        say ("map path to load :", console, systeme);
+        say ("name of the map to load :", console, systeme);
         systeme->asked = true;
         systeme->askID = CHARGER;
         console->answered = false;
@@ -186,6 +186,10 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         ui->enregistrer.etat == B_CLIQUER)
     {
         ui->enregistrer.etat = B_NORMAL;
+        systeme->asked = true;
+        systeme->askID = ENREGISTRER;
+        console->answered = false;
+        console->active = true;
     }
     else if(ui->enregistrer.etat == B_CLIQUER)
     {
