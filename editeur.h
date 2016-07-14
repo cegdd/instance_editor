@@ -8,3 +8,5 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
 void ecris(char string[50], FILE *fichier);
 void lis(char string[4096], char *ret);
 void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data);
+void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data);
+void loadingknownmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data, char *name);

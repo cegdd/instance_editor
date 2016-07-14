@@ -40,7 +40,7 @@ int editeur(struct DIVERSsysteme *systeme)
 
         if (systeme->asked)
         {
-            if(systeme->askID == CHARGER)
+            if(systeme->askID == MAP)
             {
                 loadingmap(&console, systeme, &data);
             }
@@ -51,6 +51,10 @@ int editeur(struct DIVERSsysteme *systeme)
             else if(systeme->askID == ENREGISTRER)
             {
                 saveproject(&console, systeme, &data);
+            }
+            else if(systeme->askID == CHARGER)
+            {
+                loadproject(&console, systeme, &data);
             }
         }
 
@@ -126,6 +130,31 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
     }
 }
 
+void loadingknownmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data, char *name)
+{
+    systeme->asked = false;
+    char temp[128];
+    console->answered = false;
+    systeme->asked = false;
+
+    sprintf(data->projectmap, "%s", name);
+    sprintf(temp, "rs/map/%s.png", name);
+    data->map.texture = loadTextureandsize(temp, &data->map.pos);
+    data->map.x = data->map.pos.x;
+    data->map.y = data->map.pos.y;
+
+
+    if(glIsTexture(data->map.texture))
+    {
+        sprintf(temp, "texture successfuly loaded %d x %d", data->map.pos.w, data->map.pos.h);
+        say (temp, console, systeme);
+    }
+    else
+    {
+        say("ERROR : texture not successfuly loaded", console, systeme);
+    }
+}
+
 void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
 {
     if (console->answered)
@@ -143,23 +172,67 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
         fopen(temp, "w");
         sprintf(temp2, "projet creer a destination de : %s", temp);
         say(temp2, console, systeme);
+
+        systeme->projetouvert = true;
     }
 }
 void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
 {
+    char temp[128];
+    FILE *fichier = NULL;
+
+    systeme->asked = false;
+    console->answered = false;
+    systeme->asked = false;
+
+    sprintf(temp, "rs/map/%s.RSCryptedMap", data->projectname);
+    fichier = fopen(temp, "w");
+    ecris(data->projectmap, fichier);
+
+    fclose(fichier);
+    say("projet enregistre avec succes", console, systeme);
+}
+
+void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
+{
+    if (console->answered)
+    {
         char temp[128];
+        char caractere = '\0';
+        char buffer[4096] = {'\0'};
+        char ret[50] = {'\0'};
         FILE *fichier = NULL;
+        int i = 0;
 
         systeme->asked = false;
         console->answered = false;
         systeme->asked = false;
 
-        sprintf(temp, "rs/map/%s.RSCryptedMap", data->projectname);
-        fichier = fopen(temp, "w");
-        ecris(data->projectmap, fichier);
+        sprintf(temp, "rs/map/%s.RSCryptedMap", console->lastanswer);
+        fichier = fopen(temp, "r");
 
-        fclose(fichier);
-        say("projet enregistre avec succes", console, systeme);
+        if (fichier != NULL)
+        {
+            caractere = fgetc(fichier);
+            while (caractere != '#')
+            {
+                buffer[i] = caractere;
+                i++;
+                caractere = fgetc(fichier);
+            }
+            lis(buffer, ret);
+            fclose(fichier);
+
+            sprintf(temp, "projet %s en cours d'ouverture ...", console->lastanswer);
+            say(temp, console, systeme);
+            systeme->projetouvert = true;
+            loadingknownmap(console, systeme, data, ret);
+        }
+        else
+        {
+            say("no project founded", console, systeme);
+        }
+    }
 }
 
 
@@ -178,7 +251,7 @@ void ecris(char string[50], FILE *fichier)
 		fputc('0', fichier);
 		i++;
 	}
-
+    fputc('#', fichier);
 }
 
 

@@ -144,7 +144,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         ui->loadmap.etat = B_NORMAL;
         say ("name of the map to load :", console, systeme);
         systeme->asked = true;
-        systeme->askID = CHARGER;
+        systeme->askID = MAP;
         console->answered = false;
         console->active = true;
     }
@@ -158,12 +158,12 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         ui->creer.etat == B_CLIQUER)
     {
         ui->creer.etat = B_NORMAL;
-        say ("name of the project :", console, systeme);
-        systeme->projetouvert = true;
         systeme->asked = true;
         systeme->askID = CREER;
         console->answered = false;
         console->active = true;
+
+        say ("name of the project :", console, systeme);
     }
     else if(ui->creer.etat == B_CLIQUER)
     {
@@ -175,6 +175,12 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         ui->charger.etat == B_CLIQUER)
     {
         ui->charger.etat = B_NORMAL;
+        systeme->asked = true;
+        systeme->askID = CHARGER;
+        console->answered = false;
+        console->active = true;
+
+        say ("name of the project :", console, systeme);
     }
     else if(ui->charger.etat == B_CLIQUER)
     {
