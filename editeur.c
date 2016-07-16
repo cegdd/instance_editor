@@ -198,11 +198,9 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     if (console->answered)
     {
         char temp[128];
-        char caractere = '\0';
         char buffer[4096] = {'\0'};
         char ret[50] = {'\0'};
         FILE *fichier = NULL;
-        int i = 0;
 
         systeme->asked = false;
         console->answered = false;
@@ -213,14 +211,8 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 
         if (fichier != NULL)
         {
-            caractere = fgetc(fichier);
-            while (caractere != '#')
-            {
-                buffer[i] = caractere;
-                i++;
-                caractere = fgetc(fichier);
-            }
-            lis(buffer, ret);
+            lis(fichier, buffer);
+            uncrypt(buffer, ret);
             fclose(fichier);
 
             sprintf(temp, "projet %s en cours d'ouverture ...", console->lastanswer);
@@ -255,7 +247,7 @@ void ecris(char string[50], FILE *fichier)
 }
 
 
-void lis(char string[4096], char *ret)
+void uncrypt(char string[4096], char *ret)
 {
 	int i = 0, index = 0;
 	int compteur = 0;
@@ -273,4 +265,19 @@ void lis(char string[4096], char *ret)
 		index++;
 	}
 	ret[index] = '\0';
+}
+
+void lis(FILE *fichier, char *buffer)
+{
+    char caractere = '\0';
+    int iligne = 0;
+
+    caractere = fgetc(fichier);
+    while (caractere != '#')
+    {
+        buffer[iligne] = caractere;
+        iligne++;
+        caractere = fgetc(fichier);
+    }
+    buffer[iligne] = '\0';
 }
