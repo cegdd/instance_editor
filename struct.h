@@ -57,6 +57,7 @@ struct DIVERSsysteme
 
     bool shiftactif;
     bool altactif;
+    bool moletteactif;
     bool projetouvert;
 
     bool asked;

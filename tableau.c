@@ -28,6 +28,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->projetouvert = false;
 	systeme->continuer = true;
 	systeme->asked = false;
+	systeme->moletteactif = false;
 	systeme->echap = 0;
 
 	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);

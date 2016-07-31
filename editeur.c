@@ -159,7 +159,6 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
 {
     if (console->answered)
     {
-        char temp[128];
         char temp2[128];
 
         systeme->asked = false;
@@ -167,10 +166,7 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
         systeme->asked = false;
 
         sprintf(data->projectname, "%s", console->lastanswer);
-
-        sprintf(temp, "rs/map/%s.RSCryptedMap", console->lastanswer);
-        fopen(temp, "w");
-        sprintf(temp2, "projet creer a destination de : %s", temp);
+        sprintf(temp2, "projet \"%s\" crée\n", data->projectname);
         say(temp2, console, systeme);
 
         systeme->projetouvert = true;

@@ -20,16 +20,30 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
 	{
 		switch(systeme->evenement.type)
 		{
+            case SDL_MOUSEMOTION:
+                if (systeme->moletteactif)
+                {
+                    systeme->origine.x += systeme->evenement.motion.xrel;
+                    systeme->origine.y -= systeme->evenement.motion.yrel;
+                }
 		    case SDL_MOUSEBUTTONDOWN:
                 if( systeme->evenement.button.button == SDL_BUTTON_LEFT )
                 {
                     clic_DOWN_L(ui);
+                }
+                else if( systeme->evenement.button.button == SDL_BUTTON_MIDDLE )
+                {
+                    systeme->moletteactif = true;
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
                 if( systeme->evenement.button.button == SDL_BUTTON_LEFT )
                 {
                     clic_UP_L(systeme, ui, console);
+                }
+                else if( systeme->evenement.button.button == SDL_BUTTON_MIDDLE )
+                {
+                    systeme->moletteactif = false;
                 }
                 break;
             case SDL_KEYDOWN:
