@@ -69,11 +69,6 @@ int editeur(struct DIVERSsysteme *systeme)
             draw_hookpict(&data.joueur, &data.map.pos);
         }
 
-
-
-
-
-
         //   ui
 
         if (systeme->projetouvert == true && ui.loadmap.etat == B_IMPOSSIBLE)
@@ -187,16 +182,33 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
 }
 void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
 {
-    char temp[128];
+    char buffer[128];
     FILE *fichier = NULL;
 
     systeme->asked = false;
     console->answered = false;
     systeme->asked = false;
 
-    sprintf(temp, "rs/map/%s.RSCryptedMap", data->projectname);
-    fichier = fopen(temp, "w");
+    sprintf(buffer, "rs/map/%s.RSCryptedMap", data->projectname);
+    fichier = fopen(buffer, "w");
+
+    //nom de la map
     ecris(data->projectmap, fichier);
+    //si le joueur est poser
+    if (data->joueuractif)
+    {
+        ecris("1\0", fichier);
+    }
+    else
+    {
+        ecris("0\0", fichier);
+    }
+    //translation joueur en x
+    sprintf(buffer, "%d", data->joueur.translation.x);
+    ecris(buffer, fichier);
+    //translation joueur en y
+    sprintf(buffer, "%d", data->joueur.translation.y);
+    ecris(buffer, fichier);
 
     fclose(fichier);
     say("projet enregistre avec succes", console, systeme);

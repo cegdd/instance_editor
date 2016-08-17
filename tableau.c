@@ -141,7 +141,7 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
 void initdata(struct DATA *data)
 {
-    data->joueuractif = true;
+    data->joueuractif = false;
 
     data->map.texture = -1;
     setPos4(&data->map.pos, 0, 0, 0, 0);

@@ -1231,7 +1231,7 @@
 1471465528 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"struct.h"
 
-1471466027 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1471467613 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1281,7 +1281,7 @@
 	"main.h"
 	"image.h"
 
-1471466113 source:c:\users\cegdd\programmation\instance_editor\tableau.c
+1471467613 source:c:\users\cegdd\programmation\instance_editor\tableau.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
