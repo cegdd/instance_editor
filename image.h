@@ -15,9 +15,11 @@ void draw_pict(struct pict *image);
 void draw(GLuint texture, SDL_Rect *pos);
 void draw_button(struct BOUTON *bouton);
 void draw_color_black(SDL_Rect *pos);
-void setPos(SDL_Rect *pos, int x, int y, int w, int h);
+void setPos4(SDL_Rect *pos, int x, int y, int w, int h);
+void setPos2(SDL_Point *point, int x, int y);
 void Turn_And_Draw (struct pict *img, float angle);
 void Sync_Moving_Pict(int time, struct moving_pict *m_pict);
+void draw_hookpict(struct hookpict *image, SDL_Rect *support);
 
 GLuint loadTextureandsize(const char *filename, struct SDL_Rect *pos);
 

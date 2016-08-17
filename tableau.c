@@ -39,7 +39,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
         printf("police not load2\n");
     }
 
-    setPos(&systeme->pointeur.pos, 0, 0, 20, 30);
+    setPos4(&systeme->pointeur.pos, 0, 0, 20, 30);
 
 	systeme->pecran.x = 0;
 	systeme->pecran.y = 0;
@@ -49,7 +49,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->ppobj.w = 50;
 	systeme->ppobj.h = 50;
 
-	setPos(&systeme->origine, 0, 0, 0, 0);
+	setPos4(&systeme->origine, 0, 0, 0, 0);
 
 	systeme->oldpp.x = 0;
 	systeme->oldpp.y = 0;
@@ -57,28 +57,33 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 
 void initui (struct UI *ui)
 {
+    //start state
     ui->creer.etat =        B_NORMAL;
     ui->quitter.etat =      B_NORMAL;
     ui->loadmap.etat =      B_IMPOSSIBLE;
     ui->charger.etat =      B_NORMAL;
     ui->enregistrer.etat =  B_IMPOSSIBLE;
+    ui->depart.etat =  B_IMPOSSIBLE;
 
-    setPos(&ui->creer.pos, 0, screenh-40, 120, 40);
-    setPos(&ui->loadmap.pos, 120, screenh-40, 120, 40);
-    setPos(&ui->enregistrer.pos, 240, screenh-40, 120, 40);
-    setPos(&ui->charger.pos, 360, screenh-40, 120, 40);
-    setPos(&ui->quitter.pos, screenw-120, screenh-40, 120, 40);
+    setPos4(&ui->creer.pos, 0, screenh-40, 120, 40);
+    setPos4(&ui->loadmap.pos, 120, screenh-40, 120, 40);
+    setPos4(&ui->enregistrer.pos, 240, screenh-40, 120, 40);
+    setPos4(&ui->charger.pos, 360, screenh-40, 120, 40);
+    setPos4(&ui->depart.pos, 480, screenh-40, 120, 40);
+    setPos4(&ui->quitter.pos, screenw-120, screenh-40, 120, 40);
 
     ui->creer.texture =         loadTexture ("rs/ui/creer.png");
     ui->quitter.texture =       loadTexture ("rs/ui/quitter.png");
     ui->charger.texture =       loadTexture ("rs/ui/charger.png");
     ui->enregistrer.texture =   loadTexture ("rs/ui/enregistrer.png");
     ui->loadmap.texture =       loadTexture ("rs/ui/loadmap.png");
+    ui->depart.texture =       loadTexture ("rs/ui/depart.png");
 
     if (glIsTexture(ui->creer.texture) == GL_FALSE          ||
         glIsTexture(ui->charger.texture) == GL_FALSE          ||
         glIsTexture(ui->enregistrer.texture) == GL_FALSE          ||
         glIsTexture(ui->loadmap.texture) == GL_FALSE          ||
+        glIsTexture(ui->depart.texture) == GL_FALSE          ||
         glIsTexture(ui->quitter.texture) == GL_FALSE)
     {
         printf("texture not loaded\n");
@@ -89,9 +94,9 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 {
     int index;
 
-    setPos(&console->console.pos, 0, 12, screenw, 105);
-    setPos(&console->shooton.pos, 0, 0, screenw, 12);
-    setPos(&console->shootoff.pos, 0, 0, screenw, 12);
+    setPos4(&console->console.pos, 0, 12, screenw, 105);
+    setPos4(&console->shooton.pos, 0, 0, screenw, 12);
+    setPos4(&console->shootoff.pos, 0, 0, screenw, 12);
 
     console->console.texture = loadTexture ("rs/ui/console.png");
     console->shooton.texture = loadTexture ("rs/ui/shootboxon.png");
@@ -136,8 +141,15 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
 void initdata(struct DATA *data)
 {
+    data->joueuractif = true;
+
     data->map.texture = -1;
-    setPos(&data->map.pos, 0, 0, 0, 0);
+    setPos4(&data->map.pos, 0, 0, 0, 0);
     data->map.x = 0;
     data->map.y = 0;
+
+    setPos4(&data->joueur.pict.pos, 0, 0, 68, 51);
+
+
+    data->joueur.pict.texture = loadTexture ("rs/images/perso0.png");
 }

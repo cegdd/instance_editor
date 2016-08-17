@@ -11,10 +11,11 @@
 #include "systeme.h"
 #include "clavier.h"
 #include "colision.h"
+#include "editeur.h"
 
 extern int screenh, screenw;
 
-void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console)
+void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console, struct DATA *data)
 {
 	while(SDL_PollEvent(&systeme->evenement) == 1)
 	{
@@ -29,7 +30,7 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
 		    case SDL_MOUSEBUTTONDOWN:
                 if( systeme->evenement.button.button == SDL_BUTTON_LEFT )
                 {
-                    clic_DOWN_L(ui);
+                    clic_DOWN_L(ui, systeme, data, console);
                 }
                 else if( systeme->evenement.button.button == SDL_BUTTON_MIDDLE )
                 {
@@ -84,6 +85,17 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
     else if(ui->creer.etat != B_CLIQUER)
     {
         ui->creer.etat = B_NORMAL;
+    }
+
+    /* depart*/
+    if (colisionbox(&systeme->pointeur.pos, &ui->depart.pos, true) == true &&
+        ui->depart.etat != B_CLIQUER)
+    {
+        ui->depart.etat = B_SURVOLER;
+    }
+    else if(ui->depart.etat != B_CLIQUER)
+    {
+        ui->depart.etat = B_NORMAL;
     }
 
     /* load map*/
@@ -201,6 +213,23 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         ui->charger.etat = B_NORMAL;
     }
 
+     /* depart */
+    if (colisionbox(&systeme->pointeur.pos, &ui->depart.pos, true) == true &&
+        ui->depart.etat == B_CLIQUER)
+    {
+        ui->depart.etat = B_NORMAL;
+        systeme->asked = true;
+        systeme->askID = DEPART;
+        console->answered = false;
+        console->active = true;
+
+        say ("placez le joueur a ca position de depart", console, systeme);
+    }
+    else if(ui->depart.etat == B_CLIQUER)
+    {
+        ui->depart.etat = B_NORMAL;
+    }
+
      /* enregistrer */
     if (colisionbox(&systeme->pointeur.pos, &ui->enregistrer.pos, true) == true &&
         ui->enregistrer.etat == B_CLIQUER)
@@ -229,26 +258,37 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
     }
 }
 
-void clic_DOWN_L(struct UI *ui)
+void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
 {
     /*creer*/
     if (ui->creer.etat == B_SURVOLER){
         ui->creer.etat = B_CLIQUER;
     }
      /*charger*/
-    if (ui->charger.etat == B_SURVOLER){
+   else if (ui->charger.etat == B_SURVOLER){
         ui->charger.etat = B_CLIQUER;
     }
      /*loadmap*/
-    if (ui->loadmap.etat == B_SURVOLER){
+    else if (ui->loadmap.etat == B_SURVOLER){
         ui->loadmap.etat = B_CLIQUER;
     }
      /*enregistrer*/
-    if (ui->enregistrer.etat == B_SURVOLER){
+    else if (ui->enregistrer.etat == B_SURVOLER){
         ui->enregistrer.etat = B_CLIQUER;
     }
     /*quitter*/
-    if (ui->quitter.etat == B_SURVOLER){
+    else if (ui->quitter.etat == B_SURVOLER){
         ui->quitter.etat = B_CLIQUER;
+    }
+    /*depart*/
+    else if (ui->depart.etat == B_SURVOLER){
+        ui->depart.etat = B_CLIQUER;
+    }
+
+    else if(systeme->askID == DEPART &&
+            systeme->projetouvert)
+    {
+        systeme->askID = -1;
+        depart(systeme, data, console);
     }
 }

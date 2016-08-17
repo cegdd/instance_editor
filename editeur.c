@@ -35,7 +35,7 @@ int editeur(struct DIVERSsysteme *systeme)
         /*reverse for OpenGL*/
         systeme->pointeur.pos.y = (systeme->pointeur.pos.y - screenh + systeme->pointeur.pos.h) * -1;
 
-        boucleevent(systeme, &ui, &console);
+        boucleevent(systeme, &ui, &console, &data);
         pointeur(systeme, &ui);
 
         if (systeme->asked)
@@ -64,6 +64,18 @@ int editeur(struct DIVERSsysteme *systeme)
             data.map.pos.y = data.map.y + systeme->origine.y;
             draw_pict(&data.map);
         }
+        if (data.joueuractif)
+        {
+            draw_hookpict(&data.joueur, &data.map.pos);
+        }
+
+
+
+
+
+
+        //   ui
+
         if (systeme->projetouvert == true && ui.loadmap.etat == B_IMPOSSIBLE)
         {
             ui.loadmap.etat = B_NORMAL;
@@ -75,6 +87,7 @@ int editeur(struct DIVERSsysteme *systeme)
         draw_button(&ui.enregistrer);
         draw_button(&ui.loadmap);
         draw_button(&ui.charger);
+        draw_button(&ui.depart);
 
         draw_pict(&console.console);
         if (console.active)
@@ -221,6 +234,16 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
             say("no project founded", console, systeme);
         }
     }
+}
+
+void depart(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
+{
+
+    data->joueuractif = true;
+    data->joueur.translation.x = (systeme->evenement.motion.x - data->joueur.pict.pos.w/2) - data->map.pos.x;
+    data->joueur.translation.y = (screenh - systeme->evenement.motion.y - data->joueur.pict.pos.h/2) - data->map.pos.y;
+    say("joueur positioner", console, systeme);
+
 }
 
 

@@ -11,3 +11,4 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data);
 void loadingknownmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data, char *name);
 void lis(FILE *fichier, char *buffer);
+void depart(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console);

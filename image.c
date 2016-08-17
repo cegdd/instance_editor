@@ -238,6 +238,20 @@ void draw(GLuint texture, SDL_Rect *pos)
     glEnd();
 }
 
+void draw_hookpict(struct hookpict *image, SDL_Rect *support)
+{
+    image->pict.pos.x = support->x + image->translation.x;
+    image->pict.pos.y = support->y + image->translation.y;
+
+    glBindTexture(GL_TEXTURE_2D, image->pict.texture);
+    glBegin(GL_QUADS);
+        glTexCoord2d(0,0);          glVertex2d(image->pict.pos.x,image->pict.pos.y);
+        glTexCoord2d(0,1);          glVertex2d(image->pict.pos.x,image->pict.pos.y+image->pict.pos.h);
+        glTexCoord2d(1,1);          glVertex2d(image->pict.pos.x+image->pict.pos.w,image->pict.pos.y+image->pict.pos.h);
+        glTexCoord2d(1,0);          glVertex2d(image->pict.pos.x+image->pict.pos.w,image->pict.pos.y);
+    glEnd();
+}
+
 void draw_color_black(SDL_Rect *pos)
 {
     glColor3ub(0, 0, 0);
@@ -278,12 +292,18 @@ void draw_button(struct BOUTON *bouton)
     glColor3ub(255, 255, 255);
 }
 
-void setPos(SDL_Rect *pos, int x, int y, int w, int h)
+void setPos4(SDL_Rect *pos, int x, int y, int w, int h)
 {
     pos->x = x;
     pos->y = y;
     pos->w = w;
     pos->h = h;
+}
+
+void setPos2(SDL_Point *point, int x, int y)
+{
+    point->x = x;
+    point->y = y;
 }
 
 void Turn_And_Draw (struct pict *img, float angle)

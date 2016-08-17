@@ -17,7 +17,7 @@
 
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE};/*bouton*/
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
-enum{CREER, MAP, CHARGER, ENREGISTRER};
+enum{CREER, MAP, CHARGER, ENREGISTRER, DEPART};
 
 struct pict
 {
@@ -26,6 +26,13 @@ struct pict
     int y;
     GLuint texture;
 };
+
+struct hookpict
+{
+    struct pict pict;
+    SDL_Point translation;
+};
+
 struct TEXTE
 {
     struct pict img;
@@ -95,6 +102,7 @@ struct UI
     struct BOUTON loadmap;
     struct BOUTON enregistrer;
     struct BOUTON charger;
+    struct BOUTON depart;
 };
 
 struct CONSOLE
@@ -117,7 +125,11 @@ struct CONSOLE
 
 struct DATA
 {
+    bool joueuractif;
+
     struct pict map;
+    struct hookpict joueur;
+
     char projectname [64];
     char projectmap [64];
 };
