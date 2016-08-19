@@ -191,7 +191,6 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 
     sprintf(buffer, "rs/map/%s.RSCryptedMap", data->projectname);
     fichier = fopen(buffer, "w");
-
     //nom de la map
     ecris(data->projectmap, fichier);
     //si le joueur est poser
@@ -206,9 +205,11 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     //translation joueur en x
     sprintf(buffer, "%d", data->joueur.translation.x);
     ecris(buffer, fichier);
+    say(buffer, console, systeme);
     //translation joueur en y
     sprintf(buffer, "%d", data->joueur.translation.y);
     ecris(buffer, fichier);
+    say(buffer, console, systeme);
 
     fclose(fichier);
     say("projet enregistre avec succes", console, systeme);
@@ -227,19 +228,43 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
         console->answered = false;
         systeme->asked = false;
 
+        sprintf(data->projectname, "%s", console->lastanswer);
         sprintf(temp, "rs/map/%s.RSCryptedMap", console->lastanswer);
         fichier = fopen(temp, "r");
 
         if (fichier != NULL)
         {
-            lis(fichier, buffer);
-            uncrypt(buffer, ret);
-            fclose(fichier);
-
             sprintf(temp, "projet %s en cours d'ouverture ...", console->lastanswer);
             say(temp, console, systeme);
-            systeme->projetouvert = true;
+
+            lis(fichier, buffer);
+            uncrypt(buffer, ret);
+
             loadingknownmap(console, systeme, data, ret);
+            sprintf(temp, "map %s chargee", ret);
+            say(temp, console, systeme);
+
+            lis(fichier, buffer);
+            uncrypt(buffer, ret);
+            if (ret[0] == '1')
+            {
+                lis(fichier, buffer);
+                uncrypt(buffer, ret);
+                data->joueur.translation.x = atoi(ret);
+                lis(fichier, buffer);
+                uncrypt(buffer, ret);
+                data->joueur.translation.y = atoi(ret);
+                sprintf(temp, "joueur positione en x:%d y:%d", data->joueur.translation.x, data->joueur.translation.y);
+                say(temp, console, systeme);
+                data->joueuractif = true;
+            }
+            else
+            {
+                data->joueuractif = false;
+            }
+
+            systeme->projetouvert = true;
+            fclose(fichier);
         }
         else
         {
