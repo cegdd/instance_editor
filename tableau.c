@@ -64,12 +64,14 @@ void initui (struct UI *ui)
     ui->charger.etat =      B_NORMAL;
     ui->enregistrer.etat =  B_IMPOSSIBLE;
     ui->depart.etat =  B_IMPOSSIBLE;
+    ui->monster.etat =  B_IMPOSSIBLE;
 
     setPos4(&ui->creer.pos, 0, screenh-40, 120, 40);
     setPos4(&ui->loadmap.pos, 120, screenh-40, 120, 40);
     setPos4(&ui->enregistrer.pos, 240, screenh-40, 120, 40);
     setPos4(&ui->charger.pos, 360, screenh-40, 120, 40);
     setPos4(&ui->depart.pos, 480, screenh-40, 120, 40);
+    setPos4(&ui->monster.pos, 600, screenh-40, 120, 40);
     setPos4(&ui->quitter.pos, screenw-120, screenh-40, 120, 40);
 
     ui->creer.texture =         loadTexture ("rs/ui/creer.png");
@@ -78,12 +80,14 @@ void initui (struct UI *ui)
     ui->enregistrer.texture =   loadTexture ("rs/ui/enregistrer.png");
     ui->loadmap.texture =       loadTexture ("rs/ui/loadmap.png");
     ui->depart.texture =       loadTexture ("rs/ui/depart.png");
+    ui->monster.texture =       loadTexture ("rs/ui/monster.png");
 
     if (glIsTexture(ui->creer.texture) == GL_FALSE          ||
         glIsTexture(ui->charger.texture) == GL_FALSE          ||
         glIsTexture(ui->enregistrer.texture) == GL_FALSE          ||
         glIsTexture(ui->loadmap.texture) == GL_FALSE          ||
         glIsTexture(ui->depart.texture) == GL_FALSE          ||
+        glIsTexture(ui->monster.texture) == GL_FALSE          ||
         glIsTexture(ui->quitter.texture) == GL_FALSE)
     {
         printf("texture not loaded\n");

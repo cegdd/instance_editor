@@ -17,7 +17,7 @@
 
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE};/*bouton*/
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
-enum{CREER, MAP, CHARGER, ENREGISTRER, DEPART};
+enum{CREER, MAP, CHARGER, ENREGISTRER, DEPART, MONSTER};
 
 struct pict
 {
@@ -103,6 +103,7 @@ struct UI
     struct BOUTON enregistrer;
     struct BOUTON charger;
     struct BOUTON depart;
+    struct BOUTON monster;
 };
 
 struct CONSOLE

@@ -102,6 +102,21 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
         }
     }
 
+    //monster
+    if (colisionbox(&systeme->pointeur.pos, &ui->monster.pos, true) == true &&
+        ui->monster.etat != B_CLIQUER &&
+        ui->monster.etat != B_IMPOSSIBLE)
+    {
+        ui->monster.etat = B_SURVOLER;
+    }
+    else if(ui->monster.etat != B_CLIQUER)
+    {
+         if (ui->monster.etat != B_IMPOSSIBLE)
+        {
+            ui->monster.etat = B_NORMAL;
+        }
+    }
+
     /* load map*/
     if (colisionbox(&systeme->pointeur.pos, &ui->loadmap.pos, true) == true &&
         ui->loadmap.etat != B_CLIQUER &&
@@ -234,6 +249,23 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         ui->depart.etat = B_NORMAL;
     }
 
+     /* monster */
+    if (colisionbox(&systeme->pointeur.pos, &ui->monster.pos, true) == true &&
+        ui->monster.etat == B_CLIQUER)
+    {
+        ui->monster.etat = B_NORMAL;
+        systeme->asked = true;
+        systeme->askID = MONSTER;
+        console->answered = false;
+        console->active = true;
+
+        say ("placez le monstre a ca position de depart", console, systeme);
+    }
+    else if(ui->monster.etat == B_CLIQUER)
+    {
+        ui->monster.etat = B_NORMAL;
+    }
+
      /* enregistrer */
     if (colisionbox(&systeme->pointeur.pos, &ui->enregistrer.pos, true) == true &&
         ui->enregistrer.etat == B_CLIQUER)
@@ -288,11 +320,27 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
     else if (ui->depart.etat == B_SURVOLER){
         ui->depart.etat = B_CLIQUER;
     }
+    /*monster*/
+    else if (ui->monster.etat == B_SURVOLER){
+        ui->monster.etat = B_CLIQUER;
+    }
+
+
+
+
 
     else if(systeme->askID == DEPART &&
             systeme->projetouvert)
     {
         systeme->askID = -1;
+        depart(systeme, data, console);
+    }
+
+    else if(systeme->askID == MONSTER &&
+            systeme->projetouvert)
+    {
+        systeme->askID = -1;
+        // to do
         depart(systeme, data, console);
     }
 }
