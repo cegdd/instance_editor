@@ -75,6 +75,7 @@ int editeur(struct DIVERSsysteme *systeme)
         {
             ui.loadmap.etat = B_NORMAL;
             ui.enregistrer.etat = B_NORMAL;
+            ui.depart.etat = B_NORMAL;
         }
 
         draw_button(&ui.creer);

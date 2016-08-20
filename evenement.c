@@ -89,13 +89,17 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
 
     /* depart*/
     if (colisionbox(&systeme->pointeur.pos, &ui->depart.pos, true) == true &&
-        ui->depart.etat != B_CLIQUER)
+        ui->depart.etat != B_CLIQUER &&
+        ui->depart.etat != B_IMPOSSIBLE)
     {
         ui->depart.etat = B_SURVOLER;
     }
     else if(ui->depart.etat != B_CLIQUER)
     {
-        ui->depart.etat = B_NORMAL;
+         if (ui->depart.etat != B_IMPOSSIBLE)
+        {
+            ui->depart.etat = B_NORMAL;
+        }
     }
 
     /* load map*/
