@@ -1171,7 +1171,7 @@
 1462746301 c:\users\cegdd\programmation\instance_editor\main.h
 	"struct.h"
 
-1471718282 c:\users\cegdd\programmation\instance_editor\struct.h
+1471719495 c:\users\cegdd\programmation\instance_editor\struct.h
 	<stdio.h>
 	<stdbool.h>
 	<SDL_ttf.h>
@@ -1228,10 +1228,10 @@
 	"tableau.h"
 	"image.h"
 
-1471465528 c:\users\cegdd\programmation\instance_editor\editeur.h
+1471724942 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"struct.h"
 
-1471718073 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1471724942 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1254,7 +1254,7 @@
 1464045852 c:\users\cegdd\programmation\instance_editor\systeme.h
 	"main.h"
 
-1471718283 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1471720195 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1281,7 +1281,7 @@
 	"main.h"
 	"image.h"
 
-1471718315 source:c:\users\cegdd\programmation\instance_editor\tableau.c
+1471720109 source:c:\users\cegdd\programmation\instance_editor\tableau.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
@@ -1610,4 +1610,15 @@
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
+
+1471725288 source:c:\users\cegdd\programmation\instance_editor\save.c
+	<stdio.h>
+	<stdlib.h>
+	"struct.h"
+	"systeme.h"
+	"editeur.h"
+	"save.h"
+
+1471724942 c:\users\cegdd\programmation\instance_editor\save.h
+	"struct.h"
 

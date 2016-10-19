@@ -145,6 +145,8 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
 void initdata(struct DATA *data)
 {
+    int i;
+
     data->joueuractif = false;
 
     data->map.texture = -1;
@@ -154,6 +156,13 @@ void initdata(struct DATA *data)
 
     setPos4(&data->joueur.pict.pos, 0, 0, 68, 51);
 
-
     data->joueur.pict.texture = loadTexture ("rs/images/perso0.png");
+
+    data->nbmonstre = 0;
+    data->monstre[0].pict.texture = loadTexture ("rs/images/mob0.0.png");
+    for (i=0 ; i < 512 ; i++)
+    {
+        data->monstre[i].pict.texture = data->monstre[0].pict.texture;
+        setPos4(&data->monstre[i].pict.pos, i*2, 0, 148, 38);
+    }
 }

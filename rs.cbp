@@ -227,6 +227,10 @@
 		<Unit filename="rs/ui/uicraft.png" />
 		<Unit filename="rs/ui/uiinventaire.png" />
 		<Unit filename="rs/ui/uimenu.png" />
+		<Unit filename="save.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="save.h" />
 		<Unit filename="struct.h" />
 		<Unit filename="systeme.c">
 			<Option compilerVar="CC" />

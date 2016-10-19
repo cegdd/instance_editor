@@ -130,6 +130,8 @@ struct DATA
 
     struct pict map;
     struct hookpict joueur;
+    struct hookpict monstre [512];
+    int nbmonstre;
 
     char projectname [64];
     char projectmap [64];

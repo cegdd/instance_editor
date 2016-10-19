@@ -341,6 +341,6 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
     {
         systeme->askID = -1;
         // to do
-        depart(systeme, data, console);
+        add(systeme, data, console);
     }
 }

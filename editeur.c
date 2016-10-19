@@ -68,8 +68,15 @@ int editeur(struct DIVERSsysteme *systeme)
         {
             draw_hookpict(&data.joueur, &data.map.pos);
         }
+        for(index = 0 ; index < data.nbmonstre ; index++)
+        {
+            draw_hookpict(&data.monstre[index], &data.map.pos);
+        }
 
-        //   ui
+
+
+
+        //   ui ************************************
 
         if (systeme->projetouvert == true && ui.loadmap.etat == B_IMPOSSIBLE)
         {
@@ -183,98 +190,6 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
         systeme->projetouvert = true;
     }
 }
-void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
-{
-    char buffer[128];
-    FILE *fichier = NULL;
-
-    systeme->asked = false;
-    console->answered = false;
-    systeme->asked = false;
-
-    sprintf(buffer, "rs/map/%s.RSCryptedMap", data->projectname);
-    fichier = fopen(buffer, "w");
-    //nom de la map
-    ecris(data->projectmap, fichier);
-    //si le joueur est poser
-    if (data->joueuractif)
-    {
-        ecris("1\0", fichier);
-    }
-    else
-    {
-        ecris("0\0", fichier);
-    }
-    //translation joueur en x
-    sprintf(buffer, "%d", data->joueur.translation.x);
-    ecris(buffer, fichier);
-    say(buffer, console, systeme);
-    //translation joueur en y
-    sprintf(buffer, "%d", data->joueur.translation.y);
-    ecris(buffer, fichier);
-    say(buffer, console, systeme);
-
-    fclose(fichier);
-    say("projet enregistre avec succes", console, systeme);
-}
-
-void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
-{
-    if (console->answered)
-    {
-        char temp[128];
-        char buffer[4096] = {'\0'};
-        char ret[50] = {'\0'};
-        FILE *fichier = NULL;
-
-        systeme->asked = false;
-        console->answered = false;
-        systeme->asked = false;
-
-        sprintf(data->projectname, "%s", console->lastanswer);
-        sprintf(temp, "rs/map/%s.RSCryptedMap", console->lastanswer);
-        fichier = fopen(temp, "r");
-
-        if (fichier != NULL)
-        {
-            sprintf(temp, "projet %s en cours d'ouverture ...", console->lastanswer);
-            say(temp, console, systeme);
-
-            lis(fichier, buffer);
-            uncrypt(buffer, ret);
-
-            loadingknownmap(console, systeme, data, ret);
-            sprintf(temp, "map %s chargee", ret);
-            say(temp, console, systeme);
-
-            lis(fichier, buffer);
-            uncrypt(buffer, ret);
-            if (ret[0] == '1')
-            {
-                lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                data->joueur.translation.x = atoi(ret);
-                lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                data->joueur.translation.y = atoi(ret);
-                sprintf(temp, "joueur positione en x:%d y:%d", data->joueur.translation.x, data->joueur.translation.y);
-                say(temp, console, systeme);
-                data->joueuractif = true;
-            }
-            else
-            {
-                data->joueuractif = false;
-            }
-
-            systeme->projetouvert = true;
-            fclose(fichier);
-        }
-        else
-        {
-            say("no project founded", console, systeme);
-        }
-    }
-}
 
 void depart(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
 {
@@ -286,57 +201,15 @@ void depart(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *co
 
 }
 
-
-void ecris(char string[50], FILE *fichier)
+void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
 {
-	int i = 0, index;
-	int valeur = 0;
 
-	while(string[i] != '\0')
-	{
-		valeur = (int)string[i];
-		for(index = 0 ; index < valeur ; index++)
-		{
-			fputc('O', fichier);
-		}
-		fputc('0', fichier);
-		i++;
-	}
-    fputc('#', fichier);
-}
-
-
-void uncrypt(char string[4096], char *ret)
-{
-	int i = 0, index = 0;
-	int compteur = 0;
-
-	while(string[i] != '\0')
-	{
-		while(string[i] == 'O')
-		{
-			compteur++;
-			i++;
-		}
-		i++;
-		ret[index] = compteur;
-		compteur = 0;
-		index++;
-	}
-	ret[index] = '\0';
-}
-
-void lis(FILE *fichier, char *buffer)
-{
-    char caractere = '\0';
-    int iligne = 0;
-
-    caractere = fgetc(fichier);
-    while (caractere != '#')
+    data->monstre[data->nbmonstre].translation.x = (systeme->evenement.motion.x - data->monstre[data->nbmonstre].pict.pos.w/2) - data->map.pos.x;
+    data->monstre[data->nbmonstre].translation.y = (screenh - systeme->evenement.motion.y - data->monstre[data->nbmonstre].pict.pos.h/2) - data->map.pos.y;
+    if(data->nbmonstre < 512)
     {
-        buffer[iligne] = caractere;
-        iligne++;
-        caractere = fgetc(fichier);
+        data->nbmonstre++;
     }
-    buffer[iligne] = '\0';
+    say("monstre positioner", console, systeme);
+
 }
