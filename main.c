@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
+#include <dirent.h>
+#include <string.h>
 
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -11,6 +13,7 @@
 #include "editeur.h"
 #include "tableau.h"
 #include "image.h"
+#include "systeme.h"
 
 int screenh, screenw;
 
@@ -18,6 +21,30 @@ int main (int argc, char *argv[])
 {
     struct DIVERSsysteme systeme;
     SDL_GLContext contexteOpenGL;
+
+
+
+
+        DIR * rep = opendir("./rs/bestiaire/");
+
+    if (rep != NULL)
+    {
+        struct dirent * ent;
+
+        while ((ent = readdir(rep)) != NULL)
+        {
+             if (strcmp(ent->d_name, ".") != 0 &&
+                 strcmp(ent->d_name, "..") != 0 &&
+                 !EndsWithRSmob(ent->d_name) )
+             {
+                 printf("%s\n", ent->d_name);
+             }
+        }
+
+        closedir(rep);
+    }
+
+
 
 	if (argc == *argv[0]){}/*just for warnings*/
 	srand(2); /*define a random*/

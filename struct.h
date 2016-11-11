@@ -17,7 +17,8 @@
 
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE};/*bouton*/
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
-enum{CREER, MAP, CHARGER, ENREGISTRER, DEPART, MONSTER};
+enum{CREER, QUITTER, CHARGER, ENREGISTRER,MAP , DEPART, MONSTER, CROIXMONSTRE};
+enum{FERMER, OUVERT};
 
 struct pict
 {
@@ -97,6 +98,8 @@ struct DIVERSsysteme
 
 struct UI
 {
+    int UIfondmob;
+
     struct BOUTON creer;
     struct BOUTON quitter;
     struct BOUTON loadmap;
@@ -104,6 +107,12 @@ struct UI
     struct BOUTON charger;
     struct BOUTON depart;
     struct BOUTON monster;
+
+    struct BOUTON fermer;
+    struct pict fondmob;
+
+    struct BOUTON *ListeBouton[64];
+    int ListeNb;
 };
 
 struct CONSOLE

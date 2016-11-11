@@ -14,6 +14,7 @@
 #include "systeme.h"
 #include "clavier.h"
 #include "editeur.h"
+#include "save.h"
 
 extern int screenh, screenw;
 
@@ -93,6 +94,9 @@ int editeur(struct DIVERSsysteme *systeme)
         draw_button(&ui.charger);
         draw_button(&ui.depart);
         draw_button(&ui.monster);
+
+        draw_pict(&ui.fondmob);
+        draw_button(&ui.fermer);
 
         draw_pict(&console.console);
         if (console.active)

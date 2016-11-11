@@ -136,3 +136,13 @@ void flushbuffer(struct CONSOLE *console)
     console->tampon[0] = ' ';
     console->curseur = 0;
 }
+
+int EndsWithRSmob( char *string )
+{
+  string = strrchr(string, '.');
+
+  if( string != NULL )
+    return( strcmp(string, ".RSmob") );
+
+  return( -1 );
+}

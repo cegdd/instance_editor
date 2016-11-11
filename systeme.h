@@ -10,5 +10,6 @@ void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme);
 void addletter(char lettre, struct CONSOLE *console);
 void removeletter(struct CONSOLE *console);
 void flushbuffer(struct CONSOLE *console);
+int EndsWithRSmob( char *string );
 
 #endif

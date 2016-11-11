@@ -57,6 +57,8 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 
 void initui (struct UI *ui)
 {
+    ui->UIfondmob = FERMER;
+
     //start state
     ui->creer.etat =        B_NORMAL;
     ui->quitter.etat =      B_NORMAL;
@@ -65,6 +67,7 @@ void initui (struct UI *ui)
     ui->enregistrer.etat =  B_IMPOSSIBLE;
     ui->depart.etat =  B_IMPOSSIBLE;
     ui->monster.etat =  B_IMPOSSIBLE;
+    ui->fermer.etat =  B_NORMAL;
 
     setPos4(&ui->creer.pos, 0, screenh-40, 120, 40);
     setPos4(&ui->loadmap.pos, 120, screenh-40, 120, 40);
@@ -73,14 +76,18 @@ void initui (struct UI *ui)
     setPos4(&ui->depart.pos, 480, screenh-40, 120, 40);
     setPos4(&ui->monster.pos, 600, screenh-40, 120, 40);
     setPos4(&ui->quitter.pos, screenw-120, screenh-40, 120, 40);
+    setPos4(&ui->fondmob.pos, screenw-400, 110, 400,618);
+    setPos4(&ui->fermer.pos, screenw-44, screenh-84, 40,40);
 
     ui->creer.texture =         loadTexture ("rs/ui/creer.png");
     ui->quitter.texture =       loadTexture ("rs/ui/quitter.png");
     ui->charger.texture =       loadTexture ("rs/ui/charger.png");
     ui->enregistrer.texture =   loadTexture ("rs/ui/enregistrer.png");
     ui->loadmap.texture =       loadTexture ("rs/ui/loadmap.png");
-    ui->depart.texture =       loadTexture ("rs/ui/depart.png");
+    ui->depart.texture =        loadTexture ("rs/ui/depart.png");
     ui->monster.texture =       loadTexture ("rs/ui/monster.png");
+    ui->fondmob.texture =       loadTexture ("rs/ui/fondmonstre.png");
+    ui->fermer.texture =        loadTexture ("rs/ui/fermer.png");
 
     if (glIsTexture(ui->creer.texture) == GL_FALSE          ||
         glIsTexture(ui->charger.texture) == GL_FALSE          ||
@@ -88,10 +95,23 @@ void initui (struct UI *ui)
         glIsTexture(ui->loadmap.texture) == GL_FALSE          ||
         glIsTexture(ui->depart.texture) == GL_FALSE          ||
         glIsTexture(ui->monster.texture) == GL_FALSE          ||
+        glIsTexture(ui->fondmob.texture) == GL_FALSE          ||
+        glIsTexture(ui->fermer.texture) == GL_FALSE          ||
         glIsTexture(ui->quitter.texture) == GL_FALSE)
     {
         printf("texture not loaded\n");
     }
+
+    ui->ListeNb = 0;
+
+    ui->ListeBouton[ui->ListeNb] = &ui->creer;        ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->quitter;      ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->charger;      ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->enregistrer;  ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->loadmap;      ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->depart;       ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->monster;      ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->fermer;
 }
 
 void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
