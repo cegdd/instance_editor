@@ -11,5 +11,6 @@ void addletter(char lettre, struct CONSOLE *console);
 void removeletter(struct CONSOLE *console);
 void flushbuffer(struct CONSOLE *console);
 int EndsWithRSmob( char *string );
+void listmob(struct DIVERSsysteme *systeme);
 
 #endif

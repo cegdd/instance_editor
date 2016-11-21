@@ -78,14 +78,16 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
 {
     int i;
 
-    for (i = 0 ; i < ui->ListeNb ; i++)
+    for (i = 0 ; i <= ui->ListeNb ; i++)
     {
         if ( colisionbox(&systeme->pointeur.pos, &ui->ListeBouton[i]->pos, true) == true &&
-            ui->ListeBouton[i]->etat != B_CLIQUER )
+            ui->ListeBouton[i]->etat != B_CLIQUER &&
+            ui->ListeBouton[i]->etat != B_IMPOSSIBLE )
             {
                 ui->ListeBouton[i]->etat = B_SURVOLER;
             }
-        else if ( ui->ListeBouton[i]->etat != B_CLIQUER )
+        else if ( ui->ListeBouton[i]->etat != B_CLIQUER &&
+                  ui->ListeBouton[i]->etat != B_IMPOSSIBLE )
         {
             ui->ListeBouton[i]->etat = B_NORMAL;
         }
@@ -106,7 +108,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         console->active = false;
     }
 
-    for (i = 0 ; i < ui->ListeNb ; i++)
+    for (i = 0 ; i <= ui->ListeNb ; i++)
     {
         if ( colisionbox(&systeme->pointeur.pos, &ui->ListeBouton[i]->pos, true) == true &&
              ui->ListeBouton[i]->etat == B_CLIQUER)
@@ -153,9 +155,19 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         break;
 
         case MONSTER:
-            console->answered = false;
-            console->active = true;
-            say ("placez le monstre a ca position de depart", console, systeme);
+
+            ui->UIfondmob = OUVERT;
+            if (systeme->nbcreature == 0)
+            {
+                listmob(systeme);
+            }
+            //console->answered = false;
+            //console->active = true;
+            //say ("placez le monstre a ca position de depart", console, systeme);
+        break;
+
+        case CROIXMONSTRE:
+            ui->UIfondmob = FERMER;
         break;
     }
 }
@@ -165,7 +177,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
 
     int i;
 
-    for (i = 0 ; i < ui->ListeNb ; i++)
+    for (i = 0 ; i <= ui->ListeNb ; i++)
     {
         if (ui->ListeBouton[i]->etat == B_SURVOLER)
         {

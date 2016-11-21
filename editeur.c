@@ -95,8 +95,16 @@ int editeur(struct DIVERSsysteme *systeme)
         draw_button(&ui.depart);
         draw_button(&ui.monster);
 
-        draw_pict(&ui.fondmob);
-        draw_button(&ui.fermer);
+        if (ui.UIfondmob == OUVERT)
+        {
+            draw_pict(&ui.fondmob);
+            draw_button(&ui.fermer);
+
+            for (index = 0 ; index < systeme->nbcreature ; index++)
+            {
+                draw(systeme->creature[index].bouton.texture, &systeme->creature[index].bouton.pos);
+            }
+        }
 
         draw_pict(&console.console);
         if (console.active)

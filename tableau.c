@@ -23,6 +23,8 @@ int TotalTableauInt(int *ptrTableau, int nbcase)
 
 void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 {
+    int i;
+
 	systeme->shiftactif = false;
 	systeme->altactif = false;
 	systeme->projetouvert = false;
@@ -30,6 +32,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->asked = false;
 	systeme->moletteactif = false;
 	systeme->echap = 0;
+	systeme->nbcreature = 0;
 
 	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);
 	systeme->police1 = TTF_OpenFont("rs/divers/arial.ttf", TAILLE_POLICE);
@@ -53,6 +56,11 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 
 	systeme->oldpp.x = 0;
 	systeme->oldpp.y = 0;
+
+	for (i = 0 ; i < 128 ; i++)
+    {
+        systeme->creature[i].actif = false;
+    }
 }
 
 void initui (struct UI *ui)

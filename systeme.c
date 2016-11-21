@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <dirent.h>
 
 #include "main.h"
 #include "image.h"
+#include "save.h"
 
 extern int screenh, screenw;
 
@@ -145,4 +147,54 @@ int EndsWithRSmob( char *string )
     return( strcmp(string, ".RSmob") );
 
   return( -1 );
+}
+
+void listmob(struct DIVERSsysteme *systeme)
+{
+    char buffer[4096] = {'\0'};
+    char ret[50] = {'\0'};
+    char path[16];
+
+    FILE *fichier = NULL;
+
+    sprintf(path, "./rs/bestiaire/");
+
+    DIR *rep = opendir(path);
+
+    if (rep != NULL)
+    {
+        struct dirent * ent;
+
+        while ((ent = readdir(rep)) != NULL)
+        {
+             if (strcmp(ent->d_name, ".") != 0 &&
+                 strcmp(ent->d_name, "..") != 0 &&
+                 !EndsWithRSmob(ent->d_name) )
+             {
+                 systeme->creature[systeme->nbcreature].actif = true;
+                 sprintf(systeme->creature[systeme->nbcreature].path,"%s%s", path, ent->d_name);
+
+                 ent->d_name[strlen(ent->d_name)-6] = '\0';
+                 sprintf(systeme->creature[systeme->nbcreature].filename, ent->d_name);
+
+                 fichier = fopen(systeme->creature[systeme->nbcreature].path, "r");
+
+                 lis(fichier, buffer);
+                 uncrypt(buffer, ret);
+                 sprintf(buffer, "rs/bestiaire/%s", ret);
+                 printf("%s\n",buffer);
+
+                 systeme->creature[systeme->nbcreature].bouton.texture = imprime(ent->d_name, 114, NOIR, systeme, &systeme->creature[systeme->nbcreature].bouton.pos.w, &systeme->creature[systeme->nbcreature].bouton.pos.h);
+                 setPos2(&systeme->creature[systeme->nbcreature].bouton.pos,screenw-396, screenh-95-(systeme->nbcreature*50));
+
+
+
+
+
+                 systeme->nbcreature++;
+             }
+        }
+
+        closedir(rep);
+    }
 }

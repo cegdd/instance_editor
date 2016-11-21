@@ -300,10 +300,10 @@ void setPos4(SDL_Rect *pos, int x, int y, int w, int h)
     pos->h = h;
 }
 
-void setPos2(SDL_Point *point, int x, int y)
+void setPos2(SDL_Rect *pos, int x, int y)
 {
-    point->x = x;
-    point->y = y;
+    pos->x = x;
+    pos->y = y;
 }
 
 void Turn_And_Draw (struct pict *img, float angle)

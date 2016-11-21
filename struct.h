@@ -20,6 +20,13 @@ enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
 enum{CREER, QUITTER, CHARGER, ENREGISTRER,MAP , DEPART, MONSTER, CROIXMONSTRE};
 enum{FERMER, OUVERT};
 
+struct BOUTON
+{
+	GLuint texture;
+	SDL_Rect pos;
+	int etat;
+};
+
 struct pict
 {
     SDL_Rect pos;
@@ -27,6 +34,17 @@ struct pict
     int y;
     GLuint texture;
 };
+
+struct CREATURE
+{
+    char filename[64];
+    char name[64];
+    char path[128];
+    struct pict pict;
+    struct BOUTON bouton;
+    bool actif;
+};
+
 
 struct hookpict
 {
@@ -51,15 +69,6 @@ struct moving_pict
     int time;
 };
 
-struct BOUTON
-{
-	GLuint texture;
-	SDL_Rect pos;
-	int etat;
-};
-
-
-
 struct DIVERSsysteme
 {
 
@@ -74,8 +83,10 @@ struct DIVERSsysteme
     bool continuer;
     int echap;
     int typeclavier;
+    int nbcreature;
 
     struct pict pointeur;
+    struct CREATURE creature[128];
 
     SDL_Texture *BGmort;
     GLuint BG;
