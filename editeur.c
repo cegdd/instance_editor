@@ -102,7 +102,12 @@ int editeur(struct DIVERSsysteme *systeme)
 
             for (index = 0 ; index < systeme->nbcreature ; index++)
             {
-                draw(systeme->creature[index].bouton.texture, &systeme->creature[index].bouton.pos);
+                draw_button(&systeme->creature[index].bouton);
+                if (systeme->creature[index].actif == true)
+                {
+                    draw_pict(&systeme->creature[index].pict);
+                    draw_pict(&systeme->creature[index].tvie.img);
+                }
             }
         }
 

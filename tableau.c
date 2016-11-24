@@ -60,6 +60,9 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	for (i = 0 ; i < 128 ; i++)
     {
         systeme->creature[i].actif = false;
+        systeme->creature[i].bouton.etat = B_NORMAL;
+
+        setPos4(&systeme->creature[i].pict.pos, 1100, 620, 100, 100);
     }
 }
 

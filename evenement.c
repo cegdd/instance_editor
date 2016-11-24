@@ -82,7 +82,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
     {
         if ( colisionbox(&systeme->pointeur.pos, &ui->ListeBouton[i]->pos, true) == true &&
             ui->ListeBouton[i]->etat != B_CLIQUER &&
-            ui->ListeBouton[i]->etat != B_IMPOSSIBLE )
+            ui->ListeBouton[i]->etat != B_IMPOSSIBLE)
             {
                 ui->ListeBouton[i]->etat = B_SURVOLER;
             }
@@ -92,11 +92,27 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
             ui->ListeBouton[i]->etat = B_NORMAL;
         }
     }
+
+
+    for (i = 0 ; i < systeme->nbcreature ; i++)
+    {
+        if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i].bouton.pos, true) == true &&
+            systeme->creature[i].bouton.etat != B_CLIQUER &&
+            systeme->creature[i].bouton.etat != B_IMPOSSIBLE)
+            {
+                systeme->creature[i].bouton.etat = B_SURVOLER;
+            }
+        else if ( systeme->creature[i].bouton.etat != B_CLIQUER &&
+                  systeme->creature[i].bouton.etat != B_IMPOSSIBLE )
+        {
+            systeme->creature[i].bouton.etat = B_NORMAL;
+        }
+    }
 }
 
 void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console)
 {
-    int i;
+    int i,i2,i3;
 
     /*shootbox*/
     if (colisionbox(&systeme->pointeur.pos, &console->shooton.pos, true))
@@ -121,6 +137,26 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         else if( ui->ListeBouton[i]->etat == B_CLIQUER )
         {
             ui->ListeBouton[i]->etat = B_NORMAL;
+        }
+    }
+
+    for (i2 = 0 ; i2 < systeme->nbcreature ; i2++)
+    {
+        if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i2].bouton.pos, true) == true &&
+             systeme->creature[i2].bouton.etat == B_CLIQUER)
+        {
+            systeme->creature[i2].bouton.etat = B_NORMAL;
+            for (i3 = 0 ; i3 < systeme->nbcreature ; i3++)
+            {
+                systeme->creature[i3].actif = false;
+            }
+            systeme->creature[i2].actif = true;
+            break;
+        }
+        else if( systeme->creature[i2].bouton.etat == B_CLIQUER )
+        {
+            systeme->creature[i2].bouton.etat = B_NORMAL;
+            systeme->creature[i2].actif = false;
         }
     }
 
@@ -182,6 +218,14 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
         if (ui->ListeBouton[i]->etat == B_SURVOLER)
         {
             ui->ListeBouton[i]->etat = B_CLIQUER;
+        }
+    }
+
+    for (i = 0 ; i < systeme->nbcreature ; i++)
+    {
+        if (systeme->creature[i].bouton.etat == B_SURVOLER)
+        {
+            systeme->creature[i].bouton.etat = B_CLIQUER;
         }
     }
 

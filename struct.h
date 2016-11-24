@@ -35,14 +35,27 @@ struct pict
     GLuint texture;
 };
 
+struct TEXTE
+{
+    struct pict img;
+	int lenght;
+	int high;
+};
+
+
 struct CREATURE
 {
+    bool actif;
+
+    int vie;
+
     char filename[64];
     char name[64];
     char path[128];
+
     struct pict pict;
     struct BOUTON bouton;
-    bool actif;
+    struct TEXTE tvie;
 };
 
 
@@ -50,13 +63,6 @@ struct hookpict
 {
     struct pict pict;
     SDL_Point translation;
-};
-
-struct TEXTE
-{
-    struct pict img;
-	int lenght;
-	int high;
 };
 
 struct moving_pict

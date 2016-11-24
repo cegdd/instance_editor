@@ -171,7 +171,6 @@ void listmob(struct DIVERSsysteme *systeme)
                  strcmp(ent->d_name, "..") != 0 &&
                  !EndsWithRSmob(ent->d_name) )
              {
-                 systeme->creature[systeme->nbcreature].actif = true;
                  sprintf(systeme->creature[systeme->nbcreature].path,"%s%s", path, ent->d_name);
 
                  ent->d_name[strlen(ent->d_name)-6] = '\0';
@@ -179,17 +178,20 @@ void listmob(struct DIVERSsysteme *systeme)
 
                  fichier = fopen(systeme->creature[systeme->nbcreature].path, "r");
 
+                 systeme->creature[systeme->nbcreature].bouton.texture = imprime(ent->d_name, 114, BLANC, systeme, &systeme->creature[systeme->nbcreature].bouton.pos.w, &systeme->creature[systeme->nbcreature].bouton.pos.h);
+                 setPos2(&systeme->creature[systeme->nbcreature].bouton.pos,screenw-396, screenh-70-(systeme->nbcreature*22));
+
                  lis(fichier, buffer);
                  uncrypt(buffer, ret);
                  sprintf(buffer, "rs/bestiaire/%s", ret);
-                 printf("%s\n",buffer);
+                 systeme->creature[systeme->nbcreature].pict.texture =loadTexture (buffer);
 
-                 systeme->creature[systeme->nbcreature].bouton.texture = imprime(ent->d_name, 114, NOIR, systeme, &systeme->creature[systeme->nbcreature].bouton.pos.w, &systeme->creature[systeme->nbcreature].bouton.pos.h);
-                 setPos2(&systeme->creature[systeme->nbcreature].bouton.pos,screenw-396, screenh-95-(systeme->nbcreature*50));
-
-
-
-
+                 lis(fichier, buffer);
+                 uncrypt(buffer, ret);
+                 systeme->creature[systeme->nbcreature].vie = atoi(ret);
+                 sprintf(buffer, "vie : %d", systeme->creature[systeme->nbcreature].vie);
+                 systeme->creature[systeme->nbcreature].tvie.img.texture = imprime(buffer, 114, NOIR, systeme, &systeme->creature[systeme->nbcreature].tvie.img.pos.w, &systeme->creature[systeme->nbcreature].tvie.img.pos.h);
+                 setPos2(&systeme->creature[systeme->nbcreature].tvie.img.pos,1100, screenh-170);
 
                  systeme->nbcreature++;
              }
