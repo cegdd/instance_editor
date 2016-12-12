@@ -61,8 +61,16 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
     {
         systeme->creature[i].actif = false;
         systeme->creature[i].bouton.etat = B_NORMAL;
+        systeme->creature[i].filename[0]    = '\0';
+        systeme->creature[i].name[0]        = '\0';
+        systeme->creature[i].path[0]        = '\0';
+        systeme->creature[i].imgpath[0]     = '\0';
 
         setPos4(&systeme->creature[i].pict.pos, 1100, 620, 100, 100);
+
+        systeme->nbdetail = 0;
+        systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_imgpath.bouton;    systeme->nbdetail++;
+        systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_vie.bouton;
     }
 }
 
@@ -79,6 +87,7 @@ void initui (struct UI *ui)
     ui->depart.etat =  B_IMPOSSIBLE;
     ui->monster.etat =  B_IMPOSSIBLE;
     ui->fermer.etat =  B_NORMAL;
+    ui->creermob.etat =  B_NORMAL;
 
     setPos4(&ui->creer.pos, 0, screenh-40, 120, 40);
     setPos4(&ui->loadmap.pos, 120, screenh-40, 120, 40);
@@ -89,6 +98,7 @@ void initui (struct UI *ui)
     setPos4(&ui->quitter.pos, screenw-120, screenh-40, 120, 40);
     setPos4(&ui->fondmob.pos, screenw-400, 110, 400,618);
     setPos4(&ui->fermer.pos, screenw-44, screenh-84, 40,40);
+    setPos4(&ui->creermob.pos, screenw-260, 122, 120,40);
 
     ui->creer.texture =         loadTexture ("rs/ui/creer.png");
     ui->quitter.texture =       loadTexture ("rs/ui/quitter.png");
@@ -99,6 +109,7 @@ void initui (struct UI *ui)
     ui->monster.texture =       loadTexture ("rs/ui/monster.png");
     ui->fondmob.texture =       loadTexture ("rs/ui/fondmonstre.png");
     ui->fermer.texture =        loadTexture ("rs/ui/fermer.png");
+    ui->creermob.texture =        loadTexture ("rs/ui/creer.png");
 
     if (glIsTexture(ui->creer.texture) == GL_FALSE          ||
         glIsTexture(ui->charger.texture) == GL_FALSE          ||
@@ -122,7 +133,8 @@ void initui (struct UI *ui)
     ui->ListeBouton[ui->ListeNb] = &ui->loadmap;      ui->ListeNb++;
     ui->ListeBouton[ui->ListeNb] = &ui->depart;       ui->ListeNb++;
     ui->ListeBouton[ui->ListeNb] = &ui->monster;      ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->fermer;
+    ui->ListeBouton[ui->ListeNb] = &ui->fermer;       ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->creermob;
 }
 
 void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
@@ -132,10 +144,12 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
     setPos4(&console->console.pos, 0, 12, screenw, 105);
     setPos4(&console->shooton.pos, 0, 0, screenw, 12);
     setPos4(&console->shootoff.pos, 0, 0, screenw, 12);
+    setPos4(&console->cursor.pos, 0, 0, 2, 12);
 
     console->console.texture = loadTexture ("rs/ui/console.png");
     console->shooton.texture = loadTexture ("rs/ui/shootboxon.png");
     console->shootoff.texture = loadTexture ("rs/ui/shootboxoff.png");
+    console->cursor.texture = loadTexture ("rs/divers/curseur.png");
 
     console->actif = 9;
     console->curseur = 0;
@@ -148,22 +162,13 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         memset(console->string[index], '\0', 1024);
         console->string[index][0] = ' ';
         console->texte[index].img.texture = imprime (console->string[index], screenw, NOIR, systeme, &console->texte[index].lenght, &console->texte[index].high);
-        console->pos[index].x = 0;
-        console->pos[index].y = (index*10)+10;
-        console->pos[index].w = console->texte[index].lenght;
-        console->pos[index].h = 10;
-        console->texte[index].img.pos.x = console->pos[index].x;
-        console->texte[index].img.pos.y = console->pos[index].y;
-        console->texte[index].img.pos.w = console->pos[index].w;
-        console->texte[index].img.pos.h = console->pos[index].h;
+        setPos4(&console->pos[index], 0, (index*10)+10, console->texte[index].lenght, 10);
+        copypos(&console->pos[index], &console->texte[index].img.pos);
     }
     memset(console->tampon, '\0', 1024);
     console->tampon[0] = ' ';
     console->ecris.img.texture = imprime (console->tampon, screenw, BLANC, systeme, &console->ecris.lenght, &console->ecris.high);
-    console->ecris.img.pos.x = 0;
-    console->ecris.img.pos.y = 0;
-    console->ecris.img.pos.w = console->ecris.lenght;
-    console->ecris.img.pos.h = 10;
+    setPos4(&console->ecris.img.pos, 0, 0, console->ecris.lenght, 10);
 
     memset(console->lastanswer, '\0', 1024);
     console->lastanswer[0] = ' ';

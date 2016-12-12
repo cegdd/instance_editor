@@ -1164,14 +1164,14 @@
 	"evenement.h"
 	"image.h"
 
-1467835683 source:c:\users\cegdd\programmation\instance_editor\clavier.c
+1481491966 source:c:\users\cegdd\programmation\instance_editor\clavier.c
 	"main.h"
 	"systeme.h"
 
 1462742701 c:\users\cegdd\programmation\instance_editor\main.h
 	"struct.h"
 
-1479848884 c:\users\cegdd\programmation\instance_editor\struct.h
+1481500694 c:\users\cegdd\programmation\instance_editor\struct.h
 	<stdio.h>
 	<stdbool.h>
 	<SDL_ttf.h>
@@ -1189,7 +1189,7 @@
 	"deplacement.h"
 	"main.h"
 
-1479686258 c:\users\cegdd\programmation\instance_editor\image.h
+1481493750 c:\users\cegdd\programmation\instance_editor\image.h
 	<SDL_ttf.h>
 	"main.h"
 
@@ -1203,7 +1203,7 @@
 
 1462742879 c:\users\cegdd\programmation\instance_editor\deplacement.h
 
-1479686269 source:c:\users\cegdd\programmation\instance_editor\image.c
+1481499486 source:c:\users\cegdd\programmation\instance_editor\image.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -1232,7 +1232,7 @@
 1471721342 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"struct.h"
 
-1480031203 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1481500991 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1249,17 +1249,18 @@
 	"editeur.h"
 	"save.h"
 
-1471461975 c:\users\cegdd\programmation\instance_editor\evenement.h
+1481496652 c:\users\cegdd\programmation\instance_editor\evenement.h
 	<stdbool.h>
 	"main.h"
 
-1479252915 c:\users\cegdd\programmation\instance_editor\systeme.h
+1480978677 c:\users\cegdd\programmation\instance_editor\systeme.h
 	"main.h"
 
-1479772669 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1481500455 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
+	<string.h>
 	"struct.h"
 	"main.h"
 	"image.h"
@@ -1274,7 +1275,7 @@
 	"main.h"
 	"systeme.h"
 
-1480031465 source:c:\users\cegdd\programmation\instance_editor\systeme.c
+1481499836 source:c:\users\cegdd\programmation\instance_editor\systeme.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
@@ -1285,7 +1286,7 @@
 	"image.h"
 	"save.h"
 
-1480031402 source:c:\users\cegdd\programmation\instance_editor\tableau.c
+1481500937 source:c:\users\cegdd\programmation\instance_editor\tableau.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>

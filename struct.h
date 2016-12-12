@@ -17,7 +17,7 @@
 
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE};/*bouton*/
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
-enum{CREER, QUITTER, CHARGER, ENREGISTRER,MAP , DEPART, MONSTER, CROIXMONSTRE};
+enum{CREER, QUITTER, CHARGER, ENREGISTRER,MAP , DEPART, MONSTER, CROIXMONSTRE, CREERMOB, };
 enum{FERMER, OUVERT};
 
 struct BOUTON
@@ -41,6 +41,11 @@ struct TEXTE
 	int lenght;
 	int high;
 };
+struct BOUTON_TEXTE
+{
+	struct TEXTE texte;
+	struct BOUTON bouton;
+};
 
 
 struct CREATURE
@@ -52,10 +57,14 @@ struct CREATURE
     char filename[64];
     char name[64];
     char path[128];
+    char imgpath[128];
 
     struct pict pict;
     struct BOUTON bouton;
-    struct TEXTE tvie;
+    struct BOUTON_TEXTE bt_vie;
+    struct BOUTON_TEXTE bt_imgpath;
+
+    struct BOUTON *detail[64];
 };
 
 
@@ -90,6 +99,7 @@ struct DIVERSsysteme
     int echap;
     int typeclavier;
     int nbcreature;
+    int nbdetail;
 
     struct pict pointeur;
     struct CREATURE creature[128];
@@ -126,6 +136,7 @@ struct UI
     struct BOUTON monster;
 
     struct BOUTON fermer;
+    struct BOUTON creermob;
     struct pict fondmob;
 
     struct BOUTON *ListeBouton[64];
@@ -135,15 +146,18 @@ struct UI
 struct CONSOLE
 {
     struct pict shooton;
+    struct pict cursor;
     struct pict shootoff;
     struct pict console;
     struct TEXTE texte[10];
     struct TEXTE ecris;
     struct SDL_Rect pos [10];
     int indice[10];
+    int LenToCursor;
     int actif;
     char string[10][1024];
     char tampon[1024];
+    char TamponToCursor[1024];
     char lastanswer[1024];
     short curseur;
     bool answered;

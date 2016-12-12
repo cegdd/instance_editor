@@ -57,6 +57,10 @@ int editeur(struct DIVERSsysteme *systeme)
             {
                 loadproject(&console, systeme, &data);
             }
+            else if(systeme->askID == CREERMOB)
+            {
+                createmob(&console, systeme);
+            }
         }
 
         if (glIsTexture(data.map.texture))
@@ -99,6 +103,7 @@ int editeur(struct DIVERSsysteme *systeme)
         {
             draw_pict(&ui.fondmob);
             draw_button(&ui.fermer);
+            draw_button(&ui.creermob);
 
             for (index = 0 ; index < systeme->nbcreature ; index++)
             {
@@ -106,7 +111,8 @@ int editeur(struct DIVERSsysteme *systeme)
                 if (systeme->creature[index].actif == true)
                 {
                     draw_pict(&systeme->creature[index].pict);
-                    draw_pict(&systeme->creature[index].tvie.img);
+                    draw_button(&systeme->creature[index].bt_vie.bouton);
+                    draw_button(&systeme->creature[index].bt_imgpath.bouton);
                 }
             }
         }
@@ -128,6 +134,14 @@ int editeur(struct DIVERSsysteme *systeme)
         console.ecris.img.pos.w = console.ecris.lenght;
 
         draw_pict(&console.ecris.img);
+
+        if((SDL_GetTicks()/1000) % 2 == 0)
+        {
+            TTF_SizeText(systeme->police1,console.TamponToCursor,&console.LenToCursor,NULL);
+            console.cursor.pos.x = console.ecris.img.pos.x + console.LenToCursor;
+
+            draw_pict(&console.cursor);
+        }
 
         glFlush();
         SDL_GL_SwapWindow(systeme->screen);

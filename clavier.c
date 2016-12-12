@@ -516,6 +516,8 @@ void intputtexteup(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 			systeme->altactif = false;
 			break;
         case SDL_SCANCODE_RETURN:
+        case SDL_SCANCODE_RETURN2:
+        case SDL_SCANCODE_KP_ENTER:
             say(console->tampon, console, systeme);
             sprintf(console->lastanswer, console->tampon);
             flushbuffer(console);

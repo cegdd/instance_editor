@@ -114,8 +114,20 @@ void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
 void addletter(char lettre, struct CONSOLE *console)
 {
-    console->tampon[console->curseur] = lettre;
-    console->curseur++;
+    int i = strlen(console->tampon);
+    i++;
+    if(i < 1024)
+    {
+        while(i >= console->curseur)
+        {
+            console->tampon[i+1] =console->tampon[i];
+            i--;
+        }
+        console->tampon[console->curseur] = lettre;
+        console->curseur++;
+        sprintf(console->TamponToCursor, console->tampon);
+        console->TamponToCursor[console->curseur] = '\0';
+    }
 }
 
 void removeletter(struct CONSOLE *console)
@@ -183,20 +195,61 @@ void listmob(struct DIVERSsysteme *systeme)
 
                  lis(fichier, buffer);
                  uncrypt(buffer, ret);
-                 sprintf(buffer, "rs/bestiaire/%s", ret);
-                 systeme->creature[systeme->nbcreature].pict.texture =loadTexture (buffer);
+                 sprintf(systeme->creature[systeme->nbcreature].imgpath, "rs/bestiaire/%s", ret);
+                 systeme->creature[systeme->nbcreature].pict.texture =loadTexture (systeme->creature[systeme->nbcreature].imgpath);
+                 systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.texture = imprime(systeme->creature[systeme->nbcreature].imgpath, 114, BLANC, systeme, &systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos.w, &systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos.h);
+                 setPos2(&systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos,1100, screenh-170);
+                 //copie de la texture+pos de "texte" a "bouton"
+                 systeme->creature[systeme->nbcreature].bt_imgpath.bouton.texture = systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.texture;
+                 copypos(&systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos, &systeme->creature[systeme->nbcreature].bt_imgpath.bouton.pos);
 
                  lis(fichier, buffer);
                  uncrypt(buffer, ret);
                  systeme->creature[systeme->nbcreature].vie = atoi(ret);
                  sprintf(buffer, "vie : %d", systeme->creature[systeme->nbcreature].vie);
-                 systeme->creature[systeme->nbcreature].tvie.img.texture = imprime(buffer, 114, NOIR, systeme, &systeme->creature[systeme->nbcreature].tvie.img.pos.w, &systeme->creature[systeme->nbcreature].tvie.img.pos.h);
-                 setPos2(&systeme->creature[systeme->nbcreature].tvie.img.pos,1100, screenh-170);
+                 systeme->creature[systeme->nbcreature].bt_vie.texte.img.texture = imprime(buffer, 114, BLANC, systeme, &systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos.w, &systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos.h);
+                 setPos2(&systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos,1100, screenh-190);
+                 //copie de la texture+pos de "texte" a "bouton"
+                 systeme->creature[systeme->nbcreature].bt_vie.bouton.texture = systeme->creature[systeme->nbcreature].bt_vie.texte.img.texture;
+                 copypos(&systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos, &systeme->creature[systeme->nbcreature].bt_vie.bouton.pos);
 
                  systeme->nbcreature++;
              }
         }
 
         closedir(rep);
+    }
+}
+
+void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme)
+{
+    if (console->answered)
+    {
+        char buffer[128];
+        FILE *fichier = NULL;
+
+        systeme->asked = false;
+        console->answered = false;
+        systeme->asked = false;
+
+
+        sprintf(buffer, "rs/bestiaire/%s.RSmob", console->lastanswer);
+        fichier = fopen(buffer, "w+");
+        if (fichier != NULL)
+        {
+            sprintf(buffer, "noimage.png");
+            ecris(buffer, fichier);
+            sprintf(buffer, "0");
+            ecris(buffer, fichier);
+
+            fclose(fichier);
+
+            sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
+            say(buffer, console ,systeme);
+        }
+
+        systeme->nbcreature = 0;
+        listmob(systeme);
+
     }
 }

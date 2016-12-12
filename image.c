@@ -33,7 +33,7 @@ GLuint imprime (char s[], int len, int couleur,struct DIVERSsysteme *systeme, in
 	SDL_Color Bleu = {0, 0, 255, 0};
 
 
-    if(systeme->police == NULL)
+    if(systeme->police1 == NULL)
     {
         printf ("police not load\n");
     }
@@ -298,6 +298,14 @@ void setPos4(SDL_Rect *pos, int x, int y, int w, int h)
     pos->y = y;
     pos->w = w;
     pos->h = h;
+}
+
+void copypos(SDL_Rect *source, SDL_Rect *target)
+{
+    target->x = source->x;
+    target->y = source->y;
+    target->w = source->w;
+    target->h = source->h;
 }
 
 void setPos2(SDL_Rect *pos, int x, int y)
