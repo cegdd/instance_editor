@@ -251,12 +251,14 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
             console->answered = false;
             console->active = true;
             say ("name of the project :", console, systeme);
+            systeme->askID = CREER;
         break;
 
         case MAP:
             say ("name of the map to load :", console, systeme);
             console->answered = false;
             console->active = true;
+            systeme->askID = MAP;
         break;
 
         case QUITTER:
@@ -267,6 +269,7 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
             console->answered = false;
             console->active = true;
             say ("name of the project :", console, systeme);
+            systeme->askID = CHARGER;
         break;
 
         case DEPART:
@@ -291,6 +294,7 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
             console->answered = false;
             console->active = true;
             say("nom du mob : ", console, systeme);
+            systeme->askID = CREERMOB;
         break;
 
         case CROIXMONSTRE:
@@ -307,14 +311,19 @@ void commandedetail(int j, struct CONSOLE *console, struct DIVERSsysteme *system
         console->answered = false;
         console->active = true;
         say ("nouveau chemin de l'image :", console, systeme);
-        sprintf(console->tampon, "rs/bestiaire/.png");
+        sprintf(console->tampon, ".png");
         console->curseur = strlen(console->tampon);
         console->curseur -=4;
         sprintf(console->TamponToCursor, console->tampon);
         console->TamponToCursor[console->curseur] = '\0';
+        systeme->askID = DETAIL_IMGPATH;
 
         break;
     case 1:
+        console->answered = false;
+        console->active = true;
+        say ("nouveau taux de vie :", console, systeme);
+        systeme->askID = DETAIL_LIFE;
         break;
     }
 }

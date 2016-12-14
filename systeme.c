@@ -169,6 +169,8 @@ void listmob(struct DIVERSsysteme *systeme)
 
     FILE *fichier = NULL;
 
+    systeme->nbcreature = 0;
+
     sprintf(path, "./rs/bestiaire/");
 
     DIR *rep = opendir(path);
@@ -195,9 +197,10 @@ void listmob(struct DIVERSsysteme *systeme)
 
                  lis(fichier, buffer);
                  uncrypt(buffer, ret);
-                 sprintf(systeme->creature[systeme->nbcreature].imgpath, "rs/bestiaire/%s", ret);
-                 systeme->creature[systeme->nbcreature].pict.texture =loadTexture (systeme->creature[systeme->nbcreature].imgpath);
-                 systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.texture = imprime(systeme->creature[systeme->nbcreature].imgpath, 114, BLANC, systeme, &systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos.w, &systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos.h);
+                 sprintf(systeme->creature[systeme->nbcreature].imgpath, "%s", ret);
+                 sprintf(buffer, "rs/bestiaire/%s", ret);
+                 systeme->creature[systeme->nbcreature].pict.texture =loadTexture (buffer);
+                 systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.texture = imprime(buffer, 114, BLANC, systeme, &systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos.w, &systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos.h);
                  setPos2(&systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos,1100, screenh-170);
                  //copie de la texture+pos de "texte" a "bouton"
                  systeme->creature[systeme->nbcreature].bt_imgpath.bouton.texture = systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.texture;
@@ -223,6 +226,7 @@ void listmob(struct DIVERSsysteme *systeme)
 
 void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 {
+
     if (console->answered)
     {
         char buffer[128];
@@ -230,7 +234,6 @@ void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
         systeme->asked = false;
         console->answered = false;
-        systeme->asked = false;
 
 
         sprintf(buffer, "rs/bestiaire/%s.RSmob", console->lastanswer);
@@ -244,12 +247,41 @@ void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
             fclose(fichier);
 
+            systeme->nbcreature++;
             sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
             say(buffer, console ,systeme);
         }
+        int i;
+        for (i = 0 ; i < 128 ; i++)
+        {
+            systeme->creature[i].actif = false;
+            systeme->creature[i].bouton.etat = B_NORMAL;
+            systeme->creature[i].filename[0]    = '\0';
+            systeme->creature[i].name[0]        = '\0';
+            systeme->creature[i].path[0]        = '\0';
+            systeme->creature[i].imgpath[0]     = '\0';
 
-        systeme->nbcreature = 0;
+            setPos4(&systeme->creature[i].pict.pos, 1100, 620, 100, 100);
+
+            systeme->nbdetail = 0;
+            systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_imgpath.bouton;    systeme->nbdetail++;
+            systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_vie.bouton;
+        }
+
         listmob(systeme);
 
     }
+}
+
+void refreshmob(struct CREATURE *creature)
+{
+    FILE *fichier = NULL;
+    char buffer[128];
+
+    remove(creature->path);
+    fichier = fopen(creature->path, "w+");
+    ecris(creature->imgpath, fichier);
+    sprintf(buffer, "%d", creature->vie);
+    ecris(buffer, fichier);
+    fclose(fichier);
 }

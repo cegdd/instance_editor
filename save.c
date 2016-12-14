@@ -14,7 +14,6 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 
     systeme->asked = false;
     console->answered = false;
-    systeme->asked = false;
 
     sprintf(buffer, "rs/map/%s.RSCryptedMap", data->projectname);
     fichier = fopen(buffer, "w");
@@ -64,7 +63,6 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 
         systeme->asked = false;
         console->answered = false;
-        systeme->asked = false;
 
         sprintf(data->projectname, "%s", console->lastanswer);
         sprintf(temp, "rs/map/%s.RSCryptedMap", console->lastanswer);

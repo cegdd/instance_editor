@@ -61,6 +61,44 @@ int editeur(struct DIVERSsysteme *systeme)
             {
                 createmob(&console, systeme);
             }
+            else if(systeme->askID == DETAIL_IMGPATH)
+            {
+                if (console.answered)
+                {
+                    index = 0;
+                    while(systeme->creature[index].actif != true)
+                    {
+                        index++;
+                    }
+                    systeme->asked = true;
+                    console.answered = false;
+
+                    sprintf(systeme->creature[index].imgpath, console.lastanswer);
+                    refreshmob(&systeme->creature[index]);
+                    listmob(systeme);
+                }
+            }
+            else if(systeme->askID == DETAIL_LIFE)
+            {
+                if (console.answered)
+                {
+                    index = 0;
+                     printf("%d\n", systeme->creature[index].vie);
+                    while(systeme->creature[index].actif != true)
+                    {
+                        index++;
+                    }
+                    systeme->asked = true;
+                    console.answered = false;
+
+                    systeme->creature[index].vie = atoi(console.lastanswer);
+                    printf("%d\n", systeme->creature[index].vie);
+                    refreshmob(&systeme->creature[index]);
+                    printf("%d\n", systeme->creature[index].vie);
+                    listmob(systeme);
+                    printf("%d\n", systeme->creature[index].vie);
+                }
+            }
         }
 
         if (glIsTexture(data.map.texture))
