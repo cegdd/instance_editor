@@ -185,6 +185,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
                         systeme->creature[i2].detail[j]->etat == B_CLIQUER)
                     {
                         systeme->creature[i2].detail[j]->etat = B_NORMAL;
+                        systeme->asked = true;
                         break;
                     }
                 }
@@ -238,7 +239,6 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
             systeme->projetouvert)
     {
         systeme->askID = -1;
-        // to do
         add(systeme, data, console);
     }
 }

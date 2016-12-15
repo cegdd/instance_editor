@@ -83,7 +83,6 @@ int editeur(struct DIVERSsysteme *systeme)
                 if (console.answered)
                 {
                     index = 0;
-                     printf("%d\n", systeme->creature[index].vie);
                     while(systeme->creature[index].actif != true)
                     {
                         index++;
@@ -92,11 +91,8 @@ int editeur(struct DIVERSsysteme *systeme)
                     console.answered = false;
 
                     systeme->creature[index].vie = atoi(console.lastanswer);
-                    printf("%d\n", systeme->creature[index].vie);
                     refreshmob(&systeme->creature[index]);
-                    printf("%d\n", systeme->creature[index].vie);
                     listmob(systeme);
-                    printf("%d\n", systeme->creature[index].vie);
                 }
             }
         }

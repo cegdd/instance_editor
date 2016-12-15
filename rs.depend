@@ -1164,7 +1164,7 @@
 	"evenement.h"
 	"image.h"
 
-1481491966 source:c:\users\cegdd\programmation\instance_editor\clavier.c
+1481841340 source:c:\users\cegdd\programmation\instance_editor\clavier.c
 	"main.h"
 	"systeme.h"
 
@@ -1232,7 +1232,7 @@
 1471721342 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"struct.h"
 
-1481758709 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1481840884 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1256,7 +1256,7 @@
 1481585130 c:\users\cegdd\programmation\instance_editor\systeme.h
 	"main.h"
 
-1481757682 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1481841072 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1275,7 +1275,7 @@
 	"main.h"
 	"systeme.h"
 
-1481758017 source:c:\users\cegdd\programmation\instance_editor\systeme.c
+1481841523 source:c:\users\cegdd\programmation\instance_editor\systeme.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
