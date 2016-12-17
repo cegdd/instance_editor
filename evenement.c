@@ -100,12 +100,14 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
         {//le nom du mob
             if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i].bouton.pos, true) == true &&
                 systeme->creature[i].bouton.etat != B_CLIQUER &&
-                systeme->creature[i].bouton.etat != B_IMPOSSIBLE)
+                systeme->creature[i].bouton.etat != B_IMPOSSIBLE &&
+                systeme->creature[i].bouton.etat != B_INUSE)
                 {
                     systeme->creature[i].bouton.etat = B_SURVOLER;
                 }
             else if ( systeme->creature[i].bouton.etat != B_CLIQUER &&
-                      systeme->creature[i].bouton.etat != B_IMPOSSIBLE )
+                      systeme->creature[i].bouton.etat != B_IMPOSSIBLE &&
+                systeme->creature[i].bouton.etat != B_INUSE )
             {
                 systeme->creature[i].bouton.etat = B_NORMAL;
             }
@@ -149,7 +151,6 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         {
             ui->ListeBouton[i]->etat = B_NORMAL;
             systeme->asked = true;
-            systeme->askID = i;
             break;
         }
         else if( ui->ListeBouton[i]->etat == B_CLIQUER )
@@ -165,18 +166,17 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
             if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i2].bouton.pos, true) == true &&
                  systeme->creature[i2].bouton.etat == B_CLIQUER)
             {
-                systeme->creature[i2].bouton.etat = B_NORMAL;
                 for (i3 = 0 ; i3 < systeme->nbcreature ; i3++)
                 {
-                    systeme->creature[i3].actif = false;
+                    if (systeme->creature[i3].actif == true)
+                    {
+                        systeme->creature[i3].actif = false;
+                        systeme->creature[i3].bouton.etat = B_NORMAL;
+                    }
                 }
                 systeme->creature[i2].actif = true;
+                systeme->creature[i2].bouton.etat = B_INUSE;
                 break;
-            }
-            else if( systeme->creature[i2].bouton.etat == B_CLIQUER )
-            {
-                systeme->creature[i2].bouton.etat = B_NORMAL;
-                systeme->creature[i2].actif = false;
             }
 
             for (j = 0 ; j <= systeme->nbdetail ; j++)
@@ -247,38 +247,41 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
 {
     switch (i)
     {
-        case CREER:
+        case 3:
+            systeme->askID = ENREGISTRER;
+        break;
+        case 0:
             console->answered = false;
             console->active = true;
             say ("name of the project :", console, systeme);
             systeme->askID = CREER;
         break;
 
-        case MAP:
+        case 4:
             say ("name of the map to load :", console, systeme);
             console->answered = false;
             console->active = true;
             systeme->askID = MAP;
         break;
 
-        case QUITTER:
+        case 1:
             systeme->continuer = false;
         break;
 
-        case CHARGER:
+        case 2:
             console->answered = false;
             console->active = true;
             say ("name of the project :", console, systeme);
             systeme->askID = CHARGER;
         break;
 
-        case DEPART:
+        case 5:
             console->answered = false;
             console->active = true;
             say ("placez le joueur a ca position de depart", console, systeme);
         break;
 
-        case MONSTER:
+        case 6:
 
             ui->UIfondmob = OUVERT;
             if (systeme->nbcreature == 0)
@@ -290,14 +293,19 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
             //say ("placez le monstre a ca position de depart", console, systeme);
         break;
 
-        case CREERMOB:
+        case 8:
             console->answered = false;
             console->active = true;
             say("nom du mob : ", console, systeme);
             systeme->askID = CREERMOB;
         break;
 
-        case CROIXMONSTRE:
+        case 9:
+            deletemob(systeme);
+            listmob(systeme);
+        break;
+
+        case 7:
             ui->UIfondmob = FERMER;
         break;
     }

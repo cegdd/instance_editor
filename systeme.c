@@ -4,6 +4,7 @@
 #include <math.h>
 #include <string.h>
 #include <dirent.h>
+#include <errno.h>
 
 #include "main.h"
 #include "image.h"
@@ -88,28 +89,31 @@ int calculoctant(int x, int y, int x2, int y2, int* difx, int* dify)
 }
 void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme)
 {
-    int index;
+   // if(console->tampon[0] != '\0')
+   // {
+        int index;
 
-    sprintf (console->string[console->actif], texte);
-    console->texte[console->actif].img.texture = imprime (console->string[console->actif], screenw, NOIR, systeme, &console->texte[console->actif].lenght, NULL);
-    console->actif--;
-    if(console->actif < 0)
-    {
-        console ->actif = 9;
-    }
-
-
-    for (index = 0 ; index <= 9 ; index++)
-    {
-        console->indice[index]++;
-        if (console->indice[index] == 10)
+        sprintf (console->string[console->actif], texte);
+        console->texte[console->actif].img.texture = imprime (console->string[console->actif], screenw, NOIR, systeme, &console->texte[console->actif].lenght, NULL);
+        console->actif--;
+        if(console->actif < 0)
         {
-            console->indice[index] = 0;
+            console ->actif = 9;
         }
-        console->texte[index].img.pos.x = console->pos[console->indice[index]].x;
-        console->texte[index].img.pos.y = console->pos[console->indice[index]].y;
-        console->texte[index].img.pos.w = console->texte[index].lenght;
-    }
+
+
+        for (index = 0 ; index <= 9 ; index++)
+        {
+            console->indice[index]++;
+            if (console->indice[index] == 10)
+            {
+                console->indice[index] = 0;
+            }
+            console->texte[index].img.pos.x = console->pos[console->indice[index]].x;
+            console->texte[index].img.pos.y = console->pos[console->indice[index]].y;
+            console->texte[index].img.pos.w = console->texte[index].lenght;
+        }
+   // }
 }
 
 void addletter(char lettre, struct CONSOLE *console)
@@ -140,14 +144,14 @@ void removeletter(struct CONSOLE *console)
     else if (console->curseur == 1)
     {
         console->curseur = 0;
-        console->tampon[console->curseur] = ' ';
+        console->tampon[console->curseur] = '\0';
     }
 }
 
 void flushbuffer(struct CONSOLE *console)
 {
     memset(console->tampon, '\0', 1024);
-    console->tampon[0] = ' ';
+    memset(console->TamponToCursor, '\0', 1024);
     console->curseur = 0;
 }
 
@@ -172,8 +176,8 @@ void listmob(struct DIVERSsysteme *systeme)
     systeme->nbcreature = 0;
 
     sprintf(path, "./rs/bestiaire/");
-
     DIR *rep = opendir(path);
+    sprintf(path, "rs/bestiaire/");
 
     if (rep != NULL)
     {
@@ -217,9 +221,10 @@ void listmob(struct DIVERSsysteme *systeme)
                  copypos(&systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos, &systeme->creature[systeme->nbcreature].bt_vie.bouton.pos);
 
                  systeme->nbcreature++;
+
+                 fclose(fichier);
              }
         }
-
         closedir(rep);
     }
 }
@@ -234,7 +239,6 @@ void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
         systeme->asked = false;
         console->answered = false;
-
 
         sprintf(buffer, "rs/bestiaire/%s.RSmob", console->lastanswer);
         fichier = fopen(buffer, "w+");
@@ -251,25 +255,7 @@ void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme)
             sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
             say(buffer, console ,systeme);
         }
-        int i;
-        for (i = 0 ; i < 128 ; i++)
-        {
-            systeme->creature[i].actif = false;
-            systeme->creature[i].bouton.etat = B_NORMAL;
-            systeme->creature[i].filename[0]    = '\0';
-            systeme->creature[i].name[0]        = '\0';
-            systeme->creature[i].path[0]        = '\0';
-            systeme->creature[i].imgpath[0]     = '\0';
-
-            setPos4(&systeme->creature[i].pict.pos, 1100, 620, 100, 100);
-
-            systeme->nbdetail = 0;
-            systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_imgpath.bouton;    systeme->nbdetail++;
-            systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_vie.bouton;
-        }
-
         listmob(systeme);
-
     }
 }
 
@@ -284,4 +270,28 @@ void refreshmob(struct CREATURE *creature)
     sprintf(buffer, "%d", creature->vie);
     ecris(buffer, fichier);
     fclose(fichier);
+}
+
+void deletemob(struct DIVERSsysteme *systeme)
+{
+    int i, i3;
+
+    for (i = 0 ; i < systeme->nbcreature ; i++)
+    {
+        if(systeme->creature[i].actif == true)
+        {
+            for (i3 = 0 ; i3 < systeme->nbcreature ; i3++)
+            {
+                if (systeme->creature[i3].actif == true)
+                {
+                    systeme->creature[i3].actif = false;
+                    systeme->creature[i3].bouton.etat = B_NORMAL;
+                }
+            }
+
+            remove(systeme->creature[i].path);
+            systeme->nbcreature--;
+            break;
+        }
+    }
 }

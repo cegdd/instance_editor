@@ -88,6 +88,7 @@ void initui (struct UI *ui)
     ui->monster.etat =  B_IMPOSSIBLE;
     ui->fermer.etat =  B_NORMAL;
     ui->creermob.etat =  B_NORMAL;
+    ui->supprmob.etat =  B_NORMAL;
 
     setPos4(&ui->creer.pos, 0, screenh-40, 120, 40);
     setPos4(&ui->loadmap.pos, 120, screenh-40, 120, 40);
@@ -99,6 +100,7 @@ void initui (struct UI *ui)
     setPos4(&ui->fondmob.pos, screenw-400, 110, 400,618);
     setPos4(&ui->fermer.pos, screenw-44, screenh-84, 40,40);
     setPos4(&ui->creermob.pos, screenw-260, 122, 120,40);
+    setPos4(&ui->supprmob.pos, screenw-130, 122, 120,40);
 
     ui->creer.texture =         loadTexture ("rs/ui/creer.png");
     ui->quitter.texture =       loadTexture ("rs/ui/quitter.png");
@@ -110,6 +112,7 @@ void initui (struct UI *ui)
     ui->fondmob.texture =       loadTexture ("rs/ui/fondmonstre.png");
     ui->fermer.texture =        loadTexture ("rs/ui/fermer.png");
     ui->creermob.texture =        loadTexture ("rs/ui/creer.png");
+    ui->supprmob.texture =        loadTexture ("rs/ui/suppr.png");
 
     if (glIsTexture(ui->creer.texture) == GL_FALSE          ||
         glIsTexture(ui->charger.texture) == GL_FALSE          ||
@@ -119,6 +122,7 @@ void initui (struct UI *ui)
         glIsTexture(ui->monster.texture) == GL_FALSE          ||
         glIsTexture(ui->fondmob.texture) == GL_FALSE          ||
         glIsTexture(ui->fermer.texture) == GL_FALSE          ||
+        glIsTexture(ui->supprmob.texture) == GL_FALSE          ||
         glIsTexture(ui->quitter.texture) == GL_FALSE)
     {
         printf("texture not loaded\n");
@@ -134,7 +138,8 @@ void initui (struct UI *ui)
     ui->ListeBouton[ui->ListeNb] = &ui->depart;       ui->ListeNb++;
     ui->ListeBouton[ui->ListeNb] = &ui->monster;      ui->ListeNb++;
     ui->ListeBouton[ui->ListeNb] = &ui->fermer;       ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->creermob;
+    ui->ListeBouton[ui->ListeNb] = &ui->creermob;      ui->ListeNb++;
+    ui->ListeBouton[ui->ListeNb] = &ui->supprmob;
 }
 
 void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
@@ -160,18 +165,15 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
     {
         console->indice[index] = index;
         memset(console->string[index], '\0', 1024);
-        console->string[index][0] = ' ';
         console->texte[index].img.texture = imprime (console->string[index], screenw, NOIR, systeme, &console->texte[index].lenght, &console->texte[index].high);
         setPos4(&console->pos[index], 0, (index*10)+10, console->texte[index].lenght, 10);
         copypos(&console->pos[index], &console->texte[index].img.pos);
     }
     memset(console->tampon, '\0', 1024);
-    console->tampon[0] = ' ';
     console->ecris.img.texture = imprime (console->tampon, screenw, BLANC, systeme, &console->ecris.lenght, &console->ecris.high);
     setPos4(&console->ecris.img.pos, 0, 0, console->ecris.lenght, 10);
 
     memset(console->lastanswer, '\0', 1024);
-    console->lastanswer[0] = ' ';
 
     if (glIsTexture(console->console.texture) == GL_FALSE)
     {

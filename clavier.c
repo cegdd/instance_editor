@@ -518,10 +518,13 @@ void intputtexteup(struct DIVERSsysteme *systeme, struct CONSOLE *console)
         case SDL_SCANCODE_RETURN:
         case SDL_SCANCODE_RETURN2:
         case SDL_SCANCODE_KP_ENTER:
-            say(console->tampon, console, systeme);
-            sprintf(console->lastanswer, console->tampon);
-            flushbuffer(console);
-            console->answered = true;
+            if (console->tampon[0] != '\0')
+            {
+                say(console->tampon, console, systeme);
+                sprintf(console->lastanswer, console->tampon);
+                flushbuffer(console);
+                console->answered = true;
+            }
             break;
 		default:
 			break;

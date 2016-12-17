@@ -24,56 +24,60 @@ Uint8 obtenirPixel(SDL_Surface *surface, SDL_Point *pix)
 
 GLuint imprime (char s[], int len, int couleur,struct DIVERSsysteme *systeme, int *LenghtReturn, int *HighReturn)
 {
-    SDL_Surface *SurfTemp = NULL;
-    SDL_Color Noir = {0, 0, 0, 0};
-	SDL_Color Gris = {127, 127,127, 0};
-	SDL_Color Blanc = {255, 255, 255, 0};
-	SDL_Color Rouge = {255, 0, 0, 0};
-	SDL_Color Vert = {0, 255, 0, 0};
-	SDL_Color Bleu = {0, 0, 255, 0};
+    if(s[0] != '\0')
+    {
+        SDL_Surface *SurfTemp = NULL;
+        SDL_Color Noir = {0, 0, 0, 0};
+        SDL_Color Gris = {127, 127,127, 0};
+        SDL_Color Blanc = {255, 255, 255, 0};
+        SDL_Color Rouge = {255, 0, 0, 0};
+        SDL_Color Vert = {0, 255, 0, 0};
+        SDL_Color Bleu = {0, 0, 255, 0};
 
 
-    if(systeme->police1 == NULL)
-    {
-        printf ("police not load\n");
-    }
+        if(systeme->police1 == NULL)
+        {
+            printf ("police not load\n");
+        }
 
-	if (couleur == BLANC)
-    {
-        SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Blanc, len);
-    }
-    else if (couleur == ROUGE)
-    {
-        SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Rouge, len);
-    }
-    else if (couleur == GRIS)
-    {
-        SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Gris, len);
-    }
-	else if (couleur == NOIR)
-    {
-        SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Noir, len);
-    }
-    else if (couleur == VERT)
-    {
-        SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Vert, len);
-    }
-    else
-    {
-        SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Bleu, len);
-    }
+        if (couleur == BLANC)
+        {
+            SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Blanc, len);
+        }
+        else if (couleur == ROUGE)
+        {
+            SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Rouge, len);
+        }
+        else if (couleur == GRIS)
+        {
+            SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Gris, len);
+        }
+        else if (couleur == NOIR)
+        {
+            SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Noir, len);
+        }
+        else if (couleur == VERT)
+        {
+            SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Vert, len);
+        }
+        else
+        {
+            SurfTemp = TTF_RenderText_Blended_Wrapped(systeme->police1, (const char *)s, Bleu, len);
+        }
 
 
-    if (LenghtReturn != NULL)
-    {
-        *LenghtReturn = SurfTemp->w;
-    }
-    if (HighReturn != NULL)
-    {
-        *HighReturn = SurfTemp->h;
-    }
+        if (LenghtReturn != NULL)
+        {
+            *LenghtReturn = SurfTemp->w;
+        }
+        if (HighReturn != NULL)
+        {
+            *HighReturn = SurfTemp->h;
+        }
 
-    return convertTexture(SurfTemp);
+        return convertTexture(SurfTemp);
+    }
+    return -1;
 }
 
 
@@ -275,6 +279,7 @@ void draw_button(struct BOUTON *bouton)
         case B_SURVOLER:
             glColor3ub(150, 150, 255);
             break;
+        case B_INUSE:
         case B_CLIQUER:
             glColor3ub(0, 0, 255);
             break;

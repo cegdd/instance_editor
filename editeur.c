@@ -147,6 +147,7 @@ int editeur(struct DIVERSsysteme *systeme)
                     draw_pict(&systeme->creature[index].pict);
                     draw_button(&systeme->creature[index].bt_vie.bouton);
                     draw_button(&systeme->creature[index].bt_imgpath.bouton);
+                    draw_button(&ui.supprmob);
                 }
             }
         }
@@ -164,10 +165,13 @@ int editeur(struct DIVERSsysteme *systeme)
         {
             draw_pict(&console.texte[index].img);
         }
+        if(console.tampon[0] != '\0')
+        {
         console.ecris.img.texture = imprime (console.tampon, screenw, BLANC, systeme, &console.ecris.lenght, &console.ecris.high);
         console.ecris.img.pos.w = console.ecris.lenght;
 
         draw_pict(&console.ecris.img);
+        }
 
         if((SDL_GetTicks()/1000) % 2 == 0)
         {
