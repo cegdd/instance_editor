@@ -51,8 +51,6 @@ struct BOUTON_TEXTE
 
 struct CREATURE
 {
-    bool actif;
-
     int vie;
 
     char filename[64];
@@ -85,6 +83,14 @@ struct moving_pict
     int time;
 };
 
+struct MOB
+{
+    bool actif;
+    struct hookpict monstre;
+    int vie;
+    char name[128];
+};
+
 struct DIVERSsysteme
 {
 
@@ -100,6 +106,7 @@ struct DIVERSsysteme
     int echap;
     int typeclavier;
     int nbcreature;
+    int activecreature;
     int nbdetail;
 
     struct pict pointeur;
@@ -172,11 +179,10 @@ struct DATA
 
     struct pict map;
     struct hookpict joueur;
-    struct hookpict monstre [512];
+    struct MOB mob[512];
     int nbmonstre;
 
     char projectname [64];
     char projectmap [64];
 };
-
 #endif

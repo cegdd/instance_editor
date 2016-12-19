@@ -33,6 +33,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->moletteactif = false;
 	systeme->echap = 0;
 	systeme->nbcreature = 0;
+	systeme->activecreature = 0;
 
 	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);
 	systeme->police1 = TTF_OpenFont("rs/divers/arial.ttf", TAILLE_POLICE);
@@ -59,7 +60,6 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 
 	for (i = 0 ; i < 128 ; i++)
     {
-        systeme->creature[i].actif = false;
         systeme->creature[i].bouton.etat = B_NORMAL;
         systeme->creature[i].filename[0]    = '\0';
         systeme->creature[i].name[0]        = '\0';
@@ -72,6 +72,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
         systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_imgpath.bouton;    systeme->nbdetail++;
         systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_vie.bouton;
     }
+    systeme->creature[0].bouton.etat = B_INUSE;
 }
 
 void initui (struct UI *ui)
@@ -170,10 +171,11 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         copypos(&console->pos[index], &console->texte[index].img.pos);
     }
     memset(console->tampon, '\0', 1024);
+    memset(console->TamponToCursor, '\0', 1024);
+    memset(console->lastanswer, '\0', 1024);
+
     console->ecris.img.texture = imprime (console->tampon, screenw, BLANC, systeme, &console->ecris.lenght, &console->ecris.high);
     setPos4(&console->ecris.img.pos, 0, 0, console->ecris.lenght, 10);
-
-    memset(console->lastanswer, '\0', 1024);
 
     if (glIsTexture(console->console.texture) == GL_FALSE)
     {
@@ -197,10 +199,10 @@ void initdata(struct DATA *data)
     data->joueur.pict.texture = loadTexture ("rs/images/perso0.png");
 
     data->nbmonstre = 0;
-    data->monstre[0].pict.texture = loadTexture ("rs/images/mob0.0.png");
+    data->mob[0].monstre.pict.texture = loadTexture ("rs/images/mob0.0.png");
     for (i=0 ; i < 512 ; i++)
     {
-        data->monstre[i].pict.texture = data->monstre[0].pict.texture;
-        setPos4(&data->monstre[i].pict.pos, i*2, 0, 148, 38);
+        data->mob[i].monstre.pict.texture = 0;
+        setPos4(&data->mob[i].monstre.pict.pos, 0, 0, 0, 0);
     }
 }

@@ -363,12 +363,12 @@ GLuint loadTextureandsize(const char * filename, struct SDL_Rect *pos)
     SDL_PixelFormat format;
 
     picture_surface = IMG_Load(filename);
-    pos->w = picture_surface->w;
-    pos->h = picture_surface->h;
-
     if (picture_surface == NULL)
         {   printf ("surface not correctly loaded \n");
-            return 0;}
+            return 0;}//0 is an error for opengl
+
+    pos->w = picture_surface->w;
+    pos->h = picture_surface->h;
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 

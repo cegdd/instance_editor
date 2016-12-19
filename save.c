@@ -15,18 +15,18 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     systeme->asked = false;
     console->answered = false;
 
-    sprintf(buffer, "rs/map/%s.RSCryptedMap", data->projectname);
-    fichier = fopen(buffer, "w");
+    sprintf(buffer, "rs/sauvegarde/%s.RSCryptedMap", data->projectname);
+    fichier = fopen(buffer, "w+");
     //nom de la map
     ecris(data->projectmap, fichier);
     //si le joueur est poser
     if (data->joueuractif)
     {
-        ecris("1\0", fichier);
+        ecris("1", fichier);
     }
     else
     {
-        ecris("0\0", fichier);
+        ecris("0", fichier);
     }
     //translation joueur en x
     sprintf(buffer, "%d", data->joueur.translation.x);
@@ -41,9 +41,9 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 
     for(i=0 ; i<data->nbmonstre ; i++)
     {
-        sprintf(buffer, "%d", data->monstre[i].translation.x);
+        sprintf(buffer, "%d", data->mob[i].monstre.translation.x);
         ecris(buffer, fichier);
-        sprintf(buffer, "%d", data->monstre[i].translation.y);
+        sprintf(buffer, "%d", data->mob[i].monstre.translation.y);
         ecris(buffer, fichier);
     }
 
@@ -65,7 +65,7 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
         console->answered = false;
 
         sprintf(data->projectname, "%s", console->lastanswer);
-        sprintf(temp, "rs/map/%s.RSCryptedMap", console->lastanswer);
+        sprintf(temp, "rs/sauvegarde/%s.RSCryptedMap", console->lastanswer);
         fichier = fopen(temp, "r");
 
         if (fichier != NULL)
@@ -113,11 +113,11 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 //translation mob en x
                 lis(fichier, buffer);
                 uncrypt(buffer, ret);
-                data->monstre[i].translation.x = atoi(ret);
+                data->mob[i].monstre.translation.x = atoi(ret);
                 //translation mob en x
                 lis(fichier, buffer);
                 uncrypt(buffer, ret);
-                data->monstre[i].translation.y = atoi(ret);
+                data->mob[i].monstre.translation.y = atoi(ret);
             }
             sprintf(temp, "%d monstres chargé", data->nbmonstre);
             say(temp, console, systeme);

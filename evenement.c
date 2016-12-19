@@ -132,7 +132,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
 
 void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console)
 {
-    int i,i2,i3,j;
+    int i,i2,j;
 
     /*shootbox*/
     if (colisionbox(&systeme->pointeur.pos, &console->shooton.pos, true))
@@ -166,15 +166,9 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
             if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i2].bouton.pos, true) == true &&
                  systeme->creature[i2].bouton.etat == B_CLIQUER)
             {
-                for (i3 = 0 ; i3 < systeme->nbcreature ; i3++)
-                {
-                    if (systeme->creature[i3].actif == true)
-                    {
-                        systeme->creature[i3].actif = false;
-                        systeme->creature[i3].bouton.etat = B_NORMAL;
-                    }
-                }
-                systeme->creature[i2].actif = true;
+                systeme->creature[systeme->activecreature].bouton.etat = B_NORMAL;
+
+                systeme->activecreature = i2;
                 systeme->creature[i2].bouton.etat = B_INUSE;
                 break;
             }
@@ -278,19 +272,20 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
         case 5:
             console->answered = false;
             console->active = true;
+            systeme->askID = DEPART;
             say ("placez le joueur a ca position de depart", console, systeme);
         break;
 
         case 6:
-
             ui->UIfondmob = OUVERT;
             if (systeme->nbcreature == 0)
             {
                 listmob(systeme);
             }
-            //console->answered = false;
-            //console->active = true;
-            //say ("placez le monstre a ca position de depart", console, systeme);
+            console->answered = false;
+            console->active = true;
+            say ("placez le monstre a ca position de depart", console, systeme);
+            systeme->askID = MONSTER;
         break;
 
         case 8:

@@ -274,24 +274,8 @@ void refreshmob(struct CREATURE *creature)
 
 void deletemob(struct DIVERSsysteme *systeme)
 {
-    int i, i3;
+    systeme->creature[systeme->activecreature].bouton.etat = B_NORMAL;
 
-    for (i = 0 ; i < systeme->nbcreature ; i++)
-    {
-        if(systeme->creature[i].actif == true)
-        {
-            for (i3 = 0 ; i3 < systeme->nbcreature ; i3++)
-            {
-                if (systeme->creature[i3].actif == true)
-                {
-                    systeme->creature[i3].actif = false;
-                    systeme->creature[i3].bouton.etat = B_NORMAL;
-                }
-            }
-
-            remove(systeme->creature[i].path);
-            systeme->nbcreature--;
-            break;
-        }
-    }
+    remove(systeme->creature[systeme->activecreature].path);
+    systeme->nbcreature--;
 }

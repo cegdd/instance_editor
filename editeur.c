@@ -65,16 +65,11 @@ int editeur(struct DIVERSsysteme *systeme)
             {
                 if (console.answered)
                 {
-                    index = 0;
-                    while(systeme->creature[index].actif != true)
-                    {
-                        index++;
-                    }
                     systeme->asked = true;
                     console.answered = false;
 
-                    sprintf(systeme->creature[index].imgpath, console.lastanswer);
-                    refreshmob(&systeme->creature[index]);
+                    sprintf(systeme->creature[systeme->activecreature].imgpath, console.lastanswer);
+                    refreshmob(&systeme->creature[systeme->activecreature]);
                     listmob(systeme);
                 }
             }
@@ -82,16 +77,11 @@ int editeur(struct DIVERSsysteme *systeme)
             {
                 if (console.answered)
                 {
-                    index = 0;
-                    while(systeme->creature[index].actif != true)
-                    {
-                        index++;
-                    }
                     systeme->asked = true;
                     console.answered = false;
 
-                    systeme->creature[index].vie = atoi(console.lastanswer);
-                    refreshmob(&systeme->creature[index]);
+                    systeme->creature[systeme->activecreature].vie = atoi(console.lastanswer);
+                    refreshmob(&systeme->creature[systeme->activecreature]);
                     listmob(systeme);
                 }
             }
@@ -109,7 +99,7 @@ int editeur(struct DIVERSsysteme *systeme)
         }
         for(index = 0 ; index < data.nbmonstre ; index++)
         {
-            draw_hookpict(&data.monstre[index], &data.map.pos);
+            draw_hookpict(&data.mob[index].monstre, &data.map.pos);
         }
 
 
@@ -142,11 +132,11 @@ int editeur(struct DIVERSsysteme *systeme)
             for (index = 0 ; index < systeme->nbcreature ; index++)
             {
                 draw_button(&systeme->creature[index].bouton);
-                if (systeme->creature[index].actif == true)
+                if (systeme->activecreature != -1)
                 {
-                    draw_pict(&systeme->creature[index].pict);
-                    draw_button(&systeme->creature[index].bt_vie.bouton);
-                    draw_button(&systeme->creature[index].bt_imgpath.bouton);
+                    draw_pict(&systeme->creature[systeme->activecreature].pict);
+                    draw_button(&systeme->creature[systeme->activecreature].bt_vie.bouton);
+                    draw_button(&systeme->creature[systeme->activecreature].bt_imgpath.bouton);
                     draw_button(&ui.supprmob);
                 }
             }
@@ -184,7 +174,7 @@ int editeur(struct DIVERSsysteme *systeme)
         glFlush();
         SDL_GL_SwapWindow(systeme->screen);
 
-        SDL_Delay(10);
+        SDL_Delay(25);
     }
     return EXIT_SUCCESS;
 }
@@ -227,8 +217,8 @@ void loadingknownmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, str
     sprintf(data->projectmap, "%s", name);
     sprintf(temp, "rs/map/%s.png", name);
     data->map.texture = loadTextureandsize(temp, &data->map.pos);
-    data->map.x = data->map.pos.x;
-    data->map.y = data->map.pos.y;
+    //data->map.x = data->map.pos.x;
+    //data->map.y = data->map.pos.y;
 
 
     if(glIsTexture(data->map.texture))
@@ -273,12 +263,18 @@ void depart(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *co
 void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
 {
 
-    data->monstre[data->nbmonstre].translation.x = (systeme->evenement.motion.x - data->monstre[data->nbmonstre].pict.pos.w/2) - data->map.pos.x;
-    data->monstre[data->nbmonstre].translation.y = (screenh - systeme->evenement.motion.y - data->monstre[data->nbmonstre].pict.pos.h/2) - data->map.pos.y;
+    data->mob[data->nbmonstre].monstre.translation.x = (systeme->evenement.motion.x - data->mob[data->nbmonstre].monstre.pict.pos.w/2) - data->map.pos.x;
+    data->mob[data->nbmonstre].monstre.translation.y = (screenh - systeme->evenement.motion.y - data->mob[data->nbmonstre].monstre.pict.pos.h/2) - data->map.pos.y;
+    data->mob[data->nbmonstre].monstre.pict.pos.w = 100;
+    data->mob[data->nbmonstre].monstre.pict.pos.h = 100;
+    data->mob[data->nbmonstre].monstre.pict.texture = systeme->creature[systeme->activecreature].pict.texture;
+    sprintf(data->mob[data->nbmonstre].name, systeme->creature[systeme->activecreature].name);
+    say(data->mob[data->nbmonstre].name, console, systeme);
+    data->mob[data->nbmonstre].vie = systeme->creature[systeme->activecreature].vie;
     if(data->nbmonstre < 512)
     {
         data->nbmonstre++;
     }
-    say("monstre positioner", console, systeme);
+    say("monstre positionné", console, systeme);
 
 }
