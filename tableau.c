@@ -31,6 +31,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->continuer = true;
 	systeme->asked = false;
 	systeme->moletteactif = false;
+	systeme->tookmob = false;
 	systeme->echap = 0;
 	systeme->nbcreature = 0;
 	systeme->activecreature = 0;
@@ -60,6 +61,8 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 
 	for (i = 0 ; i < 128 ; i++)
     {
+        systeme->creature[i].vie = 0;
+        systeme->creature[i].ID = 0;
         systeme->creature[i].bouton.etat = B_NORMAL;
         systeme->creature[i].filename[0]    = '\0';
         systeme->creature[i].name[0]        = '\0';
@@ -202,6 +205,7 @@ void initdata(struct DATA *data)
     data->mob[0].monstre.pict.texture = loadTexture ("rs/images/mob0.0.png");
     for (i=0 ; i < 512 ; i++)
     {
+        data->mob[i].ID = 0;
         data->mob[i].monstre.pict.texture = 0;
         setPos4(&data->mob[i].monstre.pict.pos, 0, 0, 0, 0);
     }

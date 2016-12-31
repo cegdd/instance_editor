@@ -6,6 +6,24 @@
 #include "editeur.h"
 #include "save.h"
 
+/**
+SAVE FILE DATA STRUCTURE
+
+-string     map name
+-int        number of creature
+    *int        ID
+    *string     name
+    *string     img name
+    *int        life
+-bool       player set
+    -int        player x
+    -int        player y
+-int        number of mob set
+    *int        ID
+    *int        mob x
+    *int        mob y
+**/
+
 void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
 {
     char buffer[128];
@@ -19,28 +37,52 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     fichier = fopen(buffer, "w+");
     //nom de la map
     ecris(data->projectmap, fichier);
+
+    //number of creature
+    sprintf(buffer, "%d", systeme->nbcreature);
+    ecris(buffer, fichier);
+    for(i=0 ; i < systeme->nbcreature ; i++)
+    {
+        //ID
+        sprintf(buffer, "%d", systeme->creature[i].ID);
+        ecris(buffer, fichier);
+        //name
+        sprintf(buffer, "%s", systeme->creature[i].name);
+        ecris(buffer, fichier);
+        //image name
+        sprintf(buffer, "%s", systeme->creature[i].imgpath);
+        ecris(buffer, fichier);
+        sprintf(buffer, "%d", systeme->creature[i].vie);
+        ecris(buffer, fichier);
+    }
+
+
+
+
     //si le joueur est poser
     if (data->joueuractif)
     {
         ecris("1", fichier);
+         //translation joueur en x
+        sprintf(buffer, "%d", data->joueur.translation.x);
+        ecris(buffer, fichier);
+        //translation joueur en y
+        sprintf(buffer, "%d", data->joueur.translation.y);
+        ecris(buffer, fichier);
     }
     else
     {
         ecris("0", fichier);
     }
-    //translation joueur en x
-    sprintf(buffer, "%d", data->joueur.translation.x);
-    ecris(buffer, fichier);
-    //translation joueur en y
-    sprintf(buffer, "%d", data->joueur.translation.y);
-    ecris(buffer, fichier);
 
     //nombre de mobs
     sprintf(buffer, "%d", data->nbmonstre);
     ecris(buffer, fichier);
 
-    for(i=0 ; i<data->nbmonstre ; i++)
+    for(i=0 ; i < data->nbmonstre ; i++)
     {
+        sprintf(buffer, "%d", data->mob[i].ID);
+        ecris(buffer, fichier);
         sprintf(buffer, "%d", data->mob[i].monstre.translation.x);
         ecris(buffer, fichier);
         sprintf(buffer, "%d", data->mob[i].monstre.translation.y);
@@ -140,6 +182,11 @@ void ecris(char string[50], FILE *fichier)
 
 	while(string[i] != '\0')
 	{
+	    if (i >= 4096)
+        {
+            printf("index overflow in func ecris");
+            break;
+        }
 		valeur = (int)string[i];
 		for(index = 0 ; index < valeur ; index++)
 		{

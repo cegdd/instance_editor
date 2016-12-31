@@ -41,7 +41,7 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
             case SDL_MOUSEBUTTONUP:
                 if( systeme->evenement.button.button == SDL_BUTTON_LEFT )
                 {
-                    clic_UP_L(systeme, ui, console);
+                    clic_UP_L(systeme, ui, console, data);
                 }
                 else if( systeme->evenement.button.button == SDL_BUTTON_MIDDLE )
                 {
@@ -130,7 +130,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
     }
 }
 
-void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console)
+void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console, struct DATA *data)
 {
     int i,i2,j;
 
@@ -185,6 +185,12 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
                 }
         }
         commandedetail(j, console, systeme);
+
+        if (systeme->tookmob == true)
+        {
+            add(systeme, data, console);
+            systeme->tookmob = false;
+        }
     }
 
     commandebouton(i,console, systeme, ui);
@@ -212,11 +218,18 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
             {
                 systeme->creature[i].bouton.etat = B_CLIQUER;
             }
-            for (j = 0 ; j <= systeme->nbdetail ; j++)
-            {//les details du mob
-                if (systeme->creature[i].detail[j]->etat == B_SURVOLER)
+            else
+            {
+                for (j = 0 ; j <= systeme->nbdetail ; j++)
+                {//les details du mob
+                    if (systeme->creature[i].detail[j]->etat == B_SURVOLER)
+                    {
+                        systeme->creature[i].detail[j]->etat = B_CLIQUER;
+                    }
+                }
+                if (colisionbox(&systeme->pointeur.pos, &systeme->creature[i].pict.pos, true) == true)
                 {
-                    systeme->creature[i].detail[j]->etat = B_CLIQUER;
+                    systeme->tookmob = true;
                 }
             }
         }
@@ -228,13 +241,13 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
         systeme->askID = -1;
         depart(systeme, data, console);
     }
-
+/*
     else if(systeme->askID == MONSTER &&
             systeme->projetouvert)
     {
         systeme->askID = -1;
         add(systeme, data, console);
-    }
+    }*/
 }
 
 void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui)

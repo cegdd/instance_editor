@@ -48,6 +48,8 @@ int editeur(struct DIVERSsysteme *systeme)
             else if(systeme->askID == CREER)
             {
                 createproject(&console, systeme, &data);
+                ui.creer.etat = B_IMPOSSIBLE;
+                ui.charger.etat = B_IMPOSSIBLE;
             }
             else if(systeme->askID == ENREGISTRER)
             {
@@ -56,6 +58,8 @@ int editeur(struct DIVERSsysteme *systeme)
             else if(systeme->askID == CHARGER)
             {
                 loadproject(&console, systeme, &data);
+                ui.creer.etat = B_IMPOSSIBLE;
+                ui.charger.etat = B_IMPOSSIBLE;
             }
             else if(systeme->askID == CREERMOB)
             {
@@ -171,6 +175,16 @@ int editeur(struct DIVERSsysteme *systeme)
             draw_pict(&console.cursor);
         }
 
+        if (systeme->tookmob == true)
+        {
+            setPos4(&systeme->temp,
+                    systeme->pointeur.pos.x,
+                    systeme->pointeur.pos.y + systeme->pointeur.pos.h,
+                    systeme->creature[systeme->activecreature].pict.pos.w,
+                    systeme->creature[systeme->activecreature].pict.pos.h);
+            draw(systeme->creature[systeme->activecreature].pict.texture, &systeme->temp);
+        }
+
         glFlush();
         SDL_GL_SwapWindow(systeme->screen);
 
@@ -271,6 +285,7 @@ void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *conso
     sprintf(data->mob[data->nbmonstre].name, systeme->creature[systeme->activecreature].name);
     say(data->mob[data->nbmonstre].name, console, systeme);
     data->mob[data->nbmonstre].vie = systeme->creature[systeme->activecreature].vie;
+    data->mob[data->nbmonstre].ID = systeme->creature[systeme->activecreature].ID;
     if(data->nbmonstre < 512)
     {
         data->nbmonstre++;

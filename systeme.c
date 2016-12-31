@@ -189,10 +189,13 @@ void listmob(struct DIVERSsysteme *systeme)
                  strcmp(ent->d_name, "..") != 0 &&
                  !EndsWithRSmob(ent->d_name) )
              {
+                 systeme->creature[systeme->nbcreature].ID = systeme->nbcreature;
+
                  sprintf(systeme->creature[systeme->nbcreature].path,"%s%s", path, ent->d_name);
 
-                 ent->d_name[strlen(ent->d_name)-6] = '\0';
                  sprintf(systeme->creature[systeme->nbcreature].filename, ent->d_name);
+                 ent->d_name[strlen(ent->d_name)-6] = '\0';
+                 sprintf(systeme->creature[systeme->nbcreature].name, ent->d_name);
 
                  fichier = fopen(systeme->creature[systeme->nbcreature].path, "r");
 

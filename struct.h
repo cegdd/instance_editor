@@ -52,6 +52,7 @@ struct BOUTON_TEXTE
 struct CREATURE
 {
     int vie;
+    int ID;
 
     char filename[64];
     char name[64];
@@ -88,6 +89,7 @@ struct MOB
     bool actif;
     struct hookpict monstre;
     int vie;
+    int ID;
     char name[128];
 };
 
@@ -111,6 +113,7 @@ struct DIVERSsysteme
 
     struct pict pointeur;
     struct CREATURE creature[128];
+    bool tookmob;
 
     SDL_Texture *BGmort;
     GLuint BG;
@@ -128,6 +131,7 @@ struct DIVERSsysteme
 	SDL_Rect oldpp;
 	SDL_Rect ppobj;
 	SDL_Rect origine;
+	SDL_Rect temp;
 
 };
 
