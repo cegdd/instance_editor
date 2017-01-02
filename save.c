@@ -4,6 +4,7 @@
 #include "struct.h"
 #include "systeme.h"
 #include "editeur.h"
+#include "image.h"
 #include "save.h"
 
 /**
@@ -44,7 +45,7 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     for(i=0 ; i < systeme->nbcreature ; i++)
     {
         //ID
-        sprintf(buffer, "%d", systeme->creature[i].ID);
+        sprintf(buffer, "0");
         ecris(buffer, fichier);
         //name
         sprintf(buffer, "%s", systeme->creature[i].name);
@@ -123,6 +124,27 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
             sprintf(temp, "map %s chargee", ret);
             say(temp, console, systeme);
 
+            lis(fichier, buffer);
+            uncrypt(buffer, ret);
+
+            systeme->nbcreature = atoi(ret);
+            for(i = 0 ; i < systeme->nbcreature ; i++)
+            {
+                lis(fichier, buffer);
+                uncrypt(buffer, ret);
+                lis(fichier, buffer);
+                uncrypt(buffer, ret);
+                sprintf(systeme->creature[i].name, ret);
+                lis(fichier, buffer);
+                uncrypt(buffer, ret);
+                sprintf(systeme->creature[i].imgpath, ret);
+                lis(fichier, buffer);
+                uncrypt(buffer, ret);
+                systeme->creature[i].vie = atoi(ret);
+            }
+            sprintf(temp, "%d monstre en memoire", systeme->nbcreature);
+            say(temp, console, systeme);
+
             //si le joueur est poser
             lis(fichier, buffer);
             uncrypt(buffer, ret);
@@ -146,12 +168,18 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
             }
 
             //nombre de mobs
+            listmob(systeme);
+
             lis(fichier, buffer);
             uncrypt(buffer, ret);
             data->nbmonstre = atoi(ret);
 
             for(i=0 ; i<data->nbmonstre ; i++)
             {
+                //ID des mobs
+                lis(fichier, buffer);
+                uncrypt(buffer, ret);
+                data->mob[i].ID = atoi(ret);
                 //translation mob en x
                 lis(fichier, buffer);
                 uncrypt(buffer, ret);
@@ -160,8 +188,11 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 lis(fichier, buffer);
                 uncrypt(buffer, ret);
                 data->mob[i].monstre.translation.y = atoi(ret);
+                data->mob[i].actif = true;
+                data->mob[i].monstre.pict.texture = systeme->creature[data->mob[i].ID].pict.texture;
+                setPos4(&data->mob[i].monstre.pict.pos, 0, 0, 100, 100);
             }
-            sprintf(temp, "%d monstres chargé", data->nbmonstre);
+            sprintf(temp, "%d monstre poser", data->nbmonstre);
             say(temp, console, systeme);
 
             systeme->projetouvert = true;

@@ -1171,14 +1171,14 @@
 1462742701 c:\users\cegdd\programmation\instance_editor\main.h
 	"struct.h"
 
-1483205109 c:\users\cegdd\programmation\instance_editor\struct.h
+1483397721 c:\users\cegdd\programmation\instance_editor\struct.h
 	<stdio.h>
 	<stdbool.h>
 	<SDL_ttf.h>
 	<GL/gl.h>
 	<GL/glu.h>
 
-1462914430 source:c:\users\cegdd\programmation\instance_editor\colision.c
+1483396568 source:c:\users\cegdd\programmation\instance_editor\colision.c
 	<SDL.h>
 	<math.h>
 	<stdio.h>
@@ -1203,7 +1203,7 @@
 
 1462742879 c:\users\cegdd\programmation\instance_editor\deplacement.h
 
-1482100207 source:c:\users\cegdd\programmation\instance_editor\image.c
+1483392510 source:c:\users\cegdd\programmation\instance_editor\image.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -1215,7 +1215,7 @@
 	"main.h"
 	"image.h"
 
-1482098856 source:c:\users\cegdd\programmation\instance_editor\main.c
+1483398191 source:c:\users\cegdd\programmation\instance_editor\main.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1232,7 +1232,7 @@
 1482099836 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"struct.h"
 
-1483205339 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1483397740 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1249,14 +1249,14 @@
 	"editeur.h"
 	"save.h"
 
-1482190858 c:\users\cegdd\programmation\instance_editor\evenement.h
+1483395110 c:\users\cegdd\programmation\instance_editor\evenement.h
 	<stdbool.h>
 	"main.h"
 
-1481843255 c:\users\cegdd\programmation\instance_editor\systeme.h
+1483397480 c:\users\cegdd\programmation\instance_editor\systeme.h
 	"main.h"
 
-1482190863 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1483398697 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1275,19 +1275,19 @@
 	"main.h"
 	"systeme.h"
 
-1483205186 source:c:\users\cegdd\programmation\instance_editor\systeme.c
+1483398551 source:c:\users\cegdd\programmation\instance_editor\systeme.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
 	<string.h>
-	<dirent.h>
 	<errno.h>
 	"main.h"
 	"image.h"
 	"save.h"
+	"systeme.h"
 
-1483205109 source:c:\users\cegdd\programmation\instance_editor\tableau.c
+1483397797 source:c:\users\cegdd\programmation\instance_editor\tableau.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
@@ -1617,12 +1617,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1483205238 source:c:\users\cegdd\programmation\instance_editor\save.c
+1483397783 source:c:\users\cegdd\programmation\instance_editor\save.c
 	<stdio.h>
 	<stdlib.h>
 	"struct.h"
 	"systeme.h"
 	"editeur.h"
+	"image.h"
 	"save.h"
 
 1471721342 c:\users\cegdd\programmation\instance_editor\save.h

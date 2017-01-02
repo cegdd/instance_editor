@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
-#include <dirent.h>
 #include <errno.h>
 
 #include "main.h"
 #include "image.h"
 #include "save.h"
+#include "systeme.h"
 
 extern int screenh, screenw;
 
@@ -168,67 +168,30 @@ int EndsWithRSmob( char *string )
 void listmob(struct DIVERSsysteme *systeme)
 {
     char buffer[4096] = {'\0'};
-    char ret[50] = {'\0'};
-    char path[16];
+    int i;
 
-    FILE *fichier = NULL;
-
-    systeme->nbcreature = 0;
-
-    sprintf(path, "./rs/bestiaire/");
-    DIR *rep = opendir(path);
-    sprintf(path, "rs/bestiaire/");
-
-    if (rep != NULL)
+    for (i = 0 ; i < systeme->nbcreature ; i++)
     {
-        struct dirent * ent;
+         systeme->creature[i].bouton.texture = imprime(systeme->creature[i].name, 114, BLANC, systeme, &systeme->creature[i].bouton.pos.w, &systeme->creature[i].bouton.pos.h);
+         setPos2(&systeme->creature[i].bouton.pos,screenw-396, screenh-70-(i*22));
 
-        while ((ent = readdir(rep)) != NULL)
-        {
-             if (strcmp(ent->d_name, ".") != 0 &&
-                 strcmp(ent->d_name, "..") != 0 &&
-                 !EndsWithRSmob(ent->d_name) )
-             {
-                 systeme->creature[systeme->nbcreature].ID = systeme->nbcreature;
+         sprintf(buffer, "rs/bestiaire/%s", systeme->creature[i].imgpath);
+         systeme->creature[i].pict.texture =loadTexture (buffer);
+         systeme->creature[i].bt_imgpath.texte.img.texture = imprime(buffer, 114, BLANC, systeme, &systeme->creature[i].bt_imgpath.texte.img.pos.w, &systeme->creature[i].bt_imgpath.texte.img.pos.h);
+         setPos2(&systeme->creature[i].bt_imgpath.texte.img.pos,1100, screenh-170);
+         //copie de la texture+pos de "texte" a "bouton"
+         systeme->creature[i].bt_imgpath.bouton.texture = systeme->creature[i].bt_imgpath.texte.img.texture;
+         copypos(&systeme->creature[i].bt_imgpath.texte.img.pos, &systeme->creature[i].bt_imgpath.bouton.pos);
 
-                 sprintf(systeme->creature[systeme->nbcreature].path,"%s%s", path, ent->d_name);
+         sprintf(buffer, "vie : %d", systeme->creature[i].vie);
+         systeme->creature[i].bt_vie.texte.img.texture = imprime(buffer, 114, BLANC, systeme, &systeme->creature[i].bt_vie.texte.img.pos.w, &systeme->creature[i].bt_vie.texte.img.pos.h);
+         setPos2(&systeme->creature[i].bt_vie.texte.img.pos,1100, screenh-190);
+         //copie de la texture+pos de "texte" a "bouton"
+         systeme->creature[i].bt_vie.bouton.texture = systeme->creature[i].bt_vie.texte.img.texture;
+         copypos(&systeme->creature[i].bt_vie.texte.img.pos, &systeme->creature[i].bt_vie.bouton.pos);
 
-                 sprintf(systeme->creature[systeme->nbcreature].filename, ent->d_name);
-                 ent->d_name[strlen(ent->d_name)-6] = '\0';
-                 sprintf(systeme->creature[systeme->nbcreature].name, ent->d_name);
-
-                 fichier = fopen(systeme->creature[systeme->nbcreature].path, "r");
-
-                 systeme->creature[systeme->nbcreature].bouton.texture = imprime(ent->d_name, 114, BLANC, systeme, &systeme->creature[systeme->nbcreature].bouton.pos.w, &systeme->creature[systeme->nbcreature].bouton.pos.h);
-                 setPos2(&systeme->creature[systeme->nbcreature].bouton.pos,screenw-396, screenh-70-(systeme->nbcreature*22));
-
-                 lis(fichier, buffer);
-                 uncrypt(buffer, ret);
-                 sprintf(systeme->creature[systeme->nbcreature].imgpath, "%s", ret);
-                 sprintf(buffer, "rs/bestiaire/%s", ret);
-                 systeme->creature[systeme->nbcreature].pict.texture =loadTexture (buffer);
-                 systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.texture = imprime(buffer, 114, BLANC, systeme, &systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos.w, &systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos.h);
-                 setPos2(&systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos,1100, screenh-170);
-                 //copie de la texture+pos de "texte" a "bouton"
-                 systeme->creature[systeme->nbcreature].bt_imgpath.bouton.texture = systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.texture;
-                 copypos(&systeme->creature[systeme->nbcreature].bt_imgpath.texte.img.pos, &systeme->creature[systeme->nbcreature].bt_imgpath.bouton.pos);
-
-                 lis(fichier, buffer);
-                 uncrypt(buffer, ret);
-                 systeme->creature[systeme->nbcreature].vie = atoi(ret);
-                 sprintf(buffer, "vie : %d", systeme->creature[systeme->nbcreature].vie);
-                 systeme->creature[systeme->nbcreature].bt_vie.texte.img.texture = imprime(buffer, 114, BLANC, systeme, &systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos.w, &systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos.h);
-                 setPos2(&systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos,1100, screenh-190);
-                 //copie de la texture+pos de "texte" a "bouton"
-                 systeme->creature[systeme->nbcreature].bt_vie.bouton.texture = systeme->creature[systeme->nbcreature].bt_vie.texte.img.texture;
-                 copypos(&systeme->creature[systeme->nbcreature].bt_vie.texte.img.pos, &systeme->creature[systeme->nbcreature].bt_vie.bouton.pos);
-
-                 systeme->nbcreature++;
-
-                 fclose(fichier);
-             }
-        }
-        closedir(rep);
+        systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_imgpath.bouton;
+        systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_vie.bouton;
     }
 }
 
@@ -237,48 +200,57 @@ void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
     if (console->answered)
     {
-        char buffer[128];
-        FILE *fichier = NULL;
+        char buffer[1024];
 
         systeme->asked = false;
         console->answered = false;
 
-        sprintf(buffer, "rs/bestiaire/%s.RSmob", console->lastanswer);
-        fichier = fopen(buffer, "w+");
-        if (fichier != NULL)
-        {
-            sprintf(buffer, "noimage.png");
-            ecris(buffer, fichier);
-            sprintf(buffer, "0");
-            ecris(buffer, fichier);
+        sprintf(systeme->creature[systeme->nbcreature].imgpath, "noimage.png");
+        sprintf(systeme->creature[systeme->nbcreature].name, "%s", console->lastanswer);
+        systeme->creature[systeme->nbcreature].vie = 0;
 
-            fclose(fichier);
-
-            systeme->nbcreature++;
-            sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
-            say(buffer, console ,systeme);
-        }
+        systeme->nbcreature++;
+        sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
+        say(buffer, console ,systeme);
         listmob(systeme);
     }
 }
 
-void refreshmob(struct CREATURE *creature)
+void deletecreature(struct DIVERSsysteme *systeme, struct DATA *data)
 {
-    FILE *fichier = NULL;
-    char buffer[128];
+    int i;
 
-    remove(creature->path);
-    fichier = fopen(creature->path, "w+");
-    ecris(creature->imgpath, fichier);
-    sprintf(buffer, "%d", creature->vie);
-    ecris(buffer, fichier);
-    fclose(fichier);
+    for(i = systeme->activecreature+1 ; i < systeme->nbcreature ; i++)
+    {
+        systeme->creature[i-1].vie = systeme->creature[i].vie;
+        sprintf(systeme->creature[i-1].imgpath, "%s", systeme->creature[i].imgpath);
+        sprintf(systeme->creature[i-1].name, "%s", systeme->creature[i].name);
+    }
+
+    for(i = 0 ; i < data->nbmonstre ; i++)
+    {
+        if (data->mob[i].ID == systeme->activecreature)
+        {
+            deletemob(i, data);
+        }
+    }
+
+
+    systeme->nbcreature--;
+     listmob(systeme);
 }
 
-void deletemob(struct DIVERSsysteme *systeme)
+void deletemob(int index, struct DATA *data)
 {
-    systeme->creature[systeme->activecreature].bouton.etat = B_NORMAL;
+    int i;
 
-    remove(systeme->creature[systeme->activecreature].path);
-    systeme->nbcreature--;
+    for(i = index+1 ; i < data->nbmonstre-1 ; i++)
+    {
+        data->mob[i-1].ID = data->mob[i].ID;
+        sprintf(data->mob[i-1].name, "%s", data->mob[i].name);
+        data->mob[i-1].vie = data->mob[i].vie;
+        data->mob[i-1].actif = data->mob[i].actif;
+    }
+    data->nbmonstre--;
+
 }

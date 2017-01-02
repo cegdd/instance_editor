@@ -73,7 +73,6 @@ int editeur(struct DIVERSsysteme *systeme)
                     console.answered = false;
 
                     sprintf(systeme->creature[systeme->activecreature].imgpath, console.lastanswer);
-                    refreshmob(&systeme->creature[systeme->activecreature]);
                     listmob(systeme);
                 }
             }
@@ -85,7 +84,6 @@ int editeur(struct DIVERSsysteme *systeme)
                     console.answered = false;
 
                     systeme->creature[systeme->activecreature].vie = atoi(console.lastanswer);
-                    refreshmob(&systeme->creature[systeme->activecreature]);
                     listmob(systeme);
                 }
             }
@@ -285,7 +283,7 @@ void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *conso
     sprintf(data->mob[data->nbmonstre].name, systeme->creature[systeme->activecreature].name);
     say(data->mob[data->nbmonstre].name, console, systeme);
     data->mob[data->nbmonstre].vie = systeme->creature[systeme->activecreature].vie;
-    data->mob[data->nbmonstre].ID = systeme->creature[systeme->activecreature].ID;
+    data->mob[data->nbmonstre].ID = systeme->activecreature;
     if(data->nbmonstre < 512)
     {
         data->nbmonstre++;

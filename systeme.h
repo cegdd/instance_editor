@@ -14,7 +14,7 @@ int EndsWithRSmob( char *string );
 
 void listmob(struct DIVERSsysteme *systeme);
 void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme);
-void refreshmob(struct CREATURE *creature);
-void deletemob(struct DIVERSsysteme *systeme);
+void deletecreature(struct DIVERSsysteme *systeme, struct DATA *data);
+void deletemob(int index, struct DATA *data);
 
 #endif

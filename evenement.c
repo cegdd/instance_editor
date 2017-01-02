@@ -193,7 +193,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         }
     }
 
-    commandebouton(i,console, systeme, ui);
+    commandebouton(i,console, systeme, ui, data);
 
 }
 
@@ -241,16 +241,9 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
         systeme->askID = -1;
         depart(systeme, data, console);
     }
-/*
-    else if(systeme->askID == MONSTER &&
-            systeme->projetouvert)
-    {
-        systeme->askID = -1;
-        add(systeme, data, console);
-    }*/
 }
 
-void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui)
+void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 {
     switch (i)
     {
@@ -291,14 +284,9 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
 
         case 6:
             ui->UIfondmob = OUVERT;
-            if (systeme->nbcreature == 0)
-            {
-                listmob(systeme);
-            }
             console->answered = false;
             console->active = true;
-            say ("placez le monstre a ca position de depart", console, systeme);
-            systeme->askID = MONSTER;
+            listmob(systeme);
         break;
 
         case 8:
@@ -309,8 +297,8 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
         break;
 
         case 9:
-            deletemob(systeme);
-            listmob(systeme);
+            deletecreature(systeme, data);
+            //systeme->activecreature = -1;
         break;
 
         case 7:

@@ -62,12 +62,8 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	for (i = 0 ; i < 128 ; i++)
     {
         systeme->creature[i].vie = 0;
-        systeme->creature[i].ID = 0;
         systeme->creature[i].bouton.etat = B_NORMAL;
-        systeme->creature[i].filename[0]    = '\0';
         systeme->creature[i].name[0]        = '\0';
-        systeme->creature[i].path[0]        = '\0';
-        systeme->creature[i].imgpath[0]     = '\0';
 
         setPos4(&systeme->creature[i].pict.pos, 1100, 620, 100, 100);
 

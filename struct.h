@@ -18,7 +18,7 @@
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE, B_INUSE};/*bouton*/
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
 enum{CREER, QUITTER, CHARGER, ENREGISTRER,MAP , DEPART, MONSTER, CROIXMONSTRE, CREERMOB, DETAIL_IMGPATH, DETAIL_LIFE,
-    SUPPRMOB};
+    SUPPRMOB};//monster not used
 enum{FERMER, OUVERT};
 
 struct BOUTON
@@ -52,11 +52,8 @@ struct BOUTON_TEXTE
 struct CREATURE
 {
     int vie;
-    int ID;
 
-    char filename[64];
     char name[64];
-    char path[128];
     char imgpath[128];
 
     struct pict pict;

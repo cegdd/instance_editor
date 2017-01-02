@@ -11,9 +11,6 @@
 #include "main.h"
 #include "image.h"
 
-extern int screenh, screenw;
-
-
 Uint8 obtenirPixel(SDL_Surface *surface, SDL_Point *pix)
 {
     Uint8 *p = (Uint8 *)surface->pixels + pix->y * surface->pitch + pix->x * 4;
