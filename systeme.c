@@ -220,6 +220,14 @@ void deletecreature(struct DIVERSsysteme *systeme, struct DATA *data)
 {
     int i;
 
+        for(i = 0 ; i < data->nbmonstre ; i++)
+    {
+        if (data->mob[i].ID == systeme->activecreature)
+        {
+            data->mob[i].actif = false;
+        }
+    }
+
     for(i = systeme->activecreature+1 ; i < systeme->nbcreature ; i++)
     {
         systeme->creature[i-1].vie = systeme->creature[i].vie;
@@ -227,30 +235,21 @@ void deletecreature(struct DIVERSsysteme *systeme, struct DATA *data)
         sprintf(systeme->creature[i-1].name, "%s", systeme->creature[i].name);
     }
 
-    for(i = 0 ; i < data->nbmonstre ; i++)
-    {
-        if (data->mob[i].ID == systeme->activecreature)
-        {
-            deletemob(i, data);
-        }
-    }
-
 
     systeme->nbcreature--;
      listmob(systeme);
 }
 
-void deletemob(int index, struct DATA *data)
+int checkactifmob(struct DATA *data)
 {
     int i;
 
-    for(i = index+1 ; i < data->nbmonstre-1 ; i++)
+    for (i = 0 ; i < data->nbmonstre ; i++)
     {
-        data->mob[i-1].ID = data->mob[i].ID;
-        sprintf(data->mob[i-1].name, "%s", data->mob[i].name);
-        data->mob[i-1].vie = data->mob[i].vie;
-        data->mob[i-1].actif = data->mob[i].actif;
+        if (data->mob[i].actif == false)
+        {
+            return i;
+        }
     }
-    data->nbmonstre--;
-
+    return -1;
 }

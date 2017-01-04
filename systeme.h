@@ -16,5 +16,6 @@ void listmob(struct DIVERSsysteme *systeme);
 void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme);
 void deletecreature(struct DIVERSsysteme *systeme, struct DATA *data);
 void deletemob(int index, struct DATA *data);
+int checkactifmob(struct DATA *data);
 
 #endif

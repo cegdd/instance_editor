@@ -101,7 +101,10 @@ int editeur(struct DIVERSsysteme *systeme)
         }
         for(index = 0 ; index < data.nbmonstre ; index++)
         {
-            draw_hookpict(&data.mob[index].monstre, &data.map.pos);
+            if(data.mob[index].actif == true)
+            {
+                draw_hookpict(&data.mob[index].monstre, &data.map.pos);
+            }
         }
 
 
@@ -274,20 +277,25 @@ void depart(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *co
 
 void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
 {
-
-    data->mob[data->nbmonstre].monstre.translation.x = (systeme->evenement.motion.x - data->mob[data->nbmonstre].monstre.pict.pos.w/2) - data->map.pos.x;
-    data->mob[data->nbmonstre].monstre.translation.y = (screenh - systeme->evenement.motion.y - data->mob[data->nbmonstre].monstre.pict.pos.h/2) - data->map.pos.y;
-    data->mob[data->nbmonstre].monstre.pict.pos.w = 100;
-    data->mob[data->nbmonstre].monstre.pict.pos.h = 100;
-    data->mob[data->nbmonstre].monstre.pict.texture = systeme->creature[systeme->activecreature].pict.texture;
-    sprintf(data->mob[data->nbmonstre].name, systeme->creature[systeme->activecreature].name);
-    say(data->mob[data->nbmonstre].name, console, systeme);
-    data->mob[data->nbmonstre].vie = systeme->creature[systeme->activecreature].vie;
-    data->mob[data->nbmonstre].ID = systeme->activecreature;
-    if(data->nbmonstre < 512)
+    int check = checkactifmob(data);
+    if (check == -1)
     {
-        data->nbmonstre++;
+        check = data->nbmonstre;
+        if(data->nbmonstre < 512)
+        {
+            data->nbmonstre++;
+        }
     }
-    say("monstre positionné", console, systeme);
 
+    data->mob[check].monstre.translation.x = (systeme->evenement.motion.x - data->mob[check].monstre.pict.pos.w/2) - data->map.pos.x;
+    data->mob[check].monstre.translation.y = (screenh - systeme->evenement.motion.y - data->mob[check].monstre.pict.pos.h/2) - data->map.pos.y;
+    data->mob[check].monstre.pict.pos.w = 100;
+    data->mob[check].monstre.pict.pos.h = 100;
+    data->mob[check].monstre.pict.texture = systeme->creature[systeme->activecreature].pict.texture;
+    sprintf(data->mob[check].name, systeme->creature[systeme->activecreature].name);
+    say(data->mob[check].name, console, systeme);
+    data->mob[check].vie = systeme->creature[systeme->activecreature].vie;
+    data->mob[check].ID = systeme->activecreature;
+    data->mob[check].actif = true;
+    say("monstre positionné", console, systeme);
 }
