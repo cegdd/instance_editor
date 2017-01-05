@@ -139,7 +139,7 @@ int editeur(struct DIVERSsysteme *systeme)
                 draw_button(&systeme->creature[index].bouton);
                 if (systeme->activecreature != -1)
                 {
-                    draw_pict(&systeme->creature[systeme->activecreature].pict);
+                    draw_limitedpict(&systeme->creature[systeme->activecreature].pict, &systeme->pcreature);
                     draw_button(&systeme->creature[systeme->activecreature].bt_vie.bouton);
                     draw_button(&systeme->creature[systeme->activecreature].bt_imgpath.bouton);
                     draw_button(&ui.supprmob);
@@ -289,8 +289,8 @@ void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *conso
 
     data->mob[check].monstre.translation.x = (systeme->evenement.motion.x - data->mob[check].monstre.pict.pos.w/2) - data->map.pos.x;
     data->mob[check].monstre.translation.y = (screenh - systeme->evenement.motion.y - data->mob[check].monstre.pict.pos.h/2) - data->map.pos.y;
-    data->mob[check].monstre.pict.pos.w = 100;
-    data->mob[check].monstre.pict.pos.h = 100;
+    data->mob[check].monstre.pict.pos.w = systeme->creature[systeme->activecreature].pict.pos.w;
+    data->mob[check].monstre.pict.pos.h = systeme->creature[systeme->activecreature].pict.pos.h;
     data->mob[check].monstre.pict.texture = systeme->creature[systeme->activecreature].pict.texture;
     sprintf(data->mob[check].name, systeme->creature[systeme->activecreature].name);
     say(data->mob[check].name, console, systeme);

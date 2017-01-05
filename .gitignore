@@ -48,7 +48,7 @@ Temporary Items
 .apdisk
 
 # Object files
-*.o
+.o
 *.ko
 *.obj
 *.elf
@@ -83,3 +83,4 @@ Temporary Items
 *.o
 *.o
 rs.depend
+.RSCryptedMap

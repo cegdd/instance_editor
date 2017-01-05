@@ -190,7 +190,7 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 data->mob[i].monstre.translation.y = atoi(ret);
                 data->mob[i].actif = true;
                 data->mob[i].monstre.pict.texture = systeme->creature[data->mob[i].ID].pict.texture;
-                setPos4(&data->mob[i].monstre.pict.pos, 0, 0, 100, 100);
+                setPos4(&data->mob[i].monstre.pict.pos, 0, 0, systeme->creature[data->mob[i].ID].pict.pos.w, systeme->creature[data->mob[i].ID].pict.pos.h);
             }
             sprintf(temp, "%d monstre poser", data->nbmonstre);
             say(temp, console, systeme);

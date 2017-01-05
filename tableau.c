@@ -55,6 +55,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 	systeme->ppobj.h = 50;
 
 	setPos4(&systeme->origine, 0, 0, 0, 0);
+	setPos4(&systeme->pcreature, 1100, 620, 100, 100);
 
 	systeme->oldpp.x = 0;
 	systeme->oldpp.y = 0;
@@ -65,7 +66,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
         systeme->creature[i].bouton.etat = B_NORMAL;
         systeme->creature[i].name[0]        = '\0';
 
-        setPos4(&systeme->creature[i].pict.pos, 1100, 620, 100, 100);
+        setPos4(&systeme->creature[i].pict.pos, 1100, 620, 0, 0);
 
         systeme->nbdetail = 0;
         systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_imgpath.bouton;    systeme->nbdetail++;

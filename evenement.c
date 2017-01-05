@@ -227,7 +227,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
                         systeme->creature[i].detail[j]->etat = B_CLIQUER;
                     }
                 }
-                if (colisionbox(&systeme->pointeur.pos, &systeme->creature[i].pict.pos, true) == true)
+                if (colisionbox(&systeme->pointeur.pos, &systeme->pcreature, true) == true)
                 {
                     systeme->tookmob = true;
                 }

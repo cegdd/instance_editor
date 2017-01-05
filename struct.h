@@ -125,6 +125,7 @@ struct DIVERSsysteme
     TTF_Font *police1;
 
 	SDL_Rect pecran;
+	SDL_Rect pcreature;
 	SDL_Rect oldpp;
 	SDL_Rect ppobj;
 	SDL_Rect origine;

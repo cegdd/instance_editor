@@ -176,7 +176,7 @@ void listmob(struct DIVERSsysteme *systeme)
          setPos2(&systeme->creature[i].bouton.pos,screenw-396, screenh-70-(i*22));
 
          sprintf(buffer, "rs/bestiaire/%s", systeme->creature[i].imgpath);
-         systeme->creature[i].pict.texture =loadTexture (buffer);
+         systeme->creature[i].pict.texture =loadTextureandsize(buffer, &systeme->creature[i].pict.pos);
          systeme->creature[i].bt_imgpath.texte.img.texture = imprime(buffer, 114, BLANC, systeme, &systeme->creature[i].bt_imgpath.texte.img.pos.w, &systeme->creature[i].bt_imgpath.texte.img.pos.h);
          setPos2(&systeme->creature[i].bt_imgpath.texte.img.pos,1100, screenh-170);
          //copie de la texture+pos de "texte" a "bouton"
