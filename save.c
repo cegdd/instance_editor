@@ -100,7 +100,6 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     {
         char temp[128];
         char buffer[4096] = {'\0'};
-        char ret[50] = {'\0'};
         FILE *fichier = NULL;
         int i;
 
@@ -118,46 +117,37 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 
             //nom de la map
             lis(fichier, buffer);
-            uncrypt(buffer, ret);
 
-            loadingknownmap(console, systeme, data, ret);
-            sprintf(temp, "map %s chargee", ret);
+            loadingknownmap(console, systeme, data, buffer);
+            sprintf(temp, "map %s chargee", buffer);
             say(temp, console, systeme);
 
             lis(fichier, buffer);
-            uncrypt(buffer, ret);
 
-            systeme->nbcreature = atoi(ret);
+            systeme->nbcreature = atoi(buffer);
             for(i = 0 ; i < systeme->nbcreature ; i++)
             {
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                sprintf(systeme->creature[i].name, ret);
+                sprintf(systeme->creature[i].name, buffer);
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                sprintf(systeme->creature[i].imgpath, ret);
+                sprintf(systeme->creature[i].imgpath, buffer);
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                systeme->creature[i].vie = atoi(ret);
+                systeme->creature[i].vie = atoi(buffer);
             }
             sprintf(temp, "%d monstre en memoire", systeme->nbcreature);
             say(temp, console, systeme);
 
             //si le joueur est poser
             lis(fichier, buffer);
-            uncrypt(buffer, ret);
-            if (ret[0] == '1')
+            if (buffer[0] == '1')
             {
                 //translation joueur en x
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                data->joueur.translation.x = atoi(ret);
+                data->joueur.translation.x = atoi(buffer);
                 //translation joueur en y
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                data->joueur.translation.y = atoi(ret);
+                data->joueur.translation.y = atoi(buffer);
                 sprintf(temp, "joueur positione en x:%d y:%d", data->joueur.translation.x, data->joueur.translation.y);
                 say(temp, console, systeme);
                 data->joueuractif = true;
@@ -171,23 +161,19 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
             listmob(systeme);
 
             lis(fichier, buffer);
-            uncrypt(buffer, ret);
-            data->nbmonstre = atoi(ret);
+            data->nbmonstre = atoi(buffer);
 
             for(i=0 ; i<data->nbmonstre ; i++)
             {
                 //ID des mobs
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                data->mob[i].ID = atoi(ret);
+                data->mob[i].ID = atoi(buffer);
                 //translation mob en x
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                data->mob[i].monstre.translation.x = atoi(ret);
+                data->mob[i].monstre.translation.x = atoi(buffer);
                 //translation mob en x
                 lis(fichier, buffer);
-                uncrypt(buffer, ret);
-                data->mob[i].monstre.translation.y = atoi(ret);
+                data->mob[i].monstre.translation.y = atoi(buffer);
                 data->mob[i].actif = true;
                 data->mob[i].monstre.pict.texture = systeme->creature[data->mob[i].ID].pict.texture;
                 setPos4(&data->mob[i].monstre.pict.pos, 0, 0, systeme->creature[data->mob[i].ID].pict.pos.w, systeme->creature[data->mob[i].ID].pict.pos.h);
@@ -263,4 +249,5 @@ void lis(FILE *fichier, char *buffer)
         caractere = fgetc(fichier);
     }
     buffer[iligne] = '\0';
+    uncrypt(buffer, buffer);
 }

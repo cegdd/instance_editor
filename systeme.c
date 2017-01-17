@@ -167,7 +167,7 @@ int EndsWithRSmob( char *string )
 
 void listmob(struct DIVERSsysteme *systeme)
 {
-    char buffer[4096] = {'\0'};
+    char buffer[1024] = {'\0'};
     int i;
 
     for (i = 0 ; i < systeme->nbcreature ; i++)
