@@ -13,8 +13,10 @@
 #include "image.h"
 #include "systeme.h"
 #include "clavier.h"
-#include "editeur.h"
 #include "save.h"
+#include "core.h"
+#include "editeur.h"
+#include "espece.h"
 
 extern int screenh, screenw;
 
@@ -37,7 +39,7 @@ int editeur(struct DIVERSsysteme *systeme)
         systeme->pointeur.pos.y = (systeme->pointeur.pos.y - screenh + systeme->pointeur.pos.h) * -1;
 
         boucleevent(systeme, &ui, &console, &data);
-        pointeur(systeme, &ui);
+        pointeur(systeme, &ui, &data);
 
         if (systeme->asked)
         {
@@ -72,7 +74,7 @@ int editeur(struct DIVERSsysteme *systeme)
                     systeme->asked = true;
                     console.answered = false;
 
-                    sprintf(systeme->creature[systeme->activecreature].imgpath, console.lastanswer);
+                    ESP_setimgpath(console.lastanswer, systeme->activecreature, systeme);
                     listmob(systeme);
                 }
             }
@@ -83,7 +85,7 @@ int editeur(struct DIVERSsysteme *systeme)
                     systeme->asked = true;
                     console.answered = false;
 
-                    systeme->creature[systeme->activecreature].vie = atoi(console.lastanswer);
+                    ESP_setlife(atoi(console.lastanswer), systeme->activecreature, systeme);
                     listmob(systeme);
                 }
             }
@@ -103,7 +105,14 @@ int editeur(struct DIVERSsysteme *systeme)
         {
             if(data.mob[index].actif == true)
             {
-                draw_hookpict(&data.mob[index].monstre, &data.map.pos);
+                if(data.mob[index].selected == false)
+                {
+                    draw_hookpict(&data.mob[index].monstre, &data.map.pos);
+                }
+                else
+                {
+                    draw_hookpict_selected(&data.mob[index].monstre, &data.map.pos);
+                }
             }
         }
 
@@ -136,12 +145,12 @@ int editeur(struct DIVERSsysteme *systeme)
 
             for (index = 0 ; index < systeme->nbcreature ; index++)
             {
-                draw_button(&systeme->creature[index].bouton);
+                draw_button(ESP_getbouton_nom(index, systeme));
                 if (systeme->activecreature != -1)
                 {
-                    draw_limitedpict(&systeme->creature[systeme->activecreature].pict, &systeme->pcreature);
-                    draw_button(&systeme->creature[systeme->activecreature].bt_vie.bouton);
-                    draw_button(&systeme->creature[systeme->activecreature].bt_imgpath.bouton);
+                    ESP_drawthumb(systeme);
+                    draw_button(ESP_getbouton_vie(systeme->activecreature, systeme));
+                    draw_button(ESP_getbouton_imgpath(systeme->activecreature, systeme));
                     draw_button(&ui.supprmob);
                 }
             }
@@ -181,9 +190,9 @@ int editeur(struct DIVERSsysteme *systeme)
             setPos4(&systeme->temp,
                     systeme->pointeur.pos.x,
                     systeme->pointeur.pos.y + systeme->pointeur.pos.h,
-                    systeme->creature[systeme->activecreature].pict.pos.w,
-                    systeme->creature[systeme->activecreature].pict.pos.h);
-            draw(systeme->creature[systeme->activecreature].pict.texture, &systeme->temp);
+                    ESP_getwidth(systeme->activecreature, systeme),
+                    ESP_gethight(systeme->activecreature, systeme));
+            draw(ESP_gettexture(systeme->activecreature, systeme), &systeme->temp);
         }
 
         glFlush();
@@ -289,9 +298,9 @@ void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *conso
 
     data->mob[check].monstre.translation.x = (systeme->evenement.motion.x - data->mob[check].monstre.pict.pos.w/2) - data->map.pos.x;
     data->mob[check].monstre.translation.y = (screenh - systeme->evenement.motion.y - data->mob[check].monstre.pict.pos.h/2) - data->map.pos.y;
-    data->mob[check].monstre.pict.pos.w = systeme->creature[systeme->activecreature].pict.pos.w;
-    data->mob[check].monstre.pict.pos.h = systeme->creature[systeme->activecreature].pict.pos.h;
-    data->mob[check].monstre.pict.texture = systeme->creature[systeme->activecreature].pict.texture;
+    data->mob[check].monstre.pict.pos.w = ESP_getwidth(systeme->activecreature, systeme);
+    data->mob[check].monstre.pict.pos.h = ESP_gethight(systeme->activecreature, systeme);
+    data->mob[check].monstre.pict.texture = ESP_gettexture(systeme->activecreature, systeme);
     sprintf(data->mob[check].name, systeme->creature[systeme->activecreature].name);
     say(data->mob[check].name, console, systeme);
     data->mob[check].vie = systeme->creature[systeme->activecreature].vie;

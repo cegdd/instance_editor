@@ -228,6 +228,19 @@ void draw_pict(struct pict *image)
     glEnd();
 }
 
+void draw_pict_selected(struct pict *image)
+{
+    glBindTexture(GL_TEXTURE_2D, image->texture);
+    glColor3ub(150, 150, 255);
+    glBegin(GL_QUADS);
+        glTexCoord2d(0,0);          glVertex2d(image->pos.x,image->pos.y);
+        glTexCoord2d(0,1);          glVertex2d(image->pos.x,image->pos.y+image->pos.h);
+        glTexCoord2d(1,1);          glVertex2d(image->pos.x+image->pos.w,image->pos.y+image->pos.h);
+        glTexCoord2d(1,0);          glVertex2d(image->pos.x+image->pos.w,image->pos.y);
+    glEnd();
+    glColor3ub(255, 255, 255);
+}
+
 void draw_limitedpict(struct pict *image, SDL_Rect *pos)
 {
     glBindTexture(GL_TEXTURE_2D, image->texture);
@@ -262,6 +275,22 @@ void draw_hookpict(struct hookpict *image, SDL_Rect *support)
         glTexCoord2d(1,1);          glVertex2d(image->pict.pos.x+image->pict.pos.w,image->pict.pos.y+image->pict.pos.h);
         glTexCoord2d(1,0);          glVertex2d(image->pict.pos.x+image->pict.pos.w,image->pict.pos.y);
     glEnd();
+}
+
+void draw_hookpict_selected(struct hookpict *image, SDL_Rect *support)
+{
+    image->pict.pos.x = support->x + image->translation.x;
+    image->pict.pos.y = support->y + image->translation.y;
+
+    glBindTexture(GL_TEXTURE_2D, image->pict.texture);
+    glColor3ub(150, 150, 255);
+    glBegin(GL_QUADS);
+        glTexCoord2d(0,0);          glVertex2d(image->pict.pos.x,image->pict.pos.y);
+        glTexCoord2d(0,1);          glVertex2d(image->pict.pos.x,image->pict.pos.y+image->pict.pos.h);
+        glTexCoord2d(1,1);          glVertex2d(image->pict.pos.x+image->pict.pos.w,image->pict.pos.y+image->pict.pos.h);
+        glTexCoord2d(1,0);          glVertex2d(image->pict.pos.x+image->pict.pos.w,image->pict.pos.y);
+    glEnd();
+    glColor3ub(255, 255, 255);
 }
 
 void draw_color_black(SDL_Rect *pos)

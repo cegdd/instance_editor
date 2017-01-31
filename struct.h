@@ -4,9 +4,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <SDL_ttf.h>
-
 #include <GL/gl.h>
 #include <GL/glu.h>
+
+
 
 /*####     OS     ######*/
 #define WINDOWS 1
@@ -20,6 +21,7 @@ enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
 enum{CREER, QUITTER, CHARGER, ENREGISTRER,MAP , DEPART, MONSTER, CROIXMONSTRE, CREERMOB, DETAIL_IMGPATH, DETAIL_LIFE,
     SUPPRMOB};//monster not used
 enum{FERMER, OUVERT};
+
 
 struct BOUTON
 {
@@ -48,23 +50,6 @@ struct BOUTON_TEXTE
 	struct BOUTON bouton;
 };
 
-
-struct CREATURE
-{
-    int vie;
-
-    char name[64];
-    char imgpath[128];
-
-    struct pict pict;
-    struct BOUTON bouton;
-    struct BOUTON_TEXTE bt_vie;
-    struct BOUTON_TEXTE bt_imgpath;
-
-    struct BOUTON *detail[64];
-};
-
-
 struct hookpict
 {
     struct pict pict;
@@ -84,53 +69,12 @@ struct moving_pict
 struct MOB
 {
     bool actif;
+    bool selected;
+    int state;
     struct hookpict monstre;
     int vie;
     int ID;
     char name[128];
-};
-
-struct DIVERSsysteme
-{
-
-    bool shiftactif;
-    bool altactif;
-    bool moletteactif;
-    bool projetouvert;
-
-    bool asked;
-    int askID;
-
-    bool continuer;
-    int echap;
-    int typeclavier;
-    int nbcreature;
-    int activecreature;
-    int nbdetail;
-
-    struct pict pointeur;
-    struct CREATURE creature[128];
-    bool tookmob;
-
-    SDL_Texture *BGmort;
-    GLuint BG;
-    SDL_Texture *BGblanc;
-
-
-    SDL_Event evenement;
-
-    SDL_Window *screen;
-
-    TTF_Font *police;
-    TTF_Font *police1;
-
-	SDL_Rect pecran;
-	SDL_Rect pcreature;
-	SDL_Rect oldpp;
-	SDL_Rect ppobj;
-	SDL_Rect origine;
-	SDL_Rect temp;
-
 };
 
 struct UI
@@ -183,6 +127,7 @@ struct DATA
     struct hookpict joueur;
     struct MOB mob[512];
     int nbmonstre;
+    int mob_selected;
 
     char projectname [64];
     char projectmap [64];

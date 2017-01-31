@@ -62,10 +62,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="colision.h" />
+		<Unit filename="core.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="core.h" />
 		<Unit filename="editeur.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="editeur.h" />
+		<Unit filename="espece.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="espece.h" />
 		<Unit filename="evenement.c">
 			<Option compilerVar="CC" />
 		</Unit>

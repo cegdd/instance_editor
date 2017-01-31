@@ -14,6 +14,8 @@
 #include "colision.h"
 #include "editeur.h"
 
+#include "core.h"
+
 extern int screenh, screenw;
 
 void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console, struct DATA *data)
@@ -75,7 +77,7 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
 	}
 }
 
-void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
+void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 {
     int i, j;
 
@@ -125,6 +127,16 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
                 {
                     systeme->creature[i].detail[j]->etat = B_NORMAL;
                 }
+            }
+        }
+    }
+    for(i = 0 ; i < data->nbmonstre ; i++)
+    {
+        if(data->mob[i].actif == true)
+        {
+            if (colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
+            {
+                data->mob[i].state = B_SURVOLER;
             }
         }
     }
@@ -192,8 +204,27 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
             systeme->tookmob = false;
         }
     }
+     commandebouton(i,console, systeme, ui, data);
 
-    commandebouton(i,console, systeme, ui, data);
+    for(i = 0 ; i < data->nbmonstre ; i++)
+    {
+        if(data->mob[i].actif == true)
+        {
+            if (data->mob[i].state == B_SURVOLER &&
+                colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
+            {
+                data->mob[i].state = B_NORMAL;
+                for(i2 = 0 ; i2 < data->nbmonstre ; i2++)
+                {
+                    data->mob[i2].selected = false;
+                }
+                data->mob[i].selected = true;
+                data->mob_selected = i;
+            }
+        }
+    }
+
+
 
 }
 
@@ -298,7 +329,6 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
 
         case 9:
             deletecreature(systeme, data);
-            //systeme->activecreature = -1;
         break;
 
         case 7:

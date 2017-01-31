@@ -5,6 +5,8 @@
 
 #include "main.h"
 
+#include "core.h"
+
 int TotalTableauInt(int *ptrTableau, int nbcase);
 void initsystem(struct DIVERSsysteme *systeme);
 void initui (struct UI *ui);

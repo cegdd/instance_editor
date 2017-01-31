@@ -199,9 +199,12 @@ void initdata(struct DATA *data)
     data->joueur.pict.texture = loadTexture ("rs/images/perso0.png");
 
     data->nbmonstre = 0;
+    data->mob_selected = 0;
     data->mob[0].monstre.pict.texture = loadTexture ("rs/images/mob0.0.png");
     for (i=0 ; i < 512 ; i++)
     {
+        data->mob[i].state = B_NORMAL;
+        data->mob[i].selected = false;
         data->mob[i].ID = 0;
         data->mob[i].monstre.pict.texture = 0;
         setPos4(&data->mob[i].monstre.pict.pos, 0, 0, 0, 0);

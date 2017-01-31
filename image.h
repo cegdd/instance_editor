@@ -3,6 +3,7 @@
 
 #include <SDL_ttf.h>
 #include "main.h"
+#include "core.h"
 
 SDL_Texture* LoadingImage(char* emplacement, int transparence,struct DIVERSsysteme *systeme);
 
@@ -16,6 +17,7 @@ GLuint loadTextureandsize(const char *filename, struct SDL_Rect *pos);
 GLuint imprime (char s[], int len, int couleur,struct DIVERSsysteme *systeme, int *LenghtReturn, int *HighReturn);
 
 void draw_pict(struct pict *image);
+void draw_pict_selected(struct pict *image);
 void draw_limitedpict(struct pict *image, SDL_Rect *pos);
 void draw(GLuint texture, SDL_Rect *pos);
 void draw_button(struct BOUTON *bouton);
@@ -26,6 +28,7 @@ void copypos(SDL_Rect *source, SDL_Rect *target);
 void Turn_And_Draw (struct pict *img, float angle);
 void Sync_Moving_Pict(int time, struct moving_pict *m_pict);
 void draw_hookpict(struct hookpict *image, SDL_Rect *support);
+void draw_hookpict_selected(struct hookpict *image, SDL_Rect *support);
 
 
 
