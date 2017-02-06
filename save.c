@@ -11,7 +11,7 @@
 SAVE FILE DATA STRUCTURE
 
 -string     map name
--int        number of creature
+-int        number of espece
     *int        ID
     *string     name
     *string     img name
@@ -39,7 +39,7 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     //nom de la map
     ecris(data->projectmap, fichier);
 
-    //number of creature
+    //number of espece
     sprintf(buffer, "%d", systeme->nbcreature);
     ecris(buffer, fichier);
     for(i=0 ; i < systeme->nbcreature ; i++)
@@ -48,12 +48,12 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
         sprintf(buffer, "0");
         ecris(buffer, fichier);
         //name
-        sprintf(buffer, "%s", systeme->creature[i].name);
+        sprintf(buffer, "%s", ESP_getname(i, systeme));
         ecris(buffer, fichier);
         //image name
-        sprintf(buffer, "%s", systeme->creature[i].imgpath);
+        sprintf(buffer, "%s", ESP_getimgpath(i, systeme));
         ecris(buffer, fichier);
-        sprintf(buffer, "%d", systeme->creature[i].vie);
+        sprintf(buffer, "%d", ESP_getlife(i, systeme));
         ecris(buffer, fichier);
     }
 
@@ -129,7 +129,7 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
             {
                 lis(fichier, buffer);
                 lis(fichier, buffer);
-                sprintf(systeme->creature[i].name, buffer);
+                ESP_setname(buffer, i, systeme);
                 lis(fichier, buffer);
                 sprintf(systeme->creature[i].imgpath, buffer);
                 lis(fichier, buffer);

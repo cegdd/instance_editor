@@ -100,32 +100,32 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
     {
         for (i = 0 ; i < systeme->nbcreature ; i++)
         {//le nom du mob
-            if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i].bouton.pos, true) == true &&
-                systeme->creature[i].bouton.etat != B_CLIQUER &&
-                systeme->creature[i].bouton.etat != B_IMPOSSIBLE &&
-                systeme->creature[i].bouton.etat != B_INUSE)
+            if ( colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i, systeme), true) == true &&
+                ESP_getboutonstate(i, systeme) != B_CLIQUER &&
+                ESP_getboutonstate(i, systeme) != B_IMPOSSIBLE &&
+                ESP_getboutonstate(i, systeme) != B_INUSE)
                 {
-                    systeme->creature[i].bouton.etat = B_SURVOLER;
+                    ESP_setboutonstate(B_SURVOLER, i, systeme);
                 }
-            else if ( systeme->creature[i].bouton.etat != B_CLIQUER &&
-                      systeme->creature[i].bouton.etat != B_IMPOSSIBLE &&
-                systeme->creature[i].bouton.etat != B_INUSE )
+            else if (   ESP_getboutonstate(i, systeme) != B_CLIQUER &&
+                        ESP_getboutonstate(i, systeme) != B_IMPOSSIBLE &&
+                        ESP_getboutonstate(i, systeme) != B_INUSE )
             {
-                systeme->creature[i].bouton.etat = B_NORMAL;
+                ESP_setboutonstate(B_NORMAL, i, systeme);
             }
 
             for (j = 0 ; j <= systeme->nbdetail ; j++)
             {//les details du mob
-                if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i].detail[j]->pos, true) == true &&
-                    systeme->creature[i].detail[j]->etat != B_CLIQUER &&
-                    systeme->creature[i].detail[j]->etat != B_IMPOSSIBLE)
+                if ( colisionbox(&systeme->pointeur.pos, ESP_getdetailboutonpos(i, j, systeme), true) == true &&
+                    ESP_getdetailboutonstate(i, j, systeme) != B_CLIQUER &&
+                    ESP_getdetailboutonstate(i, j, systeme) != B_IMPOSSIBLE)
                     {
-                        systeme->creature[i].detail[j]->etat = B_SURVOLER;
+                        ESP_setdetailboutonstate(B_SURVOLER, i, j, systeme);
                     }
-                else if ( systeme->creature[i].detail[j]->etat != B_CLIQUER &&
-                          systeme->creature[i].detail[j]->etat != B_IMPOSSIBLE )
+                else if ( ESP_getdetailboutonstate(i, j, systeme) != B_CLIQUER &&
+                          ESP_getdetailboutonstate(i, j, systeme) != B_IMPOSSIBLE )
                 {
-                    systeme->creature[i].detail[j]->etat = B_NORMAL;
+                    ESP_setdetailboutonstate(B_NORMAL, i, j, systeme);
                 }
             }
         }
@@ -175,22 +175,22 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
     {
         for (i2 = 0 ; i2 < systeme->nbcreature ; i2++)
         {
-            if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i2].bouton.pos, true) == true &&
-                 systeme->creature[i2].bouton.etat == B_CLIQUER)
+            if ( colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i2, systeme), true) == true &&
+                 ESP_getboutonstate(i2, systeme) == B_CLIQUER)
             {
-                systeme->creature[systeme->activecreature].bouton.etat = B_NORMAL;
+                ESP_setboutonstate(B_NORMAL, systeme->activecreature, systeme);
 
                 systeme->activecreature = i2;
-                systeme->creature[i2].bouton.etat = B_INUSE;
+                ESP_setboutonstate(B_INUSE, systeme->activecreature, systeme);
                 break;
             }
 
             for (j = 0 ; j <= systeme->nbdetail ; j++)
                 {//les details du mob
-                    if ( colisionbox(&systeme->pointeur.pos, &systeme->creature[i2].detail[j]->pos, true) == true &&
-                        systeme->creature[i2].detail[j]->etat == B_CLIQUER)
+                    if ( colisionbox(&systeme->pointeur.pos, ESP_getdetailboutonpos(i2, j, systeme), true) == true &&
+                        ESP_getdetailboutonstate(i2, j, systeme) == B_CLIQUER)
                     {
-                        systeme->creature[i2].detail[j]->etat = B_NORMAL;
+                        ESP_setdetailboutonstate(B_NORMAL, i2, j, systeme);
                         systeme->asked = true;
                         break;
                     }
@@ -245,17 +245,17 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
     {
         for (i = 0 ; i < systeme->nbcreature ; i++)
         {//le nom des mobs
-            if (systeme->creature[i].bouton.etat == B_SURVOLER)
+            if (ESP_getboutonstate(i, systeme) == B_SURVOLER)
             {
-                systeme->creature[i].bouton.etat = B_CLIQUER;
+                ESP_setboutonstate(B_CLIQUER, i, systeme);
             }
             else
             {
                 for (j = 0 ; j <= systeme->nbdetail ; j++)
                 {//les details du mob
-                    if (systeme->creature[i].detail[j]->etat == B_SURVOLER)
+                    if (ESP_getdetailboutonstate(i, j, systeme) == B_SURVOLER)
                     {
-                        systeme->creature[i].detail[j]->etat = B_CLIQUER;
+                        ESP_setdetailboutonstate(B_CLIQUER, i, j, systeme);
                     }
                 }
                 if (colisionbox(&systeme->pointeur.pos, &systeme->pcreature, true) == true)

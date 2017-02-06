@@ -301,9 +301,9 @@ void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *conso
     data->mob[check].monstre.pict.pos.w = ESP_getwidth(systeme->activecreature, systeme);
     data->mob[check].monstre.pict.pos.h = ESP_gethight(systeme->activecreature, systeme);
     data->mob[check].monstre.pict.texture = ESP_gettexture(systeme->activecreature, systeme);
-    sprintf(data->mob[check].name, systeme->creature[systeme->activecreature].name);
+    sprintf(data->mob[check].name, ESP_getname(systeme->activecreature , systeme));
     say(data->mob[check].name, console, systeme);
-    data->mob[check].vie = systeme->creature[systeme->activecreature].vie;
+    data->mob[check].vie = ESP_getlife(systeme->activecreature, systeme);
     data->mob[check].ID = systeme->activecreature;
     data->mob[check].actif = true;
     say("monstre positionné", console, systeme);

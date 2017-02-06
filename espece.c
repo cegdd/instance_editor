@@ -54,3 +54,52 @@ GLuint ESP_gettexture(int index, struct DIVERSsysteme *systeme)
     return systeme->creature[index].pict.texture;
 }
 
+int ESP_getlife(int index, struct DIVERSsysteme *systeme)
+{
+    return systeme->creature[index].vie;
+}
+
+char* ESP_getname(int index, struct DIVERSsysteme *systeme)
+{
+    return systeme->creature[index].name;
+}
+
+struct SDL_Rect* ESP_getboutonpos(int index, struct DIVERSsysteme *systeme)
+{
+    return &systeme->creature[index].bouton.pos;
+}
+
+int ESP_getboutonstate(int index, struct DIVERSsysteme *systeme)
+{
+        return systeme->creature[index].bouton.etat;
+}
+
+void ESP_setboutonstate(int state, int index, struct DIVERSsysteme *systeme)
+{
+    systeme->creature[index].bouton.etat = state;
+}
+
+int ESP_getdetailboutonstate(int index, int indexdetail,  struct DIVERSsysteme *systeme)
+{
+    return systeme->creature[index].detail[indexdetail]->etat;
+}
+
+void ESP_setdetailboutonstate(int state, int index, int indexdetail,  struct DIVERSsysteme *systeme)
+{
+    systeme->creature[index].detail[indexdetail]->etat = state;
+}
+
+struct SDL_Rect* ESP_getdetailboutonpos(int index, int indexdetail, struct DIVERSsysteme *systeme)
+{
+    return &systeme->creature[index].detail[indexdetail]->pos;
+}
+
+char* ESP_getimgpath(int index, struct DIVERSsysteme *systeme)
+{
+    return systeme->creature[index].imgpath;
+}
+
+void ESP_setname(char* buffer, int index, struct DIVERSsysteme *systeme)
+{
+    sprintf(systeme->creature[index].name, buffer);
+}
