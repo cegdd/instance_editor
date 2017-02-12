@@ -20,7 +20,6 @@ enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE, B_INUSE};/*bouton*/
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
 enum{CREER, QUITTER, CHARGER, ENREGISTRER,MAP , DEPART, MONSTER, CROIXMONSTRE, CREERMOB, DETAIL_IMGPATH, DETAIL_LIFE,
     SUPPRMOB};//monster not used
-enum{FERMER, OUVERT};
 
 
 struct BOUTON
@@ -75,27 +74,6 @@ struct MOB
     int vie;
     int ID;
     char name[128];
-};
-
-struct UI
-{
-    int UIfondmob;
-
-    struct BOUTON creer;
-    struct BOUTON quitter;
-    struct BOUTON loadmap;
-    struct BOUTON enregistrer;
-    struct BOUTON charger;
-    struct BOUTON depart;
-    struct BOUTON monster;
-
-    struct BOUTON fermer;
-    struct BOUTON creermob;
-    struct BOUTON supprmob;
-    struct pict fondmob;
-
-    struct BOUTON *ListeBouton[64];
-    int ListeNb;
 };
 
 struct CONSOLE

@@ -131,9 +131,9 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 lis(fichier, buffer);
                 ESP_setname(buffer, i, systeme);
                 lis(fichier, buffer);
-                sprintf(systeme->creature[i].imgpath, buffer);
+                ESP_setimgpath(buffer, i, systeme);
                 lis(fichier, buffer);
-                systeme->creature[i].vie = atoi(buffer);
+                ESP_setlife(atoi(buffer), i, systeme);
             }
             sprintf(temp, "%d monstre en memoire", systeme->nbcreature);
             say(temp, console, systeme);
@@ -158,7 +158,7 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
             }
 
             //nombre de mobs
-            listmob(systeme);
+            ESP_refreshmob(systeme);
 
             lis(fichier, buffer);
             data->nbmonstre = atoi(buffer);
@@ -175,8 +175,8 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 lis(fichier, buffer);
                 data->mob[i].monstre.translation.y = atoi(buffer);
                 data->mob[i].actif = true;
-                data->mob[i].monstre.pict.texture = systeme->creature[data->mob[i].ID].pict.texture;
-                setPos4(&data->mob[i].monstre.pict.pos, 0, 0, systeme->creature[data->mob[i].ID].pict.pos.w, systeme->creature[data->mob[i].ID].pict.pos.h);
+                data->mob[i].monstre.pict.texture = ESP_gettexture(data->mob[i].ID, systeme);
+                setPos4(&data->mob[i].monstre.pict.pos, 0, 0, ESP_getwidth(data->mob[i].ID, systeme), ESP_gethight(data->mob[i].ID, systeme));
             }
             sprintf(temp, "%d monstre poser", data->nbmonstre);
             say(temp, console, systeme);

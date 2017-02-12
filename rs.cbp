@@ -248,6 +248,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="tableau.h" />
+		<Unit filename="ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ui.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

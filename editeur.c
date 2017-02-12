@@ -17,6 +17,7 @@
 #include "core.h"
 #include "editeur.h"
 #include "espece.h"
+#include "ui.h"
 
 extern int screenh, screenw;
 
@@ -65,7 +66,7 @@ int editeur(struct DIVERSsysteme *systeme)
             }
             else if(systeme->askID == CREERMOB)
             {
-                createmob(&console, systeme);
+                ESP_create(&console, systeme);
             }
             else if(systeme->askID == DETAIL_IMGPATH)
             {
@@ -75,7 +76,7 @@ int editeur(struct DIVERSsysteme *systeme)
                     console.answered = false;
 
                     ESP_setimgpath(console.lastanswer, systeme->activecreature, systeme);
-                    listmob(systeme);
+                    ESP_refreshmob(systeme);
                 }
             }
             else if(systeme->askID == DETAIL_LIFE)
@@ -86,7 +87,7 @@ int editeur(struct DIVERSsysteme *systeme)
                     console.answered = false;
 
                     ESP_setlife(atoi(console.lastanswer), systeme->activecreature, systeme);
-                    listmob(systeme);
+                    ESP_refreshmob(systeme);
                 }
             }
         }
@@ -137,7 +138,7 @@ int editeur(struct DIVERSsysteme *systeme)
         draw_button(&ui.depart);
         draw_button(&ui.monster);
 
-        if (ui.UIfondmob == OUVERT)
+        if (UI_getslidestate(&ui) == UI_listmob)
         {
             draw_pict(&ui.fondmob);
             draw_button(&ui.fermer);

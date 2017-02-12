@@ -20,11 +20,12 @@ struct ESPECE
     struct BOUTON *detail[64];
 };
 
-/*
-char* ESP_getimgpath(int index, struct DIVERSsysteme *systeme);*/
+void ESP_refreshmob(struct DIVERSsysteme *systeme);
+void ESP_create(struct CONSOLE *console, struct DIVERSsysteme *systeme);
+void ESP_delete(struct DIVERSsysteme *systeme, struct DATA *data);
 
 void ESP_setlife(int life, int index, struct DIVERSsysteme *systeme);
-void ESP_setimgpath(char *string, int index, struct DIVERSsysteme *systeme);
+void ESP_setimgpath(char *buffer, int index, struct DIVERSsysteme *systeme);
 void ESP_setboutonstate(int state, int index, struct DIVERSsysteme *systeme);
 void ESP_setdetailboutonstate(int state, int index, int indexdetail,  struct DIVERSsysteme *systeme);
 void ESP_setname(char* buffer, int index, struct DIVERSsysteme *systeme);

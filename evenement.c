@@ -4,6 +4,8 @@
 #include <string.h>
 
 #include "struct.h"
+#include "ui.h"
+
 
 #include "main.h"
 #include "image.h"
@@ -15,6 +17,7 @@
 #include "editeur.h"
 
 #include "core.h"
+
 
 extern int screenh, screenw;
 
@@ -96,7 +99,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
         }
     }
 
-    if (ui->UIfondmob == OUVERT)
+    if (UI_getslidestate(ui) == UI_listmob)
     {
         for (i = 0 ; i < systeme->nbcreature ; i++)
         {//le nom du mob
@@ -171,7 +174,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         }
     }
 
-    if (ui->UIfondmob == OUVERT)
+    if (UI_getslidestate(ui) == UI_listmob)
     {
         for (i2 = 0 ; i2 < systeme->nbcreature ; i2++)
         {
@@ -241,7 +244,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
         }
     }
 
-    if (ui->UIfondmob == OUVERT)
+    if (UI_getslidestate(ui) == UI_listmob)
     {
         for (i = 0 ; i < systeme->nbcreature ; i++)
         {//le nom des mobs
@@ -314,10 +317,10 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
         break;
 
         case 6:
-            ui->UIfondmob = OUVERT;
+            UI_setslidestate(UI_listmob, ui);
             console->answered = false;
             console->active = true;
-            listmob(systeme);
+            ESP_refreshmob(systeme);
         break;
 
         case 8:
@@ -328,11 +331,11 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
         break;
 
         case 9:
-            deletecreature(systeme, data);
+            ESP_delete(systeme, data);
         break;
 
         case 7:
-            ui->UIfondmob = FERMER;
+            UI_setslidestate(UI_close, ui);
         break;
     }
 }

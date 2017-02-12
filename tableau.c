@@ -8,6 +8,8 @@
 
 #include "main.h"
 #include "image.h"
+#include "ui.h"
+
 
 extern int screenh, screenw;
 
@@ -77,7 +79,7 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 
 void initui (struct UI *ui)
 {
-    ui->UIfondmob = FERMER;
+    UI_setslidestate(UI_close, ui);
 
     //start state
     ui->creer.etat =        B_NORMAL;

@@ -11,12 +11,8 @@ void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme);
 void addletter(char lettre, struct CONSOLE *console);
 void removeletter(struct CONSOLE *console);
 void flushbuffer(struct CONSOLE *console);
-int EndsWithRSmob( char *string );
 
-void listmob(struct DIVERSsysteme *systeme);
 void createmob(struct CONSOLE *console, struct DIVERSsysteme *systeme);
-void deletecreature(struct DIVERSsysteme *systeme, struct DATA *data);
-void deletemob(int index, struct DATA *data);
 int checkactifmob(struct DATA *data);
 
 #endif
