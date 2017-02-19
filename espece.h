@@ -2,9 +2,9 @@
 #define ESPECEH
 
 #include "struct.h"
+#include "bouton.h"
 
 struct DIVERSsysteme;
-
 struct ESPECE
 {
     int vie;
@@ -18,6 +18,7 @@ struct ESPECE
     struct BOUTON_TEXTE bt_imgpath;
 
     struct BOUTON *detail[64];
+    int nbdetail;
 };
 
 void ESP_refreshmob(struct DIVERSsysteme *systeme);

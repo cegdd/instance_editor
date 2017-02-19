@@ -84,20 +84,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 {
     int i, j;
 
-    for (i = 0 ; i <= ui->ListeNb ; i++)
-    {
-        if ( colisionbox(&systeme->pointeur.pos, &ui->ListeBouton[i]->pos, true) == true &&
-            ui->ListeBouton[i]->etat != B_CLIQUER &&
-            ui->ListeBouton[i]->etat != B_IMPOSSIBLE)
-            {
-                ui->ListeBouton[i]->etat = B_SURVOLER;
-            }
-        else if ( ui->ListeBouton[i]->etat != B_CLIQUER &&
-                  ui->ListeBouton[i]->etat != B_IMPOSSIBLE )
-        {
-            ui->ListeBouton[i]->etat = B_NORMAL;
-        }
-    }
+    BT_pointeur(systeme, ui);
 
     if (UI_getslidestate(ui) == UI_listmob)
     {
@@ -117,7 +104,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
                 ESP_setboutonstate(B_NORMAL, i, systeme);
             }
 
-            for (j = 0 ; j <= systeme->nbdetail ; j++)
+            for (j = 0 ; j <= systeme->creature[i].nbdetail ; j++)
             {//les details du mob
                 if ( colisionbox(&systeme->pointeur.pos, ESP_getdetailboutonpos(i, j, systeme), true) == true &&
                     ESP_getdetailboutonstate(i, j, systeme) != B_CLIQUER &&
@@ -147,7 +134,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 
 void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console, struct DATA *data)
 {
-    int i,i2,j;
+    int i = 0,i2,j;
 
     /*shootbox*/
     if (colisionbox(&systeme->pointeur.pos, &console->shooton.pos, true))
@@ -159,20 +146,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         console->active = false;
     }
 
-    for (i = 0 ; i <= ui->ListeNb ; i++)
-    {
-        if ( colisionbox(&systeme->pointeur.pos, &ui->ListeBouton[i]->pos, true) == true &&
-             ui->ListeBouton[i]->etat == B_CLIQUER)
-        {
-            ui->ListeBouton[i]->etat = B_NORMAL;
-            systeme->asked = true;
-            break;
-        }
-        else if( ui->ListeBouton[i]->etat == B_CLIQUER )
-        {
-            ui->ListeBouton[i]->etat = B_NORMAL;
-        }
-    }
+    i = BT_up(systeme, ui);
 
     if (UI_getslidestate(ui) == UI_listmob)
     {
@@ -188,7 +162,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
                 break;
             }
 
-            for (j = 0 ; j <= systeme->nbdetail ; j++)
+            for (j = 0 ; j <= systeme->creature[i].nbdetail ; j++)
                 {//les details du mob
                     if ( colisionbox(&systeme->pointeur.pos, ESP_getdetailboutonpos(i2, j, systeme), true) == true &&
                         ESP_getdetailboutonstate(i2, j, systeme) == B_CLIQUER)
@@ -216,6 +190,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
             if (data->mob[i].state == B_SURVOLER &&
                 colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
             {
+                UI_setslidestate(UI_detail, ui);
                 data->mob[i].state = B_NORMAL;
                 for(i2 = 0 ; i2 < data->nbmonstre ; i2++)
                 {
@@ -236,13 +211,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
 
     int i, j;
 
-    for (i = 0 ; i <= ui->ListeNb ; i++)
-    {
-        if (ui->ListeBouton[i]->etat == B_SURVOLER)
-        {
-            ui->ListeBouton[i]->etat = B_CLIQUER;
-        }
-    }
+    BT_down(ui);
 
     if (UI_getslidestate(ui) == UI_listmob)
     {
@@ -254,7 +223,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
             }
             else
             {
-                for (j = 0 ; j <= systeme->nbdetail ; j++)
+                for (j = 0 ; j <= systeme->creature[i].nbdetail ; j++)
                 {//les details du mob
                     if (ESP_getdetailboutonstate(i, j, systeme) == B_SURVOLER)
                     {
@@ -269,7 +238,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
         }
     }
 
-    if(systeme->askID == DEPART &&
+    if(systeme->askID == 5 &&
             systeme->projetouvert)
     {
         systeme->askID = -1;
@@ -282,20 +251,20 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
     switch (i)
     {
         case 3:
-            systeme->askID = ENREGISTRER;
+            systeme->askID = 3;
         break;
         case 0:
             console->answered = false;
             console->active = true;
             say ("name of the project :", console, systeme);
-            systeme->askID = CREER;
+            systeme->askID = 0;
         break;
 
         case 4:
             say ("name of the map to load :", console, systeme);
             console->answered = false;
             console->active = true;
-            systeme->askID = MAP;
+            systeme->askID = 4;
         break;
 
         case 1:
@@ -306,13 +275,13 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
             console->answered = false;
             console->active = true;
             say ("name of the project :", console, systeme);
-            systeme->askID = CHARGER;
+            systeme->askID = 2;
         break;
 
         case 5:
             console->answered = false;
             console->active = true;
-            systeme->askID = DEPART;
+            systeme->askID = 5;
             say ("placez le joueur a ca position de depart", console, systeme);
         break;
 
@@ -327,7 +296,7 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
             console->answered = false;
             console->active = true;
             say("nom du mob : ", console, systeme);
-            systeme->askID = CREERMOB;
+            systeme->askID = 8;
         break;
 
         case 9:
@@ -353,14 +322,14 @@ void commandedetail(int j, struct CONSOLE *console, struct DIVERSsysteme *system
         console->curseur -=4;
         sprintf(console->TamponToCursor, console->tampon);
         console->TamponToCursor[console->curseur] = '\0';
-        systeme->askID = DETAIL_IMGPATH;
+        systeme->askID = 0;
 
         break;
     case 1:
         console->answered = false;
         console->active = true;
         say ("nouveau taux de vie :", console, systeme);
-        systeme->askID = DETAIL_LIFE;
+        systeme->askID = 1;
         break;
     }
 }

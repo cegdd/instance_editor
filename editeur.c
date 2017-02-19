@@ -44,31 +44,31 @@ int editeur(struct DIVERSsysteme *systeme)
 
         if (systeme->asked)
         {
-            if(systeme->askID == MAP)
+            if(systeme->askID == 4)
             {
                 loadingmap(&console, systeme, &data);
             }
-            else if(systeme->askID == CREER)
+            else if(systeme->askID == 0)
             {
                 createproject(&console, systeme, &data);
                 ui.creer.etat = B_IMPOSSIBLE;
                 ui.charger.etat = B_IMPOSSIBLE;
             }
-            else if(systeme->askID == ENREGISTRER)
+            else if(systeme->askID == 3)
             {
                 saveproject(&console, systeme, &data);
             }
-            else if(systeme->askID == CHARGER)
+            else if(systeme->askID == 2)
             {
                 loadproject(&console, systeme, &data);
                 ui.creer.etat = B_IMPOSSIBLE;
                 ui.charger.etat = B_IMPOSSIBLE;
             }
-            else if(systeme->askID == CREERMOB)
+            else if(systeme->askID == 8)
             {
                 ESP_create(&console, systeme);
             }
-            else if(systeme->askID == DETAIL_IMGPATH)
+            else if(systeme->askID == 0)
             {
                 if (console.answered)
                 {
@@ -79,7 +79,7 @@ int editeur(struct DIVERSsysteme *systeme)
                     ESP_refreshmob(systeme);
                 }
             }
-            else if(systeme->askID == DETAIL_LIFE)
+            else if(systeme->askID == 1)
             {
                 if (console.answered)
                 {
@@ -138,23 +138,9 @@ int editeur(struct DIVERSsysteme *systeme)
         draw_button(&ui.depart);
         draw_button(&ui.monster);
 
-        if (UI_getslidestate(&ui) == UI_listmob)
+        if (UI_getslidestate(&ui) != UI_close)
         {
-            draw_pict(&ui.fondmob);
-            draw_button(&ui.fermer);
-            draw_button(&ui.creermob);
-
-            for (index = 0 ; index < systeme->nbcreature ; index++)
-            {
-                draw_button(ESP_getbouton_nom(index, systeme));
-                if (systeme->activecreature != -1)
-                {
-                    ESP_drawthumb(systeme);
-                    draw_button(ESP_getbouton_vie(systeme->activecreature, systeme));
-                    draw_button(ESP_getbouton_imgpath(systeme->activecreature, systeme));
-                    draw_button(&ui.supprmob);
-                }
-            }
+            UI_drawslide(&ui, systeme, &data);
         }
 
         draw_pict(&console.console);

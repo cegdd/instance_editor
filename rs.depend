@@ -1172,7 +1172,7 @@
 1462742701 c:\users\cegdd\programmation\instance_editor\main.h
 	"struct.h"
 
-1486938997 c:\users\cegdd\programmation\instance_editor\struct.h
+1487464324 c:\users\cegdd\programmation\instance_editor\struct.h
 	<stdio.h>
 	<stdbool.h>
 	<SDL_ttf.h>
@@ -1236,7 +1236,7 @@
 1485905436 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"core.h"
 
-1486940335 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1487466993 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1264,7 +1264,7 @@
 	"main.h"
 	"core.h"
 
-1486940201 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1487467596 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1297,7 +1297,7 @@
 	"save.h"
 	"systeme.h"
 
-1486940206 source:c:\users\cegdd\programmation\instance_editor\tableau.c
+1487466166 source:c:\users\cegdd\programmation\instance_editor\tableau.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
@@ -1640,23 +1640,37 @@
 1471721342 c:\users\cegdd\programmation\instance_editor\save.h
 	"struct.h"
 
-1486938225 c:\users\cegdd\programmation\instance_editor\espece.h
+1487467569 c:\users\cegdd\programmation\instance_editor\espece.h
 	"struct.h"
+	"bouton.h"
 
-1486940276 source:c:\users\cegdd\programmation\instance_editor\espece.c
+1487467579 source:c:\users\cegdd\programmation\instance_editor\espece.c
 	<stdio.h>
 	"core.h"
 	"image.h"
 	"systeme.h"
 
-1485903645 c:\users\cegdd\programmation\instance_editor\core.h
+1487467353 c:\users\cegdd\programmation\instance_editor\core.h
 	"espece.h"
 
 1485900698 source:c:\users\cegdd\programmation\instance_editor\core.c
 
-1486940223 source:c:\users\cegdd\programmation\instance_editor\ui.c
+1487464009 source:c:\users\cegdd\programmation\instance_editor\ui.c
 	"ui.h"
+	"image.h"
+	"core.h"
 
-1486940179 c:\users\cegdd\programmation\instance_editor\ui.h
+1487467569 c:\users\cegdd\programmation\instance_editor\ui.h
+	"struct.h"
+	"core.h"
+	"bouton.h"
+
+1487465293 source:c:\users\cegdd\programmation\instance_editor\bouton.c
+	"bouton.h"
+	"core.h"
+	"ui.h"
+	"colision.h"
+
+1487466039 c:\users\cegdd\programmation\instance_editor\bouton.h
 	"struct.h"
 

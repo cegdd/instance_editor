@@ -16,18 +16,8 @@
 #define TAILLE_POLICE 18
 
 
-enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE, B_INUSE};/*bouton*/
+
 enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
-enum{CREER, QUITTER, CHARGER, ENREGISTRER,MAP , DEPART, MONSTER, CROIXMONSTRE, CREERMOB, DETAIL_IMGPATH, DETAIL_LIFE,
-    SUPPRMOB};//monster not used
-
-
-struct BOUTON
-{
-	GLuint texture;
-	SDL_Rect pos;
-	int etat;
-};
 
 struct pict
 {
@@ -42,11 +32,6 @@ struct TEXTE
     struct pict img;
 	int lenght;
 	int high;
-};
-struct BOUTON_TEXTE
-{
-	struct TEXTE texte;
-	struct BOUTON bouton;
 };
 
 struct hookpict

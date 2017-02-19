@@ -126,8 +126,8 @@ void ESP_refreshmob(struct DIVERSsysteme *systeme)
          systeme->creature[i].bt_vie.bouton.texture = systeme->creature[i].bt_vie.texte.img.texture;
          copypos(&systeme->creature[i].bt_vie.texte.img.pos, &systeme->creature[i].bt_vie.bouton.pos);
 
-        systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_imgpath.bouton;
-        systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_vie.bouton;
+        systeme->creature[i].detail[systeme->creature[i].nbdetail] = &systeme->creature[i].bt_imgpath.bouton;
+        systeme->creature[i].detail[systeme->creature[i].nbdetail] = &systeme->creature[i].bt_vie.bouton;
     }
 }
 

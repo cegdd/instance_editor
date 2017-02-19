@@ -21,7 +21,6 @@ struct DIVERSsysteme
     int typeclavier;
     int nbcreature;
     int activecreature;
-    int nbdetail;
 
     struct pict pointeur;
     struct ESPECE creature[128];

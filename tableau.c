@@ -70,9 +70,9 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
 
         setPos4(&systeme->creature[i].pict.pos, 1100, 620, 0, 0);
 
-        systeme->nbdetail = 0;
-        systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_imgpath.bouton;    systeme->nbdetail++;
-        systeme->creature[i].detail[systeme->nbdetail] = &systeme->creature[i].bt_vie.bouton;
+        systeme->creature[i].nbdetail = 0;
+        systeme->creature[i].detail[systeme->creature[i].nbdetail] = &systeme->creature[i].bt_imgpath.bouton;    systeme->creature[i].nbdetail++;
+        systeme->creature[i].detail[systeme->creature[i].nbdetail] = &systeme->creature[i].bt_vie.bouton;
     }
     systeme->creature[0].bouton.etat = B_INUSE;
 }
@@ -89,9 +89,9 @@ void initui (struct UI *ui)
     ui->enregistrer.etat =  B_IMPOSSIBLE;
     ui->depart.etat =  B_IMPOSSIBLE;
     ui->monster.etat =  B_IMPOSSIBLE;
-    ui->fermer.etat =  B_NORMAL;
-    ui->creermob.etat =  B_NORMAL;
-    ui->supprmob.etat =  B_NORMAL;
+    ui->fermer.etat =  B_IMPOSSIBLE;
+    ui->creermob.etat =  B_IMPOSSIBLE;
+    ui->supprmob.etat =  B_IMPOSSIBLE;
 
     setPos4(&ui->creer.pos, 0, screenh-40, 120, 40);
     setPos4(&ui->loadmap.pos, 120, screenh-40, 120, 40);
@@ -100,7 +100,8 @@ void initui (struct UI *ui)
     setPos4(&ui->depart.pos, 480, screenh-40, 120, 40);
     setPos4(&ui->monster.pos, 600, screenh-40, 120, 40);
     setPos4(&ui->quitter.pos, screenw-120, screenh-40, 120, 40);
-    setPos4(&ui->fondmob.pos, screenw-400, 110, 400,618);
+    setPos4(&ui->fondliste.pos, screenw-400, 110, 400,618);
+    setPos4(&ui->fonddetail.pos, screenw-282, 110, 400,618);
     setPos4(&ui->fermer.pos, screenw-44, screenh-84, 40,40);
     setPos4(&ui->creermob.pos, screenw-260, 122, 120,40);
     setPos4(&ui->supprmob.pos, screenw-130, 122, 120,40);
@@ -112,7 +113,8 @@ void initui (struct UI *ui)
     ui->loadmap.texture =       loadTexture ("rs/ui/loadmap.png");
     ui->depart.texture =        loadTexture ("rs/ui/depart.png");
     ui->monster.texture =       loadTexture ("rs/ui/monster.png");
-    ui->fondmob.texture =       loadTexture ("rs/ui/fondmonstre.png");
+    ui->fondliste.texture =       loadTexture ("rs/ui/fondmonstre.png");
+    ui->fonddetail.texture =       loadTexture ("rs/ui/fonddetail.png");
     ui->fermer.texture =        loadTexture ("rs/ui/fermer.png");
     ui->creermob.texture =        loadTexture ("rs/ui/creer.png");
     ui->supprmob.texture =        loadTexture ("rs/ui/suppr.png");
@@ -123,7 +125,8 @@ void initui (struct UI *ui)
         glIsTexture(ui->loadmap.texture) == GL_FALSE          ||
         glIsTexture(ui->depart.texture) == GL_FALSE          ||
         glIsTexture(ui->monster.texture) == GL_FALSE          ||
-        glIsTexture(ui->fondmob.texture) == GL_FALSE          ||
+        glIsTexture(ui->fondliste.texture) == GL_FALSE          ||
+        glIsTexture(ui->fonddetail.texture) == GL_FALSE          ||
         glIsTexture(ui->fermer.texture) == GL_FALSE          ||
         glIsTexture(ui->supprmob.texture) == GL_FALSE          ||
         glIsTexture(ui->quitter.texture) == GL_FALSE)
@@ -133,16 +136,16 @@ void initui (struct UI *ui)
 
     ui->ListeNb = 0;
 
-    ui->ListeBouton[ui->ListeNb] = &ui->creer;        ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->quitter;      ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->charger;      ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->enregistrer;  ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->loadmap;      ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->depart;       ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->monster;      ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->fermer;       ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->creermob;      ui->ListeNb++;
-    ui->ListeBouton[ui->ListeNb] = &ui->supprmob;
+    ui->ListeBouton[ui->ListeNb] = &ui->creer;        ui->ListeNb++;    //0
+    ui->ListeBouton[ui->ListeNb] = &ui->quitter;      ui->ListeNb++;    //1
+    ui->ListeBouton[ui->ListeNb] = &ui->charger;      ui->ListeNb++;    //2
+    ui->ListeBouton[ui->ListeNb] = &ui->enregistrer;  ui->ListeNb++;    //3
+    ui->ListeBouton[ui->ListeNb] = &ui->loadmap;      ui->ListeNb++;    //4
+    ui->ListeBouton[ui->ListeNb] = &ui->depart;       ui->ListeNb++;    //5
+    ui->ListeBouton[ui->ListeNb] = &ui->monster;      ui->ListeNb++;    //6
+    ui->ListeBouton[ui->ListeNb] = &ui->fermer;       ui->ListeNb++;    //7
+    ui->ListeBouton[ui->ListeNb] = &ui->creermob;      ui->ListeNb++;   //8
+    ui->ListeBouton[ui->ListeNb] = &ui->supprmob;                       //9
 }
 
 void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
@@ -201,7 +204,7 @@ void initdata(struct DATA *data)
     data->joueur.pict.texture = loadTexture ("rs/images/perso0.png");
 
     data->nbmonstre = 0;
-    data->mob_selected = 0;
+    data->mob_selected = -1;
     data->mob[0].monstre.pict.texture = loadTexture ("rs/images/mob0.0.png");
     for (i=0 ; i < 512 ; i++)
     {
