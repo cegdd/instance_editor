@@ -54,6 +54,10 @@
 		</Linker>
 		<Unit filename=".gitattributes" />
 		<Unit filename=".gitignore" />
+		<Unit filename="bouton.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bouton.h" />
 		<Unit filename="clavier.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -27,7 +27,7 @@ int editeur(struct DIVERSsysteme *systeme)
     struct UI ui;
     struct CONSOLE console;
     struct DATA data;
-    initui(&ui);
+    initui(&ui, systeme);
     initconsole(&console, systeme);
     initdata(&data);
 
@@ -51,8 +51,8 @@ int editeur(struct DIVERSsysteme *systeme)
             else if(systeme->askID == 0)
             {
                 createproject(&console, systeme, &data);
-                ui.creer.etat = B_IMPOSSIBLE;
-                ui.charger.etat = B_IMPOSSIBLE;
+                ui.ListeBouton[0].etat = B_IMPOSSIBLE;
+                ui.ListeBouton[2].etat = B_IMPOSSIBLE;
             }
             else if(systeme->askID == 3)
             {
@@ -61,8 +61,8 @@ int editeur(struct DIVERSsysteme *systeme)
             else if(systeme->askID == 2)
             {
                 loadproject(&console, systeme, &data);
-                ui.creer.etat = B_IMPOSSIBLE;
-                ui.charger.etat = B_IMPOSSIBLE;
+                ui.ListeBouton[0].etat = B_IMPOSSIBLE;
+                ui.ListeBouton[2].etat = B_IMPOSSIBLE;
             }
             else if(systeme->askID == 8)
             {
@@ -122,21 +122,21 @@ int editeur(struct DIVERSsysteme *systeme)
 
         //   ui ************************************
 
-        if (systeme->projetouvert == true && ui.loadmap.etat == B_IMPOSSIBLE)
+        if (systeme->projetouvert == true && ui.ListeBouton[4].etat == B_IMPOSSIBLE)
         {
-            ui.loadmap.etat = B_NORMAL;
-            ui.enregistrer.etat = B_NORMAL;
-            ui.depart.etat = B_NORMAL;
-            ui.monster.etat = B_NORMAL;
+            ui.ListeBouton[4].etat = B_NORMAL;
+            ui.ListeBouton[3].etat = B_NORMAL;
+            ui.ListeBouton[5].etat = B_NORMAL;
+            ui.ListeBouton[6].etat = B_NORMAL;
         }
 
-        draw_button(&ui.creer);
-        draw_button(&ui.quitter);
-        draw_button(&ui.enregistrer);
-        draw_button(&ui.loadmap);
-        draw_button(&ui.charger);
-        draw_button(&ui.depart);
-        draw_button(&ui.monster);
+        draw_button(&ui.ListeBouton[0]);
+        draw_button(&ui.ListeBouton[1]);
+        draw_button(&ui.ListeBouton[3]);
+        draw_button(&ui.ListeBouton[4]);
+        draw_button(&ui.ListeBouton[2]);
+        draw_button(&ui.ListeBouton[5]);
+        draw_button(&ui.ListeBouton[6]);
 
         if (UI_getslidestate(&ui) != UI_close)
         {

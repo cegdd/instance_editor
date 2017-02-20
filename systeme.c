@@ -115,7 +115,6 @@ void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme)
         }
    // }
 }
-
 void addletter(char lettre, struct CONSOLE *console)
 {
     int i = strlen(console->tampon);
