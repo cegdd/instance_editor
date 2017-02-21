@@ -82,7 +82,7 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
 
 void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 {
-    int i, j;
+    int i;
 
     BT_pointeur(systeme, ui);
 
@@ -103,21 +103,6 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
             {
                 ESP_setboutonstate(B_NORMAL, i, systeme);
             }
-
-            for (j = 0 ; j <= systeme->creature[i].nbdetail ; j++)
-            {//les details du mob
-                if ( colisionbox(&systeme->pointeur.pos, ESP_getdetailboutonpos(i, j, systeme), true) == true &&
-                    ESP_getdetailboutonstate(i, j, systeme) != B_CLIQUER &&
-                    ESP_getdetailboutonstate(i, j, systeme) != B_IMPOSSIBLE)
-                    {
-                        ESP_setdetailboutonstate(B_SURVOLER, i, j, systeme);
-                    }
-                else if ( ESP_getdetailboutonstate(i, j, systeme) != B_CLIQUER &&
-                          ESP_getdetailboutonstate(i, j, systeme) != B_IMPOSSIBLE )
-                {
-                    ESP_setdetailboutonstate(B_NORMAL, i, j, systeme);
-                }
-            }
         }
     }
     for(i = 0 ; i < data->nbmonstre ; i++)
@@ -134,7 +119,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 
 void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *console, struct DATA *data)
 {
-    int i = 0,i2,j;
+    int i = 0,i2;
 
     /*shootbox*/
     if (colisionbox(&systeme->pointeur.pos, &console->shooton.pos, true))
@@ -162,18 +147,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
                 break;
             }
 
-            for (j = 0 ; j <= systeme->creature[i].nbdetail ; j++)
-                {//les details du mob
-                    if ( colisionbox(&systeme->pointeur.pos, ESP_getdetailboutonpos(i2, j, systeme), true) == true &&
-                        ESP_getdetailboutonstate(i2, j, systeme) == B_CLIQUER)
-                    {
-                        ESP_setdetailboutonstate(B_NORMAL, i2, j, systeme);
-                        systeme->asked = true;
-                        break;
-                    }
-                }
         }
-        commandedetail(j, console, systeme);
 
         if (systeme->tookmob == true)
         {
@@ -209,7 +183,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
 void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
 {
 
-    int i, j;
+    int i;
 
     BT_down(ui);
 
@@ -220,20 +194,6 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
             if (ESP_getboutonstate(i, systeme) == B_SURVOLER)
             {
                 ESP_setboutonstate(B_CLIQUER, i, systeme);
-            }
-            else
-            {
-                for (j = 0 ; j <= systeme->creature[i].nbdetail ; j++)
-                {//les details du mob
-                    if (ESP_getdetailboutonstate(i, j, systeme) == B_SURVOLER)
-                    {
-                        ESP_setdetailboutonstate(B_CLIQUER, i, j, systeme);
-                    }
-                }
-                if (colisionbox(&systeme->pointeur.pos, &systeme->pcreature, true) == true)
-                {
-                    systeme->tookmob = true;
-                }
             }
         }
     }
@@ -305,15 +265,8 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
 
         case 7:
             UI_setslidestate(UI_close, ui);
-        break;
-    }
-}
-
-void commandedetail(int j, struct CONSOLE *console, struct DIVERSsysteme *systeme)
-{
-    switch  (j)
-    {
-    case 0:
+            break;
+        case 11:
         console->answered = false;
         console->active = true;
         say ("nouveau chemin de l'image :", console, systeme);
@@ -325,7 +278,7 @@ void commandedetail(int j, struct CONSOLE *console, struct DIVERSsysteme *system
         systeme->askID = 0;
 
         break;
-    case 1:
+    case 12:
         console->answered = false;
         console->active = true;
         say ("nouveau taux de vie :", console, systeme);

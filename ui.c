@@ -48,9 +48,9 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
             if (systeme->activecreature != -1)
             {
                 ESP_drawthumb(systeme);
-                draw_button(ESP_getbouton_vie(systeme->activecreature, systeme));
-                draw_button(ESP_getbouton_imgpath(systeme->activecreature, systeme));
                 draw_button(&ui->ListeBouton[9]);
+                draw_button(&ui->ListeBouton[11]);
+                draw_button(&ui->ListeBouton[12]);
             }
         }
     }
@@ -82,9 +82,6 @@ void creerbouton(char *path, int x, int y, int w, int h, int state, struct UI *u
 void creerboutontexte(char *path, int x, int y, int state, struct UI *ui, struct DIVERSsysteme *systeme)
 {
     ui->ListeBouton[ui->ListeNb].etat = state;
-
-   // ui->ListeBouton[ui->ListeNb].texture = loadTextureandsize(path, &ui->ListeBouton[ui->ListeNb].pos);
-
     ui->ListeBouton[ui->ListeNb].texture = imprime(path, screenw, BLANC, systeme, &ui->ListeBouton[ui->ListeNb].pos.w, &ui->ListeBouton[ui->ListeNb].pos.h);
 
     setPos2(&ui->ListeBouton[ui->ListeNb].pos, x, y);
@@ -116,10 +113,10 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*7*/creerbouton("rs/ui/fermer.png", screenw-44, screenh-84, 40,40, B_IMPOSSIBLE, ui);
     /*8*/creerbouton("rs/ui/creer.png", screenw-260, 122, 120,40, B_IMPOSSIBLE, ui);
     /*9*/creerbouton("rs/ui/suppr.png", screenw-130, 122, 120,40, B_IMPOSSIBLE, ui);
-    /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_IMPOSSIBLE, ui, systeme);
-    /*11*/creerboutontexte("path", 1100, screenh-170, B_IMPOSSIBLE, ui, systeme);
-    /*12*/creerboutontexte("life", 1100, screenh-190, B_IMPOSSIBLE, ui, systeme);
-voici les nouveaux bouton a sync
+    /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_NORMAL, ui, systeme);
+    /*11*/creerboutontexte("path", 1100, screenh-170, B_NORMAL, ui, systeme);
+    /*12*/creerboutontexte("life", 1100, screenh-190, B_NORMAL, ui, systeme);
+
     ui->fondliste.texture =       loadTexture ("rs/ui/fondmonstre.png");
     ui->fonddetail.texture =       loadTexture ("rs/ui/fonddetail.png");
 

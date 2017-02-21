@@ -14,11 +14,6 @@ struct ESPECE
 
     struct pict pict;
     struct BOUTON bouton;
-    struct BOUTON_TEXTE bt_vie;
-    struct BOUTON_TEXTE bt_imgpath;
-
-    struct BOUTON *detail[64];
-    int nbdetail;
 };
 
 void ESP_refreshmob(struct DIVERSsysteme *systeme);

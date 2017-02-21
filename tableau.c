@@ -60,10 +60,6 @@ void initsystem(struct DIVERSsysteme *systeme)/*																	systeme*/
         systeme->creature[i].name[0]        = '\0';
 
         setPos4(&systeme->creature[i].pict.pos, 1100, 620, 0, 0);
-
-        systeme->creature[i].nbdetail = 0;
-        systeme->creature[i].detail[systeme->creature[i].nbdetail] = &systeme->creature[i].bt_imgpath.bouton;    systeme->creature[i].nbdetail++;
-        systeme->creature[i].detail[systeme->creature[i].nbdetail] = &systeme->creature[i].bt_vie.bouton;
     }
     systeme->creature[0].bouton.etat = B_INUSE;
 }
