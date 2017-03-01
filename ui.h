@@ -18,7 +18,8 @@ struct UI
     GLuint coche0;
     GLuint coche1;
 
-    struct COCHE aggressif;
+    struct SDL_Rect aggressif_pos;
+    bool aggressif_state[128];
 
     struct BOUTON ListeBouton[64];
     int ListeNb;

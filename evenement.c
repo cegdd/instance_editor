@@ -152,15 +152,17 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
             }
         }
 
-        if (colisionbox(&systeme->pointeur.pos, &ui->aggressif.pos, true) == true )
+        if (colisionbox(&systeme->pointeur.pos, &ui->aggressif_pos, true) == true )
             {
-                if (ui->aggressif.state == false)
+                if (ui->aggressif_state[systeme->activecreature] == false)
                 {
-                    ui->aggressif.state = true;
+                    ui->aggressif_state[systeme->activecreature] = true;
+                    ui->ListeBouton[13].etat = B_NORMAL;
                 }
                 else
                 {
-                    ui->aggressif.state = false;
+                    ui->aggressif_state[systeme->activecreature] = false;
+                    ui->ListeBouton[13].etat = B_IMPOSSIBLE;
                 }
             }
 
@@ -170,7 +172,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
             systeme->tookmob = false;
         }
     }
-     commandebouton(i,console, systeme, ui, data);
+     BT_event(i,console, systeme, ui, data);
 
     for(i = 0 ; i < data->nbmonstre ; i++)
     {
@@ -222,95 +224,5 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
     {
         systeme->askID = -1;
         depart(systeme, data, console);
-    }
-}
-
-void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
-{
-    switch (i)
-    {
-        case 3:
-            systeme->askID = i;
-        break;
-        case 0:
-            console->answered = false;
-            console->active = true;
-            say ("name of the project :", console, systeme);
-            systeme->askID = i;
-        break;
-
-        case 4:
-            say ("name of the map to load :", console, systeme);
-            console->answered = false;
-            console->active = true;
-            systeme->askID = i;
-        break;
-
-        case 1:
-            systeme->continuer = false;
-        break;
-
-        case 2:
-            console->answered = false;
-            console->active = true;
-            say ("name of the project :", console, systeme);
-            systeme->askID = i;
-        break;
-
-        case 5:
-            console->answered = false;
-            console->active = true;
-            systeme->askID = i;
-            say ("placez le joueur a ca position de depart", console, systeme);
-        break;
-
-        case 6://creature
-            UI_setslidestate(UI_listmob, ui);
-            console->answered = false;
-            console->active = true;
-            ESP_updateUI(0, systeme, ui);
-        break;
-
-        case 8:
-            console->answered = false;
-            console->active = true;
-            say("nom du mob : ", console, systeme);
-            systeme->askID = i;
-        break;
-
-        case 9:
-            if (UI_getslidestate(ui) == UI_listmob)
-            {
-                ESP_delete(systeme, data);
-                ESP_refreshmob(systeme);
-            }
-            else if (UI_getslidestate(ui) == UI_detail)
-            {
-                data->mob[data->mob_selected].actif = false;
-                UI_setslidestate(UI_close, ui);
-            }
-        break;
-
-        case 7:
-            UI_setslidestate(UI_close, ui);
-            break;
-        case 11:
-        console->answered = false;
-        console->active = true;
-        say ("nouveau chemin de l'image :", console, systeme);
-        sprintf(console->tampon, ".png");
-        console->curseur = strlen(console->tampon);
-        console->curseur -=4;
-        sprintf(console->TamponToCursor, console->tampon);
-        console->TamponToCursor[console->curseur] = '\0';
-        systeme->askID = i;
-
-        break;
-    case 12:
-        console->answered = false;
-        console->active = true;
-        say ("nouveau taux de vie :", console, systeme);
-        systeme->askID = i;
-        break;
     }
 }

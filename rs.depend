@@ -1236,7 +1236,7 @@
 1485905436 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"core.h"
 
-1488325473 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1488410822 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1256,7 +1256,7 @@
 	"espece.h"
 	"ui.h"
 
-1487720379 c:\users\cegdd\programmation\instance_editor\evenement.h
+1488410706 c:\users\cegdd\programmation\instance_editor\evenement.h
 	<stdbool.h>
 	"main.h"
 
@@ -1264,7 +1264,7 @@
 	"main.h"
 	"core.h"
 
-1488326355 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1488410715 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1656,24 +1656,30 @@
 
 1485900698 source:c:\users\cegdd\programmation\instance_editor\core.c
 
-1488326551 source:c:\users\cegdd\programmation\instance_editor\ui.c
+1488410385 source:c:\users\cegdd\programmation\instance_editor\ui.c
 	"ui.h"
 	"image.h"
 	"core.h"
 
-1488326112 c:\users\cegdd\programmation\instance_editor\ui.h
+1488405509 c:\users\cegdd\programmation\instance_editor\ui.h
 	"struct.h"
 	"core.h"
 	"bouton.h"
 	"coche.h"
 
-1487629662 source:c:\users\cegdd\programmation\instance_editor\bouton.c
+1488411065 source:c:\users\cegdd\programmation\instance_editor\bouton.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 	"bouton.h"
 	"core.h"
 	"ui.h"
 	"colision.h"
+	"systeme.h"
+	"editeur.h"
+	"save.h"
 
-1487466039 c:\users\cegdd\programmation\instance_editor\bouton.h
+1488411118 c:\users\cegdd\programmation\instance_editor\bouton.h
 	"struct.h"
 
 1488325994 source:c:\users\cegdd\programmation\instance_editor\coche.c

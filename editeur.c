@@ -44,55 +44,7 @@ int editeur(struct DIVERSsysteme *systeme)
 
         if (systeme->asked)
         {
-            if(systeme->askID == 4)
-            {
-                loadingmap(&console, systeme, &data);
-            }
-            else if(systeme->askID == 0)
-            {
-                createproject(&console, systeme, &data);
-                ui.ListeBouton[0].etat = B_IMPOSSIBLE;
-                ui.ListeBouton[2].etat = B_IMPOSSIBLE;
-            }
-            else if(systeme->askID == 3)
-            {
-                saveproject(&console, systeme, &data);
-            }
-            else if(systeme->askID == 2)
-            {
-                loadproject(&console, systeme, &data);
-                ui.ListeBouton[0].etat = B_IMPOSSIBLE;
-                ui.ListeBouton[2].etat = B_IMPOSSIBLE;
-            }
-            else if(systeme->askID == 8)
-            {
-                ESP_create(&console, systeme);
-                ESP_refreshmob(systeme);
-            }
-            else if(systeme->askID == 11)
-            {
-                if (console.answered)
-                {
-                    systeme->asked = true;
-                    console.answered = false;
-
-                    ESP_setimgpath(console.lastanswer, systeme->activecreature, systeme);
-                    ESP_refreshmob(systeme);
-                    ESP_updateUI(systeme->activecreature, systeme, &ui);
-                }
-            }
-            else if(systeme->askID == 12)
-            {
-                if (console.answered)
-                {
-                    systeme->asked = true;
-                    console.answered = false;
-
-                    ESP_setlife(atoi(console.lastanswer), systeme->activecreature, systeme);
-                    ESP_refreshmob(systeme);
-                    ESP_updateUI(systeme->activecreature, systeme, &ui);
-                }
-            }
+            BT_update_loop(&console, systeme, &ui, &data);
         }
 
         if (glIsTexture(data.map.texture))
