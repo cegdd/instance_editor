@@ -1172,7 +1172,7 @@
 1462742701 c:\users\cegdd\programmation\instance_editor\main.h
 	"struct.h"
 
-1487464324 c:\users\cegdd\programmation\instance_editor\struct.h
+1488325442 c:\users\cegdd\programmation\instance_editor\struct.h
 	<stdio.h>
 	<stdbool.h>
 	<SDL_ttf.h>
@@ -1236,7 +1236,7 @@
 1485905436 c:\users\cegdd\programmation\instance_editor\editeur.h
 	"core.h"
 
-1487634752 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1488325473 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1264,7 +1264,7 @@
 	"main.h"
 	"core.h"
 
-1487720119 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1488326355 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1628,7 +1628,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1486938069 source:c:\users\cegdd\programmation\instance_editor\save.c
+1487892917 source:c:\users\cegdd\programmation\instance_editor\save.c
 	<stdio.h>
 	<stdlib.h>
 	"struct.h"
@@ -1637,33 +1637,35 @@
 	"image.h"
 	"save.h"
 
-1471721342 c:\users\cegdd\programmation\instance_editor\save.h
+1487889427 c:\users\cegdd\programmation\instance_editor\save.h
 	"struct.h"
 
-1487719995 c:\users\cegdd\programmation\instance_editor\espece.h
+1487890617 c:\users\cegdd\programmation\instance_editor\espece.h
 	"struct.h"
 	"bouton.h"
 
-1487720228 source:c:\users\cegdd\programmation\instance_editor\espece.c
+1487890603 source:c:\users\cegdd\programmation\instance_editor\espece.c
 	<stdio.h>
 	"core.h"
 	"image.h"
 	"systeme.h"
+	"ui.h"
 
 1487467353 c:\users\cegdd\programmation\instance_editor\core.h
 	"espece.h"
 
 1485900698 source:c:\users\cegdd\programmation\instance_editor\core.c
 
-1487720281 source:c:\users\cegdd\programmation\instance_editor\ui.c
+1488326551 source:c:\users\cegdd\programmation\instance_editor\ui.c
 	"ui.h"
 	"image.h"
 	"core.h"
 
-1487634745 c:\users\cegdd\programmation\instance_editor\ui.h
+1488326112 c:\users\cegdd\programmation\instance_editor\ui.h
 	"struct.h"
 	"core.h"
 	"bouton.h"
+	"coche.h"
 
 1487629662 source:c:\users\cegdd\programmation\instance_editor\bouton.c
 	"bouton.h"
@@ -1673,4 +1675,8 @@
 
 1487466039 c:\users\cegdd\programmation\instance_editor\bouton.h
 	"struct.h"
+
+1488325994 source:c:\users\cegdd\programmation\instance_editor\coche.c
+
+1488326240 c:\users\cegdd\programmation\instance_editor\coche.h
 

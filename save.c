@@ -29,7 +29,7 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 {
     char buffer[128];
     FILE *fichier = NULL;
-    int i;
+    int i, j = 0;
 
     systeme->asked = false;
     console->answered = false;
@@ -77,11 +77,22 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     }
 
     //nombre de mobs
-    sprintf(buffer, "%d", data->nbmonstre);
+    for(i=0 ; i < data->nbmonstre ; i++)
+    {
+        if (data->mob[i].actif == true)
+        {
+            j++;
+        }
+    }
+    sprintf(buffer, "%d", j);
     ecris(buffer, fichier);
 
     for(i=0 ; i < data->nbmonstre ; i++)
     {
+        if(data->mob[i].actif == false)
+        {
+            i++;
+        }
         sprintf(buffer, "%d", data->mob[i].ID);
         ecris(buffer, fichier);
         sprintf(buffer, "%d", data->mob[i].monstre.translation.x);

@@ -22,7 +22,7 @@ void UI_setslidestate (int state, struct UI* ui)
     case UI_detail:
         ui->ListeBouton[7].etat =  B_NORMAL;
         ui->ListeBouton[8].etat =  B_IMPOSSIBLE;
-        ui->ListeBouton[9].etat =  B_IMPOSSIBLE;
+        ui->ListeBouton[9].etat =  B_NORMAL;
         break;
     }
 }
@@ -51,17 +51,28 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
                 draw_button(&ui->ListeBouton[9]);
                 draw_button(&ui->ListeBouton[11]);
                 draw_button(&ui->ListeBouton[12]);
+                draw_pict(&ui->Listetexte[0].img);
+                if (ui->aggressif.state == false)
+                {
+                    draw(ui->coche0, &ui->aggressif.pos);
+                }
+                else
+                {
+                    draw(ui->coche1, &ui->aggressif.pos);
+                }
             }
         }
     }
     else if (UI_getslidestate(ui) == UI_detail)
     {
+        systeme->activecreature = data->mob[data->mob_selected].ID;
+
         draw_pict(&ui->fonddetail);
         draw_button(&ui->ListeBouton[7]);
-
+        draw_button(&ui->ListeBouton[9]);
         if (data->mob_selected != -1)
         {
-            printf("%d\n", data->mob[data->mob_selected].ID);
+            ESP_drawthumb(systeme);
         }
     }
 }
@@ -94,14 +105,48 @@ void creerboutontexte(char *path, int x, int y, int state, struct UI *ui, struct
     ui->ListeNb++;
 }
 
+void creertexte(char *path, int x, int y, struct UI *ui, struct DIVERSsysteme *systeme)
+{
+    ui->Listetexte[ui->texteNb].img.texture = imprime(path, screenw, GRIS, systeme, &ui->Listetexte[ui->texteNb].img.pos.w, &ui->Listetexte[ui->texteNb].img.pos.h);
+
+    setPos2(&ui->Listetexte[ui->texteNb].img.pos, x, y);
+
+    if (glIsTexture(ui->Listetexte[ui->texteNb].img.texture) == GL_FALSE)
+    {
+        printf("texture of texte n: %d not loaded\n", ui->texteNb);
+    }
+
+    ui->texteNb++;
+}
+
+
+void setboutontexte(char *path, int index, struct UI *ui, struct DIVERSsysteme *systeme)
+{
+    ui->ListeBouton[index].texture = imprime(path, screenw, BLANC, systeme, &ui->ListeBouton[index].pos.w, &ui->ListeBouton[index].pos.h);
+
+}
+
+void setboutonnombre(int nombre, int index, struct UI *ui, struct DIVERSsysteme *systeme)
+{
+    char buffer[32];
+    sprintf(buffer, "%d", nombre);
+    ui->ListeBouton[index].texture = imprime(buffer, screenw, BLANC, systeme, &ui->ListeBouton[index].pos.w, &ui->ListeBouton[index].pos.h);
+
+}
+
 void initui (struct UI *ui, struct DIVERSsysteme *systeme)
 {
     UI_setslidestate(UI_close, ui);
 
     setPos4(&ui->fondliste.pos, screenw-400, 110, 400,618);
     setPos4(&ui->fonddetail.pos, screenw-282, 110, 400,618);
+    setPos4(&ui->aggressif.pos, 1210, screenh-207, 12, 12);
+
+    ui->coche0 = loadTexture ("rs/ui/coche0.png");
+    ui->coche1 = loadTexture ("rs/ui/coche1.png");
 
     ui->ListeNb = 0;
+    ui->texteNb = 0;
 
     /*0*/creerbouton("rs/ui/creer.png", 0, screenh-40, 120, 40, B_NORMAL, ui);
     /*1*/creerbouton("rs/ui/quitter.png", screenw-120, screenh-40, 120, 40, B_NORMAL, ui);
@@ -116,6 +161,8 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_NORMAL, ui, systeme);
     /*11*/creerboutontexte("path", 1100, screenh-170, B_NORMAL, ui, systeme);
     /*12*/creerboutontexte("life", 1100, screenh-190, B_NORMAL, ui, systeme);
+
+    /*0*/creertexte("aggressif :", 1100, screenh-210, ui, systeme);
 
     ui->fondliste.texture =       loadTexture ("rs/ui/fondmonstre.png");
     ui->fonddetail.texture =       loadTexture ("rs/ui/fonddetail.png");

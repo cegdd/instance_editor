@@ -140,14 +140,29 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
             if ( colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i2, systeme), true) == true &&
                  ESP_getboutonstate(i2, systeme) == B_CLIQUER)
             {
-                ESP_setboutonstate(B_NORMAL, systeme->activecreature, systeme);
-
+                int i3;
+                for (i3 = 0 ; i3 < systeme->nbcreature ; i3++)
+                {
+                    ESP_setboutonstate(B_NORMAL, i3, systeme);
+                }
                 systeme->activecreature = i2;
                 ESP_setboutonstate(B_INUSE, systeme->activecreature, systeme);
+                ESP_updateUI(i2, systeme, ui);
                 break;
             }
-
         }
+
+        if (colisionbox(&systeme->pointeur.pos, &ui->aggressif.pos, true) == true )
+            {
+                if (ui->aggressif.state == false)
+                {
+                    ui->aggressif.state = true;
+                }
+                else
+                {
+                    ui->aggressif.state = false;
+                }
+            }
 
         if (systeme->tookmob == true)
         {
@@ -196,6 +211,10 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
                 ESP_setboutonstate(B_CLIQUER, i, systeme);
             }
         }
+        if (colisionbox(&systeme->pointeur.pos, &systeme->pcreature, true) == true)
+        {
+            systeme->tookmob = true;
+        }
     }
 
     if(systeme->askID == 5 &&
@@ -211,20 +230,20 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
     switch (i)
     {
         case 3:
-            systeme->askID = 3;
+            systeme->askID = i;
         break;
         case 0:
             console->answered = false;
             console->active = true;
             say ("name of the project :", console, systeme);
-            systeme->askID = 0;
+            systeme->askID = i;
         break;
 
         case 4:
             say ("name of the map to load :", console, systeme);
             console->answered = false;
             console->active = true;
-            systeme->askID = 4;
+            systeme->askID = i;
         break;
 
         case 1:
@@ -235,32 +254,41 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
             console->answered = false;
             console->active = true;
             say ("name of the project :", console, systeme);
-            systeme->askID = 2;
+            systeme->askID = i;
         break;
 
         case 5:
             console->answered = false;
             console->active = true;
-            systeme->askID = 5;
+            systeme->askID = i;
             say ("placez le joueur a ca position de depart", console, systeme);
         break;
 
-        case 6:
+        case 6://creature
             UI_setslidestate(UI_listmob, ui);
             console->answered = false;
             console->active = true;
-            ESP_refreshmob(systeme);
+            ESP_updateUI(0, systeme, ui);
         break;
 
         case 8:
             console->answered = false;
             console->active = true;
             say("nom du mob : ", console, systeme);
-            systeme->askID = 8;
+            systeme->askID = i;
         break;
 
         case 9:
-            ESP_delete(systeme, data);
+            if (UI_getslidestate(ui) == UI_listmob)
+            {
+                ESP_delete(systeme, data);
+                ESP_refreshmob(systeme);
+            }
+            else if (UI_getslidestate(ui) == UI_detail)
+            {
+                data->mob[data->mob_selected].actif = false;
+                UI_setslidestate(UI_close, ui);
+            }
         break;
 
         case 7:
@@ -275,14 +303,14 @@ void commandebouton(int i, struct CONSOLE *console, struct DIVERSsysteme *system
         console->curseur -=4;
         sprintf(console->TamponToCursor, console->tampon);
         console->TamponToCursor[console->curseur] = '\0';
-        systeme->askID = 0;
+        systeme->askID = i;
 
         break;
     case 12:
         console->answered = false;
         console->active = true;
         say ("nouveau taux de vie :", console, systeme);
-        systeme->askID = 1;
+        systeme->askID = i;
         break;
     }
 }

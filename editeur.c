@@ -67,8 +67,9 @@ int editeur(struct DIVERSsysteme *systeme)
             else if(systeme->askID == 8)
             {
                 ESP_create(&console, systeme);
+                ESP_refreshmob(systeme);
             }
-            else if(systeme->askID == 0)
+            else if(systeme->askID == 11)
             {
                 if (console.answered)
                 {
@@ -77,9 +78,10 @@ int editeur(struct DIVERSsysteme *systeme)
 
                     ESP_setimgpath(console.lastanswer, systeme->activecreature, systeme);
                     ESP_refreshmob(systeme);
+                    ESP_updateUI(systeme->activecreature, systeme, &ui);
                 }
             }
-            else if(systeme->askID == 1)
+            else if(systeme->askID == 12)
             {
                 if (console.answered)
                 {
@@ -88,6 +90,7 @@ int editeur(struct DIVERSsysteme *systeme)
 
                     ESP_setlife(atoi(console.lastanswer), systeme->activecreature, systeme);
                     ESP_refreshmob(systeme);
+                    ESP_updateUI(systeme->activecreature, systeme, &ui);
                 }
             }
         }

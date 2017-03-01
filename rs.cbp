@@ -62,6 +62,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="clavier.h" />
+		<Unit filename="coche.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="coche.h" />
 		<Unit filename="colision.c">
 			<Option compilerVar="CC" />
 		</Unit>

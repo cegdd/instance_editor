@@ -2,6 +2,7 @@
 #include "core.h"
 #include "image.h"
 #include "systeme.h"
+#include "ui.h"
 
 extern int screenh, screenw;
 
@@ -109,7 +110,6 @@ void ESP_create(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         systeme->nbcreature++;
         sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
         say(buffer, console ,systeme);
-        ESP_refreshmob(systeme);
     }
 }
 
@@ -134,5 +134,11 @@ void ESP_delete(struct DIVERSsysteme *systeme, struct DATA *data)
 
 
     systeme->nbcreature--;
-     ESP_refreshmob(systeme);
+}
+
+void ESP_updateUI(int index, struct DIVERSsysteme *systeme, struct UI *ui)
+{
+    ESP_refreshmob(systeme);
+    setboutontexte(systeme->creature[index].imgpath, 11, ui, systeme);
+    setboutonnombre(systeme->creature[index].vie, 12, ui, systeme);
 }
