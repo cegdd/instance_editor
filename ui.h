@@ -1,10 +1,10 @@
 #ifndef UIH
 #define UIH
 
-#include "struct.h"
-#include "core.h"
+#include <stdbool.h>
+
+#include "image.h"
 #include "bouton.h"
-#include "coche.h"
 
 enum{UI_close, UI_listmob, UI_detail};
 
@@ -18,8 +18,10 @@ struct UI
     GLuint coche0;
     GLuint coche1;
 
-    struct SDL_Rect aggressif_pos;
-    bool aggressif_state[128];
+    struct  SDL_Rect    aggressif_pos;
+    bool                aggressif_state[128];
+    struct  SDL_Rect    fixe_pos;
+    bool                fixe_state[512];
 
     struct BOUTON ListeBouton[64];
     int ListeNb;
@@ -38,5 +40,8 @@ void creerboutontexte(char *path, int x, int y, int state, struct UI *ui, struct
 void creertexte(char *path, int x, int y, struct UI *ui, struct DIVERSsysteme *systeme);
 void setboutontexte(char *path, int index, struct UI *ui, struct DIVERSsysteme *systeme);
 void setboutonnombre(int nombre, int index, struct UI *ui, struct DIVERSsysteme *systeme);
+void UI_updateESP(int index, struct DIVERSsysteme *systeme, struct UI *ui);
+void UI_updateMOB(int index, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data);
+
 
 #endif

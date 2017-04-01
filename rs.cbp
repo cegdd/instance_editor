@@ -70,10 +70,13 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="colision.h" />
-		<Unit filename="core.c">
+		<Unit filename="console.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="core.h" />
+		<Unit filename="data.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="data.h" />
 		<Unit filename="editeur.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -95,6 +98,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="main.h" />
+		<Unit filename="mob.h" />
 		<Unit filename="rs.layout" />
 		<Unit filename="rs/divers/color_grid.png" />
 		<Unit filename="rs/divers/dalek.ttf" />
@@ -247,14 +251,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="save.h" />
-		<Unit filename="struct.h" />
 		<Unit filename="systeme.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="systeme.h" />
-		<Unit filename="tableau.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="tableau.h" />
 		<Unit filename="ui.c">
 			<Option compilerVar="CC" />

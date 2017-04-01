@@ -1,7 +1,8 @@
 #ifndef BOUTONH
 #define BOUTONH
 
-#include "struct.h"
+#include "data.h"
+#include "console.h"
 
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE, B_INUSE};/*bouton*/
 
@@ -24,7 +25,9 @@ struct BOUTON_TEXTE
 
 void BT_pointeur(struct DIVERSsysteme *systeme, struct UI *ui);
 int BT_up(struct DIVERSsysteme *systeme, struct UI *ui);
-void BT_down(struct UI *ui);
 void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data);
+
+void BT_down(struct UI *ui);
+
 void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data);
 #endif

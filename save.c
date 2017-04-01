@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "struct.h"
+#include "save.h"
 #include "systeme.h"
 #include "editeur.h"
-#include "image.h"
-#include "save.h"
 
 /**
 SAVE FILE DATA STRUCTURE
@@ -188,6 +186,7 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 data->mob[i].actif = true;
                 data->mob[i].monstre.pict.texture = ESP_gettexture(data->mob[i].ID, systeme);
                 setPos4(&data->mob[i].monstre.pict.pos, 0, 0, ESP_getwidth(data->mob[i].ID, systeme), ESP_gethight(data->mob[i].ID, systeme));
+                setPos4(&data->mob[i].old, 0, 0, ESP_getwidth(data->mob[i].ID, systeme), ESP_gethight(data->mob[i].ID, systeme));
             }
             sprintf(temp, "%d monstre poser", data->nbmonstre);
             say(temp, console, systeme);
@@ -203,19 +202,19 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 }
 
 
-void ecris(char string[50], FILE *fichier)
+void ecris(char buffer[50], FILE *fichier)
 {
 	int i = 0, index;
 	int valeur = 0;
 
-	while(string[i] != '\0')
+	while(buffer[i] != '\0')
 	{
 	    if (i >= 4096)
         {
             printf("index overflow in func ecris");
             break;
         }
-		valeur = (int)string[i];
+		valeur = (int)buffer[i];
 		for(index = 0 ; index < valeur ; index++)
 		{
 			fputc('O', fichier);
@@ -227,14 +226,14 @@ void ecris(char string[50], FILE *fichier)
 }
 
 
-void uncrypt(char string[4096], char *ret)
+void uncrypt(char buffer[4096], char *ret)
 {
 	int i = 0, index = 0;
 	int compteur = 0;
 
-	while(string[i] != '\0')
+	while(buffer[i] != '\0')
 	{
-		while(string[i] == 'O')
+		while(buffer[i] == 'O')
 		{
 			compteur++;
 			i++;

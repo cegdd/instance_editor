@@ -3,20 +3,12 @@
 #include <SDL.h>
 #include <string.h>
 
-#include "struct.h"
-#include "ui.h"
-
-
-#include "main.h"
-#include "image.h"
-#include "evenement.h"
-#include "tableau.h"
 #include "systeme.h"
+#include "ui.h"
+#include "evenement.h"
 #include "clavier.h"
 #include "colision.h"
 #include "editeur.h"
-
-#include "core.h"
 
 
 extern int screenh, screenw;
@@ -147,30 +139,22 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
                 }
                 systeme->activecreature = i2;
                 ESP_setboutonstate(B_INUSE, systeme->activecreature, systeme);
-                ESP_updateUI(i2, systeme, ui);
+                UI_updateESP(i2, systeme, ui);
                 break;
             }
         }
 
-        if (colisionbox(&systeme->pointeur.pos, &ui->aggressif_pos, true) == true )
-            {
-                if (ui->aggressif_state[systeme->activecreature] == false)
-                {
-                    ui->aggressif_state[systeme->activecreature] = true;
-                    ui->ListeBouton[13].etat = B_NORMAL;
-                }
-                else
-                {
-                    ui->aggressif_state[systeme->activecreature] = false;
-                    ui->ListeBouton[13].etat = B_IMPOSSIBLE;
-                }
-            }
+       gestion_coche(&ui->aggressif_pos, &ui->aggressif_state[systeme->activecreature], ui, systeme);
 
         if (systeme->tookmob == true)
         {
             add(systeme, data, console);
             systeme->tookmob = false;
         }
+    }
+    else if (UI_getslidestate(ui) == UI_detail)
+    {
+        gestion_coche(&ui->fixe_pos, &ui->fixe_state[data->mob_selected], ui, systeme);
     }
      BT_event(i,console, systeme, ui, data);
 
@@ -189,11 +173,11 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
                 }
                 data->mob[i].selected = true;
                 data->mob_selected = i;
+
+                UI_updateMOB(data->mob_selected , systeme, ui, data);
             }
         }
     }
-
-
 
 }
 
@@ -224,5 +208,23 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
     {
         systeme->askID = -1;
         depart(systeme, data, console);
+    }
+}
+
+
+void gestion_coche (struct SDL_Rect *pos, bool *state, struct UI *ui, struct DIVERSsysteme *systeme)
+{
+    if (colisionbox(&systeme->pointeur.pos, pos, true) == true )
+    {
+        if (*state == false)
+        {
+            *state = true;
+            ui->ListeBouton[13].etat = B_NORMAL;
+        }
+        else
+        {
+            *state = false;
+            ui->ListeBouton[13].etat = B_IMPOSSIBLE;
+        }
     }
 }

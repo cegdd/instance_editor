@@ -1,8 +1,10 @@
-#include "ui.h"
-#include "image.h"
-#include "core.h"
 
 extern int screenh, screenw;
+
+#include <stdio.h>
+
+#include "ui.h"
+#include "systeme.h"
 
 void UI_setslidestate (int state, struct UI* ui)
 {
@@ -51,20 +53,18 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
                 draw_button(&ui->ListeBouton[9]);
                 draw_button(&ui->ListeBouton[11]);
                 draw_button(&ui->ListeBouton[12]);
+                draw_button(&ui->ListeBouton[13]);
+                draw_button(&ui->ListeBouton[14]);
+                draw_button(&ui->ListeBouton[15]);
+                draw_button(&ui->ListeBouton[16]);
+
                 draw_pict(&ui->Listetexte[0].img);
                 draw_pict(&ui->Listetexte[1].img);
                 draw_pict(&ui->Listetexte[2].img);
-                draw_button(&ui->ListeBouton[13]);
-                draw_button(&ui->ListeBouton[14]);
+                draw_pict(&ui->Listetexte[3].img);
+                draw_pict(&ui->Listetexte[4].img);
 
-                if (ui->aggressif_state[systeme->activecreature] == false)
-                {
-                    draw(ui->coche0, &ui->aggressif_pos);
-                }
-                else
-                {
-                    draw(ui->coche1, &ui->aggressif_pos);
-                }
+                draw_coche(&ui->aggressif_pos, ui->aggressif_state[systeme->activecreature], ui);
             }
         }
     }
@@ -75,6 +75,19 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
         draw_pict(&ui->fonddetail);
         draw_button(&ui->ListeBouton[7]);
         draw_button(&ui->ListeBouton[9]);
+        draw_button(&ui->ListeBouton[17]);
+        draw_button(&ui->ListeBouton[18]);
+        draw_button(&ui->ListeBouton[19]);
+        draw_button(&ui->ListeBouton[20]);
+
+        draw_pict(&ui->Listetexte[5].img);
+        draw_pict(&ui->Listetexte[6].img);
+        draw_pict(&ui->Listetexte[7].img);
+        draw_pict(&ui->Listetexte[8].img);
+        draw_pict(&ui->Listetexte[9].img);
+
+        draw_coche(&ui->fixe_pos, ui->fixe_state[data->mob_selected], ui);
+
         if (data->mob_selected != -1)
         {
             ESP_drawthumb(systeme);
@@ -148,10 +161,15 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     setPos4(&ui->fondliste.pos, screenw-400, 110, 400,618);
     setPos4(&ui->fonddetail.pos, screenw-282, 110, 400,618);
     setPos4(&ui->aggressif_pos, 1180, screenh-207, 12, 12);
+    setPos4(&ui->fixe_pos, 1320, screenh-210, 12, 12);
 
     for (i = 0 ; i < 128 ; i++)
     {
         ui->aggressif_state[i] = false;
+    }
+    for (i = 0 ; i < 512 ; i++)
+    {
+        ui->fixe_state[i] = false;
     }
 
     ui->coche0 = loadTexture ("rs/ui/coche0.png");
@@ -170,15 +188,29 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*7*/creerbouton("rs/ui/fermer.png", screenw-44, screenh-84, 40,40, B_IMPOSSIBLE, ui);
     /*8*/creerbouton("rs/ui/creer.png", screenw-260, 122, 120,40, B_IMPOSSIBLE, ui);
     /*9*/creerbouton("rs/ui/suppr.png", screenw-130, 122, 120,40, B_IMPOSSIBLE, ui);
+
     /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_NORMAL, ui, systeme);//nom
-    /*11*/creerboutontexte("path", 1100, screenh-170, B_NORMAL, ui, systeme);//chemin image
-    /*12*/creerboutontexte("life", 1100, screenh-190, B_NORMAL, ui, systeme);//vie
-    /*13*/creerboutontexte("100", 1320, screenh-210, B_IMPOSSIBLE, ui, systeme);//rayon d'attaque
+    /*11*/creerboutontexte("path", 1090, screenh-170, B_NORMAL, ui, systeme);//chemin image
+    /*12*/creerboutontexte("life", 1090, screenh-190, B_NORMAL, ui, systeme);//vie
+    /*13*/creerboutontexte("100", 1320, screenh-210, B_IMPOSSIBLE, ui, systeme);//rayon de vision
     /*14*/creerboutontexte("50", 1180, screenh-230, B_NORMAL, ui, systeme);//vitesse
+    /*15*/creerboutontexte("5", 1140, screenh-250, B_NORMAL, ui, systeme);//dps
+    /*16*/creerboutontexte("0", 1300, screenh-250, B_NORMAL, ui, systeme);//rayon d'attaque
+    /*17*/creerboutontexte("0", 1120, screenh-170, B_NORMAL, ui, systeme);//x
+    /*18*/creerboutontexte("0", 1230, screenh-170, B_NORMAL, ui, systeme);//y
+    /*19*/creerboutontexte("1", 1165, screenh-190, B_NORMAL, ui, systeme);//echelle
+    /*20*/creerboutontexte("0", 1265, screenh-190, B_NORMAL, ui, systeme);//angle
 
     /*0*/creertexte("aggressif:", 1090, screenh-210, ui, systeme);
-    /*1*/creertexte("rayon d'atk:", 1210, screenh-210, ui, systeme);
-    /*2*/creertexte("vitesse:", 1100, screenh-230, ui, systeme);
+    /*1*/creertexte("R de vision:", 1210, screenh-210, ui, systeme);
+    /*2*/creertexte("vitesse:", 1090, screenh-230, ui, systeme);
+    /*3*/creertexte("dps:", 1090, screenh-250, ui, systeme);
+    /*4*/creertexte("R d'attaque:", 1190, screenh-250, ui, systeme);
+    /*5*/creertexte("x:", 1090, screenh-170, ui, systeme);
+    /*6*/creertexte("y:", 1200, screenh-170, ui, systeme);
+    /*7*/creertexte("echelle:", 1090, screenh-190, ui, systeme);
+    /*8*/creertexte("angle:", 1200, screenh-190, ui, systeme);
+    /*9*/creertexte("fixe:", 1200, screenh-210, ui, systeme);
 
     ui->fondliste.texture =       loadTexture ("rs/ui/fondmonstre.png");
     ui->fonddetail.texture =       loadTexture ("rs/ui/fonddetail.png");
@@ -188,4 +220,23 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     {
         printf("texture not loaded\n");
     }
+}
+
+void UI_updateESP(int index, struct DIVERSsysteme *systeme, struct UI *ui)
+{
+    ESP_refreshmob(systeme);
+    setboutontexte(systeme->creature[index].imgpath, 11, ui, systeme);
+    setboutonnombre(systeme->creature[index].vie, 12, ui, systeme);
+    setboutonnombre(systeme->creature[index].Rvision, 13, ui, systeme);
+    setboutonnombre(systeme->creature[index].vitesse, 14, ui, systeme);
+    setboutonnombre(systeme->creature[index].dps, 15, ui, systeme);
+    setboutonnombre(systeme->creature[index].Ratk, 16, ui, systeme);
+}
+
+void UI_updateMOB(int index, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
+{
+    setboutonnombre(data->mob[index].monstre.translation.x, 17, ui, systeme);
+    setboutonnombre(data->mob[index].monstre.translation.y, 18, ui, systeme);
+    setboutonnombre(data->mob[index].scale, 19, ui, systeme);
+    setboutonnombre(data->mob[index].angle, 20, ui, systeme);
 }

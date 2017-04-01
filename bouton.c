@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "bouton.h"
-#include "core.h"
 #include "ui.h"
 #include "colision.h"
+#include "console.h"
+#include "data.h"
 #include "systeme.h"
+#include "espece.h"
 #include "editeur.h"
 #include "save.h"
 
@@ -106,7 +107,8 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
             UI_setslidestate(UI_listmob, ui);
             console->answered = false;
             console->active = true;
-            ESP_updateUI(0, systeme, ui);
+            systeme->activecreature = -1;
+            UI_updateESP(0, systeme, ui);
         break;
 
         case 8:
@@ -153,7 +155,7 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
     case 13:
         console->answered = false;
         console->active = true;
-        say ("nouveau rayon d'attaque", console, systeme);
+        say ("nouveau rayon de vision", console, systeme);
         systeme->askID = i;
         break;
     case 14:
@@ -162,38 +164,71 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
         say ("nouveau taux de vitesse", console, systeme);
         systeme->askID = i;
         break;
+    case 15:
+        console->answered = false;
+        console->active = true;
+        say ("nouveau taux de degat par seconde", console, systeme);
+        systeme->askID = i;
+        break;
+    case 16:
+        console->answered = false;
+        console->active = true;
+        say ("nouveau rayon d'attaque", console, systeme);
+        systeme->askID = i;
+        break;
+    case 17:
+        console->answered = false;
+        console->active = true;
+        say ("nouvelle position en x", console, systeme);
+        systeme->askID = i;
+        break;
+    case 18:
+        console->answered = false;
+        console->active = true;
+        say ("nouvelle position en y", console, systeme);
+        systeme->askID = i;
+        break;
+    case 19:
+        console->answered = false;
+        console->active = true;
+        say ("nouvelle échelle", console, systeme);
+        systeme->askID = i;
+        break;
+    case 20:
+        console->answered = false;
+        console->active = true;
+        say ("nouvel angle", console, systeme);
+        systeme->askID = i;
+        break;
     }
 }
 
 void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 {
-    if(systeme->askID == 4)
+
+    switch (systeme->askID)
     {
-        loadingmap(console, systeme, data);
-    }
-    else if(systeme->askID == 0)
-    {
+    case 0:
         createproject(console, systeme, data);
         ui->ListeBouton[0].etat = B_IMPOSSIBLE;
         ui->ListeBouton[2].etat = B_IMPOSSIBLE;
-    }
-    else if(systeme->askID == 3)
-    {
-        saveproject(console, systeme, data);
-    }
-    else if(systeme->askID == 2)
-    {
+        break;
+    case 2:
         loadproject(console, systeme, data);
         ui->ListeBouton[0].etat = B_IMPOSSIBLE;
         ui->ListeBouton[2].etat = B_IMPOSSIBLE;
-    }
-    else if(systeme->askID == 8)
-    {
+        break;
+    case 3:
+        saveproject(console, systeme, data);
+        break;
+    case 4:
+        loadingmap(console, systeme, data);
+        break;
+    case 8:
         ESP_create(console, systeme);
         ESP_refreshmob(systeme);
-    }
-    else if(systeme->askID == 11)
-    {
+        break;
+    case 11:
         if (console->answered)
         {
             systeme->asked = true;
@@ -201,11 +236,10 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
 
             ESP_setimgpath(console->lastanswer, systeme->activecreature, systeme);
             ESP_refreshmob(systeme);
-            ESP_updateUI(systeme->activecreature, systeme, ui);
+            UI_updateESP(systeme->activecreature, systeme, ui);
         }
-    }
-    else if(systeme->askID == 12)
-    {
+        break;
+    case 12:
         if (console->answered)
         {
             systeme->asked = true;
@@ -213,33 +247,94 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
 
             ESP_setlife(atoi(console->lastanswer), systeme->activecreature, systeme);
             ESP_refreshmob(systeme);
-            ESP_updateUI(systeme->activecreature, systeme, ui);
+            UI_updateESP(systeme->activecreature, systeme, ui);
         }
-    }
-    else if(systeme->askID == 13)
-    {
+        break;
+    case 13:
+        if (console->answered)
+        {
+            systeme->asked = true;
+            console->answered = false;
+
+            systeme->creature[systeme->activecreature].Rvision = atoi(console->lastanswer);
+            UI_updateESP(systeme->activecreature, systeme, ui);
+        }
+        break;
+    case 14:
+        if (console->answered)
+        {
+            systeme->asked = true;
+            console->answered = false;
+
+            systeme->creature[systeme->activecreature].vitesse = atoi(console->lastanswer);
+            UI_updateESP(systeme->activecreature, systeme, ui);
+        }
+        break;
+    case 15:
         if (console->answered)
         {
             systeme->asked = true;
             console->answered = false;
 
 
-            setboutontexte(console->lastanswer, 13, ui, systeme);
-            ESP_refreshmob(systeme);
-            ESP_updateUI(systeme->activecreature, systeme, ui);
+            systeme->creature[systeme->activecreature].dps = atoi(console->lastanswer);
+            UI_updateESP(systeme->activecreature, systeme, ui);
         }
-    }
-    else if(systeme->askID == 14)
-    {
+        break;
+    case 16:
         if (console->answered)
         {
             systeme->asked = true;
             console->answered = false;
 
 
-            setboutontexte(console->lastanswer, 14, ui, systeme);
-            ESP_refreshmob(systeme);
-            ESP_updateUI(systeme->activecreature, systeme, ui);
+            systeme->creature[systeme->activecreature].Ratk = atoi(console->lastanswer);
+            UI_updateESP(systeme->activecreature, systeme, ui);
         }
+        break;
+    case 17:
+        if (console->answered)
+        {
+            systeme->asked = true;
+            console->answered = false;
+
+            data->mob[data->mob_selected].monstre.translation.x = atoi(console->lastanswer);
+
+            UI_updateMOB(data->mob_selected, systeme, ui, data);
+        }
+        break;
+    case 18:
+        if (console->answered)
+        {
+            systeme->asked = true;
+            console->answered = false;
+
+            data->mob[data->mob_selected].monstre.translation.y = atoi(console->lastanswer);
+
+            UI_updateMOB(data->mob_selected, systeme, ui, data);
+        }
+        break;
+    case 19:
+        if (console->answered)
+        {
+            systeme->asked = true;
+            console->answered = false;
+
+            data->mob[data->mob_selected].scale = atof(console->lastanswer);
+
+            UI_updateMOB(data->mob_selected, systeme, ui, data);
+        }
+        break;
+    case 20:
+        if (console->answered)
+        {
+            systeme->asked = true;
+            console->answered = false;
+
+            data->mob[data->mob_selected].angle = atoi(console->lastanswer);
+
+            UI_updateMOB(data->mob_selected, systeme, ui, data);
+        }
+        break;
     }
 }

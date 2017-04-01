@@ -7,17 +7,9 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "struct.h"
-#include "tableau.h"
-#include "evenement.h"
-#include "image.h"
-#include "systeme.h"
-#include "clavier.h"
-#include "save.h"
-#include "core.h"
-#include "editeur.h"
-#include "espece.h"
 #include "ui.h"
+#include "evenement.h"
+#include "systeme.h"
 
 extern int screenh, screenw;
 
@@ -61,13 +53,15 @@ int editeur(struct DIVERSsysteme *systeme)
         {
             if(data.mob[index].actif == true)
             {
+                data.mob[index].monstre.pict.pos.w = data.mob[index].old.w * data.mob[index].scale;
+                data.mob[index].monstre.pict.pos.h = data.mob[index].old.h * data.mob[index].scale;
                 if(data.mob[index].selected == false)
                 {
-                    draw_hookpict(&data.mob[index].monstre, &data.map.pos);
+                    turn_draw_hookpict(data.mob[index].angle, &data.mob[index].monstre, &data.map.pos);
                 }
                 else
                 {
-                    draw_hookpict_selected(&data.mob[index].monstre, &data.map.pos);
+                    turn_draw_hookpict_selected(data.mob[index].angle, &data.mob[index].monstre, &data.map.pos);
                 }
             }
         }
@@ -242,6 +236,8 @@ void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *conso
     data->mob[check].monstre.translation.y = (screenh - systeme->evenement.motion.y - data->mob[check].monstre.pict.pos.h/2) - data->map.pos.y;
     data->mob[check].monstre.pict.pos.w = ESP_getwidth(systeme->activecreature, systeme);
     data->mob[check].monstre.pict.pos.h = ESP_gethight(systeme->activecreature, systeme);
+    data->mob[check].old.w = ESP_getwidth(systeme->activecreature, systeme);
+    data->mob[check].old.h = ESP_gethight(systeme->activecreature, systeme);
     data->mob[check].monstre.pict.texture = ESP_gettexture(systeme->activecreature, systeme);
     sprintf(data->mob[check].name, ESP_getname(systeme->activecreature , systeme));
     say(data->mob[check].name, console, systeme);

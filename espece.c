@@ -1,8 +1,6 @@
 #include <stdio.h>
-#include "core.h"
-#include "image.h"
+
 #include "systeme.h"
-#include "ui.h"
 
 extern int screenh, screenw;
 
@@ -134,11 +132,4 @@ void ESP_delete(struct DIVERSsysteme *systeme, struct DATA *data)
 
 
     systeme->nbcreature--;
-}
-
-void ESP_updateUI(int index, struct DIVERSsysteme *systeme, struct UI *ui)
-{
-    ESP_refreshmob(systeme);
-    setboutontexte(systeme->creature[index].imgpath, 11, ui, systeme);
-    setboutonnombre(systeme->creature[index].vie, 12, ui, systeme);
 }

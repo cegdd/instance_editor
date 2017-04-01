@@ -8,8 +8,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "main.h"
-#include "image.h"
+#include "systeme.h"
+#include "ui.h"
 
 Uint8 obtenirPixel(SDL_Surface *surface, SDL_Point *pix)
 {
@@ -356,25 +356,6 @@ void setPos2(SDL_Rect *pos, int x, int y)
     pos->y = y;
 }
 
-void Turn_And_Draw (struct pict *img, float angle)
-{
-    SDL_Point temp;
-    temp.x = img->pos.x;
-    temp.y = img->pos.y;
-
-    img->pos.x = 0 - (img->pos.w/2);
-    img->pos.y = 0 - (img->pos.h/2);
-
-	glTranslatef(temp.x+(img->pos.w/2), temp.y+(img->pos.h/2), 0);
-	glRotatef(angle, 0, 0 ,1);
-
-	draw_pict(img);
-
-	img->pos.x = temp.x;
-	img->pos.y = temp.y;
-
-    glLoadIdentity();
-}
 
 void Sync_Moving_Pict(int time, struct moving_pict *m_pict)
 {
@@ -450,4 +431,62 @@ GLuint loadTextureandsize(const char * filename, struct SDL_Rect *pos)
     SDL_FreeSurface(picture_surface);
 
     return glID;
+}
+
+void Turn_And_Draw (struct pict *img, float angle)
+{
+    SDL_Point temp;
+    temp.x = img->pos.x;
+    temp.y = img->pos.y;
+
+    img->pos.x = 0 - (img->pos.w/2);
+    img->pos.y = 0 - (img->pos.h/2);
+
+	glTranslatef(temp.x+(img->pos.w/2), temp.y+(img->pos.h/2), 0);
+	glRotatef(angle, 0, 0 ,1);
+
+	draw_pict(img);
+
+	img->pos.x = temp.x;
+	img->pos.y = temp.y;
+
+    glLoadIdentity();
+}
+
+void turn_draw_hookpict(int angle, struct hookpict *image, SDL_Rect *support)
+{
+    glPushMatrix();
+
+    image->pict.pos.x = support->x + image->translation.x;
+    image->pict.pos.y = support->y + image->translation.y;
+
+    Turn_And_Draw(&image->pict, angle);
+
+    glPopMatrix();
+}
+
+
+void turn_draw_hookpict_selected(int angle, struct hookpict *image, SDL_Rect *support)
+{
+    glPushMatrix();
+    glColor3ub(150, 150, 255);
+    image->pict.pos.x = support->x + image->translation.x;
+    image->pict.pos.y = support->y + image->translation.y;
+
+    Turn_And_Draw(&image->pict, angle);
+    glColor3ub(255, 255, 255);
+
+    glPopMatrix();
+}
+
+void draw_coche(struct SDL_Rect *pos, bool state, struct UI *ui)
+{
+    if (state == false)
+    {
+        draw(ui->coche0, pos);
+    }
+    else
+    {
+        draw(ui->coche1, pos);
+    }
 }

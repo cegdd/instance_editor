@@ -1,13 +1,22 @@
 #ifndef ESPECEH
 #define ESPECEH
 
-#include "struct.h"
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 #include "bouton.h"
 
+
+
 struct DIVERSsysteme;
+
 struct ESPECE
 {
     int vie;
+    int Rvision;
+    int vitesse;
+    int dps;
+    int Ratk;
 
     char name[64];
     char imgpath[128];
@@ -17,7 +26,6 @@ struct ESPECE
 };
 
 void ESP_refreshmob(struct DIVERSsysteme *systeme);
-void ESP_updateUI(int index, struct DIVERSsysteme *systeme, struct UI *ui);
 void ESP_create(struct CONSOLE *console, struct DIVERSsysteme *systeme);
 void ESP_delete(struct DIVERSsysteme *systeme, struct DATA *data);
 

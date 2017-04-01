@@ -5,10 +5,10 @@
 #include <string.h>
 #include <errno.h>
 
-#include "main.h"
-#include "image.h"
-#include "save.h"
+#include "console.h"
+#include "data.h"
 #include "systeme.h"
+#include "main.h"
 
 extern int screenh, screenw;
 
@@ -167,4 +167,54 @@ int checkactifmob(struct DATA *data)
         }
     }
     return -1;
+}
+
+void initsystem(struct DIVERSsysteme *systeme)
+{
+    int i;
+
+	systeme->shiftactif = false;
+	systeme->altactif = false;
+	systeme->projetouvert = false;
+	systeme->continuer = true;
+	systeme->asked = false;
+	systeme->moletteactif = false;
+	systeme->tookmob = false;
+	systeme->echap = 0;
+	systeme->nbcreature = 0;
+	systeme->activecreature = 0;
+
+	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);
+	systeme->police1 = TTF_OpenFont("rs/divers/arial.ttf", TAILLE_POLICE);
+	if (systeme->police == NULL ||
+        systeme->police1 == NULL)
+    {
+        printf("police not load2\n");
+    }
+
+    setPos4(&systeme->pointeur.pos, 0, 0, 20, 30);
+
+	systeme->pecran.x = 0;
+	systeme->pecran.y = 0;
+	systeme->pecran.w = screenw;
+	systeme->pecran.h = screenh;
+
+	systeme->ppobj.w = 50;
+	systeme->ppobj.h = 50;
+
+	setPos4(&systeme->origine, 0, 0, 0, 0);
+	setPos4(&systeme->pcreature, 1100, 620, 100, 100);
+
+	systeme->oldpp.x = 0;
+	systeme->oldpp.y = 0;
+
+	for (i = 0 ; i < 128 ; i++)
+    {
+        systeme->creature[i].vie = 0;
+        systeme->creature[i].bouton.etat = B_NORMAL;
+        systeme->creature[i].name[0]        = '\0';
+
+        setPos4(&systeme->creature[i].pict.pos, 1100, 620, 0, 0);
+    }
+    systeme->creature[0].bouton.etat = B_INUSE;
 }

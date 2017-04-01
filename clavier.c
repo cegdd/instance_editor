@@ -1,6 +1,7 @@
-#include "main.h"
-#include "core.h"
+#include <stdio.h>
+
 #include "systeme.h"
+
 
 void intputtexteup(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 {

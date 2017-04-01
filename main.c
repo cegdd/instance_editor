@@ -8,11 +8,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "main.h"
-#include "editeur.h"
-#include "tableau.h"
-#include "image.h"
 #include "systeme.h"
+#include "editeur.h"
 
 int screenh, screenw;
 

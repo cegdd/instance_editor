@@ -3,11 +3,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "image.h"
-#include "tableau.h"
-#include "colision.h"
-#include "deplacement.h"
-#include "main.h"
 
 extern int screenh, screenw;
 
