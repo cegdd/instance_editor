@@ -158,27 +158,18 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
     }
      BT_event(i,console, systeme, ui, data);
 
-    for(i = 0 ; i < data->nbmonstre ; i++)
+    if (UI_getslidestate(ui) == UI_close)
     {
-        if(data->mob[i].actif == true)
-        {
-            if (data->mob[i].state == B_SURVOLER &&
-                colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
-            {
-                UI_setslidestate(UI_detail, ui);
-                data->mob[i].state = B_NORMAL;
-                for(i2 = 0 ; i2 < data->nbmonstre ; i2++)
-                {
-                    data->mob[i2].selected = false;
-                }
-                data->mob[i].selected = true;
-                data->mob_selected = i;
-
-                UI_updateMOB(data->mob_selected , systeme, ui, data);
-            }
-        }
+        gestion_survol_mob (systeme, ui, data);
     }
-
+    else if (UI_getslidestate(ui) == UI_detail && colisionbox(&systeme->pointeur.pos, &ui->fonddetail.pos, true) == false)
+    {
+       gestion_survol_mob (systeme, ui, data);
+    }
+    else if (UI_getslidestate(ui) == UI_listmob && colisionbox(&systeme->pointeur.pos, &ui->fondliste.pos, true) == false)
+    {
+       gestion_survol_mob (systeme, ui, data);
+    }
 }
 
 void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
@@ -225,6 +216,31 @@ void gestion_coche (struct SDL_Rect *pos, bool *state, struct UI *ui, struct DIV
         {
             *state = false;
             ui->ListeBouton[13].etat = B_IMPOSSIBLE;
+        }
+    }
+}
+
+void gestion_survol_mob (struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
+{
+    int i, i2;
+    for(i = 0 ; i < data->nbmonstre ; i++)
+    {
+        if(data->mob[i].actif == true)
+        {
+            if (data->mob[i].state == B_SURVOLER &&
+                colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
+            {
+                UI_setslidestate(UI_detail, ui);
+                data->mob[i].state = B_NORMAL;
+                for(i2 = 0 ; i2 < data->nbmonstre ; i2++)
+                {
+                    data->mob[i2].selected = false;
+                }
+                data->mob[i].selected = true;
+                data->mob_selected = i;
+
+                UI_updateMOB(data->mob_selected , systeme, ui, data);
+            }
         }
     }
 }
