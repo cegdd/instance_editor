@@ -158,18 +158,10 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
     }
      BT_event(i,console, systeme, ui, data);
 
-    if (UI_getslidestate(ui) == UI_close)
-    {
-        gestion_survol_mob (systeme, ui, data);
-    }
-    else if (UI_getslidestate(ui) == UI_detail && colisionbox(&systeme->pointeur.pos, &ui->fonddetail.pos, true) == false)
-    {
-       gestion_survol_mob (systeme, ui, data);
-    }
-    else if (UI_getslidestate(ui) == UI_listmob && colisionbox(&systeme->pointeur.pos, &ui->fondliste.pos, true) == false)
-    {
-       gestion_survol_mob (systeme, ui, data);
-    }
+     if (UI_is_inside(ui, systeme, console) == false)
+     {
+         gestion_survol_mob (systeme, ui, data);
+     }
 }
 
 void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)

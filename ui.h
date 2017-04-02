@@ -43,5 +43,7 @@ void setboutonnombre(int nombre, int index, struct UI *ui, struct DIVERSsysteme 
 void UI_updateESP(int index, struct DIVERSsysteme *systeme, struct UI *ui);
 void UI_updateMOB(int index, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data);
 
+int UI_is_inside(struct UI *ui, struct DIVERSsysteme *systeme, struct CONSOLE *console);
+
 
 #endif

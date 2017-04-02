@@ -5,6 +5,7 @@ extern int screenh, screenw;
 
 #include "ui.h"
 #include "systeme.h"
+#include "colision.h"
 
 void UI_setslidestate (int state, struct UI* ui)
 {
@@ -239,4 +240,29 @@ void UI_updateMOB(int index, struct DIVERSsysteme *systeme, struct UI *ui, struc
     setboutonnombre(data->mob[index].monstre.translation.y, 18, ui, systeme);
     setboutonnombre(data->mob[index].scale, 19, ui, systeme);
     setboutonnombre(data->mob[index].angle, 20, ui, systeme);
+}
+
+int UI_is_inside(struct UI *ui, struct DIVERSsysteme *systeme, struct CONSOLE *console)
+{
+    if (UI_getslidestate(ui) == UI_detail && colisionbox(&systeme->pointeur.pos, &ui->fonddetail.pos, true) == true)
+    {
+       return true;
+    }
+    else if (UI_getslidestate(ui) == UI_listmob && colisionbox(&systeme->pointeur.pos, &ui->fondliste.pos, true) == true)
+    {
+       return true;
+    }
+    else if (colisionbox(&systeme->pointeur.pos, &console->console.pos, true) == true)
+    {
+       return true;
+    }
+    else if (colisionbox(&systeme->pointeur.pos, &console->shootoff.pos, true) == true)
+    {
+       return true;
+    }
+    else if (systeme->pointeur.pos.y >= screenh-70)
+    {
+        return true;
+    }
+    return false;
 }

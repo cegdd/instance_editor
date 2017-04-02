@@ -1241,7 +1241,7 @@
 	"image.h"
 	"espece.h"
 
-1491135813 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1491139604 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1613,7 +1613,7 @@
 	<GL/glu.h>
 	"bouton.h"
 
-1489272404 source:c:\users\cegdd\programmation\instance_editor\espece.c
+1491139019 source:c:\users\cegdd\programmation\instance_editor\espece.c
 	<stdio.h>
 	"systeme.h"
 
@@ -1629,12 +1629,13 @@
 
 1485900698 source:c:\users\cegdd\programmation\instance_editor\core.c
 
-1491046050 source:c:\users\cegdd\programmation\instance_editor\ui.c
+1491139731 source:c:\users\cegdd\programmation\instance_editor\ui.c
 	<stdio.h>
 	"ui.h"
 	"systeme.h"
+	"colision.h"
 
-1490137364 c:\users\cegdd\programmation\instance_editor\ui.h
+1491139548 c:\users\cegdd\programmation\instance_editor\ui.h
 	<stdbool.h>
 	"image.h"
 	"bouton.h"

@@ -104,6 +104,11 @@ void ESP_create(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         sprintf(systeme->creature[systeme->nbcreature].imgpath, "noimage.png");
         sprintf(systeme->creature[systeme->nbcreature].name, "%s", console->lastanswer);
         systeme->creature[systeme->nbcreature].vie = 0;
+        systeme->creature[systeme->nbcreature].dps = 0;
+        systeme->creature[systeme->nbcreature].Ratk = 0;
+        systeme->creature[systeme->nbcreature].Rvision = 0;
+        systeme->creature[systeme->nbcreature].vitesse = 0;
+
 
         systeme->nbcreature++;
         sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
