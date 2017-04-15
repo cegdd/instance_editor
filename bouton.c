@@ -200,6 +200,18 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
         say ("nouvel angle", console, systeme);
         systeme->askID = i;
         break;
+    case 21:
+        if (systeme->pathmode == true)
+        {
+            say ("pathmode désactivé", console, systeme);
+            systeme->pathmode = false;
+        }
+        else
+        {
+            say ("pathmode activé", console, systeme);
+            systeme->pathmode = true;
+        }
+        break;
     }
 }
 

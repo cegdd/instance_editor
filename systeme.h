@@ -13,6 +13,7 @@ struct DIVERSsysteme
     bool altactif;
     bool moletteactif;
     bool projetouvert;
+    bool pathmode;
 
     bool asked;
     int askID;

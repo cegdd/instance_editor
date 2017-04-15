@@ -10,9 +10,11 @@
 #include <stdbool.h>
 
 #include "image.h"
+#include "path.h"
 
 struct MOB
 {
+    struct PATH path;
     struct SDL_Rect old;
     bool actif;
     bool selected;

@@ -173,13 +173,15 @@ void initsystem(struct DIVERSsysteme *systeme)
 {
     int i;
 
-	systeme->shiftactif = false;
-	systeme->altactif = false;
-	systeme->projetouvert = false;
-	systeme->continuer = true;
-	systeme->asked = false;
-	systeme->moletteactif = false;
-	systeme->tookmob = false;
+	systeme->shiftactif     = false;
+	systeme->altactif       = false;
+	systeme->projetouvert   = false;
+	systeme->continuer      = true;
+	systeme->asked          = false;
+	systeme->moletteactif   = false;
+	systeme->tookmob        = false;
+	systeme->pathmode       = false;
+
 	systeme->echap = 0;
 	systeme->nbcreature = 0;
 	systeme->activecreature = 0;

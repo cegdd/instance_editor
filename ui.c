@@ -73,25 +73,27 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
     {
         systeme->activecreature = data->mob[data->mob_selected].ID;
 
-        draw_pict(&ui->fonddetail);
-        draw_button(&ui->ListeBouton[7]);
-        draw_button(&ui->ListeBouton[9]);
-        draw_button(&ui->ListeBouton[17]);
-        draw_button(&ui->ListeBouton[18]);
-        draw_button(&ui->ListeBouton[19]);
-        draw_button(&ui->ListeBouton[20]);
-
-        draw_pict(&ui->Listetexte[5].img);
-        draw_pict(&ui->Listetexte[6].img);
-        draw_pict(&ui->Listetexte[7].img);
-        draw_pict(&ui->Listetexte[8].img);
-        draw_pict(&ui->Listetexte[9].img);
-
-        draw_coche(&ui->fixe_pos, ui->fixe_state[data->mob_selected], ui);
-
         if (data->mob_selected != -1)
         {
+            draw_pict(&ui->fonddetail);
+            draw_button(&ui->ListeBouton[7]);
+            draw_button(&ui->ListeBouton[9]);
+            draw_button(&ui->ListeBouton[17]);
+            draw_button(&ui->ListeBouton[18]);
+            draw_button(&ui->ListeBouton[19]);
+            draw_button(&ui->ListeBouton[20]);
+            draw_button(&ui->ListeBouton[21]);
+
+            draw_pict(&ui->Listetexte[5].img);
+            draw_pict(&ui->Listetexte[6].img);
+            draw_pict(&ui->Listetexte[7].img);
+            draw_pict(&ui->Listetexte[8].img);
+            draw_pict(&ui->Listetexte[9].img);
+
+            draw_coche(&ui->fixe_pos, ui->fixe_state[data->mob_selected], ui);
             ESP_drawthumb(systeme);
+
+            PATH_display(data);
         }
     }
 }
@@ -189,7 +191,6 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*7*/creerbouton("rs/ui/fermer.png", screenw-44, screenh-84, 40,40, B_IMPOSSIBLE, ui);
     /*8*/creerbouton("rs/ui/creer.png", screenw-260, 122, 120,40, B_IMPOSSIBLE, ui);
     /*9*/creerbouton("rs/ui/suppr.png", screenw-130, 122, 120,40, B_IMPOSSIBLE, ui);
-
     /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_NORMAL, ui, systeme);//nom
     /*11*/creerboutontexte("path", 1090, screenh-170, B_NORMAL, ui, systeme);//chemin image
     /*12*/creerboutontexte("life", 1090, screenh-190, B_NORMAL, ui, systeme);//vie
@@ -201,6 +202,7 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*18*/creerboutontexte("0", 1230, screenh-170, B_NORMAL, ui, systeme);//y
     /*19*/creerboutontexte("1", 1165, screenh-190, B_NORMAL, ui, systeme);//echelle
     /*20*/creerboutontexte("0", 1265, screenh-190, B_NORMAL, ui, systeme);//angle
+    /*21*/creerbouton("rs/ui/path.png", screenw-250, screenh-210, 60,20, B_NORMAL, ui);
 
     /*0*/creertexte("aggressif:", 1090, screenh-210, ui, systeme);
     /*1*/creertexte("R de vision:", 1210, screenh-210, ui, systeme);

@@ -9,6 +9,7 @@
 #include "clavier.h"
 #include "colision.h"
 #include "editeur.h"
+#include "path.h"
 
 
 extern int screenh, screenw;
@@ -29,6 +30,10 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
                 if( systeme->evenement.button.button == SDL_BUTTON_LEFT )
                 {
                     clic_DOWN_L(ui, systeme, data, console);
+                }
+                else if( systeme->evenement.button.button == SDL_BUTTON_RIGHT )
+                {
+                    clic_DOWN_R(ui, systeme, data, console);
                 }
                 else if( systeme->evenement.button.button == SDL_BUTTON_MIDDLE )
                 {
@@ -155,6 +160,11 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
     else if (UI_getslidestate(ui) == UI_detail)
     {
         gestion_coche(&ui->fixe_pos, &ui->fixe_state[data->mob_selected], ui, systeme);
+
+        if (UI_is_inside(ui, systeme, console) == false)
+        {
+            PATH_add(&data->mob[data->mob_selected].path, systeme->pointeur.pos.x, systeme->pointeur.pos.y);
+        }
     }
      BT_event(i,console, systeme, ui, data);
 
@@ -193,6 +203,18 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
         depart(systeme, data, console);
     }
 }
+
+void clic_DOWN_R(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
+{
+    if (UI_getslidestate(ui) == UI_detail)
+    {
+        if (UI_is_inside(ui, systeme, console) == false)
+        {
+            PATH_remove(&data->mob[data->mob_selected].path);
+        }
+    }
+}
+
 
 
 void gestion_coche (struct SDL_Rect *pos, bool *state, struct UI *ui, struct DIVERSsysteme *systeme)

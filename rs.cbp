@@ -73,6 +73,7 @@
 		<Unit filename="console.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="console.h" />
 		<Unit filename="data.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -98,7 +99,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="main.h" />
+		<Unit filename="mob.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="mob.h" />
+		<Unit filename="path.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="path.h" />
 		<Unit filename="rs.layout" />
 		<Unit filename="rs/divers/color_grid.png" />
 		<Unit filename="rs/divers/dalek.ttf" />

@@ -19,6 +19,6 @@ struct DATA
     char projectmap [64];
 };
 
-void initdata(struct DATA *data);
+void initdata(struct DATA *data, struct DIVERSsysteme *systeme);
 
 #endif

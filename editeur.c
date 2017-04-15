@@ -21,7 +21,7 @@ int editeur(struct DIVERSsysteme *systeme)
     struct DATA data;
     initui(&ui, systeme);
     initconsole(&console, systeme);
-    initdata(&data);
+    initdata(&data, systeme);
 
     while(systeme->continuer)
     {

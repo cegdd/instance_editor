@@ -1221,7 +1221,7 @@
 
 1488842987 c:\users\cegdd\programmation\instance_editor\editeur.h
 
-1490055679 source:c:\users\cegdd\programmation\instance_editor\editeur.c
+1492272451 source:c:\users\cegdd\programmation\instance_editor\editeur.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1233,15 +1233,15 @@
 	"evenement.h"
 	"systeme.h"
 
-1491136542 c:\users\cegdd\programmation\instance_editor\evenement.h
+1491949997 c:\users\cegdd\programmation\instance_editor\evenement.h
 	<stdbool.h>
 
-1489272225 c:\users\cegdd\programmation\instance_editor\systeme.h
+1491946371 c:\users\cegdd\programmation\instance_editor\systeme.h
 	<stdbool.h>
 	"image.h"
 	"espece.h"
 
-1491139604 source:c:\users\cegdd\programmation\instance_editor\evenement.c
+1492276624 source:c:\users\cegdd\programmation\instance_editor\evenement.c
 	<stdlib.h>
 	<stdio.h>
 	<SDL.h>
@@ -1252,10 +1252,11 @@
 	"clavier.h"
 	"colision.h"
 	"editeur.h"
+	"path.h"
 
 1488842987 c:\users\cegdd\programmation\instance_editor\clavier.h
 
-1489272266 source:c:\users\cegdd\programmation\instance_editor\systeme.c
+1491946377 source:c:\users\cegdd\programmation\instance_editor\systeme.c
 	<SDL.h>
 	<stdlib.h>
 	<stdio.h>
@@ -1629,7 +1630,7 @@
 
 1485900698 source:c:\users\cegdd\programmation\instance_editor\core.c
 
-1491139731 source:c:\users\cegdd\programmation\instance_editor\ui.c
+1492273491 source:c:\users\cegdd\programmation\instance_editor\ui.c
 	<stdio.h>
 	"ui.h"
 	"systeme.h"
@@ -1640,7 +1641,7 @@
 	"image.h"
 	"bouton.h"
 
-1491046444 source:c:\users\cegdd\programmation\instance_editor\bouton.c
+1491946538 source:c:\users\cegdd\programmation\instance_editor\bouton.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -1661,10 +1662,10 @@
 
 1488838622 c:\users\cegdd\programmation\instance_editor\coche.h
 
-1489271764 c:\users\cegdd\programmation\instance_editor\data.h
+1492272443 c:\users\cegdd\programmation\instance_editor\data.h
 	"mob.h"
 
-1491045630 c:\users\cegdd\programmation\instance_editor\mob.h
+1492273656 c:\users\cegdd\programmation\instance_editor\mob.h
 	<stdio.h>
 	<stdlib.h>
 	<SDL.h>
@@ -1672,12 +1673,13 @@
 	<SDL_image.h>
 	<stdbool.h>
 	"image.h"
+	"path.h"
 
-1489271927 source:c:\users\cegdd\programmation\instance_editor\data.c
+1492272443 source:c:\users\cegdd\programmation\instance_editor\data.c
 	"data.h"
 	"bouton.h"
 
-1488837843 source:c:\users\cegdd\programmation\instance_editor\mob.c
+1488841443 source:c:\users\cegdd\programmation\instance_editor\mob.c
 
 1489271978 c:\users\cegdd\programmation\instance_editor\console.h
 	<stdbool.h>
@@ -1687,4 +1689,13 @@
 	<string.h>
 	<stdio.h>
 	"console.h"
+
+1492276709 source:c:\users\cegdd\programmation\instance_editor\path.c
+	<stdio.h>
+	"path.h"
+	"data.h"
+
+1492273695 c:\users\cegdd\programmation\instance_editor\path.h
+	<stdbool.h>
+	"image.h"
 

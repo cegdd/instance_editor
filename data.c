@@ -2,7 +2,7 @@
 #include "data.h"
 #include "bouton.h"
 
-void initdata(struct DATA *data)
+void initdata(struct DATA *data, struct DIVERSsysteme *systeme)
 {
     int i;
 
@@ -22,6 +22,7 @@ void initdata(struct DATA *data)
     data->mob[0].monstre.pict.texture = loadTexture ("rs/images/mob0.0.png");
     for (i=0 ; i < 512 ; i++)
     {
+        PATH_init(&data->mob[i].path, systeme);
         data->mob[i].state = B_NORMAL;
         data->mob[i].selected = false;
         data->mob[i].ID = 0;
