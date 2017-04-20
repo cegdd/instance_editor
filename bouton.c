@@ -226,12 +226,12 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
         ui->ListeBouton[2].etat = B_IMPOSSIBLE;
         break;
     case 2:
-        loadproject(console, systeme, data);
+        loadproject(console, systeme, data, ui);
         ui->ListeBouton[0].etat = B_IMPOSSIBLE;
         ui->ListeBouton[2].etat = B_IMPOSSIBLE;
         break;
     case 3:
-        saveproject(console, systeme, data);
+        saveproject(console, systeme, data, ui);
         break;
     case 4:
         loadingmap(console, systeme, data);

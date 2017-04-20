@@ -15,13 +15,14 @@ struct UI
 
     struct pict fondliste;
     struct pict fonddetail;
-    GLuint coche0;
-    GLuint coche1;
+    GLuint coche[2];
 
     struct  SDL_Rect    aggressif_pos;
     bool                aggressif_state[128];
     struct  SDL_Rect    fixe_pos;
     bool                fixe_state[512];
+    struct  SDL_Rect    loop_pos;
+    bool                loop_state[512];
 
     struct BOUTON ListeBouton[64];
     int ListeNb;

@@ -483,10 +483,10 @@ void draw_coche(struct SDL_Rect *pos, bool state, struct UI *ui)
 {
     if (state == false)
     {
-        draw(ui->coche0, pos);
+        draw(ui->coche[0], pos);
     }
     else
     {
-        draw(ui->coche1, pos);
+        draw(ui->coche[1], pos);
     }
 }

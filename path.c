@@ -14,9 +14,10 @@ int PATH_add(struct PATH *path, int x, int y)
     {
         path->x[i] = x;
         path->y[i] = y;
-        path->nb[i].pos.x = path->x[i] - path->nb[i].pos.w/2;
-        path->nb[i].pos.y = path->y[i] + path->nb[i].pos.h/2;
+        path->nb[i].translation.x = path->x[i] - path->nb[i].pict.pos.w/2;
+        path->nb[i].translation.y = path->y[i] + path->nb[i].pict.pos.h/2;
         path->used[i] = true;
+        path->counter++;
     }
     else{return -1;}
 
@@ -33,6 +34,7 @@ int PATH_remove(struct PATH *path)
     if (i > 0)
     {
         path->used[i-1] = false;
+        path->counter--;
     }
     else{return -1;}
 
@@ -50,7 +52,7 @@ void PATH_init(struct PATH *path, struct DIVERSsysteme *systeme)
         path->used[i] = false;
         path->loop = false;
         sprintf(buffer, "%d",i);
-        path->nb[i].texture = imprime(buffer, 100, ROUGE, systeme, &path->nb[i].pos.w, &path->nb[i].pos.h);
+        path->nb[i].pict.texture = imprime(buffer, 100, ROUGE, systeme, &path->nb[i].pict.pos.w, &path->nb[i].pict.pos.h);
     }
 }
 void PATH_write (struct PATH *path)
@@ -69,7 +71,7 @@ void PATH_display (struct DATA *data)
 
     while (data->mob[data->mob_selected].path.used[i] == true)
     {
-        draw_pict(&data->mob[data->mob_selected].path.nb[i]);
+        draw_hookpict(&data->mob[data->mob_selected].path.nb[i], &data->map.pos);
         i++;
     }
 }

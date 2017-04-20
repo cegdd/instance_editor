@@ -89,8 +89,10 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
             draw_pict(&ui->Listetexte[7].img);
             draw_pict(&ui->Listetexte[8].img);
             draw_pict(&ui->Listetexte[9].img);
+            draw_pict(&ui->Listetexte[10].img);
 
             draw_coche(&ui->fixe_pos, ui->fixe_state[data->mob_selected], ui);
+            draw_coche(&ui->loop_pos, ui->loop_state[data->mob_selected], ui);
             ESP_drawthumb(systeme);
 
             PATH_display(data);
@@ -165,6 +167,7 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     setPos4(&ui->fonddetail.pos, screenw-282, 110, 400,618);
     setPos4(&ui->aggressif_pos, 1180, screenh-207, 12, 12);
     setPos4(&ui->fixe_pos, 1320, screenh-210, 12, 12);
+    setPos4(&ui->loop_pos, 1200, screenh-230, 12, 12);
 
     for (i = 0 ; i < 128 ; i++)
     {
@@ -173,10 +176,11 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     for (i = 0 ; i < 512 ; i++)
     {
         ui->fixe_state[i] = false;
+        ui->loop_state[i] = false;
     }
 
-    ui->coche0 = loadTexture ("rs/ui/coche0.png");
-    ui->coche1 = loadTexture ("rs/ui/coche1.png");
+    ui->coche[0] = loadTexture ("rs/ui/coche0.png");
+    ui->coche[1] = loadTexture ("rs/ui/coche1.png");
 
     ui->ListeNb = 0;
     ui->texteNb = 0;
@@ -214,6 +218,7 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*7*/creertexte("echelle:", 1090, screenh-190, ui, systeme);
     /*8*/creertexte("angle:", 1200, screenh-190, ui, systeme);
     /*9*/creertexte("fixe:", 1200, screenh-210, ui, systeme);
+    /*10*/creertexte("loop:", 1090, screenh-230, ui, systeme);
 
     ui->fondliste.texture =       loadTexture ("rs/ui/fondmonstre.png");
     ui->fonddetail.texture =       loadTexture ("rs/ui/fonddetail.png");

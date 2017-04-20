@@ -16,7 +16,8 @@ struct PATH
     int y[PATH_dots];
     bool used[PATH_dots];
     bool loop;
-    struct pict nb[PATH_dots];
+    int counter;
+    struct hookpict nb[PATH_dots];
 };
 int PATH_add(struct PATH *path, int x, int y);
 int PATH_remove(struct PATH *path);

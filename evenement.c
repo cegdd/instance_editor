@@ -160,8 +160,8 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
     else if (UI_getslidestate(ui) == UI_detail)
     {
         gestion_coche(&ui->fixe_pos, &ui->fixe_state[data->mob_selected], ui, systeme);
-
-        if (UI_is_inside(ui, systeme, console) == false)
+        gestion_coche(&ui->loop_pos, &ui->loop_state[data->mob_selected], ui, systeme);
+        if (UI_is_inside(ui, systeme, console) == false && systeme->pathmode == true)
         {
             PATH_add(&data->mob[data->mob_selected].path, systeme->pointeur.pos.x, systeme->pointeur.pos.y);
         }
@@ -208,7 +208,7 @@ void clic_DOWN_R(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
 {
     if (UI_getslidestate(ui) == UI_detail)
     {
-        if (UI_is_inside(ui, systeme, console) == false)
+        if (UI_is_inside(ui, systeme, console) == false && systeme->pathmode == true)
         {
             PATH_remove(&data->mob[data->mob_selected].path);
         }
@@ -245,6 +245,7 @@ void gestion_survol_mob (struct DIVERSsysteme *systeme, struct UI *ui, struct DA
                 colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
             {
                 UI_setslidestate(UI_detail, ui);
+                systeme->pathmode = false;
                 data->mob[i].state = B_NORMAL;
                 for(i2 = 0 ; i2 < data->nbmonstre ; i2++)
                 {

@@ -4,7 +4,7 @@
 #include "save.h"
 #include "systeme.h"
 #include "editeur.h"
-
+#include "ui.h"
 /**
 SAVE FILE DATA STRUCTURE
 
@@ -14,6 +14,10 @@ SAVE FILE DATA STRUCTURE
     *string     name
     *string     img name
     *int        life
+    *bool       aggressif   -> int  R de vision
+    *int        vitesse
+    *int        dps
+    *int        R d'atk
 -bool       player set
     -int        player x
     -int        player y
@@ -21,13 +25,16 @@ SAVE FILE DATA STRUCTURE
     *int        ID
     *int        mob x
     *int        mob y
+    *int        scale
+    *int        angle
+    *bool       fixe    ->  *int[]      path(to see)    ->  *bool   loop
 **/
 
-void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
+void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data, struct UI *ui)
 {
     char buffer[128];
     FILE *fichier = NULL;
-    int i, j = 0;
+    int i, j = 0, i2;
 
     systeme->asked = false;
     console->answered = false;
@@ -43,7 +50,7 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     for(i=0 ; i < systeme->nbcreature ; i++)
     {
         //ID
-        sprintf(buffer, "0");
+        sprintf(buffer, "%d", i);
         ecris(buffer, fichier);
         //name
         sprintf(buffer, "%s", ESP_getname(i, systeme));
@@ -51,7 +58,26 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
         //image name
         sprintf(buffer, "%s", ESP_getimgpath(i, systeme));
         ecris(buffer, fichier);
+        //life
         sprintf(buffer, "%d", ESP_getlife(i, systeme));
+        ecris(buffer, fichier);
+        // aggressif
+        sprintf(buffer, "%d", ui->aggressif_state[i]);
+        ecris(buffer, fichier);
+        if (buffer[0] == '1')
+        {
+            // rayon de vision
+            sprintf(buffer, "%d", systeme->creature[i].Rvision);
+            ecris(buffer, fichier);
+        }
+        // vitesse
+        sprintf(buffer, "%d", systeme->creature[i].vitesse);
+        ecris(buffer, fichier);
+        // dps
+        sprintf(buffer, "%d", systeme->creature[i].dps);
+        ecris(buffer, fichier);
+        // Ratk
+        sprintf(buffer, "%d", systeme->creature[i].Ratk);
         ecris(buffer, fichier);
     }
 
@@ -91,26 +117,59 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
         {
             i++;
         }
+        //ID creature
         sprintf(buffer, "%d", data->mob[i].ID);
         ecris(buffer, fichier);
+        //x
         sprintf(buffer, "%d", data->mob[i].monstre.translation.x);
         ecris(buffer, fichier);
+        //y
         sprintf(buffer, "%d", data->mob[i].monstre.translation.y);
         ecris(buffer, fichier);
+        //scale
+        sprintf(buffer, "%f", data->mob[i].scale);
+        ecris(buffer, fichier);
+        //angle
+        sprintf(buffer, "%d", data->mob[i].angle);
+        ecris(buffer, fichier);
+        //fixe
+        sprintf(buffer, "%d", ui->fixe_state[i]);
+        ecris(buffer, fichier);
+        if(buffer[0] == '0')
+        {
+            //number
+            sprintf(buffer, "%d", data->mob[i].path.counter);
+            ecris(buffer, fichier);
+            for(i2 = 0 ; i2 < data->mob[i].path.counter ; i2++)
+            {
+                //x
+                sprintf(buffer, "%d", data->mob[i].path.x[i2]);
+                ecris(buffer, fichier);
+                //y
+                sprintf(buffer, "%d", data->mob[i].path.y[i2]);
+                ecris(buffer, fichier);
+            }
+            if (data->mob[i].path.counter > 0)
+            {
+                //loop
+                sprintf(buffer, "%d", ui->loop_state[i]);
+                ecris(buffer, fichier);
+            }
+        }
     }
 
     fclose(fichier);
     say("projet enregistre avec succes", console, systeme);
 }
 
-void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
+void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data, struct UI *ui)
 {
     if (console->answered)
     {
         char temp[128];
         char buffer[4096] = {'\0'};
         FILE *fichier = NULL;
-        int i;
+        int i, i2;
 
         systeme->asked = false;
         console->answered = false;
@@ -143,6 +202,19 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 ESP_setimgpath(buffer, i, systeme);
                 lis(fichier, buffer);
                 ESP_setlife(atoi(buffer), i, systeme);
+                lis(fichier, buffer);
+                ui->aggressif_state[i] = atoi(buffer);
+                if(ui->aggressif_state[i] == true)
+                {
+                    lis(fichier, buffer);
+                    systeme->creature[i].Rvision = atoi(buffer);
+                }
+                lis(fichier, buffer);
+                systeme->creature[i].vitesse = atoi(buffer);
+                lis(fichier, buffer);
+                systeme->creature[i].dps = atoi(buffer);
+                lis(fichier, buffer);
+                systeme->creature[i].Ratk = atoi(buffer);
             }
             sprintf(temp, "%d monstre en memoire", systeme->nbcreature);
             say(temp, console, systeme);
@@ -180,9 +252,37 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 //translation mob en x
                 lis(fichier, buffer);
                 data->mob[i].monstre.translation.x = atoi(buffer);
-                //translation mob en x
+                //translation mob en y
                 lis(fichier, buffer);
                 data->mob[i].monstre.translation.y = atoi(buffer);
+                //echelle
+                lis(fichier, buffer);
+                data->mob[i].scale = atof(buffer);
+                //angle
+                lis(fichier, buffer);
+                data->mob[i].angle = atoi(buffer);
+                //fixe
+                lis(fichier, buffer);
+                ui->fixe_state[i] = atoi(buffer);
+                if (ui->fixe_state[i] == false)
+                {
+                    lis(fichier, buffer);
+                    data->mob[i].path.counter = atoi(buffer);
+                    for (i2 = 0 ; i2 < data->mob[i].path.counter ; i2++)
+                    {
+                        lis(fichier, buffer);
+                        data->mob[i].path.nb[i2].translation.x = atoi(buffer);
+                        lis(fichier, buffer);
+                        data->mob[i].path.nb[i2].translation.y = atoi(buffer);
+                        data->mob[i].path.used[i2] = true;
+                    }
+                    if (data->mob[i].path.counter > 0)
+                    {
+                        lis(fichier, buffer);
+                        data->mob[i].path.loop = atoi(buffer);
+                    }
+                }
+
                 data->mob[i].actif = true;
                 data->mob[i].monstre.pict.texture = ESP_gettexture(data->mob[i].ID, systeme);
                 setPos4(&data->mob[i].monstre.pict.pos, 0, 0, ESP_getwidth(data->mob[i].ID, systeme), ESP_gethight(data->mob[i].ID, systeme));
