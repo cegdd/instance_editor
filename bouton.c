@@ -19,7 +19,8 @@ void BT_pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
     {
         if ( colisionbox(&systeme->pointeur.pos, &ui->ListeBouton[i].pos, true) == true &&
             ui->ListeBouton[i].etat != B_CLIQUER &&
-            ui->ListeBouton[i].etat != B_IMPOSSIBLE)
+            ui->ListeBouton[i].etat != B_IMPOSSIBLE &&
+            isInTheGoodPanel(ui, i) == true)
             {
                 ui->ListeBouton[i].etat = B_SURVOLER;
             }
@@ -349,4 +350,21 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
         }
         break;
     }
+}
+
+bool isInTheGoodPanel(struct UI *ui, int index)
+{
+    if (ui->ListeBouton[index].flag == B_detail && ui->slidestate == UI_detail)
+    {
+        return true;
+    }
+    else if (ui->ListeBouton[index].flag == B_liste && ui->slidestate == UI_listmob)
+    {
+        return true;
+    }
+    else if (ui->ListeBouton[index].flag == B_none)
+    {
+        return true;
+    }
+    return false;
 }

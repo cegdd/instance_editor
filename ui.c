@@ -100,9 +100,10 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
     }
 }
 
-void creerbouton(char *path, int x, int y, int w, int h, int state, struct UI *ui)
+void creerbouton(char *path, int x, int y, int w, int h, int state, int flag, struct UI *ui)
 {
     ui->ListeBouton[ui->ListeNb].etat = state;
+    ui->ListeBouton[ui->ListeNb].flag = flag;
     setPos4(&ui->ListeBouton[ui->ListeNb].pos, x, y, w, h);
     ui->ListeBouton[ui->ListeNb].texture = loadTexture (path);
     if (glIsTexture(ui->ListeBouton[ui->ListeNb].texture) == GL_FALSE)
@@ -113,9 +114,10 @@ void creerbouton(char *path, int x, int y, int w, int h, int state, struct UI *u
     ui->ListeNb++;
 }
 
-void creerboutontexte(char *path, int x, int y, int state, struct UI *ui, struct DIVERSsysteme *systeme)
+void creerboutontexte(char *path, int x, int y, int state, int flag, struct UI *ui, struct DIVERSsysteme *systeme)
 {
     ui->ListeBouton[ui->ListeNb].etat = state;
+    ui->ListeBouton[ui->ListeNb].flag = flag;
     ui->ListeBouton[ui->ListeNb].texture = imprime(path, screenw, BLANC, systeme, &ui->ListeBouton[ui->ListeNb].pos.w, &ui->ListeBouton[ui->ListeNb].pos.h);
 
     setPos2(&ui->ListeBouton[ui->ListeNb].pos, x, y);
@@ -185,28 +187,28 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     ui->ListeNb = 0;
     ui->texteNb = 0;
 
-    /*0*/creerbouton("rs/ui/creer.png", 0, screenh-40, 120, 40, B_NORMAL, ui);
-    /*1*/creerbouton("rs/ui/quitter.png", screenw-120, screenh-40, 120, 40, B_NORMAL, ui);
-    /*2*/creerbouton("rs/ui/charger.png", 360, screenh-40, 120, 40, B_NORMAL, ui);
-    /*3*/creerbouton("rs/ui/enregistrer.png", 240, screenh-40, 120, 40, B_IMPOSSIBLE, ui);
-    /*4*/creerbouton("rs/ui/loadmap.png", 120, screenh-40, 120, 40, B_IMPOSSIBLE, ui);
-    /*5*/creerbouton("rs/ui/depart.png", 480, screenh-40, 120, 40, B_IMPOSSIBLE, ui);
-    /*6*/creerbouton("rs/ui/monster.png", 600, screenh-40, 120, 40, B_IMPOSSIBLE, ui);
-    /*7*/creerbouton("rs/ui/fermer.png", screenw-44, screenh-84, 40,40, B_IMPOSSIBLE, ui);
-    /*8*/creerbouton("rs/ui/creer.png", screenw-260, 122, 120,40, B_IMPOSSIBLE, ui);
-    /*9*/creerbouton("rs/ui/suppr.png", screenw-130, 122, 120,40, B_IMPOSSIBLE, ui);
-    /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_NORMAL, ui, systeme);//nom
-    /*11*/creerboutontexte("path", 1090, screenh-170, B_NORMAL, ui, systeme);//chemin image
-    /*12*/creerboutontexte("life", 1090, screenh-190, B_NORMAL, ui, systeme);//vie
-    /*13*/creerboutontexte("100", 1320, screenh-210, B_IMPOSSIBLE, ui, systeme);//rayon de vision
-    /*14*/creerboutontexte("50", 1180, screenh-230, B_NORMAL, ui, systeme);//vitesse
-    /*15*/creerboutontexte("5", 1140, screenh-250, B_NORMAL, ui, systeme);//dps
-    /*16*/creerboutontexte("0", 1300, screenh-250, B_NORMAL, ui, systeme);//rayon d'attaque
-    /*17*/creerboutontexte("0", 1120, screenh-170, B_NORMAL, ui, systeme);//x
-    /*18*/creerboutontexte("0", 1230, screenh-170, B_NORMAL, ui, systeme);//y
-    /*19*/creerboutontexte("1", 1165, screenh-190, B_NORMAL, ui, systeme);//echelle
-    /*20*/creerboutontexte("0", 1265, screenh-190, B_NORMAL, ui, systeme);//angle
-    /*21*/creerbouton("rs/ui/path.png", screenw-250, screenh-210, 60,20, B_NORMAL, ui);
+    /*0*/creerbouton("rs/ui/creer.png", 0, screenh-40, 120, 40, B_NORMAL, B_none, ui);
+    /*1*/creerbouton("rs/ui/quitter.png", screenw-120, screenh-40, 120, 40, B_NORMAL, B_none, ui);
+    /*2*/creerbouton("rs/ui/charger.png", 360, screenh-40, 120, 40, B_NORMAL, B_none, ui);
+    /*3*/creerbouton("rs/ui/enregistrer.png", 240, screenh-40, 120, 40, B_IMPOSSIBLE, B_none, ui);
+    /*4*/creerbouton("rs/ui/loadmap.png", 120, screenh-40, 120, 40, B_IMPOSSIBLE, B_none, ui);
+    /*5*/creerbouton("rs/ui/depart.png", 480, screenh-40, 120, 40, B_IMPOSSIBLE, B_none, ui);
+    /*6*/creerbouton("rs/ui/monster.png", 600, screenh-40, 120, 40, B_IMPOSSIBLE, B_none, ui);
+    /*7*/creerbouton("rs/ui/fermer.png", screenw-44, screenh-84, 40,40, B_IMPOSSIBLE, B_none, ui);
+    /*8*/creerbouton("rs/ui/creer.png", screenw-260, 122, 120,40, B_IMPOSSIBLE, B_none, ui);
+    /*9*/creerbouton("rs/ui/suppr.png", screenw-130, 122, 120,40, B_IMPOSSIBLE, B_none, ui);
+    /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_NORMAL, B_none, ui, systeme);//nom
+    /*11*/creerboutontexte("path", 1090, screenh-170, B_NORMAL, B_none, ui, systeme);//chemin image
+    /*12*/creerboutontexte("life", 1090, screenh-190, B_NORMAL, B_none, ui, systeme);//vie
+    /*13*/creerboutontexte("100", 1320, screenh-210, B_IMPOSSIBLE, B_none, ui, systeme);//rayon de vision
+    /*14*/creerboutontexte("50", 1180, screenh-230, B_NORMAL, B_none, ui, systeme);//vitesse
+    /*15*/creerboutontexte("5", 1140, screenh-250, B_NORMAL, B_none, ui, systeme);//dps
+    /*16*/creerboutontexte("0", 1300, screenh-250, B_NORMAL, B_none, ui, systeme);//rayon d'attaque
+    /*17*/creerboutontexte("0", 1120, screenh-170, B_NORMAL, B_none, ui, systeme);//x
+    /*18*/creerboutontexte("0", 1230, screenh-170, B_NORMAL, B_none, ui, systeme);//y
+    /*19*/creerboutontexte("1", 1165, screenh-190, B_NORMAL, B_none, ui, systeme);//echelle
+    /*20*/creerboutontexte("0", 1265, screenh-190, B_NORMAL, B_none, ui, systeme);//angle
+    /*21*/creerbouton("rs/ui/path.png", screenw-250, screenh-210, 60,20, B_NORMAL, B_none, ui);
 
     /*0*/creertexte("aggressif:", 1090, screenh-210, ui, systeme);
     /*1*/creertexte("R de vision:", 1210, screenh-210, ui, systeme);

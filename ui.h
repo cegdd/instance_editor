@@ -36,8 +36,8 @@ void UI_setslidestate (int state, struct UI* ui);
 int UI_getslidestate(struct UI* ui);
 
 void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *data);
-void creerbouton(char *path, int x, int y, int w, int h, int state, struct UI *ui);
-void creerboutontexte(char *path, int x, int y, int state, struct UI *ui, struct DIVERSsysteme *systeme);
+void creerbouton(char *path, int x, int y, int w, int h, int state, int flag, struct UI *ui);
+void creerboutontexte(char *path, int x, int y, int state, int flag, struct UI *ui, struct DIVERSsysteme *systeme);
 void creertexte(char *path, int x, int y, struct UI *ui, struct DIVERSsysteme *systeme);
 void setboutontexte(char *path, int index, struct UI *ui, struct DIVERSsysteme *systeme);
 void setboutonnombre(int nombre, int index, struct UI *ui, struct DIVERSsysteme *systeme);

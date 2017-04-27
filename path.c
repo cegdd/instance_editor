@@ -3,7 +3,7 @@
 #include "path.h"
 #include "data.h"
 
-int PATH_add(struct PATH *path, int x, int y)
+int PATH_add(struct PATH *path, int x, int y, struct DATA *data)
 {
     int i = 0;
     while (path->used[i] == true)
@@ -14,8 +14,8 @@ int PATH_add(struct PATH *path, int x, int y)
     {
         path->x[i] = x;
         path->y[i] = y;
-        path->nb[i].translation.x = path->x[i] - path->nb[i].pict.pos.w/2;
-        path->nb[i].translation.y = path->y[i] + path->nb[i].pict.pos.h/2;
+        path->nb[i].translation.x = path->x[i] - path->nb[i].pict.pos.w/2 - data->map.pos.x;
+        path->nb[i].translation.y = path->y[i] + path->nb[i].pict.pos.h/2 - data->map.pos.y;
         path->used[i] = true;
         path->counter++;
     }

@@ -19,7 +19,7 @@ struct PATH
     int counter;
     struct hookpict nb[PATH_dots];
 };
-int PATH_add(struct PATH *path, int x, int y);
+int PATH_add(struct PATH *path, int x, int y, struct DATA *data);
 int PATH_remove(struct PATH *path);
 void PATH_init(struct PATH *path, struct DIVERSsysteme *systeme);
 void PATH_write(struct PATH *path);

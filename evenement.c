@@ -163,7 +163,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         gestion_coche(&ui->loop_pos, &ui->loop_state[data->mob_selected], ui, systeme);
         if (UI_is_inside(ui, systeme, console) == false && systeme->pathmode == true)
         {
-            PATH_add(&data->mob[data->mob_selected].path, systeme->pointeur.pos.x, systeme->pointeur.pos.y);
+            PATH_add(&data->mob[data->mob_selected].path, systeme->pointeur.pos.x, systeme->pointeur.pos.y, data);
         }
     }
      BT_event(i,console, systeme, ui, data);

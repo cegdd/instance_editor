@@ -5,6 +5,7 @@
 #include "console.h"
 
 enum{B_NORMAL, B_SURVOLER, B_CLIQUER, B_IMPOSSIBLE, B_INUSE};/*bouton*/
+enum{B_detail, B_liste, B_none};
 
 struct UI;
 struct DIVERSsysteme;
@@ -15,6 +16,7 @@ struct BOUTON
 	GLuint texture;
 	SDL_Rect pos;
 	int etat;
+	int flag;
 };
 
 struct BOUTON_TEXTE
@@ -30,4 +32,7 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
 void BT_down(struct UI *ui);
 
 void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data);
+bool isInTheGoodPanel(struct UI *ui, int index);
+
+
 #endif
