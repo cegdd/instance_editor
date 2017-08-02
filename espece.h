@@ -17,6 +17,7 @@ struct ESPECE
     int vitesse;
     int dps;
     int Ratk;
+    int hitlaps;
 
     char name[64];
     char imgpath[128];

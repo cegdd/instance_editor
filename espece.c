@@ -108,6 +108,7 @@ void ESP_create(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         systeme->creature[systeme->nbcreature].Ratk = 0;
         systeme->creature[systeme->nbcreature].Rvision = 0;
         systeme->creature[systeme->nbcreature].vitesse = 0;
+        systeme->creature[systeme->nbcreature].hitlaps = 100;
 
 
         systeme->nbcreature++;

@@ -58,12 +58,14 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
                 draw_button(&ui->ListeBouton[14]);
                 draw_button(&ui->ListeBouton[15]);
                 draw_button(&ui->ListeBouton[16]);
+                draw_button(&ui->ListeBouton[22]);
 
                 draw_pict(&ui->Listetexte[0].img);
                 draw_pict(&ui->Listetexte[1].img);
                 draw_pict(&ui->Listetexte[2].img);
                 draw_pict(&ui->Listetexte[3].img);
                 draw_pict(&ui->Listetexte[4].img);
+                draw_pict(&ui->Listetexte[11].img);
 
                 draw_coche(&ui->aggressif_pos, ui->aggressif_state[systeme->activecreature], ui);
             }
@@ -197,18 +199,19 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*7*/creerbouton("rs/ui/fermer.png", screenw-44, screenh-84, 40,40, B_IMPOSSIBLE, B_none, ui);
     /*8*/creerbouton("rs/ui/creer.png", screenw-260, 122, 120,40, B_IMPOSSIBLE, B_none, ui);
     /*9*/creerbouton("rs/ui/suppr.png", screenw-130, 122, 120,40, B_IMPOSSIBLE, B_none, ui);
-    /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_NORMAL, B_none, ui, systeme);//nom
-    /*11*/creerboutontexte("path", 1090, screenh-170, B_NORMAL, B_none, ui, systeme);//chemin image
-    /*12*/creerboutontexte("life", 1090, screenh-190, B_NORMAL, B_none, ui, systeme);//vie
-    /*13*/creerboutontexte("100", 1320, screenh-210, B_IMPOSSIBLE, B_none, ui, systeme);//rayon de vision
-    /*14*/creerboutontexte("50", 1180, screenh-230, B_NORMAL, B_none, ui, systeme);//vitesse
-    /*15*/creerboutontexte("5", 1140, screenh-250, B_NORMAL, B_none, ui, systeme);//dps
-    /*16*/creerboutontexte("0", 1300, screenh-250, B_NORMAL, B_none, ui, systeme);//rayon d'attaque
-    /*17*/creerboutontexte("0", 1120, screenh-170, B_NORMAL, B_none, ui, systeme);//x
-    /*18*/creerboutontexte("0", 1230, screenh-170, B_NORMAL, B_none, ui, systeme);//y
-    /*19*/creerboutontexte("1", 1165, screenh-190, B_NORMAL, B_none, ui, systeme);//echelle
-    /*20*/creerboutontexte("0", 1265, screenh-190, B_NORMAL, B_none, ui, systeme);//angle
-    /*21*/creerbouton("rs/ui/path.png", screenw-250, screenh-210, 60,20, B_NORMAL, B_none, ui);
+    /*10*/creerboutontexte("nom", screenw-396, screenh-70, B_NORMAL, B_liste, ui, systeme);//nom
+    /*11*/creerboutontexte("path", 1090, screenh-170, B_NORMAL, B_liste, ui, systeme);//chemin image
+    /*12*/creerboutontexte("life", 1090, screenh-190, B_NORMAL, B_liste, ui, systeme);//vie
+    /*13*/creerboutontexte("100", 1320, screenh-210, B_IMPOSSIBLE, B_liste, ui, systeme);//rayon de vision
+    /*14*/creerboutontexte("50", 1180, screenh-230, B_NORMAL, B_liste, ui, systeme);//vitesse
+    /*15*/creerboutontexte("5", 1140, screenh-250, B_NORMAL, B_liste, ui, systeme);//dps
+    /*16*/creerboutontexte("0", 1300, screenh-250, B_NORMAL, B_liste, ui, systeme);//rayon d'attaque
+    /*17*/creerboutontexte("0", 1120, screenh-170, B_NORMAL, B_detail, ui, systeme);//x
+    /*18*/creerboutontexte("0", 1230, screenh-170, B_NORMAL, B_detail, ui, systeme);//y
+    /*19*/creerboutontexte("1", 1165, screenh-190, B_NORMAL, B_detail, ui, systeme);//echelle
+    /*20*/creerboutontexte("0", 1265, screenh-190, B_NORMAL, B_detail, ui, systeme);//angle
+    /*21*/creerbouton("rs/ui/path.png", screenw-250, screenh-210, 60,20, B_NORMAL, B_liste, ui);
+    /*22*/creerboutontexte("100", 1165, screenh-270, B_NORMAL, B_liste, ui, systeme);//dps
 
     /*0*/creertexte("aggressif:", 1090, screenh-210, ui, systeme);
     /*1*/creertexte("R de vision:", 1210, screenh-210, ui, systeme);
@@ -221,6 +224,7 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*8*/creertexte("angle:", 1200, screenh-190, ui, systeme);
     /*9*/creertexte("fixe:", 1200, screenh-210, ui, systeme);
     /*10*/creertexte("loop:", 1090, screenh-230, ui, systeme);
+    /*11*/creertexte("hit laps:", 1090, screenh-270, ui, systeme);
 
     ui->fondliste.texture =       loadTexture ("rs/ui/fondmonstre.png");
     ui->fonddetail.texture =       loadTexture ("rs/ui/fonddetail.png");
@@ -240,6 +244,7 @@ void UI_updateESP(int index, struct DIVERSsysteme *systeme, struct UI *ui)
     setboutonnombre(systeme->creature[index].Rvision, 13, ui, systeme);
     setboutonnombre(systeme->creature[index].vitesse, 14, ui, systeme);
     setboutonnombre(systeme->creature[index].dps, 15, ui, systeme);
+    setboutonnombre(systeme->creature[index].hitlaps, 22, ui, systeme);
     setboutonnombre(systeme->creature[index].Ratk, 16, ui, systeme);
 }
 

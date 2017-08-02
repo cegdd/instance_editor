@@ -18,6 +18,7 @@ SAVE FILE DATA STRUCTURE
     *int        vitesse
     *int        dps
     *int        R d'atk
+    *int        hitlaps
 -bool       player set
     -int        player x
     -int        player y
@@ -78,6 +79,9 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
         ecris(buffer, fichier);
         // Ratk
         sprintf(buffer, "%d", systeme->creature[i].Ratk);
+        ecris(buffer, fichier);
+        // hitlaps
+        sprintf(buffer, "%d", systeme->creature[i].hitlaps);
         ecris(buffer, fichier);
     }
 
@@ -190,18 +194,24 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
             sprintf(temp, "map %s chargee", buffer);
             say(temp, console, systeme);
 
+            //nombre de creature
             lis(fichier, buffer);
 
             systeme->nbcreature = atoi(buffer);
             for(i = 0 ; i < systeme->nbcreature ; i++)
             {
+                //ID same as i
                 lis(fichier, buffer);
+                //name
                 lis(fichier, buffer);
                 ESP_setname(buffer, i, systeme);
+                //image
                 lis(fichier, buffer);
                 ESP_setimgpath(buffer, i, systeme);
+                //vie
                 lis(fichier, buffer);
                 ESP_setlife(atoi(buffer), i, systeme);
+                //aggressif
                 lis(fichier, buffer);
                 ui->aggressif_state[i] = atoi(buffer);
                 if(ui->aggressif_state[i] == true)
@@ -215,6 +225,8 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 systeme->creature[i].dps = atoi(buffer);
                 lis(fichier, buffer);
                 systeme->creature[i].Ratk = atoi(buffer);
+                lis(fichier, buffer);
+                systeme->creature[i].hitlaps = atoi(buffer);
             }
             sprintf(temp, "%d monstre en memoire", systeme->nbcreature);
             say(temp, console, systeme);
@@ -266,6 +278,7 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 ui->fixe_state[i] = atoi(buffer);
                 if (ui->fixe_state[i] == false)
                 {
+                    //compteur
                     lis(fichier, buffer);
                     data->mob[i].path.counter = atoi(buffer);
                     for (i2 = 0 ; i2 < data->mob[i].path.counter ; i2++)

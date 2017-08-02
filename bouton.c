@@ -213,6 +213,12 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
             systeme->pathmode = true;
         }
         break;
+    case 22:
+        console->answered = false;
+        console->active = true;
+        say ("nouveau temps entre dégats", console, systeme);
+        systeme->askID = i;
+        break;
     }
 }
 
@@ -270,6 +276,7 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
             console->answered = false;
 
             systeme->creature[systeme->activecreature].Rvision = atoi(console->lastanswer);
+            ESP_refreshmob(systeme);
             UI_updateESP(systeme->activecreature, systeme, ui);
         }
         break;
@@ -347,6 +354,17 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
             data->mob[data->mob_selected].angle = atoi(console->lastanswer);
 
             UI_updateMOB(data->mob_selected, systeme, ui, data);
+        }
+        break;
+    case 22:
+        if (console->answered)
+        {
+            systeme->asked = true;
+            console->answered = false;
+
+
+            systeme->creature[systeme->activecreature].hitlaps = atoi(console->lastanswer);
+            UI_updateESP(systeme->activecreature, systeme, ui);
         }
         break;
     }
