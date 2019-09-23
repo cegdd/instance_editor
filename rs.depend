@@ -1700,3 +1700,536 @@
 	<stdbool.h>
 	"image.h"
 
+1565201311 source:c:\users\antoi\documents\instance_editor\clavier.c
+	<stdio.h>
+	"systeme.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\systeme.h
+	<stdbool.h>
+	"image.h"
+	"espece.h"
+
+1565201965 c:\users\antoi\documents\instance_editor\image.h
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
+	<GL/gl.h>
+	<GL/glu.h>
+
+1565201311 c:\users\antoi\documents\instance_editor\espece.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"bouton.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\bouton.h
+	"data.h"
+	"console.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\data.h
+	"mob.h"
+
+1565201982 c:\users\antoi\documents\instance_editor\mob.h
+	<stdio.h>
+	<stdlib.h>
+	"C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_image.h"
+	<stdbool.h>
+	"image.h"
+	"path.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\path.h
+	<stdbool.h>
+	"image.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\console.h
+	<stdbool.h>
+	"image.h"
+
+1565201311 source:c:\users\antoi\documents\instance_editor\colision.c
+	<SDL.h>
+	<math.h>
+	<stdio.h>
+	<stdbool.h>
+
+1565202007 source:c:\users\antoi\documents\instance_editor\editeur.c
+	<stdio.h>
+	<stdlib.h>
+	"C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_image.h"
+	<GL/gl.h>
+	<GL/glu.h>
+	"ui.h"
+	"evenement.h"
+	"systeme.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\ui.h
+	<stdbool.h>
+	"image.h"
+	"bouton.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\evenement.h
+	<stdbool.h>
+
+1565202016 source:c:\users\antoi\documents\instance_editor\evenement.c
+	<stdlib.h>
+	<stdio.h>
+	"C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+	<string.h>
+	"systeme.h"
+	"ui.h"
+	"evenement.h"
+	"clavier.h"
+	"colision.h"
+	"editeur.h"
+	"path.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\clavier.h
+
+1565201311 c:\users\antoi\documents\instance_editor\colision.h
+	<stdbool.h>
+
+1565201311 c:\users\antoi\documents\instance_editor\editeur.h
+
+1565202028 source:c:\users\antoi\documents\instance_editor\image.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_image.h"
+	<GL/gl.h>
+	<GL/glu.h>
+	"systeme.h"
+	"ui.h"
+
+1565202043 source:c:\users\antoi\documents\instance_editor\main.c
+	<stdio.h>
+	<stdlib.h>
+	"C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
+	"C:\Users\antoi\Documents\programation\SDL2\SDL_image.h"
+	<GL/gl.h>
+	<GL/glu.h>
+	"systeme.h"
+	"editeur.h"
+
+1565202054 source:c:\users\antoi\documents\instance_editor\systeme.c
+	"C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+	<errno.h>
+	"console.h"
+	"data.h"
+	"systeme.h"
+	"main.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\main.h
+
+1569267163 source:c:\users\antoi\documents\instance_editor\ui.c
+	<stdio.h>
+	"ui.h"
+	"systeme.h"
+	"colision.h"
+
+1547325881 c:\users\antoi\documents\programation\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_joystick.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_sensor.h"
+	"SDL_shape.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<wchar.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	<sal.h>
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\begin_code.h
+
+1541002144 c:\users\antoi\documents\programation\sdl2\close_code.h
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	<process.h>
+	<stdlib.h>
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<arm_neon.h>
+	<mm3dnow.h>
+	<immintrin.h>
+	<mmintrin.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"SDL_endian.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_sensor.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1541002144 c:\users\antoi\documents\programation\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1565201311 source:c:\users\antoi\documents\instance_editor\coche.c
+
+1541001582 c:\users\antoi\documents\programation\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1565201311 source:c:\users\antoi\documents\instance_editor\console.c
+	<string.h>
+	<stdio.h>
+	"console.h"
+
+1565201311 source:c:\users\antoi\documents\instance_editor\bouton.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ui.h"
+	"colision.h"
+	"console.h"
+	"data.h"
+	"systeme.h"
+	"espece.h"
+	"editeur.h"
+	"save.h"
+
+1565201311 c:\users\antoi\documents\instance_editor\save.h
+	"data.h"
+	"systeme.h"
+
+1565201311 source:c:\users\antoi\documents\instance_editor\data.c
+	"data.h"
+	"bouton.h"
+
+1569267556 source:c:\users\antoi\documents\instance_editor\espece.c
+	<stdio.h>
+	"systeme.h"
+
+1565201311 source:c:\users\antoi\documents\instance_editor\mob.c
+
+1565201311 source:c:\users\antoi\documents\instance_editor\path.c
+	<stdio.h>
+	"path.h"
+	"data.h"
+
+1565201311 source:c:\users\antoi\documents\instance_editor\save.c
+	<stdio.h>
+	<stdlib.h>
+	"save.h"
+	"systeme.h"
+	"editeur.h"
+	"ui.h"
+

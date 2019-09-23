@@ -84,7 +84,7 @@ void ESP_refreshmob(struct DIVERSsysteme *systeme)
     for (i = 0 ; i < systeme->nbcreature ; i++)
     {
          systeme->creature[i].bouton.texture = imprime(systeme->creature[i].name, 114, BLANC, systeme, &systeme->creature[i].bouton.pos.w, &systeme->creature[i].bouton.pos.h);
-         setPos2(&systeme->creature[i].bouton.pos,screenw-396, screenh-70-(i*22));
+         setPos2(&systeme->creature[i].bouton.pos,screenw-396, 698-(i*22));
 
          sprintf(buffer, "rs/bestiaire/%s", systeme->creature[i].imgpath);
          systeme->creature[i].pict.texture =loadTextureandsize(buffer, &systeme->creature[i].pict.pos);

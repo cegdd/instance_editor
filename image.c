@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <SDL_image.h>
+#include "C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+#include "C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
+#include "C:\Users\antoi\Documents\programation\SDL2\SDL_image.h"
 
 #include <GL/gl.h>
 #include <GL/glu.h>
