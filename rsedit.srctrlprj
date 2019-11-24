@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+    <source_groups>
+        <source_group_93000290-a710-407a-8858-26c9504e948f>
+            <c_standard>c11</c_standard>
+            <codeblocks_project_path>rs.cbp</codeblocks_project_path>
+            <cpp_standard>c++17</cpp_standard>
+            <indexed_header_paths>
+                <indexed_header_path>./</indexed_header_path>
+            </indexed_header_paths>
+            <name>C/C++ from Code::Blocks</name>
+            <source_extensions>
+                <source_extension>.c</source_extension>
+                <source_extension>.cpp</source_extension>
+                <source_extension>.cxx</source_extension>
+                <source_extension>.cc</source_extension>
+            </source_extensions>
+            <status>enabled</status>
+            <type>C/C++ from Code::Blocks</type>
+        </source_group_93000290-a710-407a-8858-26c9504e948f>
+    </source_groups>
+    <version>8</version>
+</config>

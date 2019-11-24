@@ -112,7 +112,7 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
             UI_updateESP(0, systeme, ui);
         break;
 
-        case 8:
+        case 8://creer une race de mob
             console->answered = false;
             console->active = true;
             say("nom du mob : ", console, systeme);
@@ -120,15 +120,18 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
         break;
 
         case 9:
-            if (UI_getslidestate(ui) == UI_listmob)
+            if (systeme->nbcreature != 0)
             {
-                ESP_delete(systeme, data);
-                ESP_refreshmob(systeme);
-            }
-            else if (UI_getslidestate(ui) == UI_detail)
-            {
-                data->mob[data->mob_selected].actif = false;
-                UI_setslidestate(UI_close, ui);
+                if (UI_getslidestate(ui) == UI_listmob)
+                {
+                    ESP_delete(systeme, data);
+                    ESP_refreshmob(systeme);
+                }
+                else if (UI_getslidestate(ui) == UI_detail)
+                {
+                    data->mob[data->mob_selected].actif = false;
+                    UI_setslidestate(UI_listmob, ui);
+                }
             }
         break;
 

@@ -110,7 +110,7 @@ void ESP_create(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         systeme->creature[systeme->nbcreature].vitesse = 0;
         systeme->creature[systeme->nbcreature].hitlaps = 100;
 
-
+        systeme->activecreature = systeme->nbcreature;
         systeme->nbcreature++;
         sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
         say(buffer, console ,systeme);

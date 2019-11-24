@@ -198,7 +198,7 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*5*/creerbouton("rs/ui/depart.png",        480, screenh-40, 120, 40,           B_IMPOSSIBLE, B_none, ui);
     /*6*/creerbouton("rs/ui/monster.png",       600, screenh-40, 120, 40,           B_IMPOSSIBLE, B_none, ui);
     /*7*/creerbouton("rs/ui/fermer.png",        screenw-44, 684, 40,40,             B_IMPOSSIBLE, B_none, ui);
-    /*8*/creerbouton("rs/ui/creer.png",         screenw-260, 122, 120,40,           B_IMPOSSIBLE, B_none, ui);
+    /*8*/creerbouton("rs/ui/creer.png",         screenw-260, 122, 120,40,           B_IMPOSSIBLE, B_none, ui); //creer une race de mob
     /*9*/creerbouton("rs/ui/suppr.png",         screenw-130, 122, 120,40,           B_IMPOSSIBLE, B_none, ui);
     /*10*/creerboutontexte("nom",               screenw-396, 698,                   B_NORMAL, B_liste, ui, systeme);//nom
     /*11*/creerboutontexte("path",              screenw-276, 598,                   B_NORMAL, B_liste, ui, systeme);//chemin image
