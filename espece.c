@@ -15,9 +15,9 @@ struct BOUTON* ESP_getbouton_nom(int index, struct DIVERSsysteme *systeme)
 };
 
 
-void ESP_drawthumb(struct DIVERSsysteme *systeme)
+void ESP_drawthumb(GLuint texture, struct SDL_Rect *pos)
 {
-    draw_limitedpict(&systeme->creature[systeme->activecreature].pict, &systeme->pcreature);
+    draw(texture, pos);
 }
 
 void ESP_setlife(int life, int index, struct DIVERSsysteme *systeme)

@@ -36,7 +36,7 @@ void ESP_setboutonstate(int state, int index, struct DIVERSsysteme *systeme);
 void ESP_setdetailboutonstate(int state, int index, int indexdetail,  struct DIVERSsysteme *systeme);
 void ESP_setname(char* buffer, int index, struct DIVERSsysteme *systeme);
 
-void ESP_drawthumb(struct DIVERSsysteme *systeme);
+void ESP_drawthumb(GLuint texture, struct SDL_Rect *pos);
 
 
 struct BOUTON* ESP_getbouton_nom(int index, struct DIVERSsysteme *systeme);

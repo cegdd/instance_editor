@@ -55,7 +55,6 @@ GLuint imprime (char s[], int len, int couleur,struct DIVERSsysteme *systeme, in
 
 void draw_pict(struct pict *image);
 void draw_pict_selected(struct pict *image);
-void draw_limitedpict(struct pict *image, SDL_Rect *pos);
 void draw(GLuint texture, SDL_Rect *pos);
 void draw_button(struct BOUTON *bouton);
 void draw_color_black(SDL_Rect *pos);

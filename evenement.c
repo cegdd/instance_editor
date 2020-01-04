@@ -190,7 +190,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
                 ESP_setboutonstate(B_CLIQUER, i, systeme);
             }
         }
-        if (colisionbox(&systeme->pointeur.pos, &systeme->pcreature, true) == true)
+        if (colisionbox(&systeme->pointeur.pos, &ui->posthumbcreature, true) == true)
         {
             systeme->tookmob = true;
         }

@@ -23,6 +23,7 @@ struct UI
     bool                fixe_state[512];
     struct  SDL_Rect    loop_pos;
     bool                loop_state[512];
+    SDL_Rect posthumbcreature;
 
     struct BOUTON ListeBouton[64];
     int ListeNb;

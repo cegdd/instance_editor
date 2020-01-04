@@ -241,17 +241,6 @@ void draw_pict_selected(struct pict *image)
     glColor3ub(255, 255, 255);
 }
 
-void draw_limitedpict(struct pict *image, SDL_Rect *pos)
-{
-    glBindTexture(GL_TEXTURE_2D, image->texture);
-    glBegin(GL_QUADS);
-        glTexCoord2d(0,0);          glVertex2d(image->pos.x,image->pos.y);
-        glTexCoord2d(0,1);          glVertex2d(image->pos.x,image->pos.y+pos->h);
-        glTexCoord2d(1,1);          glVertex2d(image->pos.x+pos->w,image->pos.y+pos->h);
-        glTexCoord2d(1,0);          glVertex2d(image->pos.x+pos->w,image->pos.y);
-    glEnd();
-}
-
 void draw(GLuint texture, SDL_Rect *pos)
 {
     glBindTexture(GL_TEXTURE_2D, texture);

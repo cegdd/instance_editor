@@ -246,9 +246,10 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
     case 4:
         loadingmap(console, systeme, data);
         break;
-    case 8:
+    case 8: //creation d'une race de créature
         ESP_create(console, systeme);
         ESP_refreshmob(systeme);
+        UI_updateESP(systeme->activecreature, systeme, ui);
         break;
     case 11:
         if (console->answered)

@@ -50,7 +50,7 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
             draw_button(ESP_getbouton_nom(index, systeme));
             if (systeme->activecreature != -1)
             {
-                ESP_drawthumb(systeme);
+                ESP_drawthumb(systeme->creature[systeme->activecreature].pict.texture, &ui->posthumbcreature);
                 draw_button(&ui->ListeBouton[9]);
                 draw_button(&ui->ListeBouton[11]);
                 draw_button(&ui->ListeBouton[12]);
@@ -95,7 +95,7 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
 
             draw_coche(&ui->fixe_pos, ui->fixe_state[data->mob_selected], ui);
             draw_coche(&ui->loop_pos, ui->loop_state[data->mob_selected], ui);
-            ESP_drawthumb(systeme);
+            ESP_drawthumb(systeme->creature[systeme->activecreature].pict.texture, &ui->posthumbcreature);
 
             PATH_display(data);
         }
@@ -169,7 +169,7 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
 
     setPos4(&ui->fondliste.pos, screenw-400, 110, 400,618);
     setPos4(&ui->fonddetail.pos, screenw-282, 110, 400,618);
-
+	setPos4(&ui->posthumbcreature, screenw-200, 620, 100, 100);
     setPos4(&ui->aggressif_pos, screenw-186, 561, 12, 12);
     setPos4(&ui->fixe_pos, screenw-46, 558, 12, 12);
     setPos4(&ui->loop_pos, screenw-166, 538, 12, 12);

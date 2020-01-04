@@ -184,7 +184,7 @@ void initsystem(struct DIVERSsysteme *systeme)
 
 	systeme->echap = 0;
 	systeme->nbcreature = 0;
-	systeme->activecreature = 0;
+	systeme->activecreature = -1;
 
 	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);
 	systeme->police1 = TTF_OpenFont("rs/divers/arial.ttf", TAILLE_POLICE);
@@ -205,7 +205,6 @@ void initsystem(struct DIVERSsysteme *systeme)
 	systeme->ppobj.h = 50;
 
 	setPos4(&systeme->origine, 0, 0, 0, 0);
-	setPos4(&systeme->pcreature, 1100, 620, 100, 100);
 
 	systeme->oldpp.x = 0;
 	systeme->oldpp.y = 0;
