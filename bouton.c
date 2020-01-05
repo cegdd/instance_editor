@@ -90,10 +90,10 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
             systeme->continuer = false;
         break;
 
-        case 2:
+        case 2: //charger un projet
             console->answered = false;
             console->active = true;
-            say ("name of the project :", console, systeme);
+            say ("name of the project to load:", console, systeme);
             systeme->askID = i;
         break;
 
@@ -235,10 +235,12 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
         ui->ListeBouton[0].etat = B_IMPOSSIBLE;
         ui->ListeBouton[2].etat = B_IMPOSSIBLE;
         break;
-    case 2:
-        loadproject(console, systeme, data, ui);
-        ui->ListeBouton[0].etat = B_IMPOSSIBLE;
-        ui->ListeBouton[2].etat = B_IMPOSSIBLE;
+    case 2: //charger un projet
+        if( loadproject(console, systeme, data, ui) == EXIT_SUCCESS)
+        {
+            ui->ListeBouton[0].etat = B_IMPOSSIBLE;
+            ui->ListeBouton[2].etat = B_IMPOSSIBLE;
+        }
         break;
     case 3:
         saveproject(console, systeme, data, ui);

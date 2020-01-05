@@ -166,7 +166,7 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     say("projet enregistre avec succes", console, systeme);
 }
 
-void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data, struct UI *ui)
+bool loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data, struct UI *ui)
 {
     if (console->answered)
     {
@@ -306,12 +306,14 @@ void loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 
             systeme->projetouvert = true;
             fclose(fichier);
+            return EXIT_SUCCESS;
         }
         else
         {
             say("no project founded", console, systeme);
         }
     }
+    return EXIT_FAILURE;
 }
 
 
