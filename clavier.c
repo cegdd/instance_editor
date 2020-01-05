@@ -534,7 +534,7 @@ void intputtexteup(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 	}
 }
 
-void intputtextedown(struct DIVERSsysteme *systeme, struct CONSOLE *console)
+void intputtextedown(struct DIVERSsysteme *systeme)
 {
 	switch (systeme->evenement.key.keysym.scancode)
 	{
@@ -548,9 +548,6 @@ void intputtextedown(struct DIVERSsysteme *systeme, struct CONSOLE *console)
 		break;
 	case SDL_SCANCODE_RIGHT:
 		break;
-    case SDL_SCANCODE_BACKSPACE:
-        removeletter(console);
-        break;
     case SDL_SCANCODE_LSHIFT:
         systeme->shiftactif = true;
         break;

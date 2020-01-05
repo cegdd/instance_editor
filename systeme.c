@@ -139,11 +139,13 @@ void removeletter(struct CONSOLE *console)
     {
         console->curseur--;
         console->tampon[console->curseur] = '\0';
+        console->TamponToCursor[console->curseur] = '\0';
     }
     else if (console->curseur == 1)
     {
         console->curseur = 0;
         console->tampon[console->curseur] = '\0';
+        console->TamponToCursor[console->curseur] = '\0';
     }
 }
 
@@ -183,8 +185,8 @@ void initsystem(struct DIVERSsysteme *systeme)
 	systeme->pathmode       = false;
 
 	systeme->echap = 0;
-	systeme->nbcreature = 0;
-	systeme->activecreature = -1;
+	systeme->NBespece = 0;
+	systeme->ActiveEspece = -1;
 
 	systeme->police = TTF_OpenFont("rs/divers/dalek.ttf", TAILLE_POLICE);
 	systeme->police1 = TTF_OpenFont("rs/divers/arial.ttf", TAILLE_POLICE);

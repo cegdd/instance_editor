@@ -6,7 +6,7 @@
 #include "image.h"
 #include "bouton.h"
 
-enum{UI_close, UI_listmob, UI_detail};
+enum{SLIDE_CLOSE, SLIDE_ESPECE, SLIDE_DETAIL};
 
 
 struct UI

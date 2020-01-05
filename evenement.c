@@ -53,7 +53,7 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
             case SDL_KEYDOWN:
                 if (console->active)
                 {
-                    intputtextedown(systeme, console);
+                    intputtextedown(systeme);
                 }
                 else
                 {
@@ -64,6 +64,7 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
                 if (console->active)
                 {
                     intputtexteup(systeme, console);
+
                 }
                 else
                 {
@@ -83,9 +84,9 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 
     BT_pointeur(systeme, ui);
 
-    if (UI_getslidestate(ui) == UI_listmob)
+    if (UI_getslidestate(ui) == SLIDE_ESPECE)
     {
-        for (i = 0 ; i < systeme->nbcreature ; i++)
+        for (i = 0 ; i < systeme->NBespece ; i++)
         {//le nom du mob
             if ( colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i, systeme), true) == true &&
                 ESP_getboutonstate(i, systeme) != B_CLIQUER &&
@@ -99,6 +100,11 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
                         ESP_getboutonstate(i, systeme) != B_INUSE )
             {
                 ESP_setboutonstate(B_NORMAL, i, systeme);
+            }
+            else if (   ESP_getboutonstate(i, systeme) == B_INUSE &&
+                        systeme->ActiveEspece != i)
+            {
+                systeme->ActiveEspece = i;
             }
         }
     }
@@ -130,26 +136,26 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
 
     i = BT_up(systeme, ui);
 
-    if (UI_getslidestate(ui) == UI_listmob)
+    if (UI_getslidestate(ui) == SLIDE_ESPECE)
     {
-        for (i2 = 0 ; i2 < systeme->nbcreature ; i2++)
+        for (i2 = 0 ; i2 < systeme->NBespece ; i2++)
         {
             if ( colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i2, systeme), true) == true &&
                  ESP_getboutonstate(i2, systeme) == B_CLIQUER)
             {
                 int i3;
-                for (i3 = 0 ; i3 < systeme->nbcreature ; i3++)
+                for (i3 = 0 ; i3 < systeme->NBespece ; i3++)
                 {
                     ESP_setboutonstate(B_NORMAL, i3, systeme);
                 }
-                systeme->activecreature = i2;
-                ESP_setboutonstate(B_INUSE, systeme->activecreature, systeme);
+                systeme->ActiveEspece = i2;
+                ESP_setboutonstate(B_INUSE, systeme->ActiveEspece, systeme);
                 UI_updateESP(i2, systeme, ui);
                 break;
             }
         }
 
-       gestion_coche(&ui->aggressif_pos, &ui->aggressif_state[systeme->activecreature], ui, systeme);
+       gestion_coche(&ui->aggressif_pos, &ui->aggressif_state[systeme->ActiveEspece], ui, systeme);
 
         if (systeme->tookmob == true)
         {
@@ -157,7 +163,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
             systeme->tookmob = false;
         }
     }
-    else if (UI_getslidestate(ui) == UI_detail)
+    else if (UI_getslidestate(ui) == SLIDE_DETAIL)
     {
         gestion_coche(&ui->fixe_pos, &ui->fixe_state[data->mob_selected], ui, systeme);
         gestion_coche(&ui->loop_pos, &ui->loop_state[data->mob_selected], ui, systeme);
@@ -181,9 +187,9 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
 
     BT_down(ui);
 
-    if (UI_getslidestate(ui) == UI_listmob)
+    if (UI_getslidestate(ui) == SLIDE_ESPECE)
     {
-        for (i = 0 ; i < systeme->nbcreature ; i++)
+        for (i = 0 ; i < systeme->NBespece ; i++)
         {//le nom des mobs
             if (ESP_getboutonstate(i, systeme) == B_SURVOLER)
             {
@@ -206,7 +212,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
 
 void clic_DOWN_R(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *console)
 {
-    if (UI_getslidestate(ui) == UI_detail)
+    if (UI_getslidestate(ui) == SLIDE_DETAIL)
     {
         if (UI_is_inside(ui, systeme, console) == false && systeme->pathmode == true)
         {
@@ -244,7 +250,7 @@ void gestion_survol_mob (struct DIVERSsysteme *systeme, struct UI *ui, struct DA
             if (data->mob[i].state == B_SURVOLER &&
                 colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
             {
-                UI_setslidestate(UI_detail, ui);
+                UI_setslidestate(SLIDE_DETAIL, ui);
                 systeme->pathmode = false;
                 data->mob[i].state = B_NORMAL;
                 for(i2 = 0 ; i2 < data->nbmonstre ; i2++)

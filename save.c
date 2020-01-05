@@ -46,9 +46,9 @@ void saveproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
     ecris(data->projectmap, fichier);
 
     //number of espece
-    sprintf(buffer, "%d", systeme->nbcreature);
+    sprintf(buffer, "%d", systeme->NBespece);
     ecris(buffer, fichier);
-    for(i=0 ; i < systeme->nbcreature ; i++)
+    for(i=0 ; i < systeme->NBespece ; i++)
     {
         //ID
         sprintf(buffer, "%d", i);
@@ -197,9 +197,10 @@ bool loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
             //nombre de creature
             lis(fichier, buffer);
 
-            systeme->nbcreature = atoi(buffer);
-            for(i = 0 ; i < systeme->nbcreature ; i++)
+            systeme->NBespece = atoi(buffer);
+            for(i = 0 ; i < systeme->NBespece ; i++)
             {
+                ESP_setboutonstate(B_NORMAL, i, systeme);
                 //ID same as i
                 lis(fichier, buffer);
                 //name
@@ -228,7 +229,7 @@ bool loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
                 lis(fichier, buffer);
                 systeme->creature[i].hitlaps = atoi(buffer);
             }
-            sprintf(temp, "%d monstre en memoire", systeme->nbcreature);
+            sprintf(temp, "%d monstre en memoire", systeme->NBespece);
             say(temp, console, systeme);
 
             //si le joueur est poser

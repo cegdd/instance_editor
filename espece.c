@@ -81,7 +81,7 @@ void ESP_refreshmob(struct DIVERSsysteme *systeme)
     char buffer[1024] = {'\0'};
     int i;
 
-    for (i = 0 ; i < systeme->nbcreature ; i++)
+    for (i = 0 ; i < systeme->NBespece ; i++)
     {
          systeme->creature[i].bouton.texture = imprime(systeme->creature[i].name, 114, BLANC, systeme, &systeme->creature[i].bouton.pos.w, &systeme->creature[i].bouton.pos.h);
          setPos2(&systeme->creature[i].bouton.pos,screenw-396, 698-(i*22));
@@ -101,17 +101,17 @@ void ESP_create(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         systeme->asked = false;
         console->answered = false;
 
-        sprintf(systeme->creature[systeme->nbcreature].imgpath, "noimage.png");
-        sprintf(systeme->creature[systeme->nbcreature].name, "%s", console->lastanswer);
-        systeme->creature[systeme->nbcreature].vie = 0;
-        systeme->creature[systeme->nbcreature].dps = 0;
-        systeme->creature[systeme->nbcreature].Ratk = 0;
-        systeme->creature[systeme->nbcreature].Rvision = 0;
-        systeme->creature[systeme->nbcreature].vitesse = 0;
-        systeme->creature[systeme->nbcreature].hitlaps = 100;
+        sprintf(systeme->creature[systeme->NBespece].imgpath, "noimage.png");
+        sprintf(systeme->creature[systeme->NBespece].name, "%s", console->lastanswer);
+        systeme->creature[systeme->NBespece].vie = 0;
+        systeme->creature[systeme->NBespece].dps = 0;
+        systeme->creature[systeme->NBespece].Ratk = 0;
+        systeme->creature[systeme->NBespece].Rvision = 0;
+        systeme->creature[systeme->NBespece].vitesse = 0;
+        systeme->creature[systeme->NBespece].hitlaps = 100;
 
-        systeme->activecreature = systeme->nbcreature;
-        systeme->nbcreature++;
+        systeme->ActiveEspece = systeme->NBespece;
+        systeme->NBespece++;
         sprintf(buffer, "monstre %s ajouté avec succès", console->lastanswer);
         say(buffer, console ,systeme);
     }
@@ -123,13 +123,13 @@ void ESP_delete(struct DIVERSsysteme *systeme, struct DATA *data)
 
         for(i = 0 ; i < data->nbmonstre ; i++)
     {
-        if (data->mob[i].ID == systeme->activecreature)
+        if (data->mob[i].ID == systeme->ActiveEspece)
         {
             data->mob[i].actif = false;
         }
     }
 
-    for(i = systeme->activecreature+1 ; i < systeme->nbcreature ; i++)
+    for(i = systeme->ActiveEspece+1 ; i < systeme->NBespece ; i++)
     {
         systeme->creature[i-1].vie = systeme->creature[i].vie;
         sprintf(systeme->creature[i-1].imgpath, "%s", systeme->creature[i].imgpath);
@@ -137,5 +137,5 @@ void ESP_delete(struct DIVERSsysteme *systeme, struct DATA *data)
     }
 
 
-    systeme->nbcreature--;
+    systeme->NBespece--;
 }

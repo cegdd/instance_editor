@@ -21,8 +21,8 @@ struct DIVERSsysteme
     bool continuer;
     int echap;
     int typeclavier;
-    int nbcreature;
-    int activecreature;
+    int NBespece;
+    int ActiveEspece;
 
     struct pict pointeur;
     struct ESPECE creature[128];

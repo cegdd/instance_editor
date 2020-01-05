@@ -69,74 +69,78 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
 {
     switch (i)
     {
-        case 3:
-            systeme->askID = i;
+        case B_SAVE_PROJECT:
+            saveproject(console, systeme, data, ui);
         break;
-        case 0:
+        case B_NEW_PROJECT:
             console->answered = false;
             console->active = true;
-            say ("name of the project :", console, systeme);
+            say ("name of the project to create:", console, systeme);
             systeme->askID = i;
         break;
 
-        case 4:
+        case B_LOAD_MAP:
             say ("name of the map to load :", console, systeme);
             console->answered = false;
             console->active = true;
             systeme->askID = i;
         break;
 
-        case 1:
+        case B_QUITTER:
             systeme->continuer = false;
         break;
 
-        case 2: //charger un projet
+        case B_LOAD_PROJECT:
             console->answered = false;
             console->active = true;
             say ("name of the project to load:", console, systeme);
             systeme->askID = i;
         break;
 
-        case 5:
+        case B_PLAYER_START:
             console->answered = false;
             console->active = true;
             systeme->askID = i;
             say ("placez le joueur a ca position de depart", console, systeme);
         break;
 
-        case 6://creature
-            UI_setslidestate(UI_listmob, ui);
+        case B_SLIDE_CREATURE://creature
+            UI_setslidestate(SLIDE_ESPECE, ui);
             console->answered = false;
             console->active = true;
-            systeme->activecreature = -1;
+            if(systeme->NBespece > 0)
+            {
+                systeme->ActiveEspece = 0;
+            }
+            systeme->ActiveEspece = -1;
             UI_updateESP(0, systeme, ui);
         break;
 
-        case 8://creer une race de mob
+        case B_NEW_CREATURE:
             console->answered = false;
             console->active = true;
             say("nom du mob : ", console, systeme);
             systeme->askID = i;
         break;
 
-        case 9:
-            if (systeme->nbcreature != 0)
+        case B_DELETE_CREATURE_MOB:
+            if (systeme->NBespece != 0)
             {
-                if (UI_getslidestate(ui) == UI_listmob)
+                if (UI_getslidestate(ui) == SLIDE_ESPECE)
                 {
                     ESP_delete(systeme, data);
                     ESP_refreshmob(systeme);
                 }
-                else if (UI_getslidestate(ui) == UI_detail)
+                else if (UI_getslidestate(ui) == SLIDE_DETAIL)
                 {
                     data->mob[data->mob_selected].actif = false;
-                    UI_setslidestate(UI_listmob, ui);
+                    UI_setslidestate(SLIDE_CLOSE, ui);
                 }
             }
         break;
 
-        case 7:
-            UI_setslidestate(UI_close, ui);
+        case B_SLIDE_CLOSE:
+            UI_setslidestate(SLIDE_CLOSE, ui);
             break;
         case 11:
         console->answered = false;
@@ -230,28 +234,25 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
 
     switch (systeme->askID)
     {
-    case 0:
+    case B_NEW_PROJECT:
         createproject(console, systeme, data);
         ui->ListeBouton[0].etat = B_IMPOSSIBLE;
         ui->ListeBouton[2].etat = B_IMPOSSIBLE;
         break;
-    case 2: //charger un projet
+    case B_LOAD_PROJECT:
         if( loadproject(console, systeme, data, ui) == EXIT_SUCCESS)
         {
             ui->ListeBouton[0].etat = B_IMPOSSIBLE;
             ui->ListeBouton[2].etat = B_IMPOSSIBLE;
         }
         break;
-    case 3:
-        saveproject(console, systeme, data, ui);
-        break;
-    case 4:
+    case B_LOAD_MAP:
         loadingmap(console, systeme, data);
         break;
-    case 8: //creation d'une race de créature
+    case B_NEW_CREATURE:
         ESP_create(console, systeme);
         ESP_refreshmob(systeme);
-        UI_updateESP(systeme->activecreature, systeme, ui);
+        UI_updateESP(systeme->ActiveEspece, systeme, ui);
         break;
     case 11:
         if (console->answered)
@@ -259,9 +260,9 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
             systeme->asked = true;
             console->answered = false;
 
-            ESP_setimgpath(console->lastanswer, systeme->activecreature, systeme);
+            ESP_setimgpath(console->lastanswer, systeme->ActiveEspece, systeme);
             ESP_refreshmob(systeme);
-            UI_updateESP(systeme->activecreature, systeme, ui);
+            UI_updateESP(systeme->ActiveEspece, systeme, ui);
         }
         break;
     case 12:
@@ -270,9 +271,9 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
             systeme->asked = true;
             console->answered = false;
 
-            ESP_setlife(atoi(console->lastanswer), systeme->activecreature, systeme);
+            ESP_setlife(atoi(console->lastanswer), systeme->ActiveEspece, systeme);
             ESP_refreshmob(systeme);
-            UI_updateESP(systeme->activecreature, systeme, ui);
+            UI_updateESP(systeme->ActiveEspece, systeme, ui);
         }
         break;
     case 13:
@@ -281,9 +282,9 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
             systeme->asked = true;
             console->answered = false;
 
-            systeme->creature[systeme->activecreature].Rvision = atoi(console->lastanswer);
+            systeme->creature[systeme->ActiveEspece].Rvision = atoi(console->lastanswer);
             ESP_refreshmob(systeme);
-            UI_updateESP(systeme->activecreature, systeme, ui);
+            UI_updateESP(systeme->ActiveEspece, systeme, ui);
         }
         break;
     case 14:
@@ -292,8 +293,8 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
             systeme->asked = true;
             console->answered = false;
 
-            systeme->creature[systeme->activecreature].vitesse = atoi(console->lastanswer);
-            UI_updateESP(systeme->activecreature, systeme, ui);
+            systeme->creature[systeme->ActiveEspece].vitesse = atoi(console->lastanswer);
+            UI_updateESP(systeme->ActiveEspece, systeme, ui);
         }
         break;
     case 15:
@@ -303,8 +304,8 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
             console->answered = false;
 
 
-            systeme->creature[systeme->activecreature].dps = atoi(console->lastanswer);
-            UI_updateESP(systeme->activecreature, systeme, ui);
+            systeme->creature[systeme->ActiveEspece].dps = atoi(console->lastanswer);
+            UI_updateESP(systeme->ActiveEspece, systeme, ui);
         }
         break;
     case 16:
@@ -314,8 +315,8 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
             console->answered = false;
 
 
-            systeme->creature[systeme->activecreature].Ratk = atoi(console->lastanswer);
-            UI_updateESP(systeme->activecreature, systeme, ui);
+            systeme->creature[systeme->ActiveEspece].Ratk = atoi(console->lastanswer);
+            UI_updateESP(systeme->ActiveEspece, systeme, ui);
         }
         break;
     case 17:
@@ -365,12 +366,13 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
     case 22:
         if (console->answered)
         {
+
             systeme->asked = true;
             console->answered = false;
 
 
-            systeme->creature[systeme->activecreature].hitlaps = atoi(console->lastanswer);
-            UI_updateESP(systeme->activecreature, systeme, ui);
+            systeme->creature[systeme->ActiveEspece].hitlaps = atoi(console->lastanswer);
+            UI_updateESP(systeme->ActiveEspece, systeme, ui);
         }
         break;
     }
@@ -378,11 +380,11 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
 
 bool isInTheGoodPanel(struct UI *ui, int index)
 {
-    if (ui->ListeBouton[index].flag == B_detail && ui->slidestate == UI_detail)
+    if (ui->ListeBouton[index].flag == B_detail && ui->slidestate == SLIDE_DETAIL)
     {
         return true;
     }
-    else if (ui->ListeBouton[index].flag == B_liste && ui->slidestate == UI_listmob)
+    else if (ui->ListeBouton[index].flag == B_liste && ui->slidestate == SLIDE_ESPECE)
     {
         return true;
     }

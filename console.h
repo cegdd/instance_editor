@@ -18,6 +18,7 @@ struct CONSOLE
     int indice[10];
     int LenToCursor;
     int actif;
+
     char string[10][1024];
     char tampon[1024];
     char TamponToCursor[1024];

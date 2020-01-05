@@ -12,17 +12,17 @@ void UI_setslidestate (int state, struct UI* ui)
     ui->slidestate = state;
     switch(state)
     {
-    case UI_close:
+    case SLIDE_CLOSE:
         ui->ListeBouton[7].etat =  B_IMPOSSIBLE;
         ui->ListeBouton[8].etat =  B_IMPOSSIBLE;
         ui->ListeBouton[9].etat =  B_IMPOSSIBLE;
         break;
-    case UI_listmob:
+    case SLIDE_ESPECE:
         ui->ListeBouton[7].etat =  B_NORMAL;
         ui->ListeBouton[8].etat =  B_NORMAL;
         ui->ListeBouton[9].etat =  B_NORMAL;
         break;
-    case UI_detail:
+    case SLIDE_DETAIL:
         ui->ListeBouton[7].etat =  B_NORMAL;
         ui->ListeBouton[8].etat =  B_IMPOSSIBLE;
         ui->ListeBouton[9].etat =  B_NORMAL;
@@ -39,18 +39,18 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
 {
     int index;
 
-    if(UI_getslidestate(ui) == UI_listmob)
+    if(UI_getslidestate(ui) == SLIDE_ESPECE)
     {
         draw_pict(&ui->fondliste);
         draw_button(&ui->ListeBouton[7]);
         draw_button(&ui->ListeBouton[8]);
 
-        for (index = 0 ; index < systeme->nbcreature ; index++)
+        for (index = 0 ; index < systeme->NBespece ; index++)
         {
             draw_button(ESP_getbouton_nom(index, systeme));
-            if (systeme->activecreature != -1)
+            if (systeme->ActiveEspece != -1)
             {
-                ESP_drawthumb(systeme->creature[systeme->activecreature].pict.texture, &ui->posthumbcreature);
+                ESP_drawthumb(systeme->creature[systeme->ActiveEspece].pict.texture, &ui->posthumbcreature);
                 draw_button(&ui->ListeBouton[9]);
                 draw_button(&ui->ListeBouton[11]);
                 draw_button(&ui->ListeBouton[12]);
@@ -66,14 +66,16 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
                 draw_pict(&ui->Listetexte[3].img);
                 draw_pict(&ui->Listetexte[4].img);
                 draw_pict(&ui->Listetexte[11].img);
+                draw_pict(&ui->Listetexte[12].img);
+                draw_pict(&ui->Listetexte[13].img);
 
-                draw_coche(&ui->aggressif_pos, ui->aggressif_state[systeme->activecreature], ui);
+                draw_coche(&ui->aggressif_pos, ui->aggressif_state[systeme->ActiveEspece], ui);
             }
         }
     }
-    else if (UI_getslidestate(ui) == UI_detail)
+    else if (UI_getslidestate(ui) == SLIDE_DETAIL)
     {
-        systeme->activecreature = data->mob[data->mob_selected].ID;
+        systeme->ActiveEspece = data->mob[data->mob_selected].ID;
 
         if (data->mob_selected != -1)
         {
@@ -95,7 +97,7 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
 
             draw_coche(&ui->fixe_pos, ui->fixe_state[data->mob_selected], ui);
             draw_coche(&ui->loop_pos, ui->loop_state[data->mob_selected], ui);
-            ESP_drawthumb(systeme->creature[systeme->activecreature].pict.texture, &ui->posthumbcreature);
+            ESP_drawthumb(systeme->creature[systeme->ActiveEspece].pict.texture, &ui->posthumbcreature);
 
             PATH_display(data);
         }
@@ -165,7 +167,7 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
 {
     int i = 0;
 
-    UI_setslidestate(UI_close, ui);
+    UI_setslidestate(SLIDE_CLOSE, ui);
 
     setPos4(&ui->fondliste.pos, screenw-400, 110, 400,618);
     setPos4(&ui->fonddetail.pos, screenw-282, 110, 400,618);
@@ -201,8 +203,8 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*8*/creerbouton("rs/ui/creer.png",         screenw-260, 122, 120,40,           B_IMPOSSIBLE, B_none, ui); //creer une race de mob
     /*9*/creerbouton("rs/ui/suppr.png",         screenw-130, 122, 120,40,           B_IMPOSSIBLE, B_none, ui);
     /*10*/creerboutontexte("nom",               screenw-396, 698,                   B_NORMAL, B_liste, ui, systeme);//nom
-    /*11*/creerboutontexte("path",              screenw-276, 598,                   B_NORMAL, B_liste, ui, systeme);//chemin image
-    /*12*/creerboutontexte("life",              screenw-276, 578,                   B_NORMAL, B_liste, ui, systeme);//vie
+    /*11*/creerboutontexte("path",              screenw-200, 598,                   B_NORMAL, B_liste, ui, systeme);//chemin image
+    /*12*/creerboutontexte("life",              screenw-226, 578,                   B_NORMAL, B_liste, ui, systeme);//vie
     /*13*/creerboutontexte("100",               screenw-46, 558,                    B_IMPOSSIBLE, B_liste, ui, systeme);//rayon de vision
     /*14*/creerboutontexte("50",                screenw-186, 538,                   B_NORMAL, B_liste, ui, systeme);//vitesse
     /*15*/creerboutontexte("5",                 screenw-226, 518,                   B_NORMAL, B_liste, ui, systeme);//dps
@@ -226,6 +228,8 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*9*/creertexte("fixe:",        screenw-166, 558, ui, systeme);
     /*10*/creertexte("loop:",       screenw-276, 538, ui, systeme);
     /*11*/creertexte("hit laps:",   screenw-276, 498, ui, systeme);
+    /*12*/creertexte("vie:",        screenw-276, 578, ui, systeme);
+    /*13*/creertexte("image:",        screenw-276, 598, ui, systeme);
 
     ui->fondliste.texture =       loadTexture ("rs/ui/fondmonstre.png");
     ui->fonddetail.texture =       loadTexture ("rs/ui/fonddetail.png");
@@ -259,11 +263,11 @@ void UI_updateMOB(int index, struct DIVERSsysteme *systeme, struct UI *ui, struc
 
 int UI_is_inside(struct UI *ui, struct DIVERSsysteme *systeme, struct CONSOLE *console)
 {
-    if (UI_getslidestate(ui) == UI_detail && colisionbox(&systeme->pointeur.pos, &ui->fonddetail.pos, true) == true)
+    if (UI_getslidestate(ui) == SLIDE_DETAIL && colisionbox(&systeme->pointeur.pos, &ui->fonddetail.pos, true) == true)
     {
        return true;
     }
-    else if (UI_getslidestate(ui) == UI_listmob && colisionbox(&systeme->pointeur.pos, &ui->fondliste.pos, true) == true)
+    else if (UI_getslidestate(ui) == SLIDE_ESPECE && colisionbox(&systeme->pointeur.pos, &ui->fondliste.pos, true) == true)
     {
        return true;
     }

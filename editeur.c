@@ -10,12 +10,12 @@
 #include "ui.h"
 #include "evenement.h"
 #include "systeme.h"
+#include "editeur.h"
 
 extern int screenh, screenw;
 
 int editeur(struct DIVERSsysteme *systeme)
 {
-    int index;
     struct UI ui;
     struct CONSOLE console;
     struct DATA data;
@@ -25,12 +25,6 @@ int editeur(struct DIVERSsysteme *systeme)
 
     while(systeme->continuer)
     {
-        /*effacage de l'écran*/
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) ;
-        SDL_GetMouseState(&systeme->pointeur.pos.x, &systeme->pointeur.pos.y);
-        /*reverse for OpenGL*/
-        systeme->pointeur.pos.y = (systeme->pointeur.pos.y - screenh + systeme->pointeur.pos.h) * -1;
-
         boucleevent(systeme, &ui, &console, &data);
         pointeur(systeme, &ui, &data);
 
@@ -39,86 +33,96 @@ int editeur(struct DIVERSsysteme *systeme)
             BT_update_loop(&console, systeme, &ui, &data);
         }
 
-        if (glIsTexture(data.map.texture))
+        affichage(&console, systeme, &ui, &data);
+
+        SDL_Delay(10);
+    }
+    return EXIT_SUCCESS;
+}
+
+void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
+{
+    int index;
+
+    if (glIsTexture(data->map.texture))
+    {
+        data->map.pos.x = data->map.x + systeme->origine.x;
+        data->map.pos.y = data->map.y + systeme->origine.y;
+        draw_pict(&data->map);
+    }
+
+    if (data->joueuractif)
+    {
+        draw_hookpict(&data->joueur, &data->map.pos);
+    }
+
+    for(index = 0 ; index < data->nbmonstre ; index++)
+    {
+        if(data->mob[index].actif == true)
         {
-            data.map.pos.x = data.map.x + systeme->origine.x;
-            data.map.pos.y = data.map.y + systeme->origine.y;
-            draw_pict(&data.map);
-        }
-        if (data.joueuractif)
-        {
-            draw_hookpict(&data.joueur, &data.map.pos);
-        }
-        for(index = 0 ; index < data.nbmonstre ; index++)
-        {
-            if(data.mob[index].actif == true)
+            data->mob[index].monstre.pict.pos.w = data->mob[index].old.w * data->mob[index].scale;
+            data->mob[index].monstre.pict.pos.h = data->mob[index].old.h * data->mob[index].scale;
+            if(data->mob[index].selected == false)
             {
-                data.mob[index].monstre.pict.pos.w = data.mob[index].old.w * data.mob[index].scale;
-                data.mob[index].monstre.pict.pos.h = data.mob[index].old.h * data.mob[index].scale;
-                if(data.mob[index].selected == false)
-                {
-                    turn_draw_hookpict(data.mob[index].angle, &data.mob[index].monstre, &data.map.pos);
-                }
-                else
-                {
-                    turn_draw_hookpict_selected(data.mob[index].angle, &data.mob[index].monstre, &data.map.pos);
-                }
+                turn_draw_hookpict(data->mob[index].angle, &data->mob[index].monstre, &data->map.pos);
+            }
+            else
+            {
+                turn_draw_hookpict_selected(data->mob[index].angle, &data->mob[index].monstre, &data->map.pos);
             }
         }
+    }
 
-
-
-
-        //   ui ************************************
-
-        if (systeme->projetouvert == true && ui.ListeBouton[4].etat == B_IMPOSSIBLE)
+    if (systeme->projetouvert == true && ui->ListeBouton[4].etat == B_IMPOSSIBLE)
         {
-            ui.ListeBouton[4].etat = B_NORMAL;
-            ui.ListeBouton[3].etat = B_NORMAL;
-            ui.ListeBouton[5].etat = B_NORMAL;
-            ui.ListeBouton[6].etat = B_NORMAL;
+            ui->ListeBouton[4].etat = B_NORMAL;
+            ui->ListeBouton[3].etat = B_NORMAL;
+            ui->ListeBouton[5].etat = B_NORMAL;
+            ui->ListeBouton[6].etat = B_NORMAL;
         }
 
-        draw_button(&ui.ListeBouton[0]);
-        draw_button(&ui.ListeBouton[1]);
-        draw_button(&ui.ListeBouton[3]);
-        draw_button(&ui.ListeBouton[4]);
-        draw_button(&ui.ListeBouton[2]);
-        draw_button(&ui.ListeBouton[5]);
-        draw_button(&ui.ListeBouton[6]);
+        draw_button(&ui->ListeBouton[0]);
+        draw_button(&ui->ListeBouton[1]);
+        draw_button(&ui->ListeBouton[3]);
+        draw_button(&ui->ListeBouton[4]);
+        draw_button(&ui->ListeBouton[2]);
+        draw_button(&ui->ListeBouton[5]);
+        draw_button(&ui->ListeBouton[6]);
 
-        if (UI_getslidestate(&ui) != UI_close)
+        if (UI_getslidestate(ui) != SLIDE_CLOSE)
         {
-            UI_drawslide(&ui, systeme, &data);
+            UI_drawslide(ui, systeme, data);
         }
 
-        draw_pict(&console.console);
-        if (console.active)
+        draw_pict(&console->console);
+        if (console->active)
         {
-            draw_pict(&console.shooton);
+            draw_pict(&console->shooton);
         }
         else
         {
-            draw_pict(&console.shootoff);
+            draw_pict(&console->shootoff);
         }
         for(index = 0 ; index < 10 ; index++)
         {
-            draw_pict(&console.texte[index].img);
+            draw_pict(&console->texte[index].img);
         }
-        if(console.tampon[0] != '\0')
-        {
-        console.ecris.img.texture = imprime (console.tampon, screenw, BLANC, systeme, &console.ecris.lenght, &console.ecris.high);
-        console.ecris.img.pos.w = console.ecris.lenght;
+        if(console->tampon[0] != '\0')
 
-        draw_pict(&console.ecris.img);
+        {
+        console->ecris.img.texture = imprime (console->tampon, screenw, BLANC, systeme, &console->ecris.lenght, &console->ecris.high);
+        console->ecris.img.pos.w = console->ecris.lenght;
+
+        draw_pict(&console->ecris.img);
         }
+
 
         if((SDL_GetTicks()/1000) % 2 == 0)
         {
-            TTF_SizeText(systeme->police1,console.TamponToCursor,&console.LenToCursor,NULL);
-            console.cursor.pos.x = console.ecris.img.pos.x + console.LenToCursor;
+            TTF_SizeText(systeme->police1,console->TamponToCursor,&console->LenToCursor,NULL);
+            console->cursor.pos.x = console->ecris.img.pos.x + console->LenToCursor;
 
-            draw_pict(&console.cursor);
+            draw_pict(&console->cursor);
         }
 
         if (systeme->tookmob == true)
@@ -126,17 +130,20 @@ int editeur(struct DIVERSsysteme *systeme)
             setPos4(&systeme->temp,
                     systeme->pointeur.pos.x,
                     systeme->pointeur.pos.y + systeme->pointeur.pos.h,
-                    ESP_getwidth(systeme->activecreature, systeme),
-                    ESP_gethight(systeme->activecreature, systeme));
-            draw(ESP_gettexture(systeme->activecreature, systeme), &systeme->temp);
+                    ESP_getwidth(systeme->ActiveEspece, systeme),
+                    ESP_gethight(systeme->ActiveEspece, systeme));
+            draw(ESP_gettexture(systeme->ActiveEspece, systeme), &systeme->temp);
         }
 
         glFlush();
         SDL_GL_SwapWindow(systeme->screen);
 
-        SDL_Delay(25);
-    }
-    return EXIT_SUCCESS;
+        /*effacage de l'écran*/
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) ;
+        SDL_GetMouseState(&systeme->pointeur.pos.x, &systeme->pointeur.pos.y);
+        /*reverse for OpenGL*/
+        systeme->pointeur.pos.y = (systeme->pointeur.pos.y - screenh + systeme->pointeur.pos.h) * -1;
+
 }
 
 void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct DATA *data)
@@ -234,15 +241,15 @@ void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *conso
 
     data->mob[check].monstre.translation.x = (systeme->evenement.motion.x - data->mob[check].monstre.pict.pos.w/2) - data->map.pos.x;
     data->mob[check].monstre.translation.y = (screenh - systeme->evenement.motion.y - data->mob[check].monstre.pict.pos.h/2) - data->map.pos.y;
-    data->mob[check].monstre.pict.pos.w = ESP_getwidth(systeme->activecreature, systeme);
-    data->mob[check].monstre.pict.pos.h = ESP_gethight(systeme->activecreature, systeme);
-    data->mob[check].old.w = ESP_getwidth(systeme->activecreature, systeme);
-    data->mob[check].old.h = ESP_gethight(systeme->activecreature, systeme);
-    data->mob[check].monstre.pict.texture = ESP_gettexture(systeme->activecreature, systeme);
-    sprintf(data->mob[check].name, ESP_getname(systeme->activecreature , systeme));
+    data->mob[check].monstre.pict.pos.w = ESP_getwidth(systeme->ActiveEspece, systeme);
+    data->mob[check].monstre.pict.pos.h = ESP_gethight(systeme->ActiveEspece, systeme);
+    data->mob[check].old.w = ESP_getwidth(systeme->ActiveEspece, systeme);
+    data->mob[check].old.h = ESP_gethight(systeme->ActiveEspece, systeme);
+    data->mob[check].monstre.pict.texture = ESP_gettexture(systeme->ActiveEspece, systeme);
+    sprintf(data->mob[check].name, ESP_getname(systeme->ActiveEspece , systeme));
     say(data->mob[check].name, console, systeme);
-    data->mob[check].vie = ESP_getlife(systeme->activecreature, systeme);
-    data->mob[check].ID = systeme->activecreature;
+    data->mob[check].vie = ESP_getlife(systeme->ActiveEspece, systeme);
+    data->mob[check].ID = systeme->ActiveEspece;
     data->mob[check].actif = true;
     say("monstre positionné", console, systeme);
 }
