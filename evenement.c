@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+#include "SDL2/SDL.h"
 #include <string.h>
 
 #include "systeme.h"
@@ -26,6 +26,7 @@ void boucleevent (struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *
                     systeme->origine.x += systeme->evenement.motion.xrel;
                     systeme->origine.y -= systeme->evenement.motion.yrel;
                 }
+                break;
 		    case SDL_MOUSEBUTTONDOWN:
                 if( systeme->evenement.button.button == SDL_BUTTON_LEFT )
                 {

@@ -1,7 +1,7 @@
 #ifndef IMAGEH
 #define IMAGEH
 
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
+#include "SDL2/SDL_ttf.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
 
@@ -44,8 +44,6 @@ struct moving_pict
 
 SDL_Texture* LoadingImage(char* emplacement, int transparence,struct DIVERSsysteme *systeme);
 
-Uint8 obtenirPixel(SDL_Surface *surface, SDL_Point *pix);
-
 SDL_Surface * flipSurface(SDL_Surface * surface);
 
 GLuint convertTexture(SDL_Surface *surface);
@@ -58,9 +56,6 @@ void draw_pict_selected(struct pict *image);
 void draw(GLuint texture, SDL_Rect *pos);
 void draw_button(struct BOUTON *bouton);
 void draw_color_black(SDL_Rect *pos);
-
-void setPos4(SDL_Rect *pos, int x, int y, int w, int h);
-void setPos2(SDL_Rect *pos, int x, int y);
 void copypos(SDL_Rect *source, SDL_Rect *target);
 void Turn_And_Draw (struct pict *img, float angle);
 void Sync_Moving_Pict(int time, struct moving_pict *m_pict);

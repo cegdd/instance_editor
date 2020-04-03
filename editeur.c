@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL.h"
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL_image.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
+#include "SDL2/SDL_image.h"
 
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -11,6 +11,8 @@
 #include "evenement.h"
 #include "systeme.h"
 #include "editeur.h"
+
+#include <LIBcegdd_ui.h>
 
 extern int screenh, screenw;
 
@@ -127,7 +129,7 @@ void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI
 
         if (systeme->tookmob == true)
         {
-            setPos4(&systeme->temp,
+            CEGDD_UI_setPos4(&systeme->temp,
                     systeme->pointeur.pos.x,
                     systeme->pointeur.pos.y + systeme->pointeur.pos.h,
                     ESP_getwidth(systeme->ActiveEspece, systeme),
@@ -151,7 +153,7 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
     if (console->answered)
     {
         systeme->asked = false;
-        char temp[128];
+        char temp[1132];
         console->answered = false;
         systeme->asked = false;
 
@@ -203,13 +205,13 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
 {
     if (console->answered)
     {
-        char temp2[128];
+        char temp2[1132];
 
         systeme->asked = false;
         console->answered = false;
         systeme->asked = false;
 
-        sprintf(data->projectname, "%s", console->lastanswer);
+        snprintf(data->projectname, 63, "%s", console->lastanswer); //TO DO vérifier qu'il y a moins de 64 caractère pour le projectname
         sprintf(temp2, "projet \"%s\" crée\n", data->projectname);
         say(temp2, console, systeme);
 
@@ -246,7 +248,7 @@ void add(struct DIVERSsysteme *systeme, struct DATA *data, struct CONSOLE *conso
     data->mob[check].old.w = ESP_getwidth(systeme->ActiveEspece, systeme);
     data->mob[check].old.h = ESP_gethight(systeme->ActiveEspece, systeme);
     data->mob[check].monstre.pict.texture = ESP_gettexture(systeme->ActiveEspece, systeme);
-    sprintf(data->mob[check].name, ESP_getname(systeme->ActiveEspece , systeme));
+    strcpy(data->mob[check].name, ESP_getname(systeme->ActiveEspece , systeme));
     say(data->mob[check].name, console, systeme);
     data->mob[check].vie = ESP_getlife(systeme->ActiveEspece, systeme);
     data->mob[check].ID = systeme->ActiveEspece;

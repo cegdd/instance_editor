@@ -2,6 +2,8 @@
 #include "data.h"
 #include "bouton.h"
 
+#include <LIBcegdd_ui.h>
+
 void initdata(struct DATA *data, struct DIVERSsysteme *systeme)
 {
     int i;
@@ -9,11 +11,11 @@ void initdata(struct DATA *data, struct DIVERSsysteme *systeme)
     data->joueuractif = false;
 
     data->map.texture = -1;
-    setPos4(&data->map.pos, 0, 0, 0, 0);
+    CEGDD_UI_setPos4(&data->map.pos, 0, 0, 0, 0);
     data->map.x = 0;
     data->map.y = 0;
 
-    setPos4(&data->joueur.pict.pos, 0, 0, 68, 51);
+    CEGDD_UI_setPos4(&data->joueur.pict.pos, 0, 0, 68, 51);
 
     data->joueur.pict.texture = loadTexture ("rs/images/perso0.png");
 
@@ -29,7 +31,7 @@ void initdata(struct DATA *data, struct DIVERSsysteme *systeme)
         data->mob[i].scale = 1;
         data->mob[i].angle = 0;
         data->mob[i].monstre.pict.texture = 0;
-        setPos4(&data->mob[i].monstre.pict.pos, 0, 0, 0, 0);
-        setPos4(&data->mob[i].old, 0, 0, 0, 0);
+        CEGDD_UI_setPos4(&data->mob[i].monstre.pict.pos, 0, 0, 0, 0);
+        CEGDD_UI_setPos4(&data->mob[i].old, 0, 0, 0, 0);
     }
 }

@@ -523,7 +523,7 @@ void intputtexteup(struct DIVERSsysteme *systeme, struct CONSOLE *console)
             if (console->tampon[0] != '\0')
             {
                 say(console->tampon, console, systeme);
-                sprintf(console->lastanswer, console->tampon);
+                strcpy(console->lastanswer, console->tampon);
                 flushbuffer(console);
                 console->answered = true;
             }

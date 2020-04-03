@@ -7,6 +7,8 @@ extern int screenh, screenw;
 #include "systeme.h"
 #include "colision.h"
 
+#include <LIBcegdd_ui.h>
+
 void UI_setslidestate (int state, struct UI* ui)
 {
     ui->slidestate = state;
@@ -108,7 +110,7 @@ void creerbouton(char *path, int x, int y, int w, int h, int state, int flag, st
 {
     ui->ListeBouton[ui->ListeNb].etat = state;
     ui->ListeBouton[ui->ListeNb].flag = flag;
-    setPos4(&ui->ListeBouton[ui->ListeNb].pos, x, y, w, h);
+    CEGDD_UI_setPos4(&ui->ListeBouton[ui->ListeNb].pos, x, y, w, h);
     ui->ListeBouton[ui->ListeNb].texture = loadTexture (path);
     if (glIsTexture(ui->ListeBouton[ui->ListeNb].texture) == GL_FALSE)
     {
@@ -124,7 +126,7 @@ void creerboutontexte(char *path, int x, int y, int state, int flag, struct UI *
     ui->ListeBouton[ui->ListeNb].flag = flag;
     ui->ListeBouton[ui->ListeNb].texture = imprime(path, screenw, BLANC, systeme, &ui->ListeBouton[ui->ListeNb].pos.w, &ui->ListeBouton[ui->ListeNb].pos.h);
 
-    setPos2(&ui->ListeBouton[ui->ListeNb].pos, x, y);
+    CEGDD_UI_setPos2rect(&ui->ListeBouton[ui->ListeNb].pos, x, y);
 
     if (glIsTexture(ui->ListeBouton[ui->ListeNb].texture) == GL_FALSE)
     {
@@ -138,7 +140,7 @@ void creertexte(char *path, int x, int y, struct UI *ui, struct DIVERSsysteme *s
 {
     ui->Listetexte[ui->texteNb].img.texture = imprime(path, screenw, GRIS, systeme, &ui->Listetexte[ui->texteNb].img.pos.w, &ui->Listetexte[ui->texteNb].img.pos.h);
 
-    setPos2(&ui->Listetexte[ui->texteNb].img.pos, x, y);
+    CEGDD_UI_setPos2rect(&ui->Listetexte[ui->texteNb].img.pos, x, y);
 
     if (glIsTexture(ui->Listetexte[ui->texteNb].img.texture) == GL_FALSE)
     {
@@ -169,12 +171,12 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
 
     UI_setslidestate(SLIDE_CLOSE, ui);
 
-    setPos4(&ui->fondliste.pos, screenw-400, 110, 400,618);
-    setPos4(&ui->fonddetail.pos, screenw-282, 110, 400,618);
-	setPos4(&ui->posthumbcreature, screenw-200, 620, 100, 100);
-    setPos4(&ui->aggressif_pos, screenw-186, 561, 12, 12);
-    setPos4(&ui->fixe_pos, screenw-46, 558, 12, 12);
-    setPos4(&ui->loop_pos, screenw-166, 538, 12, 12);
+    CEGDD_UI_setPos4(&ui->fondliste.pos, screenw-400, 110, 400,618);
+    CEGDD_UI_setPos4(&ui->fonddetail.pos, screenw-282, 110, 400,618);
+	CEGDD_UI_setPos4(&ui->posthumbcreature, screenw-200, 620, 100, 100);
+    CEGDD_UI_setPos4(&ui->aggressif_pos, screenw-186, 561, 12, 12);
+    CEGDD_UI_setPos4(&ui->fixe_pos, screenw-46, 558, 12, 12);
+    CEGDD_UI_setPos4(&ui->loop_pos, screenw-166, 538, 12, 12);
 
     for (i = 0 ; i < 128 ; i++)
     {

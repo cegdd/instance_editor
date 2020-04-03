@@ -149,7 +149,8 @@ void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, str
         sprintf(console->tampon, ".png");
         console->curseur = strlen(console->tampon);
         console->curseur -=4;
-        sprintf(console->TamponToCursor, console->tampon);
+        strcpy(console->TamponToCursor, console->tampon);
+        //sprintf(console->TamponToCursor, console->tampon);
         console->TamponToCursor[console->curseur] = '\0';
         systeme->askID = i;
 

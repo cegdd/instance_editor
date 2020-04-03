@@ -1,23 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL.h"
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL_image.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
+#include "SDL2/SDL_image.h"
 
 #include <GL/gl.h>
 #include <GL/glu.h>
 
 #include "systeme.h"
 #include "ui.h"
-
-Uint8 obtenirPixel(SDL_Surface *surface, SDL_Point *pix)
-{
-    Uint8 *p = (Uint8 *)surface->pixels + pix->y * surface->pitch + pix->x * 4;
-    /* HAVE TO BE 32 BIT PNG */
-    return *p;
-}
-
 
 GLuint imprime (char s[], int len, int couleur,struct DIVERSsysteme *systeme, int *LenghtReturn, int *HighReturn)
 {
@@ -323,14 +315,6 @@ void draw_button(struct BOUTON *bouton)
     glColor3ub(255, 255, 255);
 }
 
-void setPos4(SDL_Rect *pos, int x, int y, int w, int h)
-{
-    pos->x = x;
-    pos->y = y;
-    pos->w = w;
-    pos->h = h;
-}
-
 void copypos(SDL_Rect *source, SDL_Rect *target)
 {
     target->x = source->x;
@@ -338,13 +322,6 @@ void copypos(SDL_Rect *source, SDL_Rect *target)
     target->w = source->w;
     target->h = source->h;
 }
-
-void setPos2(SDL_Rect *pos, int x, int y)
-{
-    pos->x = x;
-    pos->y = y;
-}
-
 
 void Sync_Moving_Pict(int time, struct moving_pict *m_pict)
 {

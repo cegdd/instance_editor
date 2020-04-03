@@ -2,17 +2,19 @@
 
 #include "systeme.h"
 
+#include <LIBcegdd_ui.h>
+
 extern int screenh, screenw;
 
 void ESP_setimgpath(char *buffer, int index, struct DIVERSsysteme *systeme)
 {
-    sprintf (systeme->creature[index].imgpath, buffer);
+    strcpy(systeme->creature[index].imgpath, buffer);
 }
 
 struct BOUTON* ESP_getbouton_nom(int index, struct DIVERSsysteme *systeme)
 {
     return &systeme->creature[index].bouton;
-};
+}
 
 
 void ESP_drawthumb(GLuint texture, struct SDL_Rect *pos)
@@ -73,7 +75,7 @@ char* ESP_getimgpath(int index, struct DIVERSsysteme *systeme)
 
 void ESP_setname(char* buffer, int index, struct DIVERSsysteme *systeme)
 {
-    sprintf(systeme->creature[index].name, buffer);
+    strcpy(systeme->creature[index].name, buffer); //TO DO vérifier qu'il y a moins de 64 caractère pour le name
 }
 
 void ESP_refreshmob(struct DIVERSsysteme *systeme)
@@ -84,7 +86,7 @@ void ESP_refreshmob(struct DIVERSsysteme *systeme)
     for (i = 0 ; i < systeme->NBespece ; i++)
     {
          systeme->creature[i].bouton.texture = imprime(systeme->creature[i].name, 114, BLANC, systeme, &systeme->creature[i].bouton.pos.w, &systeme->creature[i].bouton.pos.h);
-         setPos2(&systeme->creature[i].bouton.pos,screenw-396, 698-(i*22));
+         CEGDD_UI_setPos2rect(&systeme->creature[i].bouton.pos,screenw-396, 698-(i*22));
 
          sprintf(buffer, "rs/bestiaire/%s", systeme->creature[i].imgpath);
          systeme->creature[i].pict.texture =loadTextureandsize(buffer, &systeme->creature[i].pict.pos);
@@ -96,13 +98,13 @@ void ESP_create(struct CONSOLE *console, struct DIVERSsysteme *systeme)
 
     if (console->answered)
     {
-        char buffer[1024];
+        char buffer[1158];
 
         systeme->asked = false;
         console->answered = false;
 
         sprintf(systeme->creature[systeme->NBespece].imgpath, "noimage.png");
-        sprintf(systeme->creature[systeme->NBespece].name, "%s", console->lastanswer);
+        snprintf(systeme->creature[systeme->NBespece].name, 63, "%s", console->lastanswer);
         systeme->creature[systeme->NBespece].vie = 0;
         systeme->creature[systeme->NBespece].dps = 0;
         systeme->creature[systeme->NBespece].Ratk = 0;

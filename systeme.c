@@ -1,4 +1,4 @@
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL.h"
+#include "SDL2/SDL.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -10,6 +10,8 @@
 #include "systeme.h"
 #include "main.h"
 
+
+#include <LIBcegdd_ui.h>
 extern int screenh, screenw;
 
 int checkdistance(SDL_Rect *A, SDL_Rect *B, int lenght)
@@ -93,7 +95,7 @@ void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme)
    // {
         int index;
 
-        sprintf (console->string[console->actif], texte);
+        strcpy(console->string[console->actif], texte);
         console->texte[console->actif].img.texture = imprime (console->string[console->actif], screenw, NOIR, systeme, &console->texte[console->actif].lenght, NULL);
         console->actif--;
         if(console->actif < 0)
@@ -128,7 +130,7 @@ void addletter(char lettre, struct CONSOLE *console)
         }
         console->tampon[console->curseur] = lettre;
         console->curseur++;
-        sprintf(console->TamponToCursor, console->tampon);
+        strcpy(console->TamponToCursor, console->tampon);
         console->TamponToCursor[console->curseur] = '\0';
     }
 }
@@ -196,7 +198,7 @@ void initsystem(struct DIVERSsysteme *systeme)
         printf("police not load2\n");
     }
 
-    setPos4(&systeme->pointeur.pos, 0, 0, 20, 30);
+    CEGDD_UI_setPos4(&systeme->pointeur.pos, 0, 0, 20, 30);
 
 	systeme->pecran.x = 0;
 	systeme->pecran.y = 0;
@@ -206,7 +208,7 @@ void initsystem(struct DIVERSsysteme *systeme)
 	systeme->ppobj.w = 50;
 	systeme->ppobj.h = 50;
 
-	setPos4(&systeme->origine, 0, 0, 0, 0);
+	CEGDD_UI_setPos4(&systeme->origine, 0, 0, 0, 0);
 
 	systeme->oldpp.x = 0;
 	systeme->oldpp.y = 0;
@@ -217,7 +219,7 @@ void initsystem(struct DIVERSsysteme *systeme)
         systeme->creature[i].bouton.etat = B_NORMAL;
         systeme->creature[i].name[0]        = '\0';
 
-        setPos4(&systeme->creature[i].pict.pos, 1100, 620, 0, 0);
+        CEGDD_UI_setPos4(&systeme->creature[i].pict.pos, 1100, 620, 0, 0);
     }
     systeme->creature[0].bouton.etat = B_INUSE;
 }

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL.h"
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL_ttf.h"
-#include "C:\Users\antoi\Documents\programation\SDL2\SDL_image.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
+#include "SDL2/SDL_image.h"
 
 
 #include <GL/gl.h>

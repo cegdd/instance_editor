@@ -5,6 +5,8 @@
 #include "systeme.h"
 #include "editeur.h"
 #include "ui.h"
+
+#include <LIBcegdd_ui.h>
 /**
 SAVE FILE DATA STRUCTURE
 
@@ -170,7 +172,7 @@ bool loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 {
     if (console->answered)
     {
-        char temp[128];
+        char temp[2048];
         char buffer[4096] = {'\0'};
         FILE *fichier = NULL;
         int i, i2;
@@ -178,7 +180,7 @@ bool loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
         systeme->asked = false;
         console->answered = false;
 
-        sprintf(data->projectname, "%s", console->lastanswer);
+        snprintf(data->projectname, 63, "%s", console->lastanswer);
         sprintf(temp, "rs/sauvegarde/%s.RSCryptedMap", console->lastanswer);
         fichier = fopen(temp, "r");
 
@@ -299,8 +301,8 @@ bool loadproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, struct
 
                 data->mob[i].actif = true;
                 data->mob[i].monstre.pict.texture = ESP_gettexture(data->mob[i].ID, systeme);
-                setPos4(&data->mob[i].monstre.pict.pos, 0, 0, ESP_getwidth(data->mob[i].ID, systeme), ESP_gethight(data->mob[i].ID, systeme));
-                setPos4(&data->mob[i].old, 0, 0, ESP_getwidth(data->mob[i].ID, systeme), ESP_gethight(data->mob[i].ID, systeme));
+                CEGDD_UI_setPos4(&data->mob[i].monstre.pict.pos, 0, 0, ESP_getwidth(data->mob[i].ID, systeme), ESP_gethight(data->mob[i].ID, systeme));
+                CEGDD_UI_setPos4(&data->mob[i].old, 0, 0, ESP_getwidth(data->mob[i].ID, systeme), ESP_gethight(data->mob[i].ID, systeme));
             }
             sprintf(temp, "%d monstre poser", data->nbmonstre);
             say(temp, console, systeme);
