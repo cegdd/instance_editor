@@ -31,7 +31,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-Wno-format-truncation" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -39,6 +38,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Wno-format-truncation" />
 			<Add directory="/home/cegdd/projets/LIBcegdd_UI" />
 		</Compiler>
 		<Linker>

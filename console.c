@@ -16,10 +16,10 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
     CEGDD_UI_setPos4(&console->shootoff.pos, 0, 0, screenw, 12);
     CEGDD_UI_setPos4(&console->cursor.pos, 0, 0, 2, 12);
 
-    console->console.texture = loadTexture ("rs/ui/console.png");
-    console->shooton.texture = loadTexture ("rs/ui/shootboxon.png");
-    console->shootoff.texture = loadTexture ("rs/ui/shootboxoff.png");
-    console->cursor.texture = loadTexture ("rs/divers/curseur.png");
+    console->console.texture = CEGDD_UI_loadTexture     ("rs/ui/console.png");
+    console->shooton.texture = CEGDD_UI_loadTexture     ("rs/ui/shootboxon.png");
+    console->shootoff.texture = CEGDD_UI_loadTexture    ("rs/ui/shootboxoff.png");
+    console->cursor.texture = CEGDD_UI_loadTexture      ("rs/divers/curseur.png");
 
     console->actif = 9;
     console->curseur = 0;

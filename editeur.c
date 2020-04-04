@@ -211,7 +211,7 @@ void createproject (struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
         console->answered = false;
         systeme->asked = false;
 
-        snprintf(data->projectname, 63, "%s", console->lastanswer); //TO DO vérifier qu'il y a moins de 64 caractère pour le projectname
+        snprintf(data->projectname, 63, "%s", console->lastanswer);
         sprintf(temp2, "projet \"%s\" crée\n", data->projectname);
         say(temp2, console, systeme);
 

@@ -17,11 +17,11 @@ void initdata(struct DATA *data, struct DIVERSsysteme *systeme)
 
     CEGDD_UI_setPos4(&data->joueur.pict.pos, 0, 0, 68, 51);
 
-    data->joueur.pict.texture = loadTexture ("rs/images/perso0.png");
+    data->joueur.pict.texture = CEGDD_UI_loadTexture ("rs/images/perso0.png");
 
     data->nbmonstre = 0;
     data->mob_selected = -1;
-    data->mob[0].monstre.pict.texture = loadTexture ("rs/images/mob0.0.png");
+    data->mob[0].monstre.pict.texture = CEGDD_UI_loadTexture ("rs/images/mob0.0.png");
     for (i=0 ; i < 512 ; i++)
     {
         PATH_init(&data->mob[i].path, systeme);

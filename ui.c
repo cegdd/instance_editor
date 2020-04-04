@@ -111,7 +111,7 @@ void creerbouton(char *path, int x, int y, int w, int h, int state, int flag, st
     ui->ListeBouton[ui->ListeNb].etat = state;
     ui->ListeBouton[ui->ListeNb].flag = flag;
     CEGDD_UI_setPos4(&ui->ListeBouton[ui->ListeNb].pos, x, y, w, h);
-    ui->ListeBouton[ui->ListeNb].texture = loadTexture (path);
+    ui->ListeBouton[ui->ListeNb].texture = CEGDD_UI_loadTexture (path);
     if (glIsTexture(ui->ListeBouton[ui->ListeNb].texture) == GL_FALSE)
     {
         printf("texture not loaded\n");
@@ -188,8 +188,8 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
         ui->loop_state[i] = false;
     }
 
-    ui->coche[0] = loadTexture ("rs/ui/coche0.png");
-    ui->coche[1] = loadTexture ("rs/ui/coche1.png");
+    ui->coche[0] = CEGDD_UI_loadTexture ("rs/ui/coche0.png");
+    ui->coche[1] = CEGDD_UI_loadTexture ("rs/ui/coche1.png");
 
     ui->ListeNb = 0;
     ui->texteNb = 0;
@@ -233,8 +233,8 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     /*12*/creertexte("vie:",        screenw-276, 578, ui, systeme);
     /*13*/creertexte("image:",        screenw-276, 598, ui, systeme);
 
-    ui->fondliste.texture =       loadTexture ("rs/ui/fondmonstre.png");
-    ui->fonddetail.texture =       loadTexture ("rs/ui/fonddetail.png");
+    ui->fondliste.texture =		CEGDD_UI_loadTexture ("rs/ui/fondmonstre.png");
+    ui->fonddetail.texture =	CEGDD_UI_loadTexture ("rs/ui/fonddetail.png");
 
     if (glIsTexture(ui->fondliste.texture) == GL_FALSE          ||
         glIsTexture(ui->fonddetail.texture) == GL_FALSE)
