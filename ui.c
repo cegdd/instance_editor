@@ -43,7 +43,7 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
 
     if(UI_getslidestate(ui) == SLIDE_ESPECE)
     {
-        draw_pict(&ui->fondliste);
+        CEGDD_UI_draw_pict(&ui->fondliste);
         draw_button(&ui->ListeBouton[7]);
         draw_button(&ui->ListeBouton[8]);
 
@@ -62,14 +62,14 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
                 draw_button(&ui->ListeBouton[16]);
                 draw_button(&ui->ListeBouton[22]);
 
-                draw_pict(&ui->Listetexte[0].img);
-                draw_pict(&ui->Listetexte[1].img);
-                draw_pict(&ui->Listetexte[2].img);
-                draw_pict(&ui->Listetexte[3].img);
-                draw_pict(&ui->Listetexte[4].img);
-                draw_pict(&ui->Listetexte[11].img);
-                draw_pict(&ui->Listetexte[12].img);
-                draw_pict(&ui->Listetexte[13].img);
+                CEGDD_UI_draw_pict(&ui->Listetexte[0].img);
+                CEGDD_UI_draw_pict(&ui->Listetexte[1].img);
+                CEGDD_UI_draw_pict(&ui->Listetexte[2].img);
+                CEGDD_UI_draw_pict(&ui->Listetexte[3].img);
+                CEGDD_UI_draw_pict(&ui->Listetexte[4].img);
+                CEGDD_UI_draw_pict(&ui->Listetexte[11].img);
+                CEGDD_UI_draw_pict(&ui->Listetexte[12].img);
+                CEGDD_UI_draw_pict(&ui->Listetexte[13].img);
 
                 draw_coche(&ui->aggressif_pos, ui->aggressif_state[systeme->ActiveEspece], ui);
             }
@@ -81,7 +81,7 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
 
         if (data->mob_selected != -1)
         {
-            draw_pict(&ui->fonddetail);
+            CEGDD_UI_draw_pict(&ui->fonddetail);
             draw_button(&ui->ListeBouton[7]);
             draw_button(&ui->ListeBouton[9]);
             draw_button(&ui->ListeBouton[17]);
@@ -90,12 +90,12 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
             draw_button(&ui->ListeBouton[20]);
             draw_button(&ui->ListeBouton[21]);
 
-            draw_pict(&ui->Listetexte[5].img);
-            draw_pict(&ui->Listetexte[6].img);
-            draw_pict(&ui->Listetexte[7].img);
-            draw_pict(&ui->Listetexte[8].img);
-            draw_pict(&ui->Listetexte[9].img);
-            draw_pict(&ui->Listetexte[10].img);
+            CEGDD_UI_draw_pict(&ui->Listetexte[5].img);
+            CEGDD_UI_draw_pict(&ui->Listetexte[6].img);
+            CEGDD_UI_draw_pict(&ui->Listetexte[7].img);
+            CEGDD_UI_draw_pict(&ui->Listetexte[8].img);
+            CEGDD_UI_draw_pict(&ui->Listetexte[9].img);
+            CEGDD_UI_draw_pict(&ui->Listetexte[10].img);
 
             draw_coche(&ui->fixe_pos, ui->fixe_state[data->mob_selected], ui);
             draw_coche(&ui->loop_pos, ui->loop_state[data->mob_selected], ui);
@@ -124,7 +124,7 @@ void creerboutontexte(char *path, int x, int y, int state, int flag, struct UI *
 {
     ui->ListeBouton[ui->ListeNb].etat = state;
     ui->ListeBouton[ui->ListeNb].flag = flag;
-    ui->ListeBouton[ui->ListeNb].texture = imprime(path, screenw, BLANC, systeme, &ui->ListeBouton[ui->ListeNb].pos.w, &ui->ListeBouton[ui->ListeNb].pos.h);
+    ui->ListeBouton[ui->ListeNb].texture = CEGDD_UI_imprime(path, screenw, &systeme->blanc, systeme->police1, &ui->ListeBouton[ui->ListeNb].pos.w, &ui->ListeBouton[ui->ListeNb].pos.h);
 
     CEGDD_UI_setPos2rect(&ui->ListeBouton[ui->ListeNb].pos, x, y);
 
@@ -138,7 +138,7 @@ void creerboutontexte(char *path, int x, int y, int state, int flag, struct UI *
 
 void creertexte(char *path, int x, int y, struct UI *ui, struct DIVERSsysteme *systeme)
 {
-    ui->Listetexte[ui->texteNb].img.texture = imprime(path, screenw, GRIS, systeme, &ui->Listetexte[ui->texteNb].img.pos.w, &ui->Listetexte[ui->texteNb].img.pos.h);
+    ui->Listetexte[ui->texteNb].img.texture = CEGDD_UI_imprime(path, screenw, &systeme->gris, systeme->police1, &ui->Listetexte[ui->texteNb].img.pos.w, &ui->Listetexte[ui->texteNb].img.pos.h);
 
     CEGDD_UI_setPos2rect(&ui->Listetexte[ui->texteNb].img.pos, x, y);
 
@@ -153,7 +153,7 @@ void creertexte(char *path, int x, int y, struct UI *ui, struct DIVERSsysteme *s
 
 void setboutontexte(char *buffer, int index, struct UI *ui, struct DIVERSsysteme *systeme)
 {
-    ui->ListeBouton[index].texture = imprime(buffer, screenw, BLANC, systeme, &ui->ListeBouton[index].pos.w, &ui->ListeBouton[index].pos.h);
+    ui->ListeBouton[index].texture = CEGDD_UI_imprime(buffer, screenw, &systeme->blanc, systeme->police1, &ui->ListeBouton[index].pos.w, &ui->ListeBouton[index].pos.h);
 
 }
 
@@ -161,7 +161,7 @@ void setboutonnombre(int nombre, int index, struct UI *ui, struct DIVERSsysteme 
 {
     char buffer[32];
     sprintf(buffer, "%d", nombre);
-    ui->ListeBouton[index].texture = imprime(buffer, screenw, BLANC, systeme, &ui->ListeBouton[index].pos.w, &ui->ListeBouton[index].pos.h);
+    ui->ListeBouton[index].texture = CEGDD_UI_imprime(buffer, screenw, &systeme->blanc, systeme->police1, &ui->ListeBouton[index].pos.w, &ui->ListeBouton[index].pos.h);
 
 }
 

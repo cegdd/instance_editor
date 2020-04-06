@@ -32,6 +32,12 @@ struct DIVERSsysteme
     GLuint BG;
     SDL_Texture *BGblanc;
 
+	SDL_Color noir;
+	SDL_Color gris;
+	SDL_Color blanc;
+	SDL_Color rouge;
+	SDL_Color vert;
+	SDL_Color bleu;
 
     SDL_Event evenement;
 

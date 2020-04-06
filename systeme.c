@@ -96,7 +96,7 @@ void say(char *texte, struct CONSOLE *console, struct DIVERSsysteme *systeme)
         int index;
 
         strcpy(console->string[console->actif], texte);
-        console->texte[console->actif].img.texture = imprime (console->string[console->actif], screenw, NOIR, systeme, &console->texte[console->actif].lenght, NULL);
+        console->texte[console->actif].img.texture = CEGDD_UI_imprime (console->string[console->actif], screenw, &systeme->noir, systeme->police1, &console->texte[console->actif].lenght, NULL);
         console->actif--;
         if(console->actif < 0)
         {
@@ -197,6 +197,13 @@ void initsystem(struct DIVERSsysteme *systeme)
     {
         printf("police not load2\n");
     }
+
+    CEGDD_UI_setColor(&systeme->noir, 0, 0, 0, 0);
+	CEGDD_UI_setColor(&systeme->gris, 127, 127, 127, 0);
+	CEGDD_UI_setColor(&systeme->blanc, 255, 255, 255, 0);
+	CEGDD_UI_setColor(&systeme->rouge, 255, 0, 0, 0);
+	CEGDD_UI_setColor(&systeme->vert, 0, 255, 0, 0);
+	CEGDD_UI_setColor(&systeme->bleu, 0, 0, 255, 0);
 
     CEGDD_UI_setPos4(&systeme->pointeur.pos, 0, 0, 20, 30);
 

@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "console.h"
+#include "systeme.h"
 
 #include <LIBcegdd_ui.h>
 
@@ -30,7 +31,7 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
     {
         console->indice[index] = index;
         memset(console->string[index], '\0', 1024);
-        console->texte[index].img.texture = imprime (console->string[index], screenw, NOIR, systeme, &console->texte[index].lenght, &console->texte[index].high);
+        console->texte[index].img.texture = CEGDD_UI_imprime(console->string[index], screenw, &systeme->noir, systeme->police1, &console->texte[index].lenght, &console->texte[index].high);
         CEGDD_UI_setPos4(&console->pos[index], 0, (index*10)+10, console->texte[index].lenght, 10);
         copypos(&console->pos[index], &console->texte[index].img.pos);
     }
@@ -38,7 +39,7 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
     memset(console->TamponToCursor, '\0', 1024);
     memset(console->lastanswer, '\0', 1024);
 
-    console->ecris.img.texture = imprime (console->tampon, screenw, BLANC, systeme, &console->ecris.lenght, &console->ecris.high);
+    console->ecris.img.texture = CEGDD_UI_imprime (console->tampon, screenw, &systeme->blanc, systeme->police1, &console->ecris.lenght, &console->ecris.high);
     CEGDD_UI_setPos4(&console->ecris.img.pos, 0, 0, console->ecris.lenght, 10);
 
     if (glIsTexture(console->console.texture) == GL_FALSE)

@@ -85,7 +85,7 @@ void ESP_refreshmob(struct DIVERSsysteme *systeme)
 
     for (i = 0 ; i < systeme->NBespece ; i++)
     {
-         systeme->creature[i].bouton.texture = imprime(systeme->creature[i].name, 114, BLANC, systeme, &systeme->creature[i].bouton.pos.w, &systeme->creature[i].bouton.pos.h);
+         systeme->creature[i].bouton.texture = CEGDD_UI_imprime(systeme->creature[i].name, 114, &systeme->blanc, systeme->police, &systeme->creature[i].bouton.pos.w, &systeme->creature[i].bouton.pos.h);
          CEGDD_UI_setPos2rect(&systeme->creature[i].bouton.pos,screenw-396, 698-(i*22));
 
          sprintf(buffer, "rs/bestiaire/%s", systeme->creature[i].imgpath);

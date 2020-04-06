@@ -5,19 +5,11 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include "LIBcegdd_ui.h"
+
 struct BOUTON;
 struct DIVERSsysteme;
 struct UI;
-
-enum{BLANC, ROUGE, GRIS, NOIR, VERT, BLEU};/*text color*/
-
-struct pict
-{
-    SDL_Rect pos;
-    int x;
-    int y;
-    GLuint texture;
-};
 
 struct TEXTE
 {
@@ -42,12 +34,8 @@ struct moving_pict
     int time;
 };
 
-SDL_Texture* LoadingImage(char* emplacement, int transparence,struct DIVERSsysteme *systeme);
-
 GLuint loadTextureandsize(const char *filename, struct SDL_Rect *pos);
-GLuint imprime (char s[], int len, int couleur,struct DIVERSsysteme *systeme, int *LenghtReturn, int *HighReturn);
 
-void draw_pict(struct pict *image);
 void draw_pict_selected(struct pict *image);
 void draw(GLuint texture, SDL_Rect *pos);
 void draw_button(struct BOUTON *bouton);

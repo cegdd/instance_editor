@@ -2,6 +2,7 @@
 
 #include "path.h"
 #include "data.h"
+#include "systeme.h"
 
 int PATH_add(struct PATH *path, int x, int y, struct DATA *data)
 {
@@ -52,7 +53,7 @@ void PATH_init(struct PATH *path, struct DIVERSsysteme *systeme)
         path->used[i] = false;
         path->loop = false;
         sprintf(buffer, "%d",i);
-        path->nb[i].pict.texture = imprime(buffer, 100, ROUGE, systeme, &path->nb[i].pict.pos.w, &path->nb[i].pict.pos.h);
+        path->nb[i].pict.texture = CEGDD_UI_imprime(buffer, 100, &systeme->rouge, systeme->police1, &path->nb[i].pict.pos.w, &path->nb[i].pict.pos.h);
     }
 }
 void PATH_write (struct PATH *path)

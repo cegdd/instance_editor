@@ -50,7 +50,7 @@ void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI
     {
         data->map.pos.x = data->map.x + systeme->origine.x;
         data->map.pos.y = data->map.y + systeme->origine.y;
-        draw_pict(&data->map);
+        CEGDD_UI_draw_pict(&data->map);
     }
 
     if (data->joueuractif)
@@ -96,26 +96,26 @@ void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI
             UI_drawslide(ui, systeme, data);
         }
 
-        draw_pict(&console->console);
+        CEGDD_UI_draw_pict(&console->console);
         if (console->active)
         {
-            draw_pict(&console->shooton);
+            CEGDD_UI_draw_pict(&console->shooton);
         }
         else
         {
-            draw_pict(&console->shootoff);
+            CEGDD_UI_draw_pict(&console->shootoff);
         }
         for(index = 0 ; index < 10 ; index++)
         {
-            draw_pict(&console->texte[index].img);
+            CEGDD_UI_draw_pict(&console->texte[index].img);
         }
         if(console->tampon[0] != '\0')
 
         {
-        console->ecris.img.texture = imprime (console->tampon, screenw, BLANC, systeme, &console->ecris.lenght, &console->ecris.high);
+        console->ecris.img.texture = CEGDD_UI_imprime(console->tampon, screenw, &systeme->blanc, systeme->police1, &console->ecris.lenght, &console->ecris.high);
         console->ecris.img.pos.w = console->ecris.lenght;
 
-        draw_pict(&console->ecris.img);
+        CEGDD_UI_draw_pict(&console->ecris.img);
         }
 
 
@@ -124,7 +124,7 @@ void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI
             TTF_SizeText(systeme->police1,console->TamponToCursor,&console->LenToCursor,NULL);
             console->cursor.pos.x = console->ecris.img.pos.x + console->LenToCursor;
 
-            draw_pict(&console->cursor);
+            CEGDD_UI_draw_pict(&console->cursor);
         }
 
         if (systeme->tookmob == true)
