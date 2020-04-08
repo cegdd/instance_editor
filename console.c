@@ -33,7 +33,7 @@ void initconsole(struct CONSOLE *console, struct DIVERSsysteme *systeme)
         memset(console->string[index], '\0', 1024);
         console->texte[index].img.texture = CEGDD_UI_imprime(console->string[index], screenw, &systeme->noir, systeme->police1, &console->texte[index].lenght, &console->texte[index].high);
         CEGDD_UI_setPos4(&console->pos[index], 0, (index*10)+10, console->texte[index].lenght, 10);
-        copypos(&console->pos[index], &console->texte[index].img.pos);
+        CEGDD_UI_copypos(&console->pos[index], &console->texte[index].img.pos);
     }
     memset(console->tampon, '\0', 1024);
     memset(console->TamponToCursor, '\0', 1024);

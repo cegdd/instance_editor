@@ -72,7 +72,7 @@ void PATH_display (struct DATA *data)
 
     while (data->mob[data->mob_selected].path.used[i] == true)
     {
-        draw_hookpict(&data->mob[data->mob_selected].path.nb[i], &data->map.pos);
+        CEGDD_UI_draw_hookpict(&data->mob[data->mob_selected].path.nb[i], &data->map.pos);
         i++;
     }
 }

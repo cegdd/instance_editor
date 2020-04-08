@@ -19,7 +19,7 @@ struct BOUTON* ESP_getbouton_nom(int index, struct DIVERSsysteme *systeme)
 
 void ESP_drawthumb(GLuint texture, struct SDL_Rect *pos)
 {
-    draw(texture, pos);
+    CEGDD_UI_draw(texture, pos);
 }
 
 void ESP_setlife(int life, int index, struct DIVERSsysteme *systeme)
@@ -89,7 +89,7 @@ void ESP_refreshmob(struct DIVERSsysteme *systeme)
          CEGDD_UI_setPos2rect(&systeme->creature[i].bouton.pos,screenw-396, 698-(i*22));
 
          sprintf(buffer, "rs/bestiaire/%s", systeme->creature[i].imgpath);
-         systeme->creature[i].pict.texture =loadTextureandsize(buffer, &systeme->creature[i].pict.pos);
+         systeme->creature[i].pict.texture = CEGDD_UI_loadTextureandsize(buffer, &systeme->creature[i].pict.pos);
     }
 }
 

@@ -55,7 +55,7 @@ void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI
 
     if (data->joueuractif)
     {
-        draw_hookpict(&data->joueur, &data->map.pos);
+        CEGDD_UI_draw_hookpict(&data->joueur, &data->map.pos);
     }
 
     for(index = 0 ; index < data->nbmonstre ; index++)
@@ -66,7 +66,7 @@ void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI
             data->mob[index].monstre.pict.pos.h = data->mob[index].old.h * data->mob[index].scale;
             if(data->mob[index].selected == false)
             {
-                turn_draw_hookpict(data->mob[index].angle, &data->mob[index].monstre, &data->map.pos);
+                CEGDD_UI_turn_draw_hookpict(data->mob[index].angle, &data->mob[index].monstre, &data->map.pos);
             }
             else
             {
@@ -83,13 +83,13 @@ void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI
             ui->ListeBouton[6].etat = B_NORMAL;
         }
 
-        draw_button(&ui->ListeBouton[0]);
-        draw_button(&ui->ListeBouton[1]);
-        draw_button(&ui->ListeBouton[3]);
-        draw_button(&ui->ListeBouton[4]);
-        draw_button(&ui->ListeBouton[2]);
-        draw_button(&ui->ListeBouton[5]);
-        draw_button(&ui->ListeBouton[6]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[0]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[1]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[3]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[4]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[2]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[5]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[6]);
 
         if (UI_getslidestate(ui) != SLIDE_CLOSE)
         {
@@ -134,7 +134,7 @@ void affichage(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI
                     systeme->pointeur.pos.y + systeme->pointeur.pos.h,
                     ESP_getwidth(systeme->ActiveEspece, systeme),
                     ESP_gethight(systeme->ActiveEspece, systeme));
-            draw(ESP_gettexture(systeme->ActiveEspece, systeme), &systeme->temp);
+            CEGDD_UI_draw(ESP_gettexture(systeme->ActiveEspece, systeme), &systeme->temp);
         }
 
         glFlush();
@@ -159,7 +159,7 @@ void loadingmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, struct D
 
         sprintf(data->projectmap, "%s", console->lastanswer);
         sprintf(temp, "rs/map/%s.png", console->lastanswer);
-        data->map.texture = loadTextureandsize(temp, &data->map.pos);
+        data->map.texture = CEGDD_UI_loadTextureandsize(temp, &data->map.pos);
         data->map.x = data->map.pos.x;
         data->map.y = data->map.pos.y;
 
@@ -185,7 +185,7 @@ void loadingknownmap(struct CONSOLE *console, struct DIVERSsysteme *systeme, str
 
     sprintf(data->projectmap, "%s", name);
     sprintf(temp, "rs/map/%s.png", name);
-    data->map.texture = loadTextureandsize(temp, &data->map.pos);
+    data->map.texture = CEGDD_UI_loadTextureandsize(temp, &data->map.pos);
     //data->map.x = data->map.pos.x;
     //data->map.y = data->map.pos.y;
 

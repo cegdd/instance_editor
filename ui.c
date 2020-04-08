@@ -44,23 +44,23 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
     if(UI_getslidestate(ui) == SLIDE_ESPECE)
     {
         CEGDD_UI_draw_pict(&ui->fondliste);
-        draw_button(&ui->ListeBouton[7]);
-        draw_button(&ui->ListeBouton[8]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[7]);
+        CEGDD_UI_draw_button(&ui->ListeBouton[8]);
 
         for (index = 0 ; index < systeme->NBespece ; index++)
         {
-            draw_button(ESP_getbouton_nom(index, systeme));
+            CEGDD_UI_draw_button(ESP_getbouton_nom(index, systeme));
             if (systeme->ActiveEspece != -1)
             {
                 ESP_drawthumb(systeme->creature[systeme->ActiveEspece].pict.texture, &ui->posthumbcreature);
-                draw_button(&ui->ListeBouton[9]);
-                draw_button(&ui->ListeBouton[11]);
-                draw_button(&ui->ListeBouton[12]);
-                draw_button(&ui->ListeBouton[13]);
-                draw_button(&ui->ListeBouton[14]);
-                draw_button(&ui->ListeBouton[15]);
-                draw_button(&ui->ListeBouton[16]);
-                draw_button(&ui->ListeBouton[22]);
+                CEGDD_UI_draw_button(&ui->ListeBouton[9]);
+                CEGDD_UI_draw_button(&ui->ListeBouton[11]);
+                CEGDD_UI_draw_button(&ui->ListeBouton[12]);
+                CEGDD_UI_draw_button(&ui->ListeBouton[13]);
+                CEGDD_UI_draw_button(&ui->ListeBouton[14]);
+                CEGDD_UI_draw_button(&ui->ListeBouton[15]);
+                CEGDD_UI_draw_button(&ui->ListeBouton[16]);
+                CEGDD_UI_draw_button(&ui->ListeBouton[22]);
 
                 CEGDD_UI_draw_pict(&ui->Listetexte[0].img);
                 CEGDD_UI_draw_pict(&ui->Listetexte[1].img);
@@ -82,13 +82,13 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
         if (data->mob_selected != -1)
         {
             CEGDD_UI_draw_pict(&ui->fonddetail);
-            draw_button(&ui->ListeBouton[7]);
-            draw_button(&ui->ListeBouton[9]);
-            draw_button(&ui->ListeBouton[17]);
-            draw_button(&ui->ListeBouton[18]);
-            draw_button(&ui->ListeBouton[19]);
-            draw_button(&ui->ListeBouton[20]);
-            draw_button(&ui->ListeBouton[21]);
+            CEGDD_UI_draw_button(&ui->ListeBouton[7]);
+            CEGDD_UI_draw_button(&ui->ListeBouton[9]);
+            CEGDD_UI_draw_button(&ui->ListeBouton[17]);
+            CEGDD_UI_draw_button(&ui->ListeBouton[18]);
+            CEGDD_UI_draw_button(&ui->ListeBouton[19]);
+            CEGDD_UI_draw_button(&ui->ListeBouton[20]);
+            CEGDD_UI_draw_button(&ui->ListeBouton[21]);
 
             CEGDD_UI_draw_pict(&ui->Listetexte[5].img);
             CEGDD_UI_draw_pict(&ui->Listetexte[6].img);
