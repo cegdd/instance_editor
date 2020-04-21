@@ -12,20 +12,24 @@
 	"editeur.h"
 	"save.h"
 
-1585538704 /home/cegdd/Documents/rs_editor/instance_editor/ui.h
+1587452774 /home/cegdd/Documents/rs_editor/instance_editor/ui.h
 	<stdbool.h>
 	"image.h"
 	"bouton.h"
 
-1586135436 /home/cegdd/Documents/rs_editor/instance_editor/image.h
+1587450667 /home/cegdd/Documents/rs_editor/instance_editor/image.h
 	"SDL2/SDL_ttf.h"
 	<GL/gl.h>
 	<GL/glu.h>
 	"LIBcegdd_ui.h"
 
-1586066096 /home/cegdd/projets/LIBcegdd_UI/LIBcegdd_ui.h
+1587452204 /home/cegdd/projets/LIBcegdd_UI/LIBcegdd_ui.h
+	<GL/gl.h>
+	"SDL2/SDL.h"
+	"SDL2/SDL_image.h"
+	"SDL2/SDL_ttf.h"
 
-1585538704 /home/cegdd/Documents/rs_editor/instance_editor/bouton.h
+1587449304 /home/cegdd/Documents/rs_editor/instance_editor/bouton.h
 	"data.h"
 	"console.h"
 
@@ -79,10 +83,11 @@
 	<stdio.h>
 	<stdbool.h>
 
-1585975863 source:/home/cegdd/Documents/rs_editor/instance_editor/console.c
+1586311218 source:/home/cegdd/Documents/rs_editor/instance_editor/console.c
 	<string.h>
 	<stdio.h>
 	"console.h"
+	"systeme.h"
 	<LIBcegdd_ui.h>
 
 1585975877 source:/home/cegdd/Documents/rs_editor/instance_editor/data.c
@@ -90,7 +95,7 @@
 	"bouton.h"
 	<LIBcegdd_ui.h>
 
-1586059787 source:/home/cegdd/Documents/rs_editor/instance_editor/editeur.c
+1586311823 source:/home/cegdd/Documents/rs_editor/instance_editor/editeur.c
 	<stdio.h>
 	<stdlib.h>
 	"SDL2/SDL.h"
@@ -107,7 +112,7 @@
 1585538704 /home/cegdd/Documents/rs_editor/instance_editor/evenement.h
 	<stdbool.h>
 
-1585954518 source:/home/cegdd/Documents/rs_editor/instance_editor/espece.c
+1586310550 source:/home/cegdd/Documents/rs_editor/instance_editor/espece.c
 	<stdio.h>
 	"systeme.h"
 	<LIBcegdd_ui.h>
@@ -138,10 +143,11 @@
 	"systeme.h"
 	"editeur.h"
 
-1585538704 source:/home/cegdd/Documents/rs_editor/instance_editor/path.c
+1586310077 source:/home/cegdd/Documents/rs_editor/instance_editor/path.c
 	<stdio.h>
 	"path.h"
 	"data.h"
+	"systeme.h"
 
 1585953953 source:/home/cegdd/Documents/rs_editor/instance_editor/save.c
 	<stdio.h>
@@ -152,7 +158,7 @@
 	"ui.h"
 	<LIBcegdd_ui.h>
 
-1585947317 source:/home/cegdd/Documents/rs_editor/instance_editor/systeme.c
+1586137474 source:/home/cegdd/Documents/rs_editor/instance_editor/systeme.c
 	"SDL2/SDL.h"
 	<stdlib.h>
 	<stdio.h>
@@ -174,7 +180,7 @@
 	"colision.h"
 	<LIBcegdd_ui.h>
 
-1586135342 source:/home/cegdd/Documents/rs_editor/instance_editor/image.c
+1586311784 source:/home/cegdd/Documents/rs_editor/instance_editor/image.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

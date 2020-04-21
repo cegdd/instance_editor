@@ -106,65 +106,6 @@ void UI_drawslide(struct UI* ui, struct DIVERSsysteme *systeme, struct DATA *dat
     }
 }
 
-void creerbouton(char *path, int x, int y, int w, int h, int state, int flag, struct UI *ui)
-{
-    ui->ListeBouton[ui->ListeNb].etat = state;
-    ui->ListeBouton[ui->ListeNb].flag = flag;
-    CEGDD_UI_setPos4(&ui->ListeBouton[ui->ListeNb].pos, x, y, w, h);
-    ui->ListeBouton[ui->ListeNb].texture = CEGDD_UI_loadTexture (path);
-    if (glIsTexture(ui->ListeBouton[ui->ListeNb].texture) == GL_FALSE)
-    {
-        printf("texture not loaded\n");
-    }
-
-    ui->ListeNb++;
-}
-
-void creerboutontexte(char *path, int x, int y, int state, int flag, struct UI *ui, struct DIVERSsysteme *systeme)
-{
-    ui->ListeBouton[ui->ListeNb].etat = state;
-    ui->ListeBouton[ui->ListeNb].flag = flag;
-    ui->ListeBouton[ui->ListeNb].texture = CEGDD_UI_imprime(path, screenw, &systeme->blanc, systeme->police1, &ui->ListeBouton[ui->ListeNb].pos.w, &ui->ListeBouton[ui->ListeNb].pos.h);
-
-    CEGDD_UI_setPos2rect(&ui->ListeBouton[ui->ListeNb].pos, x, y);
-
-    if (glIsTexture(ui->ListeBouton[ui->ListeNb].texture) == GL_FALSE)
-    {
-        printf("texture not loaded\n");
-    }
-
-    ui->ListeNb++;
-}
-
-void creertexte(char *path, int x, int y, struct UI *ui, struct DIVERSsysteme *systeme)
-{
-    ui->Listetexte[ui->texteNb].img.texture = CEGDD_UI_imprime(path, screenw, &systeme->gris, systeme->police1, &ui->Listetexte[ui->texteNb].img.pos.w, &ui->Listetexte[ui->texteNb].img.pos.h);
-
-    CEGDD_UI_setPos2rect(&ui->Listetexte[ui->texteNb].img.pos, x, y);
-
-    if (glIsTexture(ui->Listetexte[ui->texteNb].img.texture) == GL_FALSE)
-    {
-        printf("texture of texte n: %d not loaded\n", ui->texteNb);
-    }
-
-    ui->texteNb++;
-}
-
-
-void setboutontexte(char *buffer, int index, struct UI *ui, struct DIVERSsysteme *systeme)
-{
-    ui->ListeBouton[index].texture = CEGDD_UI_imprime(buffer, screenw, &systeme->blanc, systeme->police1, &ui->ListeBouton[index].pos.w, &ui->ListeBouton[index].pos.h);
-
-}
-
-void setboutonnombre(int nombre, int index, struct UI *ui, struct DIVERSsysteme *systeme)
-{
-    char buffer[32];
-    sprintf(buffer, "%d", nombre);
-    ui->ListeBouton[index].texture = CEGDD_UI_imprime(buffer, screenw, &systeme->blanc, systeme->police1, &ui->ListeBouton[index].pos.w, &ui->ListeBouton[index].pos.h);
-
-}
-
 void initui (struct UI *ui, struct DIVERSsysteme *systeme)
 {
     int i = 0;
@@ -194,44 +135,44 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
     ui->ListeNb = 0;
     ui->texteNb = 0;
 
-    /*0*/creerbouton("rs/ui/creer.png",         0, screenh-40, 120, 40,             B_NORMAL, B_none, ui);
-    /*1*/creerbouton("rs/ui/quitter.png",       screenw-120, screenh-40, 120, 40,   B_NORMAL, B_none, ui);
-    /*2*/creerbouton("rs/ui/charger.png",       360, screenh-40, 120, 40,           B_NORMAL, B_none, ui);
-    /*3*/creerbouton("rs/ui/enregistrer.png",   240, screenh-40, 120, 40,           B_IMPOSSIBLE, B_none, ui);
-    /*4*/creerbouton("rs/ui/loadmap.png",       120, screenh-40, 120, 40,           B_IMPOSSIBLE, B_none, ui);
-    /*5*/creerbouton("rs/ui/depart.png",        480, screenh-40, 120, 40,           B_IMPOSSIBLE, B_none, ui);
-    /*6*/creerbouton("rs/ui/monster.png",       600, screenh-40, 120, 40,           B_IMPOSSIBLE, B_none, ui);
-    /*7*/creerbouton("rs/ui/fermer.png",        screenw-44, 684, 40,40,             B_IMPOSSIBLE, B_none, ui);
-    /*8*/creerbouton("rs/ui/creer.png",         screenw-260, 122, 120,40,           B_IMPOSSIBLE, B_none, ui); //creer une race de mob
-    /*9*/creerbouton("rs/ui/suppr.png",         screenw-130, 122, 120,40,           B_IMPOSSIBLE, B_none, ui);
-    /*10*/creerboutontexte("nom",               screenw-396, 698,                   B_NORMAL, B_liste, ui, systeme);//nom
-    /*11*/creerboutontexte("path",              screenw-200, 598,                   B_NORMAL, B_liste, ui, systeme);//chemin image
-    /*12*/creerboutontexte("life",              screenw-226, 578,                   B_NORMAL, B_liste, ui, systeme);//vie
-    /*13*/creerboutontexte("100",               screenw-46, 558,                    B_IMPOSSIBLE, B_liste, ui, systeme);//rayon de vision
-    /*14*/creerboutontexte("50",                screenw-186, 538,                   B_NORMAL, B_liste, ui, systeme);//vitesse
-    /*15*/creerboutontexte("5",                 screenw-226, 518,                   B_NORMAL, B_liste, ui, systeme);//dps
-    /*16*/creerboutontexte("0",                 screenw-66, 518,                    B_NORMAL, B_liste, ui, systeme);//rayon d'attaque
-    /*17*/creerboutontexte("0",                 screenw-246, 598,                   B_NORMAL, B_detail, ui, systeme);//x
-    /*18*/creerboutontexte("0",                 screenw-136, 598,                   B_NORMAL, B_detail, ui, systeme);//y
-    /*19*/creerboutontexte("1",                 screenw-201, 578,                   B_NORMAL, B_detail, ui, systeme);//echelle
-    /*20*/creerboutontexte("0",                 screenw-101, 578,                   B_NORMAL, B_detail, ui, systeme);//angle
-    /*21*/creerbouton("rs/ui/path.png",         screenw-250, 558, 60, 20,           B_NORMAL, B_liste, ui);
-    /*22*/creerboutontexte("100",               screenw-201, 498,                   B_NORMAL, B_liste, ui, systeme);//dps
+    /*0*/CEGDD_UI_creerbouton("rs/ui/creer.png",         0, screenh-40, 120, 40,             B_NORMAL, 		B_none,		ui->ListeBouton, &ui->ListeNb);
+    /*1*/CEGDD_UI_creerbouton("rs/ui/quitter.png",       screenw-120, screenh-40, 120, 40,   B_NORMAL, 		B_none, 	ui->ListeBouton, &ui->ListeNb);
+    /*2*/CEGDD_UI_creerbouton("rs/ui/charger.png",       360, screenh-40, 120, 40,           B_NORMAL, 		B_none, 	ui->ListeBouton, &ui->ListeNb);
+    /*3*/CEGDD_UI_creerbouton("rs/ui/enregistrer.png",   240, screenh-40, 120, 40,           B_IMPOSSIBLE, 	B_none, 	ui->ListeBouton, &ui->ListeNb);
+    /*4*/CEGDD_UI_creerbouton("rs/ui/loadmap.png",       120, screenh-40, 120, 40,           B_IMPOSSIBLE, 	B_none, 	ui->ListeBouton, &ui->ListeNb);
+    /*5*/CEGDD_UI_creerbouton("rs/ui/depart.png",        480, screenh-40, 120, 40,           B_IMPOSSIBLE, 	B_none, 	ui->ListeBouton, &ui->ListeNb);
+    /*6*/CEGDD_UI_creerbouton("rs/ui/monster.png",       600, screenh-40, 120, 40,           B_IMPOSSIBLE, 	B_none, 	ui->ListeBouton, &ui->ListeNb);
+    /*7*/CEGDD_UI_creerbouton("rs/ui/fermer.png",        screenw-44, 684, 40,40,             B_IMPOSSIBLE, 	B_none, 	ui->ListeBouton, &ui->ListeNb);
+    /*8*/CEGDD_UI_creerbouton("rs/ui/creer.png",         screenw-260, 122, 120,40,           B_IMPOSSIBLE, 	B_none, 	ui->ListeBouton, &ui->ListeNb); //creer une race de mob
+    /*9*/CEGDD_UI_creerbouton("rs/ui/suppr.png",         screenw-130, 122, 120,40,           B_IMPOSSIBLE, 	B_none, 	ui->ListeBouton, &ui->ListeNb);
+    /*10*/CEGDD_UI_creerboutontexte("nom",               screenw-396, 698,                   B_NORMAL, 		B_liste,	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//nom
+    /*11*/CEGDD_UI_creerboutontexte("path",              screenw-200, 598,                   B_NORMAL, 		B_liste,	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//chemin image
+    /*12*/CEGDD_UI_creerboutontexte("life",              screenw-226, 578,                   B_NORMAL, 		B_liste,	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//vie
+    /*13*/CEGDD_UI_creerboutontexte("100",               screenw-46, 558,                    B_IMPOSSIBLE, 	B_liste,	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//rayon de vision
+    /*14*/CEGDD_UI_creerboutontexte("50",                screenw-186, 538,                   B_NORMAL, 		B_liste,	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//vitesse
+    /*15*/CEGDD_UI_creerboutontexte("5",                 screenw-226, 518,                   B_NORMAL, 		B_liste,	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//dps
+    /*16*/CEGDD_UI_creerboutontexte("0",                 screenw-66, 518,                    B_NORMAL, 		B_liste,	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//rayon d'attaque
+    /*17*/CEGDD_UI_creerboutontexte("0",                 screenw-246, 598,                   B_NORMAL, 		B_detail,	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//x
+    /*18*/CEGDD_UI_creerboutontexte("0",                 screenw-136, 598,                   B_NORMAL, 		B_detail, 	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//y
+    /*19*/CEGDD_UI_creerboutontexte("1",                 screenw-201, 578,                   B_NORMAL, 		B_detail, 	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//echelle
+    /*20*/CEGDD_UI_creerboutontexte("0",                 screenw-101, 578,                   B_NORMAL, 		B_detail, 	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//angle
+    /*21*/CEGDD_UI_creerbouton("rs/ui/path.png",         screenw-250, 558, 60, 20,           B_NORMAL, 		B_liste, 	ui->ListeBouton, &ui->ListeNb);
+    /*22*/CEGDD_UI_creerboutontexte("100",               screenw-201, 498,                   B_NORMAL, 		B_liste, 	ui->ListeBouton, &ui->ListeNb, &systeme->blanc, systeme->police1);//dps
 
-    /*0*/creertexte("aggressif:",   screenw-276, 558, ui, systeme);
-    /*1*/creertexte("R de vision:", screenw-156, 558, ui, systeme);
-    /*2*/creertexte("vitesse:",     screenw-276, 538, ui, systeme);
-    /*3*/creertexte("dps:",         screenw-276, 518, ui, systeme);
-    /*4*/creertexte("R d'attaque:", screenw-176, 518, ui, systeme);
-    /*5*/creertexte("x:",           screenw-276, 598, ui, systeme);
-    /*6*/creertexte("y:",           screenw-166, 598, ui, systeme);
-    /*7*/creertexte("echelle:",     screenw-276, 578, ui, systeme);
-    /*8*/creertexte("angle:",       screenw-166, 578, ui, systeme);
-    /*9*/creertexte("fixe:",        screenw-166, 558, ui, systeme);
-    /*10*/creertexte("loop:",       screenw-276, 538, ui, systeme);
-    /*11*/creertexte("hit laps:",   screenw-276, 498, ui, systeme);
-    /*12*/creertexte("vie:",        screenw-276, 578, ui, systeme);
-    /*13*/creertexte("image:",        screenw-276, 598, ui, systeme);
+    /*0*/CEGDD_UI_creertexte("aggressif:",   screenw-276, 558, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*1*/CEGDD_UI_creertexte("R de vision:", screenw-156, 558, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*2*/CEGDD_UI_creertexte("vitesse:",     screenw-276, 538, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*3*/CEGDD_UI_creertexte("dps:",         screenw-276, 518, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*4*/CEGDD_UI_creertexte("R d'attaque:", screenw-176, 518, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*5*/CEGDD_UI_creertexte("x:",           screenw-276, 598, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*6*/CEGDD_UI_creertexte("y:",           screenw-166, 598, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*7*/CEGDD_UI_creertexte("echelle:",     screenw-276, 578, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*8*/CEGDD_UI_creertexte("angle:",       screenw-166, 578, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*9*/CEGDD_UI_creertexte("fixe:",        screenw-166, 558, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*10*/CEGDD_UI_creertexte("loop:",       screenw-276, 538, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*11*/CEGDD_UI_creertexte("hit laps:",   screenw-276, 498, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*12*/CEGDD_UI_creertexte("vie:",        screenw-276, 578, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
+    /*13*/CEGDD_UI_creertexte("image:",      screenw-276, 598, ui->Listetexte, &ui->texteNb, &systeme->blanc, systeme->police1);
 
     ui->fondliste.texture =		CEGDD_UI_loadTexture ("rs/ui/fondmonstre.png");
     ui->fonddetail.texture =	CEGDD_UI_loadTexture ("rs/ui/fonddetail.png");
@@ -246,21 +187,21 @@ void initui (struct UI *ui, struct DIVERSsysteme *systeme)
 void UI_updateESP(int index, struct DIVERSsysteme *systeme, struct UI *ui)
 {
     ESP_refreshmob(systeme);
-    setboutontexte(systeme->creature[index].imgpath, 11, ui, systeme);
-    setboutonnombre(systeme->creature[index].vie, 12, ui, systeme);
-    setboutonnombre(systeme->creature[index].Rvision, 13, ui, systeme);
-    setboutonnombre(systeme->creature[index].vitesse, 14, ui, systeme);
-    setboutonnombre(systeme->creature[index].dps, 15, ui, systeme);
-    setboutonnombre(systeme->creature[index].hitlaps, 22, ui, systeme);
-    setboutonnombre(systeme->creature[index].Ratk, 16, ui, systeme);
+    CEGDD_UI_setboutontexte(systeme->creature[index].imgpath, 	11, ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(systeme->creature[index].vie, 		12, ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(systeme->creature[index].Rvision, 	13, ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(systeme->creature[index].vitesse, 	14, ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(systeme->creature[index].dps, 		15, ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(systeme->creature[index].hitlaps, 	22, ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(systeme->creature[index].Ratk, 		16, ui->ListeBouton, &systeme->blanc, systeme->police1);
 }
 
 void UI_updateMOB(int index, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 {
-    setboutonnombre(data->mob[index].monstre.translation.x, 17, ui, systeme);
-    setboutonnombre(data->mob[index].monstre.translation.y, 18, ui, systeme);
-    setboutonnombre(data->mob[index].scale, 19, ui, systeme);
-    setboutonnombre(data->mob[index].angle, 20, ui, systeme);
+    CEGDD_UI_setboutonnombre(data->mob[index].monstre.translation.x, 17, ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(data->mob[index].monstre.translation.y, 18, ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(data->mob[index].scale, 19, 				ui->ListeBouton, &systeme->blanc, systeme->police1);
+    CEGDD_UI_setboutonnombre(data->mob[index].angle, 20, 				ui->ListeBouton, &systeme->blanc, systeme->police1);
 }
 
 int UI_is_inside(struct UI *ui, struct DIVERSsysteme *systeme, struct CONSOLE *console)

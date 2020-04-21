@@ -11,13 +11,6 @@ struct BOUTON;
 struct DIVERSsysteme;
 struct UI;
 
-struct TEXTE
-{
-    struct pict img;
-	int lenght;
-	int high;
-};
-
 void draw_pict_selected(struct pict *image);
 void draw_color_black(SDL_Rect *pos);
 
