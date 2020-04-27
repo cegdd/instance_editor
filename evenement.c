@@ -3,14 +3,14 @@
 #include "SDL2/SDL.h"
 #include <string.h>
 
+#include "LIBcegdd_ui.h"
+
 #include "systeme.h"
 #include "ui.h"
 #include "evenement.h"
 #include "clavier.h"
-#include "colision.h"
 #include "editeur.h"
 #include "path.h"
-
 
 extern int screenh, screenw;
 
@@ -83,13 +83,13 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 {
     int i;
 
-    BT_pointeur(systeme, ui);
+    CEGDD_UI_BT_pointeur(systeme->pointeur.pos, ui->ListeBouton, &ui->ListeNb, ui->slidestate);
 
     if (UI_getslidestate(ui) == SLIDE_ESPECE)
     {
         for (i = 0 ; i < systeme->NBespece ; i++)
         {//le nom du mob
-            if ( colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i, systeme), true) == true &&
+            if ( CEGDD_UI_colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i, systeme), true) == true &&
                 ESP_getboutonstate(i, systeme) != B_CLIQUER &&
                 ESP_getboutonstate(i, systeme) != B_IMPOSSIBLE &&
                 ESP_getboutonstate(i, systeme) != B_INUSE)
@@ -113,7 +113,7 @@ void pointeur(struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
     {
         if(data->mob[i].actif == true)
         {
-            if (colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
+            if (CEGDD_UI_colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
             {
                 data->mob[i].state = B_SURVOLER;
             }
@@ -126,7 +126,7 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
     int i = 0,i2;
 
     /*shootbox*/
-    if (colisionbox(&systeme->pointeur.pos, &console->shooton.pos, true))
+    if (CEGDD_UI_colisionbox(&systeme->pointeur.pos, &console->shooton.pos, true))
     {
         console->active = true;
     }
@@ -135,13 +135,13 @@ void clic_UP_L(struct DIVERSsysteme *systeme, struct UI *ui, struct CONSOLE *con
         console->active = false;
     }
 
-    i = BT_up(systeme, ui);
+    i = CEGDD_UI_BT_up(systeme->pointeur.pos, ui->ListeBouton, &ui->ListeNb, &systeme->asked);
 
     if (UI_getslidestate(ui) == SLIDE_ESPECE)
     {
         for (i2 = 0 ; i2 < systeme->NBespece ; i2++)
         {
-            if ( colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i2, systeme), true) == true &&
+            if ( CEGDD_UI_colisionbox(&systeme->pointeur.pos, ESP_getboutonpos(i2, systeme), true) == true &&
                  ESP_getboutonstate(i2, systeme) == B_CLIQUER)
             {
                 int i3;
@@ -186,7 +186,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
 
     int i;
 
-    BT_down(ui);
+    CEGDD_UI_BT_down(ui->ListeBouton, &ui->ListeNb);
 
     if (UI_getslidestate(ui) == SLIDE_ESPECE)
     {
@@ -197,7 +197,7 @@ void clic_DOWN_L(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
                 ESP_setboutonstate(B_CLIQUER, i, systeme);
             }
         }
-        if (colisionbox(&systeme->pointeur.pos, &ui->posthumbcreature, true) == true)
+        if (CEGDD_UI_colisionbox(&systeme->pointeur.pos, &ui->posthumbcreature, true) == true)
         {
             systeme->tookmob = true;
         }
@@ -226,7 +226,7 @@ void clic_DOWN_R(struct UI *ui, struct DIVERSsysteme *systeme, struct DATA *data
 
 void gestion_coche (struct SDL_Rect *pos, bool *state, struct UI *ui, struct DIVERSsysteme *systeme)
 {
-    if (colisionbox(&systeme->pointeur.pos, pos, true) == true )
+    if (CEGDD_UI_colisionbox(&systeme->pointeur.pos, pos, true) == true )
     {
         if (*state == false)
         {
@@ -249,7 +249,7 @@ void gestion_survol_mob (struct DIVERSsysteme *systeme, struct UI *ui, struct DA
         if(data->mob[i].actif == true)
         {
             if (data->mob[i].state == B_SURVOLER &&
-                colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
+                CEGDD_UI_colisionbox(&systeme->pointeur.pos, &data->mob[i].monstre.pict.pos, true) == true)
             {
                 UI_setslidestate(SLIDE_DETAIL, ui);
                 systeme->pathmode = false;

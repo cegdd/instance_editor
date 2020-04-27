@@ -2,68 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "LIBcegdd_ui.h"
 #include "ui.h"
-#include "colision.h"
 #include "console.h"
 #include "data.h"
 #include "systeme.h"
 #include "espece.h"
 #include "editeur.h"
 #include "save.h"
-
-void BT_pointeur(struct DIVERSsysteme *systeme, struct UI *ui)
-{
-    int i;
-
-    for (i = 0 ; i <= ui->ListeNb ; i++)
-    {
-        if ( colisionbox(&systeme->pointeur.pos, &ui->ListeBouton[i].pos, true) == true &&
-            ui->ListeBouton[i].etat != B_CLIQUER &&
-            ui->ListeBouton[i].etat != B_IMPOSSIBLE &&
-            isInTheGoodPanel(ui, i) == true)
-            {
-                ui->ListeBouton[i].etat = B_SURVOLER;
-            }
-        else if ( ui->ListeBouton[i].etat != B_CLIQUER &&
-                  ui->ListeBouton[i].etat != B_IMPOSSIBLE )
-        {
-            ui->ListeBouton[i].etat = B_NORMAL;
-        }
-    }
-}
-
-int BT_up(struct DIVERSsysteme *systeme, struct UI *ui)
-{
-    int i;
-    for (i = 0 ; i <= ui->ListeNb ; i++)
-    {
-        if ( colisionbox(&systeme->pointeur.pos, &ui->ListeBouton[i].pos, true) == true &&
-             ui->ListeBouton[i].etat == B_CLIQUER)
-        {
-            ui->ListeBouton[i].etat = B_NORMAL;
-            systeme->asked = true;
-            return i;
-        }
-        else if( ui->ListeBouton[i].etat == B_CLIQUER )
-        {
-            ui->ListeBouton[i].etat = B_NORMAL;
-        }
-    }
-    return i;
-}
-
-void BT_down(struct UI *ui)
-{
-    int i;
-
-    for (i = 0 ; i <= ui->ListeNb ; i++)
-    {
-        if (ui->ListeBouton[i].etat == B_SURVOLER)
-        {
-            ui->ListeBouton[i].etat = B_CLIQUER;
-        }
-    }
-}
 
 void BT_event(int i, struct CONSOLE *console, struct DIVERSsysteme *systeme, struct UI *ui, struct DATA *data)
 {
@@ -377,21 +323,4 @@ void BT_update_loop(struct CONSOLE *console, struct DIVERSsysteme *systeme, stru
         }
         break;
     }
-}
-
-bool isInTheGoodPanel(struct UI *ui, int index)
-{
-    if (ui->ListeBouton[index].flag == B_detail && ui->slidestate == SLIDE_DETAIL)
-    {
-        return true;
-    }
-    else if (ui->ListeBouton[index].flag == B_liste && ui->slidestate == SLIDE_ESPECE)
-    {
-        return true;
-    }
-    else if (ui->ListeBouton[index].flag == B_none)
-    {
-        return true;
-    }
-    return false;
 }

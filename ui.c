@@ -5,7 +5,6 @@ extern int screenh, screenw;
 
 #include "ui.h"
 #include "systeme.h"
-#include "colision.h"
 
 #include <LIBcegdd_ui.h>
 
@@ -206,19 +205,19 @@ void UI_updateMOB(int index, struct DIVERSsysteme *systeme, struct UI *ui, struc
 
 int UI_is_inside(struct UI *ui, struct DIVERSsysteme *systeme, struct CONSOLE *console)
 {
-    if (UI_getslidestate(ui) == SLIDE_DETAIL && colisionbox(&systeme->pointeur.pos, &ui->fonddetail.pos, true) == true)
+    if (UI_getslidestate(ui) == SLIDE_DETAIL && CEGDD_UI_colisionbox(&systeme->pointeur.pos, &ui->fonddetail.pos, true) == true)
     {
        return true;
     }
-    else if (UI_getslidestate(ui) == SLIDE_ESPECE && colisionbox(&systeme->pointeur.pos, &ui->fondliste.pos, true) == true)
+    else if (UI_getslidestate(ui) == SLIDE_ESPECE && CEGDD_UI_colisionbox(&systeme->pointeur.pos, &ui->fondliste.pos, true) == true)
     {
        return true;
     }
-    else if (colisionbox(&systeme->pointeur.pos, &console->console.pos, true) == true)
+    else if (CEGDD_UI_colisionbox(&systeme->pointeur.pos, &console->console.pos, true) == true)
     {
        return true;
     }
-    else if (colisionbox(&systeme->pointeur.pos, &console->shootoff.pos, true) == true)
+    else if (CEGDD_UI_colisionbox(&systeme->pointeur.pos, &console->shootoff.pos, true) == true)
     {
        return true;
     }

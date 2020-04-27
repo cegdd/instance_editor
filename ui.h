@@ -6,8 +6,6 @@
 #include "image.h"
 #include "bouton.h"
 
-enum{SLIDE_CLOSE, SLIDE_ESPECE, SLIDE_DETAIL};
-
 
 struct UI
 {

@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-pedantic" />
+					<Add option="-Wfatal-errors" />
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-std=c11" />
@@ -39,7 +40,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wno-format-truncation" />
-			<Add directory="/home/cegdd/projets/LIBcegdd_UI" />
+			<Add directory="/home/cegdd/Documents/dev/cegdd_ui" />
 		</Compiler>
 		<Linker>
 			<Add library="pthread" />
@@ -51,10 +52,9 @@
 			<Add library="GL" />
 			<Add library="GLU" />
 			<Add library="m" />
-			<Add library="/home/cegdd/projets/LIBcegdd_UI/bin/Release/libLIBcegdd_UI.a" />
+			<Add library="/home/cegdd/Documents/dev/cegdd_ui/bin/Debug/libLIBcegdd_UI.a" />
+			<Add directory="/home/cegdd/Bureau/cegdd_ui/bin/Debug" />
 		</Linker>
-		<Unit filename=".gitattributes" />
-		<Unit filename=".gitignore" />
 		<Unit filename="bouton.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -64,10 +64,6 @@
 		</Unit>
 		<Unit filename="clavier.h" />
 		<Unit filename="coche.h" />
-		<Unit filename="colision.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="colision.h" />
 		<Unit filename="console.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -88,7 +84,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="evenement.h" />
-		<Unit filename="game.mp3" />
 		<Unit filename="image.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -102,154 +97,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="path.h" />
-		<Unit filename="rs.layout" />
-		<Unit filename="rs/divers/color_grid.png" />
-		<Unit filename="rs/divers/dalek.ttf" />
-		<Unit filename="rs/divers/police1.ttf" />
-		<Unit filename="rs/fonds/fondcombat.png" />
-		<Unit filename="rs/fonds/login.png" />
-		<Unit filename="rs/fonds/mort.png" />
-		<Unit filename="rs/fonds/rs.png" />
-		<Unit filename="rs/histoire/carte/map4.png" />
-		<Unit filename="rs/histoire/ressource.sdk" />
-		<Unit filename="rs/images/balle.png" />
-		<Unit filename="rs/images/cachermdp.png" />
-		<Unit filename="rs/images/case.png" />
-		<Unit filename="rs/images/case0.png" />
-		<Unit filename="rs/images/character.png" />
-		<Unit filename="rs/images/chargement.png" />
-		<Unit filename="rs/images/cheveux0.png" />
-		<Unit filename="rs/images/cheveux1.png" />
-		<Unit filename="rs/images/cheveux2.png" />
-		<Unit filename="rs/images/cheveux3.png" />
-		<Unit filename="rs/images/coche.png" />
-		<Unit filename="rs/images/curseur.png" />
-		<Unit filename="rs/images/enligne.png" />
-		<Unit filename="rs/images/etabli.png" />
-		<Unit filename="rs/images/horsligne.png" />
-		<Unit filename="rs/images/joueurcombat.png" />
-		<Unit filename="rs/images/mob0.0.png" />
-		<Unit filename="rs/images/mob0.1.png" />
-		<Unit filename="rs/images/mob0.2.png" />
-		<Unit filename="rs/images/mob1.0.png" />
-		<Unit filename="rs/images/mob1.1.png" />
-		<Unit filename="rs/images/mob1.2.png" />
-		<Unit filename="rs/images/mob2.0.png" />
-		<Unit filename="rs/images/mob2.1.png" />
-		<Unit filename="rs/images/mob2.2.png" />
-		<Unit filename="rs/images/mob3.0.png" />
-		<Unit filename="rs/images/mob3.1.png" />
-		<Unit filename="rs/images/mob3.2.png" />
-		<Unit filename="rs/images/mob4.0.png" />
-		<Unit filename="rs/images/mob4.1.png" />
-		<Unit filename="rs/images/mob4.2.png" />
-		<Unit filename="rs/images/noir.png" />
-		<Unit filename="rs/images/p.png" />
-		<Unit filename="rs/images/perso0.png" />
-		<Unit filename="rs/images/perso1.png" />
-		<Unit filename="rs/images/perso2.png" />
-		<Unit filename="rs/images/piece.png" />
-		<Unit filename="rs/images/pnj1.png" />
-		<Unit filename="rs/maps/calque0.png" />
-		<Unit filename="rs/maps/calque1.png" />
-		<Unit filename="rs/maps/calque2.png" />
-		<Unit filename="rs/maps/calque3.png" />
-		<Unit filename="rs/maps/calque4.png" />
-		<Unit filename="rs/maps/calque5.png" />
-		<Unit filename="rs/maps/calque6.png" />
-		<Unit filename="rs/maps/calque7.png" />
-		<Unit filename="rs/maps/calque8.png" />
-		<Unit filename="rs/maps/calque9.png" />
-		<Unit filename="rs/maps/map0.png" />
-		<Unit filename="rs/maps/map1.png" />
-		<Unit filename="rs/maps/map2.png" />
-		<Unit filename="rs/maps/map3.png" />
-		<Unit filename="rs/maps/map4.png" />
-		<Unit filename="rs/maps/map5.png" />
-		<Unit filename="rs/maps/map6.png" />
-		<Unit filename="rs/maps/map7.png" />
-		<Unit filename="rs/maps/map8.png" />
-		<Unit filename="rs/maps/map9.png" />
-		<Unit filename="rs/objets/0#0.png" />
-		<Unit filename="rs/objets/1#0.png" />
-		<Unit filename="rs/objets/10#0.png" />
-		<Unit filename="rs/objets/11#0.png" />
-		<Unit filename="rs/objets/12#0.png" />
-		<Unit filename="rs/objets/2#0.png" />
-		<Unit filename="rs/objets/3#0.png" />
-		<Unit filename="rs/objets/4#0.png" />
-		<Unit filename="rs/objets/5#0.png" />
-		<Unit filename="rs/objets/6#0.png" />
-		<Unit filename="rs/objets/7#0.png" />
-		<Unit filename="rs/objets/8#0.png" />
-		<Unit filename="rs/objets/9#0.png" />
-		<Unit filename="rs/options.RSsave" />
-		<Unit filename="rs/sauvegarde/cegdd.RSCryptedSave" />
-		<Unit filename="rs/sauvegarde/cegdd.RSsave2" />
-		<Unit filename="rs/ui/BG.png" />
-		<Unit filename="rs/ui/BGchat.png" />
-		<Unit filename="rs/ui/BGcraft.png" />
-		<Unit filename="rs/ui/BGinventaire.png" />
-		<Unit filename="rs/ui/BGmenu.png" />
-		<Unit filename="rs/ui/BGzonetextechat.png" />
-		<Unit filename="rs/ui/arcade.png" />
-		<Unit filename="rs/ui/arme.png" />
-		<Unit filename="rs/ui/arme1.png" />
-		<Unit filename="rs/ui/arme2.png" />
-		<Unit filename="rs/ui/azerty.png" />
-		<Unit filename="rs/ui/azerty2.png" />
-		<Unit filename="rs/ui/azerty3.png" />
-		<Unit filename="rs/ui/bgb.png" />
-		<Unit filename="rs/ui/caseinventaire.png" />
-		<Unit filename="rs/ui/caseinventaire2.png" />
-		<Unit filename="rs/ui/cou.png" />
-		<Unit filename="rs/ui/cou1.png" />
-		<Unit filename="rs/ui/cou2.png" />
-		<Unit filename="rs/ui/creer.png" />
-		<Unit filename="rs/ui/creer2.png" />
-		<Unit filename="rs/ui/creer3.png" />
-		<Unit filename="rs/ui/creernon.png" />
-		<Unit filename="rs/ui/dialogue.png" />
-		<Unit filename="rs/ui/dos.png" />
-		<Unit filename="rs/ui/dos1.png" />
-		<Unit filename="rs/ui/dos2.png" />
-		<Unit filename="rs/ui/fenetreinfo.png" />
-		<Unit filename="rs/ui/jouer.png" />
-		<Unit filename="rs/ui/jouer2.png" />
-		<Unit filename="rs/ui/jouer3.png" />
-		<Unit filename="rs/ui/jouernon.png" />
-		<Unit filename="rs/ui/logquitter.png" />
-		<Unit filename="rs/ui/logquitter2.png" />
-		<Unit filename="rs/ui/logquitter3.png" />
-		<Unit filename="rs/ui/options.png" />
-		<Unit filename="rs/ui/options2.png" />
-		<Unit filename="rs/ui/options3.png" />
-		<Unit filename="rs/ui/pied.png" />
-		<Unit filename="rs/ui/pied1.png" />
-		<Unit filename="rs/ui/pied2.png" />
-		<Unit filename="rs/ui/quitter.png" />
-		<Unit filename="rs/ui/quitter1.png" />
-		<Unit filename="rs/ui/quitter2.png" />
-		<Unit filename="rs/ui/qwerty.png" />
-		<Unit filename="rs/ui/qwerty2.png" />
-		<Unit filename="rs/ui/qwerty3.png" />
-		<Unit filename="rs/ui/qwertz.png" />
-		<Unit filename="rs/ui/qwertz2.png" />
-		<Unit filename="rs/ui/qwertz3.png" />
-		<Unit filename="rs/ui/sac1.png" />
-		<Unit filename="rs/ui/taille.png" />
-		<Unit filename="rs/ui/taille1.png" />
-		<Unit filename="rs/ui/taille2.png" />
-		<Unit filename="rs/ui/tete.png" />
-		<Unit filename="rs/ui/tete1.png" />
-		<Unit filename="rs/ui/tete2.png" />
-		<Unit filename="rs/ui/torse.png" />
-		<Unit filename="rs/ui/torse1.png" />
-		<Unit filename="rs/ui/torse2.png" />
-		<Unit filename="rs/ui/uichat.png" />
-		<Unit filename="rs/ui/uicraft.png" />
-		<Unit filename="rs/ui/uiinventaire.png" />
-		<Unit filename="rs/ui/uimenu.png" />
 		<Unit filename="save.c">
 			<Option compilerVar="CC" />
 		</Unit>
